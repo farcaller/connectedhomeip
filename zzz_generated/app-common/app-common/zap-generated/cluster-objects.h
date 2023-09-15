@@ -32547,6 +32547,123 @@ struct TypeInfo
 };
 } // namespace Attributes
 } // namespace ElectricalMeasurement
+namespace WaterHeater {
+
+namespace Commands {
+// Forward-declarations so we can reference these later.
+
+namespace SetUtcTime {
+struct Type;
+struct DecodableType;
+} // namespace SetUtcTime
+
+} // namespace Commands
+
+namespace Commands {
+namespace SetUtcTime {
+enum class Fields : uint8_t
+{
+    kUtcTime = 0,
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::SetUtcTime::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+
+    uint64_t utcTime = static_cast<uint64_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::SetUtcTime::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+
+    uint64_t utcTime = static_cast<uint64_t>(0);
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace SetUtcTime
+} // namespace Commands
+
+namespace Attributes {
+
+namespace HeaterTypes {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>>;
+    using DecodableType    = chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::HeaterTypes::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace HeaterTypes
+namespace GeneratedCommandList {
+struct TypeInfo : public Clusters::Globals::Attributes::GeneratedCommandList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+};
+} // namespace GeneratedCommandList
+namespace AcceptedCommandList {
+struct TypeInfo : public Clusters::Globals::Attributes::AcceptedCommandList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+};
+} // namespace AcceptedCommandList
+namespace EventList {
+struct TypeInfo : public Clusters::Globals::Attributes::EventList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+};
+} // namespace EventList
+namespace AttributeList {
+struct TypeInfo : public Clusters::Globals::Attributes::AttributeList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+};
+} // namespace AttributeList
+namespace FeatureMap {
+struct TypeInfo : public Clusters::Globals::Attributes::FeatureMap::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+};
+} // namespace FeatureMap
+namespace ClusterRevision {
+struct TypeInfo : public Clusters::Globals::Attributes::ClusterRevision::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+};
+} // namespace ClusterRevision
+
+struct TypeInfo
+{
+    struct DecodableType
+    {
+        static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+
+        CHIP_ERROR Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path);
+
+        Attributes::HeaterTypes::TypeInfo::DecodableType heaterTypes;
+        Attributes::GeneratedCommandList::TypeInfo::DecodableType generatedCommandList;
+        Attributes::AcceptedCommandList::TypeInfo::DecodableType acceptedCommandList;
+        Attributes::EventList::TypeInfo::DecodableType eventList;
+        Attributes::AttributeList::TypeInfo::DecodableType attributeList;
+        Attributes::FeatureMap::TypeInfo::DecodableType featureMap           = static_cast<uint32_t>(0);
+        Attributes::ClusterRevision::TypeInfo::DecodableType clusterRevision = static_cast<uint16_t>(0);
+    };
+};
+} // namespace Attributes
+} // namespace WaterHeater
 namespace UnitTesting {
 namespace Structs {
 namespace SimpleStruct {

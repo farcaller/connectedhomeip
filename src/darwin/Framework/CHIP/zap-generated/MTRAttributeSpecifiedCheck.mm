@@ -5180,6 +5180,36 @@ static BOOL AttributeIsSpecifiedInElectricalMeasurementCluster(AttributeId aAttr
     }
     }
 }
+static BOOL AttributeIsSpecifiedInWaterHeaterCluster(AttributeId aAttributeId)
+{
+    using namespace Clusters::WaterHeater;
+    switch (aAttributeId) {
+    case Attributes::HeaterTypes::Id: {
+        return YES;
+    }
+    case Attributes::GeneratedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::AcceptedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::EventList::Id: {
+        return YES;
+    }
+    case Attributes::AttributeList::Id: {
+        return YES;
+    }
+    case Attributes::FeatureMap::Id: {
+        return YES;
+    }
+    case Attributes::ClusterRevision::Id: {
+        return YES;
+    }
+    default: {
+        return NO;
+    }
+    }
+}
 static BOOL AttributeIsSpecifiedInUnitTestingCluster(AttributeId aAttributeId)
 {
     using namespace Clusters::UnitTesting;
@@ -5732,6 +5762,9 @@ BOOL MTRAttributeIsSpecified(ClusterId aClusterId, AttributeId aAttributeId)
     }
     case Clusters::ElectricalMeasurement::Id: {
         return AttributeIsSpecifiedInElectricalMeasurementCluster(aAttributeId);
+    }
+    case Clusters::WaterHeater::Id: {
+        return AttributeIsSpecifiedInWaterHeaterCluster(aAttributeId);
     }
     case Clusters::UnitTesting::Id: {
         return AttributeIsSpecifiedInUnitTestingCluster(aAttributeId);

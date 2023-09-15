@@ -1804,6 +1804,16 @@ typedef void (*ElectricalMeasurementEventListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::EventId> & data);
 typedef void (*ElectricalMeasurementAttributeListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
+typedef void (*WaterHeaterHeaterTypesAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>> &);
+typedef void (*WaterHeaterGeneratedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*WaterHeaterAcceptedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*WaterHeaterEventListListAttributeCallback)(void * context,
+                                                          const chip::app::DataModel::DecodableList<chip::EventId> & data);
+typedef void (*WaterHeaterAttributeListListAttributeCallback)(void * context,
+                                                              const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
 typedef void (*UnitTestingBitmap8AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>);
 typedef void (*UnitTestingBitmap16AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>);
 typedef void (*UnitTestingBitmap32AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>);
@@ -18137,6 +18147,166 @@ public:
     void OnSubscriptionEstablished();
     using MTRElectricalMeasurementAttributeListListAttributeCallbackBridge::KeepAliveOnCallback;
     using MTRElectricalMeasurementAttributeListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRWaterHeaterHeaterTypesAttributeCallbackBridge : public MTRCallbackBridge<WaterHeaterHeaterTypesAttributeCallback>
+{
+public:
+    MTRWaterHeaterHeaterTypesAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<WaterHeaterHeaterTypesAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRWaterHeaterHeaterTypesAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action) :
+        MTRCallbackBridge<WaterHeaterHeaterTypesAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>> & value);
+};
+
+class MTRWaterHeaterHeaterTypesAttributeCallbackSubscriptionBridge : public MTRWaterHeaterHeaterTypesAttributeCallbackBridge
+{
+public:
+    MTRWaterHeaterHeaterTypesAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                 MTRActionBlock action,
+                                                                 MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRWaterHeaterHeaterTypesAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRWaterHeaterHeaterTypesAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRWaterHeaterHeaterTypesAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<WaterHeaterGeneratedCommandListListAttributeCallback>
+{
+public:
+    MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<WaterHeaterGeneratedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                  MTRActionBlock action) :
+        MTRCallbackBridge<WaterHeaterGeneratedCommandListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTRWaterHeaterGeneratedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge
+{
+public:
+    MTRWaterHeaterGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<WaterHeaterAcceptedCommandListListAttributeCallback>
+{
+public:
+    MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<WaterHeaterAcceptedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                 MTRActionBlock action) :
+        MTRCallbackBridge<WaterHeaterAcceptedCommandListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTRWaterHeaterAcceptedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge
+{
+public:
+    MTRWaterHeaterAcceptedCommandListListAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                             MTRActionBlock action,
+                                                                             MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRWaterHeaterAcceptedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRWaterHeaterEventListListAttributeCallbackBridge : public MTRCallbackBridge<WaterHeaterEventListListAttributeCallback>
+{
+public:
+    MTRWaterHeaterEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<WaterHeaterEventListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRWaterHeaterEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action) :
+        MTRCallbackBridge<WaterHeaterEventListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::EventId> & value);
+};
+
+class MTRWaterHeaterEventListListAttributeCallbackSubscriptionBridge : public MTRWaterHeaterEventListListAttributeCallbackBridge
+{
+public:
+    MTRWaterHeaterEventListListAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                   MTRActionBlock action,
+                                                                   MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRWaterHeaterEventListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRWaterHeaterEventListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRWaterHeaterEventListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRWaterHeaterAttributeListListAttributeCallbackBridge
+    : public MTRCallbackBridge<WaterHeaterAttributeListListAttributeCallback>
+{
+public:
+    MTRWaterHeaterAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<WaterHeaterAttributeListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRWaterHeaterAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action) :
+        MTRCallbackBridge<WaterHeaterAttributeListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & value);
+};
+
+class MTRWaterHeaterAttributeListListAttributeCallbackSubscriptionBridge
+    : public MTRWaterHeaterAttributeListListAttributeCallbackBridge
+{
+public:
+    MTRWaterHeaterAttributeListListAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                       MTRActionBlock action,
+                                                                       MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRWaterHeaterAttributeListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRWaterHeaterAttributeListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRWaterHeaterAttributeListListAttributeCallbackBridge::OnDone;
 
 private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;

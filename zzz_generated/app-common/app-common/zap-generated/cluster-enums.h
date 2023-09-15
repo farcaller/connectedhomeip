@@ -4040,6 +4040,19 @@ namespace AccountLogin {} // namespace AccountLogin
 
 namespace ElectricalMeasurement {} // namespace ElectricalMeasurement
 
+namespace WaterHeater {
+
+// Bitmap for HeaterType
+enum class HeaterType : uint8_t
+{
+    kImmersionElement1 = 0x1,
+    kImmersionElement2 = 0x2,
+    kHeatpump          = 0x4,
+    kBoiler            = 0x8,
+    kOther             = 0x10,
+};
+} // namespace WaterHeater
+
 namespace UnitTesting {
 
 // Enum for SimpleEnum

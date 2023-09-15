@@ -12813,6 +12813,36 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
+@implementation MTRWaterHeaterClusterSetUtcTimeParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _utcTime = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRWaterHeaterClusterSetUtcTimeParams alloc] init];
+
+    other.utcTime = self.utcTime;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: utcTime:%@; >", NSStringFromClass([self class]), _utcTime];
+    return descriptionString;
+}
+
+@end
 @implementation MTRUnitTestingClusterTestParams
 - (instancetype)init
 {
