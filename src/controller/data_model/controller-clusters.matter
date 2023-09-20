@@ -6583,6 +6583,32 @@ client cluster ElectricalMeasurement = 2820 {
   command GetMeasurementProfileCommand(GetMeasurementProfileCommandRequest): DefaultSuccess = 1;
 }
 
+/** This allows clients to control a hot water heating appliance so it can be used with energy management. It can help consumers save cost (e.g. using power at cheaper times or from local solar PV generation). */
+client cluster WaterHeater = 26208 {
+  bitmap HeaterType : BITMAP8 {
+    kImmersionElement1 = 0x1;
+    kImmersionElement2 = 0x2;
+    kHeatpump = 0x4;
+    kBoiler = 0x8;
+    kOther = 0x10;
+  }
+
+  readonly attribute nullable HeaterType heaterTypes = 0;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+
+  request struct SetUtcTimeRequest {
+    epoch_us utcTime = 0;
+  }
+
+  /** TODO Command to be replaced with correct ones when specified. */
+  command SetUtcTime(SetUtcTimeRequest): DefaultSuccess = 0;
+}
+
 /** The Test Cluster is meant to validate the generated code */
 client cluster UnitTesting = 4294048773 {
   enum SimpleEnum : ENUM8 {

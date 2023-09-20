@@ -313,6 +313,9 @@ public class ClusterIDMapping {
         if (clusterId == ElectricalMeasurement.ID) {
             return new ElectricalMeasurement();
         }
+        if (clusterId == WaterHeater.ID) {
+            return new WaterHeater();
+        }
         if (clusterId == UnitTesting.ID) {
             return new UnitTesting();
         }
@@ -13498,6 +13501,125 @@ public class ClusterIDMapping {
                     }
                     public static GetMeasurementProfileCommandCommandField value(int id) throws NoSuchFieldError {
                         for (GetMeasurementProfileCommandCommandField field : GetMeasurementProfileCommandCommandField.values()) {
+                        if (field.getID() == id) {
+                            return field;
+                        }
+                        }
+                        throw new NoSuchFieldError();
+                    }
+                }@Override
+        public String getAttributeName(long id) throws NoSuchFieldError {
+            return Attribute.value(id).toString();
+        }
+
+        @Override
+        public String getEventName(long id) throws NoSuchFieldError {
+            return Event.value(id).toString();
+        }
+
+        @Override
+        public String getCommandName(long id) throws NoSuchFieldError {
+            return Command.value(id).toString();
+        }
+
+        @Override
+        public long getAttributeID(String name) throws IllegalArgumentException {
+            return Attribute.valueOf(name).getID();
+        }
+
+        @Override
+        public long getEventID(String name) throws IllegalArgumentException {
+            return Event.valueOf(name).getID();
+        }
+
+        @Override
+        public long getCommandID(String name) throws IllegalArgumentException {
+            return Command.valueOf(name).getID();
+        }
+    }
+    public static class WaterHeater implements BaseCluster {
+        public static final long ID = 26208L;
+        public long getID() {
+            return ID;
+        }
+
+        public enum Attribute {
+            HeaterTypes(0L),
+            GeneratedCommandList(65528L),
+            AcceptedCommandList(65529L),
+            EventList(65530L),
+            AttributeList(65531L),
+            FeatureMap(65532L),
+            ClusterRevision(65533L),;
+            private final long id;
+            Attribute(long id) {
+                this.id = id;
+            }
+
+            public long getID() {
+                return id;
+            }
+
+            public static Attribute value(long id) throws NoSuchFieldError {
+                for (Attribute attribute : Attribute.values()) {
+                    if (attribute.getID() == id) {
+                        return attribute;
+                    }
+                }
+                throw new NoSuchFieldError();
+            }
+        }
+
+        public enum Event {;
+            private final long id;
+            Event(long id) {
+                this.id = id;
+            }
+
+            public long getID() {
+                return id;
+            }
+
+            public static Event value(long id) throws NoSuchFieldError {
+                for (Event event : Event.values()) {
+                    if (event.getID() == id) {
+                        return event;
+                    }
+                }
+                throw new NoSuchFieldError();
+            }
+        }
+
+        public enum Command {
+            SetUtcTime(0L),;
+            private final long id;
+            Command(long id) {
+                this.id = id;
+            }
+
+            public long getID() {
+                return id;
+            }
+
+            public static Command value(long id) throws NoSuchFieldError {
+                for (Command command : Command.values()) {
+                    if (command.getID() == id) {
+                        return command;
+                    }
+                }
+                throw new NoSuchFieldError();
+            }
+        }public enum SetUtcTimeCommandField {UtcTime(0),;
+                    private final int id;
+                    SetUtcTimeCommandField(int id) {
+                        this.id = id;
+                    }
+
+                    public int getID() {
+                        return id;
+                    }
+                    public static SetUtcTimeCommandField value(int id) throws NoSuchFieldError {
+                        for (SetUtcTimeCommandField field : SetUtcTimeCommandField.values()) {
                         if (field.getID() == id) {
                             return field;
                         }

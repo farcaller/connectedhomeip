@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2023 Project CHIP Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<configurator>
+  <domain name="CHIP"/>
+
+  <bitmap name="HeaterType" type="BITMAP8">
+    <cluster code="0x6660" />
+    <field name="ImmersionElement1" mask="0x01" />
+    <field name="ImmersionElement2" mask="0x02" />
+    <field name="Heatpump" mask="0x04" />
+    <field name="Boiler"   mask="0x08" />
+    <field name="Other"    mask="0x10" />
+  </bitmap>
+
+  <cluster>
+    <domain>HVAC</domain>
+    <name>Water Heater</name>
+    <code>0x6660</code>
+    <define>WATER_HEATER_CLUSTER</define>
+    <client init="false" tick="false">true</client>
+    <server init="false" tick="false">true</server>
+    <description>This allows clients to control a hot water heating appliance so it can be used with energy management. It can help consumers save cost (e.g. using power at cheaper times or from local solar PV generation).</description>
+    <!-- Base data types -->
+    <attribute side="server" code="0x0000" define="HEATER_TYPES" type="HeaterType" min="0x00" max="0xff" writable="false" isNullable="true" optional="false" >HeaterTypes</attribute>
+
+    <!-- Test Commands -->
+    <command source="client" code="0x00" name="SetUtcTime" optional="false">
+	<description>TODO Command to be replaced with correct ones when specified.</description>
+	<arg name="UtcTime" type="epoch_us"/>
+    </command>
+  </cluster>
+</configurator>

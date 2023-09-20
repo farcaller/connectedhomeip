@@ -1323,6 +1323,16 @@ static constexpr CommandId Id = 0x00000001;
 } // namespace Commands
 } // namespace ElectricalMeasurement
 
+namespace WaterHeater {
+namespace Commands {
+
+namespace SetUtcTime {
+static constexpr CommandId Id = 0x00000000;
+} // namespace SetUtcTime
+
+} // namespace Commands
+} // namespace WaterHeater
+
 namespace UnitTesting {
 namespace Commands {
 

@@ -13887,6 +13887,102 @@ public class ClusterInfoMapping {
         }
       }
 
+      public static class DelegatedWaterHeaterClusterHeaterTypesAttributeCallback implements ChipClusters.WaterHeaterCluster.HeaterTypesAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedWaterHeaterClusterGeneratedCommandListAttributeCallback implements ChipClusters.WaterHeaterCluster.GeneratedCommandListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedWaterHeaterClusterAcceptedCommandListAttributeCallback implements ChipClusters.WaterHeaterCluster.AcceptedCommandListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedWaterHeaterClusterEventListAttributeCallback implements ChipClusters.WaterHeaterCluster.EventListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedWaterHeaterClusterAttributeListAttributeCallback implements ChipClusters.WaterHeaterCluster.AttributeListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+
       public static class DelegatedUnitTestingClusterTestSpecificResponseCallback implements ChipClusters.UnitTestingCluster.TestSpecificResponseCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
@@ -15386,6 +15482,9 @@ public class ClusterInfoMapping {
       ClusterInfo electricalMeasurementClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.ElectricalMeasurementCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("electricalMeasurement", electricalMeasurementClusterInfo);
+      ClusterInfo waterHeaterClusterInfo = new ClusterInfo(
+        (ptr, endpointId) -> new ChipClusters.WaterHeaterCluster(ptr, endpointId), new HashMap<>());
+      clusterMap.put("waterHeater", waterHeaterClusterInfo);
       ClusterInfo unitTestingClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.UnitTestingCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("unitTesting", unitTestingClusterInfo);
@@ -15491,6 +15590,7 @@ public class ClusterInfoMapping {
       destination.get("applicationBasic").combineCommands(source.get("applicationBasic"));
       destination.get("accountLogin").combineCommands(source.get("accountLogin"));
       destination.get("electricalMeasurement").combineCommands(source.get("electricalMeasurement"));
+      destination.get("waterHeater").combineCommands(source.get("waterHeater"));
       destination.get("unitTesting").combineCommands(source.get("unitTesting"));
       destination.get("faultInjection").combineCommands(source.get("faultInjection"));
  }
@@ -19839,6 +19939,25 @@ public class ClusterInfoMapping {
        );
        electricalMeasurementClusterInteractionInfoMap.put("getMeasurementProfileCommand", electricalMeasurementgetMeasurementProfileCommandInteractionInfo);
      commandMap.put("electricalMeasurement", electricalMeasurementClusterInteractionInfoMap);
+     Map<String, InteractionInfo> waterHeaterClusterInteractionInfoMap = new LinkedHashMap<>();
+     Map<String, CommandParameterInfo> waterHeatersetUtcTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo waterHeatersetUtcTimeutcTimeCommandParameterInfo = new CommandParameterInfo("utcTime", Long.class, Long.class);
+       waterHeatersetUtcTimeCommandParams.put("utcTime",waterHeatersetUtcTimeutcTimeCommandParameterInfo);
+     
+       InteractionInfo waterHeatersetUtcTimeInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.WaterHeaterCluster) cluster)
+           .setUtcTime((DefaultClusterCallback) callback
+           , (Long)
+           commandArguments.get("utcTime")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           waterHeatersetUtcTimeCommandParams
+       );
+       waterHeaterClusterInteractionInfoMap.put("setUtcTime", waterHeatersetUtcTimeInteractionInfo);
+     commandMap.put("waterHeater", waterHeaterClusterInteractionInfoMap);
      Map<String, InteractionInfo> unitTestingClusterInteractionInfoMap = new LinkedHashMap<>();
      Map<String, CommandParameterInfo> unitTestingtestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
        InteractionInfo unitTestingtestInteractionInfo = new InteractionInfo(
