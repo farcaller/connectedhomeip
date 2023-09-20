@@ -6605,7 +6605,7 @@ client cluster WaterHeater = 26208 {
     epoch_us utcTime = 0;
   }
 
-  /** Upon receipt of this command, the server MAY update its UTCTime Attribute to match the time specified in the command */
+  /** TODO Command to be replaced with correct ones when specified. */
   command SetUtcTime(SetUtcTimeRequest): DefaultSuccess = 0;
 }
 

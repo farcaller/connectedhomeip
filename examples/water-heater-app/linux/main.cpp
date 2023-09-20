@@ -128,6 +128,9 @@ int main(int argc, char * argv[])
     ui.AddWindow(std::make_unique<example::Ui::Windows::QRCode>());
     ui.AddWindow(std::make_unique<example::Ui::Windows::OccupancySensing>(chip::EndpointId(1), "Occupancy"));
 
+//     TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
+//     Not sure what this is about but assume it won’t harm us to have a water heater with occupancy sensing!?
+
     ChipLinuxAppMainLoop(&ui);
 #else
     ChipLinuxAppMainLoop();

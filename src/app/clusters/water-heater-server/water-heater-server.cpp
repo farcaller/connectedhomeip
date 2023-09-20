@@ -46,10 +46,10 @@ void emberAfWaterHeaterClusterServerInitCallback(chip::EndpointId endpoint)
 {
 }
 
+// TODO: Command to be replaced with correct ones when specified.
 bool emberAfWaterHeaterClusterSetUtcTimeCallback(app::CommandHandler * commandObj,
                                                     const app::ConcreteCommandPath & commandPath,
                                                     const Commands::SetUtcTime::DecodableType & commandData)
 {
-    // TODO
     return false;
 }

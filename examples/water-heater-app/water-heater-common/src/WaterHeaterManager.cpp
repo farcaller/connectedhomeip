@@ -23,6 +23,8 @@
 
 WaterHeaterManager WaterHeaterManager::sWaterHeater;
 
+// TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
+//  We’ll need to review how Robot Vacuum/ Washing machines handle Modes - but this is ok for now.
 CHIP_ERROR WaterHeaterManager::Init()
 {
     mState = kState_On;

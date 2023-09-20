@@ -39,7 +39,7 @@ limitations under the License.
 
     <!-- Test Commands -->
     <command source="client" code="0x00" name="SetUtcTime" optional="false">
-	<description>Upon receipt of this command, the server MAY update its UTCTime Attribute to match the time specified in the command</description>
+	<description>TODO Command to be replaced with correct ones when specified.</description>
 	<arg name="UtcTime" type="epoch_us"/>
     </command>
   </cluster>

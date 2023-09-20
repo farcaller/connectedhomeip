@@ -39,10 +39,13 @@
 
 #define CHIP_DEVICE_CONFIG_ENABLE_COMMISSIONABLE_DEVICE_TYPE 1
 
+
+// TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
+// We don’t have one yet - but we’d need to change this
 #define CHIP_DEVICE_CONFIG_DEVICE_TYPE 257 // 0x0101 = 257 = Dimmable Bulb
 
 #define CHIP_DEVICE_CONFIG_ENABLE_COMMISSIONABLE_DEVICE_NAME 1
 
 #define CHIP_DEVICE_ENABLE_PORT_PARAMS 1
 
-#define CHIP_DEVICE_CONFIG_DEVICE_NAME "Test Bulb"
+#define CHIP_DEVICE_CONFIG_DEVICE_NAME "Test Water Heater"
