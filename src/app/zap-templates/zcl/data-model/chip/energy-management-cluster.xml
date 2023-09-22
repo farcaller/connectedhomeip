@@ -14,11 +14,122 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-                                                                            <!-- based on Power Source -->
+
 <configurator>
   <domain name="CHIP"/>
+
+
+  <enum name="CostTypeEnum" type="ENUM8">
+    <cluster code="0x0706"/>
+    <item name="Financial"    value="0x00"/>
+    <item name="GHGEmissions" value="0x01"/>
+    <item name="Comfort"      value="0x02"/>
+    <item name="Temperature"  value="0x03"/>
+  </enum>
+
+  <enum name="EsaTypeEnum" type="ENUM8">
+    <cluster code="0x0706"/>
+    <item name="EVSE"         value="0x00"/>
+    <item name="SpaceHeating" value="0x01"/>
+    <item name="WaterHeating" value="0x02"/>
+    <item name="SpaceCooling" value="0x03"/>
+    <item name="SpaceHeatingCooling" value="0x04"/>
+    <item name="BatteryStorage"      value="0x05"/>
+    <item name="SolarPV"        value="0x06"/>
+    <item name="FridgeFreezer"  value="0x07"/>
+    <item name="WashingMachine" value="0x08"/>
+    <item name="Dishwasher"     value="0x09"/>
+    <item name="Cooking" value="0x0A"/>
+    <item name="Other"   value="0xFF"/>
+  </enum>
+
+  <enum name="EsaStateEnum" type="ENUM8">
+    <cluster code="0x0706"/>
+    <item name="Offline" value="0x00"/>
+    <item name="Online"  value="0x01"/>
+    <item name="Fault"   value="0x02"/>
+    <item name="UserOptout"        value="0x03"/>
+    <item name="PowerAdjustActive" value="0x04"/>
+    <item name="Paused"  value="0x05"/>
+  </enum>
+
+  <enum name="CauseEnum" type="ENUM8">
+    <cluster code="0x0706"/>
+    <item name="NormalCompletion" value="0x00"/>
+    <item name="Offline"     value="0x01"/>
+    <item name="Fault"       value="0x02"/>
+    <item name="UserOptout"  value="0x03"/>
+  </enum>
+
+  <!-- TODO: These *ChangeType structs should just be removed, after a
+       brief deprecation period. -->
+
+  <struct name="CostStruct">
+    <cluster code="0x0706"/>
+    <item name="CostType"      type="CostTypeEnum" />
+    <item name="Value"         type="INT32" />
+    <item name="DecimalPoints" type="INT8"/>
+    <item name="Currency"      type="INT8"   isNullable="true"/>
+  </struct>
+
+  <struct name="PowerAdjustStruct">
+    <cluster code="0x0706"/>
+    <item name="MinPower"    type="INT16" />
+    <item name="MaxPower"    type="INT16" />
+    <item name="MinDuration" type="UINT32"/>
+    <item name="MinDuration" type="UINT32"/>
+  </struct>
+
+  <struct name="PowerForecastStruct">
+    <cluster code="0x0706"/>
+    <item name="ForecastId"       type="UINT16" />
+    <item name="ActiveSlotNumber" type="UINT16" />
+    <item name="StartTime"  type="epoch_us" />
+    <item name="EndTime"    type="epoch_us" />
+    <item name="EarliestStartTime" type="BatFaultEnum" />
+    <item name="LatestEndTime" type="BatFaultEnum" />
+    <item name="IsPauseable"   type="BatFaultEnum" />
+    <!--item name="Slots" type="ARRAY" entryType="SlotStruct"  array="true" length="16"/ -->
+    <item name="Slots" type="SlotStruct"  array="true" length="16"/>
+  </struct>
+
+  <struct name="SlotStruct">
+    <cluster code="0x0706"/>
+    <item name="MinDuration" type="UINT32" />
+    <item name="MaxDuration" type="UINT32" />
+    <item name="DefaultDuration" type="UINT32" />
+    <item name="ElapsedSlotTime" type="UINT32" />
+    <item name="RemainingSlotTime" type="UINT32" />
+    <item name="SlotIsPauseable" type="BOOLEAN" />
+    <item name="NominalPower" type="INT16" />
+    <item name="MinPower" type="INT16" />
+    <item name="MaxPower" type="INT16" />
+    <item name="NominalEnergy" type="INT32" />
+    <!--item name="Costs"         type="ARRAY" entryType="CostStruct"  array="true" length="5"/ -->
+    <item name="Costs"    type="CostStruct"  array="true" length="5"/>
+    <item name="MinPowerAdjustment" type="INT16" />
+    <item name="MaxPowerAdjustment" type="INT16" />
+    <item name="MinimumDurationAdjustment" type="UINT32" />
+    <item name="MaximumDurationAdjustment" type="UINT32" />
+  </struct>
+
+  <struct name="SlotAdjustmentStruct">
+    <cluster code="0x0706"/>
+    <item name="SlotIndex"    type="UINT16" />
+    <item name="NominalPower" type="INT16" />
+    <item name="Duration"     type="UINT32" />
+  </struct>
+
+  <struct name="PowerLimitsStruct">
+    <cluster code="0x0706"/>
+    <item name="StartTime"     type="epoch-s" />
+    <item name="Duration"      type="UINT32" />
+    <item name="NominalPower"  type="INT16" />
+    <item name="MaximumEnergy" type="INT32" />
+  </struct>
+
   <cluster>
-    <domain>CHIP</domain>
+    <domain>HVAC</domain>
     <name>Energy Management</name>
     <code>0x0706</code>
     <define>ENERGY_MANAGEMENT_CLUSTER</define>
@@ -33,7 +144,7 @@ limitations under the License.
     <attribute side="server" code="0x0003" define="ABS_MIN_POWER"    type="INT16" writable="false" optional="true" isNullable="false">AbsMinPower</attribute>
     <attribute side="server" code="0x0004" define="ABS_MAX_POWER"    type="INT16" writable="false" optional="true" isNullable="false">AbsMaxPower</attribute>
     <attribute side="server" code="0x0005" define="POWER_ADJUSTMENT_CAPABILITY" type="ARRAY" entryType="PowerAdjustStruct" length="16" writable="false" optional="false"  isNullable="true">PowerAdjustmentCapability</attribute>
-    <attribute side="server" code="0x0006" define="POWER_FORCEAST" type="ARRAY" entryType="PowerForecastStruct" length="16" writable="false" optional="false"  isNullable="true">PowerForecast</attribute>
+    <attribute side="server" code="0x0006" define="POWER_FORCEAST"   type="ARRAY" entryType="PowerForecastStruct" writable="false" optional="false"  isNullable="true">PowerForecast</attribute>
 
     <command source="client" code="0x00" name="PowerAdjustRequest" optional="false">
       <description>Given valid args, the ESA begins to adjust its power consumption or generation to the level requested.</description>
@@ -99,94 +210,5 @@ limitations under the License.
     <field name="PowerForecastAdjustment" mask="0x4"/>
   </bitmap>
 
-  <enum name="EsaTypeEnum" type="ENUM8">
-    <cluster code="0x0706"/>
-    <item name="EVSE"         value="0x00"/>
-    <item name="SpaceHeating" value="0x01"/>
-    <item name="WaterHeating" value="0x02"/>
-    <item name="SpaceCooling" value="0x03"/>
-    <item name="SpaceHeatingCooling" value="0x04"/>
-    <item name="BatteryStorage"      value="0x05"/>
-    <item name="SolarPV"        value="0x06"/>
-    <item name="FridgeFreezer"  value="0x07"/>
-    <item name="WashingMachine" value="0x08"/>
-    <item name="Dishwasher"     value="0x09"/>
-    <item name="Cooking" value="0x0A"/>
-    <item name="Other"   value="0xFF"/>
-  </enum>
-
-  <enum name="EsaStateEnum" type="ENUM8">
-    <cluster code="0x0706"/>
-    <item name="Offline" value="0x00"/>
-    <item name="Online"  value="0x01"/>
-    <item name="Fault"   value="0x02"/>
-    <item name="UserOptout"        value="0x03"/>
-    <item name="PowerAdjustActive" value="0x04"/>
-    <item name="Paused"  value="0x05"/>
-  </enum>
-
-  <enum name="CauseEnum" type="ENUM8">
-    <cluster code="0x0706"/>
-    <item name="NormalCompletion" value="0x00"/>
-    <item name="Offline"     value="0x01"/>
-    <item name="Fault"       value="0x02"/>
-    <item name="UserOptout"  value="0x03"/>
-  </enum>
-
-  <!-- TODO: These *ChangeType structs should just be removed, after a
-       brief deprecation period. -->
-
-  <struct name="PowerAdjustStruct">
-    <cluster code="0x0706"/>
-    <item name="MinPower"    type="INT16" />
-    <item name="MaxPower"    type="INT16" />
-    <item name="MinDuration" type="UINT32"/>
-    <item name="MinDuration" type="UINT32"/>
-  </struct>
-
-  <struct name="PowerForecastStruct">
-    <cluster code="0x0706"/>
-    <item name="ForecastId" type="UINT16" array="true" length="8"/>
-    <item name="ActiveSlotNumber" type="UINT16" array="true" length="8"/>
-    <item name="StartTime" type="epoch_us" array="true" length="8"/>
-    <item name="EndTime"   type="epoch_us" array="true" length="8"/>
-    <item name="EarliestStartTime" type="BatFaultEnum" array="true" length="8"/>
-    <item name="LatestEndTime" type="BatFaultEnum" array="true" length="8"/>
-    <item name="IsPauseable" type="BatFaultEnum" array="true" length="8"/>
-    <item name="Slots" type="ARRAY" entryType="SlotStruct"  array="true" length="8"/>
-  </struct>
-
-  <struct name="SlotStruct">
-    <cluster code="0x0706"/>
-    <item name="MinDuration" type="UINT32" />
-    <item name="MaxDuration" type="UINT32" />
-    <item name="DefaultDuration" type="UINT32" />
-    <item name="ElapsedSlotTime" type="UINT32" />
-    <item name="RemainingSlotTime" type="UINT32" />
-    <item name="SlotIsPauseable" type="BOOLEAN" />
-    <item name="NominalPower" type="INT16" />
-    <item name="MinPower" type="INT16" />
-    <item name="MaxPower" type="INT16" />
-    <item name="NominalEnergy" type="INT32" />
-    <item name="MinPowerAdjustment" type="INT16" />
-    <item name="MaxPowerAdjustment" type="INT16" />
-    <item name="MinimumDurationAdjustment" type="UINT32" />
-    <item name="MaximumDurationAdjustment" type="UINT32" />
-  </struct>
-
-  <struct name="SlotAdjustmentStruct">
-    <cluster code="0x0706"/>
-    <item name="SlotIndex"    type="UINT16" />
-    <item name="NominalPower" type="INT16" />
-    <item name="Duration"     type="UINT32" />
-  </struct>
-
-  <struct name="PowerLimitsStruct">
-    <cluster code="0x0706"/>
-    <item name="StartTime"     type="epoch-s" />
-    <item name="Duration"      type="UINT32" />
-    <item name="NominalPower"  type="INT16" />
-    <item name="MaximumEnergy" type="INT32" />
-  </struct>
 
 </configurator>
