@@ -19,7 +19,7 @@ limitations under the License.
   <domain name="CHIP"/>
 
   <bitmap name="EnergyManagementFeature" type="BITMAP32">
-    <cluster code="0x0706C"/>
+    <cluster code="0x0706"/>
     <field name="PowerAdjustment"         mask="0x1" optional="false"/>
     <field name="PowerForecastReporting"  mask="0x2" optional="false"/>
     <field name="PowerForecastAdjustment" mask="0x4" optional="true" />
