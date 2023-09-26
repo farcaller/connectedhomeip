@@ -10414,6 +10414,140 @@ class ChipClusters:
             },
         },
     }
+    _ENERGY_MANAGEMENT_CLUSTER_INFO = {
+        "clusterName": "EnergyManagement",
+        "clusterId": 0x00000706,
+        "commands": {
+            0x00000000: {
+                "commandId": 0x00000000,
+                "commandName": "PowerAdjustRequest",
+                "args": {
+                    "power": "int",
+                    "duration": "int",
+                },
+            },
+            0x00000001: {
+                "commandId": 0x00000001,
+                "commandName": "CancelPowerAdjustRequest",
+                "args": {
+                },
+            },
+            0x00000002: {
+                "commandId": 0x00000002,
+                "commandName": "StartTimeAdjustRequest",
+                "args": {
+                    "requestedStartTime": "int",
+                },
+            },
+            0x00000003: {
+                "commandId": 0x00000003,
+                "commandName": "PauseRequest",
+                "args": {
+                },
+            },
+            0x00000004: {
+                "commandId": 0x00000004,
+                "commandName": "ResumeRequest",
+                "args": {
+                },
+            },
+            0x00000005: {
+                "commandId": 0x00000005,
+                "commandName": "ModifyPowerForecastRequest",
+                "args": {
+                    "forecastId": "int",
+                    "slotAdjustments": "int",
+                },
+            },
+            0x00000006: {
+                "commandId": 0x00000006,
+                "commandName": "RequestLimitBasedPowerForecast",
+                "args": {
+                    "powerLimits": "int",
+                },
+            },
+        },
+        "attributes": {
+            0x00000000: {
+                "attributeName": "EsaType",
+                "attributeId": 0x00000000,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000001: {
+                "attributeName": "EsaIsGenerator",
+                "attributeId": 0x00000001,
+                "type": "bool",
+                "reportable": True,
+            },
+            0x00000002: {
+                "attributeName": "EsaState",
+                "attributeId": 0x00000002,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000003: {
+                "attributeName": "AbsMinPower",
+                "attributeId": 0x00000003,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000004: {
+                "attributeName": "AbsMaxPower",
+                "attributeId": 0x00000004,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000005: {
+                "attributeName": "PowerAdjustmentCapability",
+                "attributeId": 0x00000005,
+                "type": "",
+                "reportable": True,
+            },
+            0x00000006: {
+                "attributeName": "PowerForecast",
+                "attributeId": 0x00000006,
+                "type": "",
+                "reportable": True,
+            },
+            0x0000FFF8: {
+                "attributeName": "GeneratedCommandList",
+                "attributeId": 0x0000FFF8,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFF9: {
+                "attributeName": "AcceptedCommandList",
+                "attributeId": 0x0000FFF9,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFA: {
+                "attributeName": "EventList",
+                "attributeId": 0x0000FFFA,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFB: {
+                "attributeName": "AttributeList",
+                "attributeId": 0x0000FFFB,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFC: {
+                "attributeName": "FeatureMap",
+                "attributeId": 0x0000FFFC,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFD: {
+                "attributeName": "ClusterRevision",
+                "attributeId": 0x0000FFFD,
+                "type": "int",
+                "reportable": True,
+            },
+        },
+    }
     _ELECTRICAL_MEASUREMENT_CLUSTER_INFO = {
         "clusterName": "ElectricalMeasurement",
         "clusterId": 0x00000B04,
@@ -12253,6 +12387,7 @@ class ChipClusters:
         0x0000050C: _APPLICATION_LAUNCHER_CLUSTER_INFO,
         0x0000050D: _APPLICATION_BASIC_CLUSTER_INFO,
         0x0000050E: _ACCOUNT_LOGIN_CLUSTER_INFO,
+        0x00000706: _ENERGY_MANAGEMENT_CLUSTER_INFO,
         0x00000B04: _ELECTRICAL_MEASUREMENT_CLUSTER_INFO,
         0x00006660: _WATER_HEATER_CLUSTER_INFO,
         0xFFF1FC05: _UNIT_TESTING_CLUSTER_INFO,
@@ -12354,6 +12489,7 @@ class ChipClusters:
         "ApplicationLauncher": _APPLICATION_LAUNCHER_CLUSTER_INFO,
         "ApplicationBasic": _APPLICATION_BASIC_CLUSTER_INFO,
         "AccountLogin": _ACCOUNT_LOGIN_CLUSTER_INFO,
+        "EnergyManagement": _ENERGY_MANAGEMENT_CLUSTER_INFO,
         "ElectricalMeasurement": _ELECTRICAL_MEASUREMENT_CLUSTER_INFO,
         "WaterHeater": _WATER_HEATER_CLUSTER_INFO,
         "UnitTesting": _UNIT_TESTING_CLUSTER_INFO,

@@ -20,18 +20,18 @@ limitations under the License.
 
   <bitmap name="EnergyManagementFeature" type="BITMAP32">
     <cluster code="0x0706C"/>
-    <field name="PowerAdjustment"         mask="0x1"/>
-    <field name="PowerForecastReporting"  mask="0x2"/>
-    <field name="PowerForecastAdjustment" mask="0x4"/>
+    <field name="PowerAdjustment"         mask="0x1" optional="false"/>
+    <field name="PowerForecastReporting"  mask="0x2" optional="false"/>
+    <field name="PowerForecastAdjustment" mask="0x4" optional="true" />
   </bitmap>
 
 
   <enum name="CostTypeEnum" type="ENUM8">
     <cluster code="0x0706"/>
-    <item name="Financial"    value="0x00"/>
-    <item name="GHGEmissions" value="0x01"/>
-    <item name="Comfort"      value="0x02"/>
-    <item name="Temperature"  value="0x03"/>
+    <item name="Financial"    value="0x00"  optional="false"/>
+    <item name="GHGEmissions" value="0x01"  optional="false"/>
+    <item name="Comfort"      value="0x02"  optional="false"/>
+    <item name="Temperature"  value="0x03"  optional="false"/>
   </enum>
 
   <enum name="EsaTypeEnum" type="ENUM8">
@@ -46,8 +46,8 @@ limitations under the License.
     <item name="FridgeFreezer"  value="0x07"/>
     <item name="WashingMachine" value="0x08"/>
     <item name="Dishwasher"     value="0x09"/>
-    <item name="Cooking" value="0x0A"/>
-    <item name="Other"   value="0xFF"/>
+    <item name="Cooking"        value="0x0A"/>
+    <item name="Other"          value="0xFF"/>
   </enum>
 
   <enum name="EsaStateEnum" type="ENUM8">
@@ -56,27 +56,26 @@ limitations under the License.
     <item name="Online"  value="0x01"/>
     <item name="Fault"   value="0x02"/>
     <item name="UserOptout"        value="0x03"/>
-    <item name="PowerAdjustActive" value="0x04"/>
-    <item name="Paused"  value="0x05"/>
+    <item name="PowerAdjustActive" value="0x04"  optional="true" />
+    <item name="Paused"            value="0x05"  optional="true" />
   </enum>
 
   <enum name="CauseEnum" type="ENUM8">
     <cluster code="0x0706"/>
-    <item name="NormalCompletion" value="0x00"/>
-    <item name="Offline"     value="0x01"/>
-    <item name="Fault"       value="0x02"/>
-    <item name="UserOptout"  value="0x03"/>
+    <item name="NormalCompletion" value="0x00" optional="true" />
+    <item name="Offline"     value="0x01"  optional="true" />
+    <item name="Fault"       value="0x02"  optional="true" />
+    <item name="UserOptout"  value="0x03"  optional="true" />
   </enum>
 
-  <!-- TODO: These *ChangeType structs should just be removed, after a
-       brief deprecation period. -->
+
 
   <struct name="CostStruct">
     <cluster code="0x0706"/>
-    <item name="CostType"      type="CostTypeEnum" />
-    <item name="Value"         type="INT32S"  optional="false"/>
-    <item name="DecimalPoints" type="INT8S"   optional="false"/>
-    <item name="Currency"      type="INT8S"   optional="false" isNullable="true"/>
+    <item name="CostType"      type="CostTypeEnum" optional="false"/>
+    <item name="Value"         type="INT32S"       optional="false" isNullable="true"/>
+    <item name="DecimalPoints" type="INT8S"        optional="false"/>
+    <item name="Currency"      type="INT8S"        optional="true" />
   </struct>
 
   <struct name="PowerAdjustStruct">
@@ -84,7 +83,7 @@ limitations under the License.
     <item name="MinPower"    type="INT16S"  optional="false"/>
     <item name="MaxPower"    type="INT16S"  optional="false"/>
     <item name="MinDuration" type="INT32U"  optional="false"/>
-    <item name="MinDuration" type="INT32U"  optional="false"/>
+    <item name="MaxDuration" type="INT32U"  optional="false"/>
   </struct>
 
   <struct name="SlotStruct">
@@ -99,7 +98,7 @@ limitations under the License.
     <item name="MinPower"      type="INT16S"  optional="false"/>
     <item name="MaxPower"      type="INT16S"  optional="false"/>
     <item name="NominalEnergy" type="INT32S"  optional="false"/>
-    <item name="Costs"         type="CostStruct"  array="true" length="5"  optional="false"/>
+    <item name="Costs"         type="CostStruct"  array="true" length="5"  optional="true"/>
     <item name="MinPowerAdjustment" type="INT16S"  optional="false"/>
     <item name="MaxPowerAdjustment" type="INT16S"  optional="false"/>
     <item name="MinimumDurationAdjustment" type="INT32U"  optional="false"/>
@@ -111,12 +110,12 @@ limitations under the License.
     <cluster code="0x0706"/>
     <item name="ForecastId"       type="INT16U"  optional="false"/>
     <item name="ActiveSlotNumber" type="INT16U"  optional="false"/>
-    <item name="StartTime"     type="epoch_us"   optional="false"/>
-    <item name="EndTime"       type="epoch_us"   optional="false"/>
-    <item name="EarliestStartTime" type="BatFaultEnum" optional="false"/>
-    <item name="LatestEndTime" type="BatFaultEnum"     optional="false"/>
-    <item name="IsPauseable"   type="BatFaultEnum"     optional="false"/>
-    <item name="Slots"         type="SlotStruct"  array="true" length="16" optional="false"/>
+    <item name="StartTime"     type="epoch_s"    optional="false"/>
+    <item name="EndTime"       type="epoch_s"    optional="true" />
+    <item name="EarliestStartTime" type="epoch_s" optional="false"/>
+    <item name="LatestEndTime" type="epoch_s"    optional="false"/>
+    <item name="IsPauseable"   type="BOOLEAN"    optional="false"/>
+    <item name="Slots"         type="SlotStruct" array="true" length="16" optional="false"/>
   </struct>
 
   <struct name="SlotAdjustmentStruct">
@@ -134,6 +133,8 @@ limitations under the License.
     <item name="MaximumEnergy" type="INT32S"  optional="false"/>
   </struct>
 
+
+
   <cluster>
     <domain>HVAC</domain>
     <name>Energy Management</name>
@@ -144,13 +145,15 @@ limitations under the License.
     <description>This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).</description>
 
     
-    <attribute side="server" code="0x0000" define="ESA_TYPE"         type="EsaTypeEnum"   writable="false"  isNullable="true">EsaType</attribute>
-    <attribute side="server" code="0x0001" define="ESA_IS_GENERATOR" type="BOOLEAN"       writable="false">EsaIsGenerator</attribute>
-    <attribute side="server" code="0x0002" define="ESA_STATE"        type="EsaStateEnum"  writable="false"  isNullable="true">EsaState</attribute>
-    <attribute side="server" code="0x0003" define="ABS_MIN_POWER"    type="INT16S" writable="false" optional="true" isNullable="false">AbsMinPower</attribute>
-    <attribute side="server" code="0x0004" define="ABS_MAX_POWER"    type="INT16S" writable="false" optional="true" isNullable="false">AbsMaxPower</attribute>
-    <attribute side="server" code="0x0005" define="POWER_ADJUSTMENT_CAPABILITY" type="ARRAY" entryType="PowerAdjustStruct" length="16" writable="false" optional="false"  isNullable="true">PowerAdjustmentCapability</attribute>
-    <attribute side="server" code="0x0006" define="POWER_FORCEAST"   type="ARRAY" entryType="PowerForecastStruct" writable="false" optional="false"  isNullable="true">PowerForecast</attribute >
+    <attribute side="server" code="0x0000" define="ESA_TYPE"         type="EsaTypeEnum"   writable="false" optional="false"  isNullable="true">EsaType</attribute>
+    <attribute side="server" code="0x0001" define="ESA_IS_GENERATOR" type="BOOLEAN"       writable="false" optional="false" >EsaIsGenerator</attribute>
+    <attribute side="server" code="0x0002" define="ESA_STATE"        type="EsaStateEnum"  writable="false" optional="false"  isNullable="true">EsaState</attribute>
+    <attribute side="server" code="0x0003" define="ABS_MIN_POWER"    type="INT16S"        writable="false" optional="false"  isNullable="false">AbsMinPower</attribute>
+    <attribute side="server" code="0x0004" define="ABS_MAX_POWER"    type="INT16S"        writable="false" optional="false"  isNullable="false">AbsMaxPower</attribute>
+    <attribute side="server" code="0x0005" define="POWER_ADJUSTMENT_CAPABILITY" type="ARRAY" entryType="PowerAdjustStruct" length="16" writable="false" optional="true"  isNullable="true">PowerAdjustmentCapability</attribute>
+    <attribute side="server" code="0x0006" define="POWER_FORCEAST"   type="PowerForecastStruct" writable="false" optional="true"  isNullable="true">PowerForecast</attribute >
+
+
 
     <command source="client" code="0x00" name="PowerAdjustRequest" optional="false">
       <description>Given valid args, the ESA begins to adjust its power consumption or generation to the level requested.</description>
@@ -163,7 +166,7 @@ limitations under the License.
 
     <command source="client" code="0x02" name="StartTimeAdjustRequest" optional="true">
       <description>If the ESA supports Power Forecast Adjustment and the EsaState is not UserOptout, it may have its start time shifted after the EarliestStartTime.</description>
-      <arg name="RequestedStartTime" type="epoch-s"/>
+      <arg name="RequestedStartTime" type="epoch_s"   optional="false"/>
     </command>
 
     <command source="client" code="0x03" name="PauseRequest" optional="true">
@@ -173,18 +176,17 @@ limitations under the License.
       <description>The ESA may resume its current operation, given various conditions.</description>
     </command>
 
-
     <command source="client" code="0x05" name="ModifyPowerForecastRequest" optional="true">
       <description>If the ESA supports PFA, and the EsaState is not UserOptout it may have its power forecast adjusted by a client.</description>
-      <arg name="ForecastId" type="INT32U" />
-      <arg name="SlotAdjustments" type="ARRAY" entryType="SlotAdjustmentStruct" length="16" />
+      <arg name="ForecastId" type="INT32U"  optional="false"/>
+      <arg name="SlotAdjustments" type="ARRAY" entryType="SlotAdjustmentStruct" length="16"  optional="false" />
     </command>
 
-
-    <command source="client" code="0x06" name="RequestLimitBasedPowerRequest" optional="true">
+    <command source="client" code="0x06" name="RequestLimitBasedPowerForecast" optional="true">
       <description>If the ESA supports PFA, and the EsaState is not UserOptout it may be requested to generate a new power forecast by a client.</description>
-      <arg name="PowerLimits" type="ARRAY" entryType="PowerLimitsStruct" length="10" />
+      <arg name="PowerLimits" type="ARRAY" entryType="PowerLimitsStruct" length="10"  optional="false" />
     </command>
+
 
 
     <event code="0x0000" name="PowerAdjustStart" priority="info" side="server" optional="true">
@@ -193,9 +195,9 @@ limitations under the License.
 
     <event code="0x0001" name="PowerAdjustEnd" priority="info" side="server" optional="true">
       <description>Generated when the Power Adjustment session ends.</description>
-      <field id="0" name="Cause"     type="CauseEnum" />
-      <field id="1" name="Duration"  type="INT32U"    />
-      <field id="2" name="EnergyUse" type="INT32S"     />
+      <field id="0" name="Cause"     type="CauseEnum"  optional="true"/>
+      <field id="1" name="Duration"  type="INT32U"     optional="true"/>
+      <field id="2" name="EnergyUse" type="INT32S"     optional="true"/>
     </event>
 
     <event code="0x0002" name="Paused" priority="info" side="server" optional="true">

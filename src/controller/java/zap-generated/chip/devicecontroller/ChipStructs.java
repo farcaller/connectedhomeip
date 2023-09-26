@@ -2664,6 +2664,324 @@ public String applicationID;
   }
 }
 
+public static class EnergyManagementClusterCostStruct {
+public Integer costType;
+public @Nullable Long value;
+public Integer decimalPoints;
+public Optional<Integer> currency;
+
+  public EnergyManagementClusterCostStruct(
+    Integer costType
+      , @Nullable Long value
+      , Integer decimalPoints
+      , Optional<Integer> currency
+  ) {
+    this.costType = costType;
+    this.value = value;
+    this.decimalPoints = decimalPoints;
+    this.currency = currency;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EnergyManagementClusterCostStruct {\n");
+    output.append("\tcostType: ");
+    output.append(costType);
+        output.append("\n");
+    output.append("\tvalue: ");
+    output.append(value);
+        output.append("\n");
+    output.append("\tdecimalPoints: ");
+    output.append(decimalPoints);
+        output.append("\n");
+    output.append("\tcurrency: ");
+    output.append(currency);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EnergyManagementClusterSlotStruct {
+public Long minDuration;
+public Long maxDuration;
+public Long defaultDuration;
+public Long elapsedSlotTime;
+public Long remainingSlotTime;
+public Boolean slotIsPauseable;
+public Integer nominalPower;
+public Integer minPower;
+public Integer maxPower;
+public Long nominalEnergy;
+public Optional<ArrayList<ChipStructs.EnergyManagementClusterCostStruct>> costs;
+public Integer minPowerAdjustment;
+public Integer maxPowerAdjustment;
+public Long minimumDurationAdjustment;
+public Long maximumDurationAdjustment;
+
+  public EnergyManagementClusterSlotStruct(
+    Long minDuration
+      , Long maxDuration
+      , Long defaultDuration
+      , Long elapsedSlotTime
+      , Long remainingSlotTime
+      , Boolean slotIsPauseable
+      , Integer nominalPower
+      , Integer minPower
+      , Integer maxPower
+      , Long nominalEnergy
+      , Optional<ArrayList<ChipStructs.EnergyManagementClusterCostStruct>> costs
+      , Integer minPowerAdjustment
+      , Integer maxPowerAdjustment
+      , Long minimumDurationAdjustment
+      , Long maximumDurationAdjustment
+  ) {
+    this.minDuration = minDuration;
+    this.maxDuration = maxDuration;
+    this.defaultDuration = defaultDuration;
+    this.elapsedSlotTime = elapsedSlotTime;
+    this.remainingSlotTime = remainingSlotTime;
+    this.slotIsPauseable = slotIsPauseable;
+    this.nominalPower = nominalPower;
+    this.minPower = minPower;
+    this.maxPower = maxPower;
+    this.nominalEnergy = nominalEnergy;
+    this.costs = costs;
+    this.minPowerAdjustment = minPowerAdjustment;
+    this.maxPowerAdjustment = maxPowerAdjustment;
+    this.minimumDurationAdjustment = minimumDurationAdjustment;
+    this.maximumDurationAdjustment = maximumDurationAdjustment;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EnergyManagementClusterSlotStruct {\n");
+    output.append("\tminDuration: ");
+    output.append(minDuration);
+        output.append("\n");
+    output.append("\tmaxDuration: ");
+    output.append(maxDuration);
+        output.append("\n");
+    output.append("\tdefaultDuration: ");
+    output.append(defaultDuration);
+        output.append("\n");
+    output.append("\telapsedSlotTime: ");
+    output.append(elapsedSlotTime);
+        output.append("\n");
+    output.append("\tremainingSlotTime: ");
+    output.append(remainingSlotTime);
+        output.append("\n");
+    output.append("\tslotIsPauseable: ");
+    output.append(slotIsPauseable);
+        output.append("\n");
+    output.append("\tnominalPower: ");
+    output.append(nominalPower);
+        output.append("\n");
+    output.append("\tminPower: ");
+    output.append(minPower);
+        output.append("\n");
+    output.append("\tmaxPower: ");
+    output.append(maxPower);
+        output.append("\n");
+    output.append("\tnominalEnergy: ");
+    output.append(nominalEnergy);
+        output.append("\n");
+    output.append("\tcosts: ");
+    output.append(costs);
+    output.append("\n");
+    output.append("\tminPowerAdjustment: ");
+    output.append(minPowerAdjustment);
+        output.append("\n");
+    output.append("\tmaxPowerAdjustment: ");
+    output.append(maxPowerAdjustment);
+        output.append("\n");
+    output.append("\tminimumDurationAdjustment: ");
+    output.append(minimumDurationAdjustment);
+        output.append("\n");
+    output.append("\tmaximumDurationAdjustment: ");
+    output.append(maximumDurationAdjustment);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EnergyManagementClusterPowerForecastStruct {
+public Integer forecastId;
+public Integer activeSlotNumber;
+public Long startTime;
+public Optional<Long> endTime;
+public Long earliestStartTime;
+public Long latestEndTime;
+public Boolean isPauseable;
+public ArrayList<ChipStructs.EnergyManagementClusterSlotStruct> slots;
+
+  public EnergyManagementClusterPowerForecastStruct(
+    Integer forecastId
+      , Integer activeSlotNumber
+      , Long startTime
+      , Optional<Long> endTime
+      , Long earliestStartTime
+      , Long latestEndTime
+      , Boolean isPauseable
+      , ArrayList<ChipStructs.EnergyManagementClusterSlotStruct> slots
+  ) {
+    this.forecastId = forecastId;
+    this.activeSlotNumber = activeSlotNumber;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.earliestStartTime = earliestStartTime;
+    this.latestEndTime = latestEndTime;
+    this.isPauseable = isPauseable;
+    this.slots = slots;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EnergyManagementClusterPowerForecastStruct {\n");
+    output.append("\tforecastId: ");
+    output.append(forecastId);
+        output.append("\n");
+    output.append("\tactiveSlotNumber: ");
+    output.append(activeSlotNumber);
+        output.append("\n");
+    output.append("\tstartTime: ");
+    output.append(startTime);
+        output.append("\n");
+    output.append("\tendTime: ");
+    output.append(endTime);
+        output.append("\n");
+    output.append("\tearliestStartTime: ");
+    output.append(earliestStartTime);
+        output.append("\n");
+    output.append("\tlatestEndTime: ");
+    output.append(latestEndTime);
+        output.append("\n");
+    output.append("\tisPauseable: ");
+    output.append(isPauseable);
+        output.append("\n");
+    output.append("\tslots: ");
+    output.append(slots);
+    output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EnergyManagementClusterPowerAdjustStruct {
+public Integer minPower;
+public Integer maxPower;
+public Long minDuration;
+public Long maxDuration;
+
+  public EnergyManagementClusterPowerAdjustStruct(
+    Integer minPower
+      , Integer maxPower
+      , Long minDuration
+      , Long maxDuration
+  ) {
+    this.minPower = minPower;
+    this.maxPower = maxPower;
+    this.minDuration = minDuration;
+    this.maxDuration = maxDuration;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EnergyManagementClusterPowerAdjustStruct {\n");
+    output.append("\tminPower: ");
+    output.append(minPower);
+        output.append("\n");
+    output.append("\tmaxPower: ");
+    output.append(maxPower);
+        output.append("\n");
+    output.append("\tminDuration: ");
+    output.append(minDuration);
+        output.append("\n");
+    output.append("\tmaxDuration: ");
+    output.append(maxDuration);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EnergyManagementClusterPowerLimitsStruct {
+public Long startTime;
+public Long duration;
+public Integer nominalPower;
+public Long maximumEnergy;
+
+  public EnergyManagementClusterPowerLimitsStruct(
+    Long startTime
+      , Long duration
+      , Integer nominalPower
+      , Long maximumEnergy
+  ) {
+    this.startTime = startTime;
+    this.duration = duration;
+    this.nominalPower = nominalPower;
+    this.maximumEnergy = maximumEnergy;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EnergyManagementClusterPowerLimitsStruct {\n");
+    output.append("\tstartTime: ");
+    output.append(startTime);
+        output.append("\n");
+    output.append("\tduration: ");
+    output.append(duration);
+        output.append("\n");
+    output.append("\tnominalPower: ");
+    output.append(nominalPower);
+        output.append("\n");
+    output.append("\tmaximumEnergy: ");
+    output.append(maximumEnergy);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EnergyManagementClusterSlotAdjustmentStruct {
+public Integer slotIndex;
+public Integer nominalPower;
+public Long duration;
+
+  public EnergyManagementClusterSlotAdjustmentStruct(
+    Integer slotIndex
+      , Integer nominalPower
+      , Long duration
+  ) {
+    this.slotIndex = slotIndex;
+    this.nominalPower = nominalPower;
+    this.duration = duration;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EnergyManagementClusterSlotAdjustmentStruct {\n");
+    output.append("\tslotIndex: ");
+    output.append(slotIndex);
+        output.append("\n");
+    output.append("\tnominalPower: ");
+    output.append(nominalPower);
+        output.append("\n");
+    output.append("\tduration: ");
+    output.append(duration);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterSimpleStruct {
 public Integer a;
 public Boolean b;
