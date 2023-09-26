@@ -34,20 +34,20 @@
 using namespace chip;
 using namespace chip::app;
 using namespace chip::app::Clusters;
-using namespace chip::app::Clusters::WaterHeater;
-using namespace chip::app::Clusters::WaterHeater::Attributes;
+using namespace chip::app::Clusters::EnergyManagement;
+using namespace chip::app::Clusters::EnergyManagement::Attributes;
 
 
-void MatterWaterHeaterPluginServerInitCallback()
+void MatterEnergyManagementPluginServerInitCallback()
 {
 }
 
-void emberAfWaterHeaterClusterServerInitCallback(chip::EndpointId endpoint)
+void emberAfEnergyManagementClusterServerInitCallback(chip::EndpointId endpoint)
 {
 }
 
 // TODO: Command to be replaced with correct ones when specified.
-bool emberAfWaterHeaterClusterSetUtcTimeCallback(app::CommandHandler * commandObj,
+bool emberAfEnergyManagementClusterSetUtcTimeCallback(app::CommandHandler * commandObj,
                                                     const app::ConcreteCommandPath & commandPath,
                                                     const Commands::SetUtcTime::DecodableType & commandData)
 {
