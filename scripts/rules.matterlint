@@ -26,6 +26,7 @@ load "../src/app/zap-templates/zcl/data-model/chip/diagnostic-logs-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/dishwasher-alarm-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/dishwasher-mode-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/door-lock-cluster.xml";
+load "../src/app/zap-templates/zcl/data-model/chip/energy-management-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/ethernet-network-diagnostics-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/fan-control-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/fixed-label-cluster.xml";
@@ -81,6 +82,7 @@ load "../src/app/zap-templates/zcl/data-model/chip/unit-localization-cluster.xml
 load "../src/app/zap-templates/zcl/data-model/chip/user-label-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/wake-on-lan-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/washer-controls-cluster.xml";
+load "../src/app/zap-templates/zcl/data-model/chip/water-heater-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/wifi-network-diagnostics-cluster.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/window-covering.xml";
 load "../src/app/zap-templates/zcl/data-model/chip/temperature-control-cluster.xml";
