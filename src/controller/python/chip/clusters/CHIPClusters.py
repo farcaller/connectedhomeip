@@ -10456,14 +10456,14 @@ class ChipClusters:
                 "commandName": "ModifyPowerForecastRequest",
                 "args": {
                     "forecastId": "int",
-                    "slotAdjustments": "int",
+                    "slotAdjustments": "SlotAdjustmentStruct",
                 },
             },
             0x00000006: {
                 "commandId": 0x00000006,
                 "commandName": "RequestLimitBasedPowerForecast",
                 "args": {
-                    "powerLimits": "int",
+                    "powerLimits": "PowerLimitsStruct",
                 },
             },
         },
