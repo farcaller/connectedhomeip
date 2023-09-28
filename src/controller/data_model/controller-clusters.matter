@@ -6458,6 +6458,12 @@ client cluster EnergyManagement = 1798 {
     kOther = 255;
   }
 
+  bitmap EnergyManagementFeature : BITMAP32 {
+    kPowerAdjustment = 0x1;
+    kPowerForecastReporting = 0x2;
+    kPowerForecastAdjustment = 0x4;
+  }
+
   struct CostStruct {
     CostTypeEnum costType = 0;
     nullable int32s value = 1;
@@ -6554,11 +6560,11 @@ client cluster EnergyManagement = 1798 {
 
   request struct ModifyPowerForecastRequestRequest {
     INT32U forecastId = 0;
-    ARRAY slotAdjustments = 1;
+    SlotAdjustmentStruct slotAdjustments[] = 1;
   }
 
   request struct RequestLimitBasedPowerForecastRequest {
-    ARRAY powerLimits = 0;
+    PowerLimitsStruct powerLimits[] = 0;
   }
 
   /** Given valid args, the ESA begins to adjust its power consumption or generation to the level requested. */

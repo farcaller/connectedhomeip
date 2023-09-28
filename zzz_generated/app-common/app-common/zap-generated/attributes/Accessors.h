@@ -3880,6 +3880,55 @@ EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
 } // namespace Attributes
 } // namespace AccountLogin
 
+namespace EnergyManagement {
+namespace Attributes {
+
+namespace EsaType {
+EmberAfStatus Get(chip::EndpointId endpoint,
+                  DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> & value); // EsaTypeEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyManagement::EsaTypeEnum value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint,
+                  const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> & value);
+} // namespace EsaType
+
+namespace EsaIsGenerator {
+EmberAfStatus Get(chip::EndpointId endpoint, bool * value); // boolean
+EmberAfStatus Set(chip::EndpointId endpoint, bool value);
+} // namespace EsaIsGenerator
+
+namespace EsaState {
+EmberAfStatus Get(chip::EndpointId endpoint,
+                  DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> & value); // EsaStateEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyManagement::EsaStateEnum value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint,
+                  const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> & value);
+} // namespace EsaState
+
+namespace AbsMinPower {
+EmberAfStatus Get(chip::EndpointId endpoint, int16_t * value); // int16s
+EmberAfStatus Set(chip::EndpointId endpoint, int16_t value);
+} // namespace AbsMinPower
+
+namespace AbsMaxPower {
+EmberAfStatus Get(chip::EndpointId endpoint, int16_t * value); // int16s
+EmberAfStatus Set(chip::EndpointId endpoint, int16_t value);
+} // namespace AbsMaxPower
+
+namespace FeatureMap {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // bitmap32
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace FeatureMap
+
+namespace ClusterRevision {
+EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
+EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
+} // namespace ClusterRevision
+
+} // namespace Attributes
+} // namespace EnergyManagement
+
 namespace ElectricalMeasurement {
 namespace Attributes {
 

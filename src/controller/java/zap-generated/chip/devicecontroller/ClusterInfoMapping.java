@@ -20116,16 +20116,13 @@ public class ClusterInfoMapping {
        CommandParameterInfo energyManagementmodifyPowerForecastRequestforecastIdCommandParameterInfo = new CommandParameterInfo("forecastId", Long.class, Long.class);
        energyManagementmodifyPowerForecastRequestCommandParams.put("forecastId",energyManagementmodifyPowerForecastRequestforecastIdCommandParameterInfo);
       
-       CommandParameterInfo energyManagementmodifyPowerForecastRequestslotAdjustmentsCommandParameterInfo = new CommandParameterInfo("slotAdjustments", Integer.class, Integer.class);
-       energyManagementmodifyPowerForecastRequestCommandParams.put("slotAdjustments",energyManagementmodifyPowerForecastRequestslotAdjustmentsCommandParameterInfo);
-     
        InteractionInfo energyManagementmodifyPowerForecastRequestInteractionInfo = new InteractionInfo(
          (cluster, callback, commandArguments) -> {
            ((ChipClusters.EnergyManagementCluster) cluster)
            .modifyPowerForecastRequest((DefaultClusterCallback) callback
            , (Long)
            commandArguments.get("forecastId")
-           , (Integer)
+           , (ArrayList<ChipStructs.EnergyManagementClusterSlotAdjustmentStruct>)
            commandArguments.get("slotAdjustments")
            
            );
@@ -20135,14 +20132,11 @@ public class ClusterInfoMapping {
        );
        energyManagementClusterInteractionInfoMap.put("modifyPowerForecastRequest", energyManagementmodifyPowerForecastRequestInteractionInfo);
      Map<String, CommandParameterInfo> energyManagementrequestLimitBasedPowerForecastCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       CommandParameterInfo energyManagementrequestLimitBasedPowerForecastpowerLimitsCommandParameterInfo = new CommandParameterInfo("powerLimits", Integer.class, Integer.class);
-       energyManagementrequestLimitBasedPowerForecastCommandParams.put("powerLimits",energyManagementrequestLimitBasedPowerForecastpowerLimitsCommandParameterInfo);
-     
        InteractionInfo energyManagementrequestLimitBasedPowerForecastInteractionInfo = new InteractionInfo(
          (cluster, callback, commandArguments) -> {
            ((ChipClusters.EnergyManagementCluster) cluster)
            .requestLimitBasedPowerForecast((DefaultClusterCallback) callback
-           , (Integer)
+           , (ArrayList<ChipStructs.EnergyManagementClusterPowerLimitsStruct>)
            commandArguments.get("powerLimits")
            
            );

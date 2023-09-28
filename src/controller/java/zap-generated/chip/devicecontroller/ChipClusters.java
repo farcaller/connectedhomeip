@@ -33808,23 +33808,23 @@ public class ChipClusters {
     }
 
     public void modifyPowerForecastRequest(DefaultClusterCallback callback
-      , Long forecastId, Integer slotAdjustments) {
+      , Long forecastId, ArrayList<ChipStructs.EnergyManagementClusterSlotAdjustmentStruct> slotAdjustments) {
       modifyPowerForecastRequest(chipClusterPtr, callback, forecastId, slotAdjustments, null);
     }
 
     public void modifyPowerForecastRequest(DefaultClusterCallback callback
-      , Long forecastId, Integer slotAdjustments
+      , Long forecastId, ArrayList<ChipStructs.EnergyManagementClusterSlotAdjustmentStruct> slotAdjustments
       , int timedInvokeTimeoutMs) {
       modifyPowerForecastRequest(chipClusterPtr, callback, forecastId, slotAdjustments, timedInvokeTimeoutMs);
     }
 
     public void requestLimitBasedPowerForecast(DefaultClusterCallback callback
-      , Integer powerLimits) {
+      , ArrayList<ChipStructs.EnergyManagementClusterPowerLimitsStruct> powerLimits) {
       requestLimitBasedPowerForecast(chipClusterPtr, callback, powerLimits, null);
     }
 
     public void requestLimitBasedPowerForecast(DefaultClusterCallback callback
-      , Integer powerLimits
+      , ArrayList<ChipStructs.EnergyManagementClusterPowerLimitsStruct> powerLimits
       , int timedInvokeTimeoutMs) {
       requestLimitBasedPowerForecast(chipClusterPtr, callback, powerLimits, timedInvokeTimeoutMs);
     }
@@ -33844,10 +33844,10 @@ public class ChipClusters {
       
       , @Nullable Integer timedInvokeTimeoutMs);
     private native void modifyPowerForecastRequest(long chipClusterPtr, DefaultClusterCallback Callback
-      , Long forecastId, Integer slotAdjustments
+      , Long forecastId, ArrayList<ChipStructs.EnergyManagementClusterSlotAdjustmentStruct> slotAdjustments
       , @Nullable Integer timedInvokeTimeoutMs);
     private native void requestLimitBasedPowerForecast(long chipClusterPtr, DefaultClusterCallback Callback
-      , Integer powerLimits
+      , ArrayList<ChipStructs.EnergyManagementClusterPowerLimitsStruct> powerLimits
       , @Nullable Integer timedInvokeTimeoutMs);
 
       public interface EsaTypeAttributeCallback {

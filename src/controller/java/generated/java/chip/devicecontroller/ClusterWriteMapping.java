@@ -3382,6 +3382,8 @@ public class ClusterWriteMapping {
     writeAttributeMap.put("applicationBasic", writeApplicationBasicInteractionInfo);
     Map<String, InteractionInfo> writeAccountLoginInteractionInfo = new LinkedHashMap<>();
     writeAttributeMap.put("accountLogin", writeAccountLoginInteractionInfo);
+    Map<String, InteractionInfo> writeEnergyManagementInteractionInfo = new LinkedHashMap<>();
+    writeAttributeMap.put("energyManagement", writeEnergyManagementInteractionInfo);
     Map<String, InteractionInfo> writeElectricalMeasurementInteractionInfo = new LinkedHashMap<>();
     Map<String, CommandParameterInfo> writeElectricalMeasurementAverageRmsVoltageMeasurementPeriodCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
     CommandParameterInfo electricalMeasurementaverageRmsVoltageMeasurementPeriodCommandParameterInfo =

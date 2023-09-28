@@ -3919,6 +3919,12 @@ server cluster EnergyManagement = 1798 {
     kOther = 255;
   }
 
+  bitmap EnergyManagementFeature : BITMAP32 {
+    kPowerAdjustment = 0x1;
+    kPowerForecastReporting = 0x2;
+    kPowerForecastAdjustment = 0x4;
+  }
+
   struct CostStruct {
     CostTypeEnum costType = 0;
     nullable int32s value = 1;
@@ -4003,6 +4009,32 @@ server cluster EnergyManagement = 1798 {
   readonly attribute attrib_id attributeList[] = 65531;
   readonly attribute bitmap32 featureMap = 65532;
   readonly attribute int16u clusterRevision = 65533;
+
+  request struct PowerAdjustRequestRequest {
+    INT16S power = 0;
+    INT32U duration = 1;
+  }
+
+  request struct StartTimeAdjustRequestRequest {
+    epoch_s requestedStartTime = 0;
+  }
+
+  request struct ModifyPowerForecastRequestRequest {
+    INT32U forecastId = 0;
+    SlotAdjustmentStruct slotAdjustments[] = 1;
+  }
+
+  request struct RequestLimitBasedPowerForecastRequest {
+    PowerLimitsStruct powerLimits[] = 0;
+  }
+
+  command PowerAdjustRequest(PowerAdjustRequestRequest): DefaultSuccess = 0;
+  command CancelPowerAdjustRequest(): DefaultSuccess = 1;
+  command StartTimeAdjustRequest(StartTimeAdjustRequestRequest): DefaultSuccess = 2;
+  command PauseRequest(): DefaultSuccess = 3;
+  command ResumeRequest(): DefaultSuccess = 4;
+  command ModifyPowerForecastRequest(ModifyPowerForecastRequestRequest): DefaultSuccess = 5;
+  command RequestLimitBasedPowerForecast(RequestLimitBasedPowerForecastRequest): DefaultSuccess = 6;
 }
 
 endpoint 0 {
@@ -4490,18 +4522,22 @@ endpoint 1 {
   }
 
   server cluster EnergyManagement {
+    emits event PowerAdjustStart;
+    emits event PowerAdjustEnd;
+    emits event Paused;
+    emits event Resumed;
     ram      attribute esaType;
     ram      attribute esaIsGenerator;
     ram      attribute esaState;
     ram      attribute absMinPower;
     ram      attribute absMaxPower;
     callback attribute powerAdjustmentCapability;
-    ram      attribute powerForecast;
+    callback attribute powerForecast;
     callback attribute generatedCommandList;
     callback attribute acceptedCommandList;
     callback attribute eventList;
     callback attribute attributeList;
-    ram      attribute featureMap default = 0;
+    ram      attribute featureMap default = 0x7;
     ram      attribute clusterRevision default = 1;
   }
 }
