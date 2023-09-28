@@ -385,6 +385,10 @@
 @property (nonatomic, readonly) MTRDevice * device;
 @end
 
+@interface MTRClusterEnergyManagement ()
+@property (nonatomic, readonly) MTRDevice * device;
+@end
+
 @interface MTRClusterElectricalMeasurement ()
 @property (nonatomic, readonly) MTRDevice * device;
 @end

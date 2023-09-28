@@ -6418,6 +6418,171 @@ client cluster AccountLogin = 1294 {
   timed command Logout(): DefaultSuccess = 3;
 }
 
+/** This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA). */
+client cluster EnergyManagement = 1798 {
+  enum CauseEnum : ENUM8 {
+    kNormalCompletion = 0;
+    kOffline = 1;
+    kFault = 2;
+    kUserOptout = 3;
+  }
+
+  enum CostTypeEnum : ENUM8 {
+    kFinancial = 0;
+    kGHGEmissions = 1;
+    kComfort = 2;
+    kTemperature = 3;
+  }
+
+  enum EsaStateEnum : ENUM8 {
+    kOffline = 0;
+    kOnline = 1;
+    kFault = 2;
+    kUserOptout = 3;
+    kPowerAdjustActive = 4;
+    kPaused = 5;
+  }
+
+  enum EsaTypeEnum : ENUM8 {
+    kEVSE = 0;
+    kSpaceHeating = 1;
+    kWaterHeating = 2;
+    kSpaceCooling = 3;
+    kSpaceHeatingCooling = 4;
+    kBatteryStorage = 5;
+    kSolarPV = 6;
+    kFridgeFreezer = 7;
+    kWashingMachine = 8;
+    kDishwasher = 9;
+    kCooking = 10;
+    kOther = 255;
+  }
+
+  bitmap EnergyManagementFeature : BITMAP32 {
+    kPowerAdjustment = 0x1;
+    kPowerForecastReporting = 0x2;
+    kPowerForecastAdjustment = 0x4;
+  }
+
+  struct CostStruct {
+    CostTypeEnum costType = 0;
+    nullable int32s value = 1;
+    int8s decimalPoints = 2;
+    optional int8s currency = 3;
+  }
+
+  struct SlotStruct {
+    int32u minDuration = 0;
+    int32u maxDuration = 1;
+    int32u defaultDuration = 2;
+    int32u elapsedSlotTime = 3;
+    int32u remainingSlotTime = 4;
+    boolean slotIsPauseable = 5;
+    int16s nominalPower = 6;
+    int16s minPower = 7;
+    int16s maxPower = 8;
+    int32s nominalEnergy = 9;
+    optional CostStruct costs[] = 10;
+    int16s minPowerAdjustment = 11;
+    int16s maxPowerAdjustment = 12;
+    int32u minimumDurationAdjustment = 13;
+    int32u maximumDurationAdjustment = 14;
+  }
+
+  struct PowerForecastStruct {
+    int16u forecastId = 0;
+    int16u activeSlotNumber = 1;
+    epoch_s startTime = 2;
+    optional epoch_s endTime = 3;
+    epoch_s earliestStartTime = 4;
+    epoch_s latestEndTime = 5;
+    boolean isPauseable = 6;
+    SlotStruct slots[] = 7;
+  }
+
+  struct PowerAdjustStruct {
+    int16s minPower = 0;
+    int16s maxPower = 1;
+    int32u minDuration = 2;
+    int32u maxDuration = 3;
+  }
+
+  struct PowerLimitsStruct {
+    epoch_s startTime = 0;
+    int32u duration = 1;
+    int16s nominalPower = 2;
+    int32s maximumEnergy = 3;
+  }
+
+  struct SlotAdjustmentStruct {
+    int16u slotIndex = 0;
+    int16s nominalPower = 1;
+    int32u duration = 2;
+  }
+
+  info event PowerAdjustStart = 0 {
+  }
+
+  info event PowerAdjustEnd = 1 {
+    optional CauseEnum cause = 0;
+    optional INT32U duration = 1;
+    optional INT32S energyUse = 2;
+  }
+
+  info event Paused = 2 {
+  }
+
+  info event Resumed = 3 {
+  }
+
+  readonly attribute nullable EsaTypeEnum esaType = 0;
+  readonly attribute boolean esaIsGenerator = 1;
+  readonly attribute nullable EsaStateEnum esaState = 2;
+  readonly attribute int16s absMinPower = 3;
+  readonly attribute int16s absMaxPower = 4;
+  readonly attribute optional nullable PowerAdjustStruct powerAdjustmentCapability[] = 5;
+  readonly attribute optional nullable PowerForecastStruct powerForecast = 6;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+
+  request struct PowerAdjustRequestRequest {
+    INT16S power = 0;
+    INT32U duration = 1;
+  }
+
+  request struct StartTimeAdjustRequestRequest {
+    epoch_s requestedStartTime = 0;
+  }
+
+  request struct ModifyPowerForecastRequestRequest {
+    INT32U forecastId = 0;
+    SlotAdjustmentStruct slotAdjustments[] = 1;
+  }
+
+  request struct RequestLimitBasedPowerForecastRequest {
+    PowerLimitsStruct powerLimits[] = 0;
+  }
+
+  /** Given valid args, the ESA begins to adjust its power consumption or generation to the level requested. */
+  command PowerAdjustRequest(PowerAdjustRequestRequest): DefaultSuccess = 0;
+  /** The ESA SHALL end the active Power adjustment session and reutn to normal (or idle) power levels. */
+  command CancelPowerAdjustRequest(): DefaultSuccess = 1;
+  /** If the ESA supports Power Forecast Adjustment and the EsaState is not UserOptout, it may have its start time shifted after the EarliestStartTime. */
+  command StartTimeAdjustRequest(StartTimeAdjustRequestRequest): DefaultSuccess = 2;
+  /** The ESA may pause its current operation, given various conditions. */
+  command PauseRequest(): DefaultSuccess = 3;
+  /** The ESA may resume its current operation, given various conditions. */
+  command ResumeRequest(): DefaultSuccess = 4;
+  /** If the ESA supports PFA, and the EsaState is not UserOptout it may have its power forecast adjusted by a client. */
+  command ModifyPowerForecastRequest(ModifyPowerForecastRequestRequest): DefaultSuccess = 5;
+  /** If the ESA supports PFA, and the EsaState is not UserOptout it may be requested to generate a new power forecast by a client. */
+  command RequestLimitBasedPowerForecast(RequestLimitBasedPowerForecastRequest): DefaultSuccess = 6;
+}
+
 /** Attributes related to the electrical properties of a device. This cluster is used by power outlets and other devices that need to provide instantaneous data as opposed to metrology data which should be retrieved from the metering cluster.. */
 client cluster ElectricalMeasurement = 2820 {
   readonly attribute optional bitmap32 measurementType = 0;

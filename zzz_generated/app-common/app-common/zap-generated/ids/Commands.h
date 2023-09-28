@@ -1301,6 +1301,40 @@ static constexpr CommandId Id = 0x00000003;
 } // namespace Commands
 } // namespace AccountLogin
 
+namespace EnergyManagement {
+namespace Commands {
+
+namespace PowerAdjustRequest {
+static constexpr CommandId Id = 0x00000000;
+} // namespace PowerAdjustRequest
+
+namespace CancelPowerAdjustRequest {
+static constexpr CommandId Id = 0x00000001;
+} // namespace CancelPowerAdjustRequest
+
+namespace StartTimeAdjustRequest {
+static constexpr CommandId Id = 0x00000002;
+} // namespace StartTimeAdjustRequest
+
+namespace PauseRequest {
+static constexpr CommandId Id = 0x00000003;
+} // namespace PauseRequest
+
+namespace ResumeRequest {
+static constexpr CommandId Id = 0x00000004;
+} // namespace ResumeRequest
+
+namespace ModifyPowerForecastRequest {
+static constexpr CommandId Id = 0x00000005;
+} // namespace ModifyPowerForecastRequest
+
+namespace RequestLimitBasedPowerForecast {
+static constexpr CommandId Id = 0x00000006;
+} // namespace RequestLimitBasedPowerForecast
+
+} // namespace Commands
+} // namespace EnergyManagement
+
 namespace ElectricalMeasurement {
 namespace Commands {
 

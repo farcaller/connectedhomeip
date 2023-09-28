@@ -814,6 +814,18 @@ typedef void (*ApplicationBasicClusterApplicationStatusEnumAttributeCallback)(
     void *, chip::app::Clusters::ApplicationBasic::ApplicationStatusEnum);
 typedef void (*NullableApplicationBasicClusterApplicationStatusEnumAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationBasic::ApplicationStatusEnum> &);
+typedef void (*EnergyManagementClusterCauseEnumAttributeCallback)(void *, chip::app::Clusters::EnergyManagement::CauseEnum);
+typedef void (*NullableEnergyManagementClusterCauseEnumAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::CauseEnum> &);
+typedef void (*EnergyManagementClusterCostTypeEnumAttributeCallback)(void *, chip::app::Clusters::EnergyManagement::CostTypeEnum);
+typedef void (*NullableEnergyManagementClusterCostTypeEnumAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::CostTypeEnum> &);
+typedef void (*EnergyManagementClusterEsaStateEnumAttributeCallback)(void *, chip::app::Clusters::EnergyManagement::EsaStateEnum);
+typedef void (*NullableEnergyManagementClusterEsaStateEnumAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> &);
+typedef void (*EnergyManagementClusterEsaTypeEnumAttributeCallback)(void *, chip::app::Clusters::EnergyManagement::EsaTypeEnum);
+typedef void (*NullableEnergyManagementClusterEsaTypeEnumAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> &);
 typedef void (*UnitTestingClusterSimpleEnumAttributeCallback)(void *, chip::app::Clusters::UnitTesting::SimpleEnum);
 typedef void (*NullableUnitTestingClusterSimpleEnumAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> &);
@@ -1796,6 +1808,22 @@ typedef void (*AccountLoginEventListListAttributeCallback)(void * context,
                                                            const chip::app::DataModel::DecodableList<chip::EventId> & data);
 typedef void (*AccountLoginAttributeListListAttributeCallback)(void * context,
                                                                const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
+typedef void (*EnergyManagementPowerAdjustmentCapabilityListAttributeCallback)(
+    void * context,
+    const chip::app::DataModel::Nullable<
+        chip::app::DataModel::DecodableList<chip::app::Clusters::EnergyManagement::Structs::PowerAdjustStruct::DecodableType>> &
+        data);
+typedef void (*EnergyManagementPowerForecastStructAttributeCallback)(
+    void *,
+    const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::Structs::PowerForecastStruct::DecodableType> &);
+typedef void (*EnergyManagementGeneratedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*EnergyManagementAcceptedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*EnergyManagementEventListListAttributeCallback)(void * context,
+                                                               const chip::app::DataModel::DecodableList<chip::EventId> & data);
+typedef void (*EnergyManagementAttributeListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
 typedef void (*ElectricalMeasurementGeneratedCommandListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
 typedef void (*ElectricalMeasurementAcceptedCommandListListAttributeCallback)(
@@ -18020,6 +18048,209 @@ private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;
 };
 
+class MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementPowerAdjustmentCapabilityListAttributeCallback>
+{
+public:
+    MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementPowerAdjustmentCapabilityListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                            MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementPowerAdjustmentCapabilityListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context,
+                            const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+                                chip::app::Clusters::EnergyManagement::Structs::PowerAdjustStruct::DecodableType>> & value);
+};
+
+class MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementPowerForecastStructAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementPowerForecastStructAttributeCallback>
+{
+public:
+    MTREnergyManagementPowerForecastStructAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementPowerForecastStructAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementPowerForecastStructAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                  MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementPowerForecastStructAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(
+        void * context,
+        const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::Structs::PowerForecastStruct::DecodableType> &
+            value);
+};
+
+class MTREnergyManagementPowerForecastStructAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementPowerForecastStructAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementPowerForecastStructAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementPowerForecastStructAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementPowerForecastStructAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementPowerForecastStructAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementGeneratedCommandListListAttributeCallback>
+{
+public:
+    MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementGeneratedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                       MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementGeneratedCommandListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTREnergyManagementGeneratedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementAcceptedCommandListListAttributeCallback>
+{
+public:
+    MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementAcceptedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                      MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementAcceptedCommandListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTREnergyManagementAcceptedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementEventListListAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementEventListListAttributeCallback>
+{
+public:
+    MTREnergyManagementEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementEventListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                            MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementEventListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::EventId> & value);
+};
+
+class MTREnergyManagementEventListListAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementEventListListAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementEventListListAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                        MTRActionBlock action,
+                                                                        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementEventListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementEventListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementEventListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementAttributeListListAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementAttributeListListAttributeCallback>
+{
+public:
+    MTREnergyManagementAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementAttributeListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementAttributeListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & value);
+};
+
+class MTREnergyManagementAttributeListListAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementAttributeListListAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementAttributeListListAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                            MTRActionBlock action,
+                                                                            MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementAttributeListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementAttributeListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementAttributeListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
 class MTRElectricalMeasurementGeneratedCommandListListAttributeCallbackBridge
     : public MTRCallbackBridge<ElectricalMeasurementGeneratedCommandListListAttributeCallback>
 {
@@ -32335,6 +32566,274 @@ public:
     void OnSubscriptionEstablished();
     using MTRNullableApplicationBasicClusterApplicationStatusEnumAttributeCallbackBridge::KeepAliveOnCallback;
     using MTRNullableApplicationBasicClusterApplicationStatusEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementClusterCauseEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementClusterCauseEnumAttributeCallback>
+{
+public:
+    MTREnergyManagementClusterCauseEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementClusterCauseEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementClusterCauseEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                               MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementClusterCauseEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, chip::app::Clusters::EnergyManagement::CauseEnum value);
+};
+
+class MTREnergyManagementClusterCauseEnumAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementClusterCauseEnumAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementClusterCauseEnumAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                           MTRActionBlock action,
+                                                                           MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementClusterCauseEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementClusterCauseEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementClusterCauseEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<NullableEnergyManagementClusterCauseEnumAttributeCallback>
+{
+public:
+    MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<NullableEnergyManagementClusterCauseEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                       MTRActionBlock action) :
+        MTRCallbackBridge<NullableEnergyManagementClusterCauseEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context,
+                            const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::CauseEnum> & value);
+};
+
+class MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackSubscriptionBridge
+    : public MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge
+{
+public:
+    MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementClusterCostTypeEnumAttributeCallback>
+{
+public:
+    MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementClusterCostTypeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                  MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementClusterCostTypeEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, chip::app::Clusters::EnergyManagement::CostTypeEnum value);
+};
+
+class MTREnergyManagementClusterCostTypeEnumAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementClusterCostTypeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<NullableEnergyManagementClusterCostTypeEnumAttributeCallback>
+{
+public:
+    MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<NullableEnergyManagementClusterCostTypeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                          MTRActionBlock action) :
+        MTRCallbackBridge<NullableEnergyManagementClusterCostTypeEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context,
+                            const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::CostTypeEnum> & value);
+};
+
+class MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackSubscriptionBridge
+    : public MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge
+{
+public:
+    MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementClusterEsaStateEnumAttributeCallback>
+{
+public:
+    MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementClusterEsaStateEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                  MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementClusterEsaStateEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, chip::app::Clusters::EnergyManagement::EsaStateEnum value);
+};
+
+class MTREnergyManagementClusterEsaStateEnumAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementClusterEsaStateEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<NullableEnergyManagementClusterEsaStateEnumAttributeCallback>
+{
+public:
+    MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<NullableEnergyManagementClusterEsaStateEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                          MTRActionBlock action) :
+        MTRCallbackBridge<NullableEnergyManagementClusterEsaStateEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context,
+                            const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> & value);
+};
+
+class MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackSubscriptionBridge
+    : public MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge
+{
+public:
+    MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<EnergyManagementClusterEsaTypeEnumAttributeCallback>
+{
+public:
+    MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<EnergyManagementClusterEsaTypeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                 MTRActionBlock action) :
+        MTRCallbackBridge<EnergyManagementClusterEsaTypeEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, chip::app::Clusters::EnergyManagement::EsaTypeEnum value);
+};
+
+class MTREnergyManagementClusterEsaTypeEnumAttributeCallbackSubscriptionBridge
+    : public MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge
+{
+public:
+    MTREnergyManagementClusterEsaTypeEnumAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                             MTRActionBlock action,
+                                                                             MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<NullableEnergyManagementClusterEsaTypeEnumAttributeCallback>
+{
+public:
+    MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<NullableEnergyManagementClusterEsaTypeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                         MTRActionBlock action) :
+        MTRCallbackBridge<NullableEnergyManagementClusterEsaTypeEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context,
+                            const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> & value);
+};
+
+class MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackSubscriptionBridge
+    : public MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge
+{
+public:
+    MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge::OnDone;
 
 private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;

@@ -31,6 +31,7 @@
         "DISHWASHER_MODE_CLUSTER": [],
         "DOOR_LOCK_CLUSTER": [],
         "ELECTRICAL_MEASUREMENT_CLUSTER": [],
+        "ENERGY_MANAGEMENT_CLUSTER":[],
         "ETHERNET_NETWORK_DIAGNOSTICS_CLUSTER": [],
         "FAN_CONTROL_CLUSTER": [],
         "FAULT_INJECTION_CLUSTER": [],
@@ -107,6 +108,7 @@
         "USER_LABEL_CLUSTER": [],
         "TVOC_CONCENTRATION_MEASUREMENT_CLUSTER": [],
         "WAKE_ON_LAN_CLUSTER": [],
+        "WATER_HEATER_CLUSTER": [],
         "LAUNDRY_WASHER_CONTROLS_CLUSTER": [],
         "WIFI_NETWORK_DIAGNOSTICS_CLUSTER": [],
         "WINDOW_COVERING_CLUSTER": [],
@@ -153,6 +155,7 @@
         "DISHWASHER_MODE_CLUSTER": ["mode-base-server"],
         "DOOR_LOCK_CLUSTER": ["door-lock-server"],
         "ELECTRICAL_MEASUREMENT_CLUSTER": [],
+        "ENERGY_MANAGEMENT_CLUSTER":["energy-management-server"],
         "ETHERNET_NETWORK_DIAGNOSTICS_CLUSTER": [
             "ethernet-network-diagnostics-server"
         ],

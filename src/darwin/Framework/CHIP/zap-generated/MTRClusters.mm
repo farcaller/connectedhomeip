@@ -26263,6 +26263,433 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
 }
 @end
 
+@implementation MTRClusterEnergyManagement
+
+- (instancetype)initWithDevice:(MTRDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
+{
+    if (self = [super initWithEndpointID:endpointID queue:queue]) {
+        if (device == nil) {
+            return nil;
+        }
+
+        _device = device;
+    }
+    return self;
+}
+
+- (void)powerAdjustRequestWithParams:(MTREnergyManagementClusterPowerAdjustRequestParams *)params
+                      expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+               expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                          completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandPowerAdjustRequestID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster powerAdjustRequestWithParams:params
+                                   completion:^(NSError * _Nullable error) {
+                                       MTRClustersLogCompletion(logPrefix, nil, error);
+                                       dispatch_async(self.callbackQueue, ^{
+                                           completion(error);
+                                       });
+                                       [workItem endWork];
+                                   }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)cancelPowerAdjustRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                             expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                        completion:(MTRStatusCompletion)completion
+{
+    [self cancelPowerAdjustRequestWithParams:nil
+                              expectedValues:expectedValues
+                       expectedValueInterval:expectedValueIntervalMs
+                                  completion:completion];
+}
+- (void)cancelPowerAdjustRequestWithParams:(MTREnergyManagementClusterCancelPowerAdjustRequestParams * _Nullable)params
+                            expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                     expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandCancelPowerAdjustRequestID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster cancelPowerAdjustRequestWithParams:params
+                                         completion:^(NSError * _Nullable error) {
+                                             MTRClustersLogCompletion(logPrefix, nil, error);
+                                             dispatch_async(self.callbackQueue, ^{
+                                                 completion(error);
+                                             });
+                                             [workItem endWork];
+                                         }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)startTimeAdjustRequestWithParams:(MTREnergyManagementClusterStartTimeAdjustRequestParams *)params
+                          expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                   expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                              completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandStartTimeAdjustRequestID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster startTimeAdjustRequestWithParams:params
+                                       completion:^(NSError * _Nullable error) {
+                                           MTRClustersLogCompletion(logPrefix, nil, error);
+                                           dispatch_async(self.callbackQueue, ^{
+                                               completion(error);
+                                           });
+                                           [workItem endWork];
+                                       }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)pauseRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                 expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                            completion:(MTRStatusCompletion)completion
+{
+    [self pauseRequestWithParams:nil
+                  expectedValues:expectedValues
+           expectedValueInterval:expectedValueIntervalMs
+                      completion:completion];
+}
+- (void)pauseRequestWithParams:(MTREnergyManagementClusterPauseRequestParams * _Nullable)params
+                expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+         expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                    completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandPauseRequestID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster pauseRequestWithParams:params
+                             completion:^(NSError * _Nullable error) {
+                                 MTRClustersLogCompletion(logPrefix, nil, error);
+                                 dispatch_async(self.callbackQueue, ^{
+                                     completion(error);
+                                 });
+                                 [workItem endWork];
+                             }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)resumeRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                             completion:(MTRStatusCompletion)completion
+{
+    [self resumeRequestWithParams:nil
+                   expectedValues:expectedValues
+            expectedValueInterval:expectedValueIntervalMs
+                       completion:completion];
+}
+- (void)resumeRequestWithParams:(MTREnergyManagementClusterResumeRequestParams * _Nullable)params
+                 expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+          expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                     completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandResumeRequestID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster resumeRequestWithParams:params
+                              completion:^(NSError * _Nullable error) {
+                                  MTRClustersLogCompletion(logPrefix, nil, error);
+                                  dispatch_async(self.callbackQueue, ^{
+                                      completion(error);
+                                  });
+                                  [workItem endWork];
+                              }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)modifyPowerForecastRequestWithParams:(MTREnergyManagementClusterModifyPowerForecastRequestParams *)params
+                              expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                       expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                  completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandModifyPowerForecastRequestID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster modifyPowerForecastRequestWithParams:params
+                                           completion:^(NSError * _Nullable error) {
+                                               MTRClustersLogCompletion(logPrefix, nil, error);
+                                               dispatch_async(self.callbackQueue, ^{
+                                                   completion(error);
+                                               });
+                                               [workItem endWork];
+                                           }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)requestLimitBasedPowerForecastWithParams:(MTREnergyManagementClusterRequestLimitBasedPowerForecastParams *)params
+                                  expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                           expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                      completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeEnergyManagementID,
+                                     (unsigned int) MTRCommandIDTypeClusterEnergyManagementCommandRequestLimitBasedPowerForecastID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterEnergyManagement alloc] initWithDevice:baseDevice
+                                                                     endpointID:@(self.endpoint)
+                                                                          queue:self.device.queue];
+        [cluster requestLimitBasedPowerForecastWithParams:params
+                                               completion:^(NSError * _Nullable error) {
+                                                   MTRClustersLogCompletion(logPrefix, nil, error);
+                                                   dispatch_async(self.callbackQueue, ^{
+                                                       completion(error);
+                                                   });
+                                                   [workItem endWork];
+                                               }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEsaTypeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeEsaTypeID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEsaIsGeneratorWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeEsaIsGeneratorID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEsaStateWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeEsaStateID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAbsMinPowerWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeAbsMinPowerID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAbsMaxPowerWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeAbsMaxPowerID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePowerAdjustmentCapabilityWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributePowerAdjustmentCapabilityID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePowerForecastWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributePowerForecastID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeGeneratedCommandListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeAcceptedCommandListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeEventListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeAttributeListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeFeatureMapID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeEnergyManagementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyManagementAttributeClusterRevisionID)
+                                             params:params];
+}
+
+@end
+
 @implementation MTRClusterElectricalMeasurement
 
 - (instancetype)initWithDevice:(MTRDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue

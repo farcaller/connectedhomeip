@@ -18551,6 +18551,307 @@ void MTRAccountLoginAttributeListListAttributeCallbackSubscriptionBridge::OnSubs
     }
 }
 
+void MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackBridge::OnSuccessFn(void * context,
+    const chip::app::DataModel::Nullable<
+        chip::app::DataModel::DecodableList<chip::app::Clusters::EnergyManagement::Structs::PowerAdjustStruct::DecodableType>> &
+        value)
+{
+    NSArray * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        { // Scope for our temporary variables
+            auto * array_1 = [NSMutableArray new];
+            auto iter_1 = value.Value().begin();
+            while (iter_1.Next()) {
+                auto & entry_1 = iter_1.GetValue();
+                MTREnergyManagementClusterPowerAdjustStruct * newElement_1;
+                newElement_1 = [MTREnergyManagementClusterPowerAdjustStruct new];
+                newElement_1.minPower = [NSNumber numberWithShort:entry_1.minPower];
+                newElement_1.maxPower = [NSNumber numberWithShort:entry_1.maxPower];
+                newElement_1.minDuration = [NSNumber numberWithUnsignedInt:entry_1.minDuration];
+                newElement_1.maxDuration = [NSNumber numberWithUnsignedInt:entry_1.maxDuration];
+                [array_1 addObject:newElement_1];
+            }
+            CHIP_ERROR err = iter_1.GetStatus();
+            if (err != CHIP_NO_ERROR) {
+                OnFailureFn(context, err);
+                return;
+            }
+            objCValue = array_1;
+        }
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementPowerAdjustmentCapabilityListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementPowerForecastStructAttributeCallbackBridge::OnSuccessFn(void * context,
+    const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::Structs::PowerForecastStruct::DecodableType> &
+        value)
+{
+    MTREnergyManagementClusterPowerForecastStruct * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        objCValue = [MTREnergyManagementClusterPowerForecastStruct new];
+        objCValue.forecastId = [NSNumber numberWithUnsignedShort:value.Value().forecastId];
+        objCValue.activeSlotNumber = [NSNumber numberWithUnsignedShort:value.Value().activeSlotNumber];
+        objCValue.startTime = [NSNumber numberWithUnsignedInt:value.Value().startTime];
+        if (value.Value().endTime.HasValue()) {
+            objCValue.endTime = [NSNumber numberWithUnsignedInt:value.Value().endTime.Value()];
+        } else {
+            objCValue.endTime = nil;
+        }
+        objCValue.earliestStartTime = [NSNumber numberWithUnsignedInt:value.Value().earliestStartTime];
+        objCValue.latestEndTime = [NSNumber numberWithUnsignedInt:value.Value().latestEndTime];
+        objCValue.isPauseable = [NSNumber numberWithBool:value.Value().isPauseable];
+        { // Scope for our temporary variables
+            auto * array_2 = [NSMutableArray new];
+            auto iter_2 = value.Value().slots.begin();
+            while (iter_2.Next()) {
+                auto & entry_2 = iter_2.GetValue();
+                MTREnergyManagementClusterSlotStruct * newElement_2;
+                newElement_2 = [MTREnergyManagementClusterSlotStruct new];
+                newElement_2.minDuration = [NSNumber numberWithUnsignedInt:entry_2.minDuration];
+                newElement_2.maxDuration = [NSNumber numberWithUnsignedInt:entry_2.maxDuration];
+                newElement_2.defaultDuration = [NSNumber numberWithUnsignedInt:entry_2.defaultDuration];
+                newElement_2.elapsedSlotTime = [NSNumber numberWithUnsignedInt:entry_2.elapsedSlotTime];
+                newElement_2.remainingSlotTime = [NSNumber numberWithUnsignedInt:entry_2.remainingSlotTime];
+                newElement_2.slotIsPauseable = [NSNumber numberWithBool:entry_2.slotIsPauseable];
+                newElement_2.nominalPower = [NSNumber numberWithShort:entry_2.nominalPower];
+                newElement_2.minPower = [NSNumber numberWithShort:entry_2.minPower];
+                newElement_2.maxPower = [NSNumber numberWithShort:entry_2.maxPower];
+                newElement_2.nominalEnergy = [NSNumber numberWithInt:entry_2.nominalEnergy];
+                if (entry_2.costs.HasValue()) {
+                    { // Scope for our temporary variables
+                        auto * array_5 = [NSMutableArray new];
+                        auto iter_5 = entry_2.costs.Value().begin();
+                        while (iter_5.Next()) {
+                            auto & entry_5 = iter_5.GetValue();
+                            MTREnergyManagementClusterCostStruct * newElement_5;
+                            newElement_5 = [MTREnergyManagementClusterCostStruct new];
+                            newElement_5.costType = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_5.costType)];
+                            if (entry_5.value.IsNull()) {
+                                newElement_5.value = nil;
+                            } else {
+                                newElement_5.value = [NSNumber numberWithInt:entry_5.value.Value()];
+                            }
+                            newElement_5.decimalPoints = [NSNumber numberWithChar:entry_5.decimalPoints];
+                            if (entry_5.currency.HasValue()) {
+                                newElement_5.currency = [NSNumber numberWithChar:entry_5.currency.Value()];
+                            } else {
+                                newElement_5.currency = nil;
+                            }
+                            [array_5 addObject:newElement_5];
+                        }
+                        CHIP_ERROR err = iter_5.GetStatus();
+                        if (err != CHIP_NO_ERROR) {
+                            OnFailureFn(context, err);
+                            return;
+                        }
+                        newElement_2.costs = array_5;
+                    }
+                } else {
+                    newElement_2.costs = nil;
+                }
+                newElement_2.minPowerAdjustment = [NSNumber numberWithShort:entry_2.minPowerAdjustment];
+                newElement_2.maxPowerAdjustment = [NSNumber numberWithShort:entry_2.maxPowerAdjustment];
+                newElement_2.minimumDurationAdjustment = [NSNumber numberWithUnsignedInt:entry_2.minimumDurationAdjustment];
+                newElement_2.maximumDurationAdjustment = [NSNumber numberWithUnsignedInt:entry_2.maximumDurationAdjustment];
+                [array_2 addObject:newElement_2];
+            }
+            CHIP_ERROR err = iter_2.GetStatus();
+            if (err != CHIP_NO_ERROR) {
+                OnFailureFn(context, err);
+                return;
+            }
+            objCValue.slots = array_2;
+        }
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementPowerForecastStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementGeneratedCommandListListAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value)
+{
+    NSArray * _Nonnull objCValue;
+    { // Scope for our temporary variables
+        auto * array_0 = [NSMutableArray new];
+        auto iter_0 = value.begin();
+        while (iter_0.Next()) {
+            auto & entry_0 = iter_0.GetValue();
+            NSNumber * newElement_0;
+            newElement_0 = [NSNumber numberWithUnsignedInt:entry_0];
+            [array_0 addObject:newElement_0];
+        }
+        CHIP_ERROR err = iter_0.GetStatus();
+        if (err != CHIP_NO_ERROR) {
+            OnFailureFn(context, err);
+            return;
+        }
+        objCValue = array_0;
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementAcceptedCommandListListAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value)
+{
+    NSArray * _Nonnull objCValue;
+    { // Scope for our temporary variables
+        auto * array_0 = [NSMutableArray new];
+        auto iter_0 = value.begin();
+        while (iter_0.Next()) {
+            auto & entry_0 = iter_0.GetValue();
+            NSNumber * newElement_0;
+            newElement_0 = [NSNumber numberWithUnsignedInt:entry_0];
+            [array_0 addObject:newElement_0];
+        }
+        CHIP_ERROR err = iter_0.GetStatus();
+        if (err != CHIP_NO_ERROR) {
+            OnFailureFn(context, err);
+            return;
+        }
+        objCValue = array_0;
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementEventListListAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::DecodableList<chip::EventId> & value)
+{
+    NSArray * _Nonnull objCValue;
+    { // Scope for our temporary variables
+        auto * array_0 = [NSMutableArray new];
+        auto iter_0 = value.begin();
+        while (iter_0.Next()) {
+            auto & entry_0 = iter_0.GetValue();
+            NSNumber * newElement_0;
+            newElement_0 = [NSNumber numberWithUnsignedInt:entry_0];
+            [array_0 addObject:newElement_0];
+        }
+        CHIP_ERROR err = iter_0.GetStatus();
+        if (err != CHIP_NO_ERROR) {
+            OnFailureFn(context, err);
+            return;
+        }
+        objCValue = array_0;
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementEventListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementAttributeListListAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & value)
+{
+    NSArray * _Nonnull objCValue;
+    { // Scope for our temporary variables
+        auto * array_0 = [NSMutableArray new];
+        auto iter_0 = value.begin();
+        while (iter_0.Next()) {
+            auto & entry_0 = iter_0.GetValue();
+            NSNumber * newElement_0;
+            newElement_0 = [NSNumber numberWithUnsignedInt:entry_0];
+            [array_0 addObject:newElement_0];
+        }
+        CHIP_ERROR err = iter_0.GetStatus();
+        if (err != CHIP_NO_ERROR) {
+            OnFailureFn(context, err);
+            return;
+        }
+        objCValue = array_0;
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
 void MTRElectricalMeasurementGeneratedCommandListListAttributeCallbackBridge::OnSuccessFn(
     void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value)
 {
@@ -29506,6 +29807,206 @@ void MTRNullableApplicationBasicClusterApplicationStatusEnumAttributeCallbackBri
 };
 
 void MTRNullableApplicationBasicClusterApplicationStatusEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementClusterCauseEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, chip::app::Clusters::EnergyManagement::CauseEnum value)
+{
+    NSNumber * _Nonnull objCValue;
+    objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value)];
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementClusterCauseEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::CauseEnum> & value)
+{
+    NSNumber * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value.Value())];
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTRNullableEnergyManagementClusterCauseEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementClusterCostTypeEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, chip::app::Clusters::EnergyManagement::CostTypeEnum value)
+{
+    NSNumber * _Nonnull objCValue;
+    objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value)];
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementClusterCostTypeEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::CostTypeEnum> & value)
+{
+    NSNumber * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value.Value())];
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTRNullableEnergyManagementClusterCostTypeEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementClusterEsaStateEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, chip::app::Clusters::EnergyManagement::EsaStateEnum value)
+{
+    NSNumber * _Nonnull objCValue;
+    objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value)];
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementClusterEsaStateEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> & value)
+{
+    NSNumber * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value.Value())];
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTRNullableEnergyManagementClusterEsaStateEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTREnergyManagementClusterEsaTypeEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, chip::app::Clusters::EnergyManagement::EsaTypeEnum value)
+{
+    NSNumber * _Nonnull objCValue;
+    objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value)];
+    DispatchSuccess(context, objCValue);
+};
+
+void MTREnergyManagementClusterEsaTypeEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
+void MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> & value)
+{
+    NSNumber * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value.Value())];
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTRNullableEnergyManagementClusterEsaTypeEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
 {
     if (!mQueue) {
         return;

@@ -315,6 +315,7 @@ typedef NS_ENUM(uint32_t, MTRClusterIDType) {
     MTRClusterIDTypeApplicationLauncherID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000050C,
     MTRClusterIDTypeApplicationBasicID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000050D,
     MTRClusterIDTypeAccountLoginID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000050E,
+    MTRClusterIDTypeEnergyManagementID MTR_NEWLY_AVAILABLE = 0x00000706,
     MTRClusterIDTypeElectricalMeasurementID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000B04,
     MTRClusterIDTypeWaterHeaterID MTR_NEWLY_AVAILABLE = 0x00006660,
     MTRClusterIDTypeUnitTestingID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0xFFF1FC05,
@@ -7182,6 +7183,27 @@ typedef NS_ENUM(uint32_t, MTRAttributeIDType) {
     MTRAttributeIDTypeClusterAccountLoginAttributeClusterRevisionID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
     = MTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster EnergyManagement attributes
+    MTRAttributeIDTypeClusterEnergyManagementAttributeEsaTypeID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeEsaIsGeneratorID MTR_NEWLY_AVAILABLE = 0x00000001,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeEsaStateID MTR_NEWLY_AVAILABLE = 0x00000002,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeAbsMinPowerID MTR_NEWLY_AVAILABLE = 0x00000003,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeAbsMaxPowerID MTR_NEWLY_AVAILABLE = 0x00000004,
+    MTRAttributeIDTypeClusterEnergyManagementAttributePowerAdjustmentCapabilityID MTR_NEWLY_AVAILABLE = 0x00000005,
+    MTRAttributeIDTypeClusterEnergyManagementAttributePowerForecastID MTR_NEWLY_AVAILABLE = 0x00000006,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeGeneratedCommandListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeAcceptedCommandListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeEventListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeEventListID,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeAttributeListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeAttributeListID,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeFeatureMapID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    MTRAttributeIDTypeClusterEnergyManagementAttributeClusterRevisionID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster ElectricalMeasurement deprecated attribute names
     MTRClusterElectricalMeasurementAttributeMeasurementTypeID MTR_DEPRECATED(
         "Please use MTRAttributeIDTypeClusterElectricalMeasurementAttributeMeasurementTypeID", ios(16.1, 16.4), macos(13.0, 13.3),
@@ -10050,6 +10072,15 @@ typedef NS_ENUM(uint32_t, MTRCommandIDType) {
     MTRCommandIDTypeClusterAccountLoginCommandLoginID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     MTRCommandIDTypeClusterAccountLoginCommandLogoutID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
 
+    // Cluster EnergyManagement commands
+    MTRCommandIDTypeClusterEnergyManagementCommandPowerAdjustRequestID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTRCommandIDTypeClusterEnergyManagementCommandCancelPowerAdjustRequestID MTR_NEWLY_AVAILABLE = 0x00000001,
+    MTRCommandIDTypeClusterEnergyManagementCommandStartTimeAdjustRequestID MTR_NEWLY_AVAILABLE = 0x00000002,
+    MTRCommandIDTypeClusterEnergyManagementCommandPauseRequestID MTR_NEWLY_AVAILABLE = 0x00000003,
+    MTRCommandIDTypeClusterEnergyManagementCommandResumeRequestID MTR_NEWLY_AVAILABLE = 0x00000004,
+    MTRCommandIDTypeClusterEnergyManagementCommandModifyPowerForecastRequestID MTR_NEWLY_AVAILABLE = 0x00000005,
+    MTRCommandIDTypeClusterEnergyManagementCommandRequestLimitBasedPowerForecastID MTR_NEWLY_AVAILABLE = 0x00000006,
+
     // Cluster ElectricalMeasurement deprecated command id names
     MTRClusterElectricalMeasurementCommandGetProfileInfoResponseCommandID MTR_DEPRECATED(
         "Please use MTRCommandIDTypeClusterElectricalMeasurementCommandGetProfileInfoResponseCommandID", ios(16.1, 16.4),
@@ -10744,6 +10775,12 @@ typedef NS_ENUM(uint32_t, MTREventIDType) {
     MTREventIDTypeClusterPumpConfigurationAndControlEventTurbineOperationID API_AVAILABLE(
         ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
     = 0x00000010,
+
+    // Cluster EnergyManagement events
+    MTREventIDTypeClusterEnergyManagementEventPowerAdjustStartID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTREventIDTypeClusterEnergyManagementEventPowerAdjustEndID MTR_NEWLY_AVAILABLE = 0x00000001,
+    MTREventIDTypeClusterEnergyManagementEventPausedID MTR_NEWLY_AVAILABLE = 0x00000002,
+    MTREventIDTypeClusterEnergyManagementEventResumedID MTR_NEWLY_AVAILABLE = 0x00000003,
 
     // Cluster TestCluster deprecated event names
     MTRClusterTestClusterEventTestEventID MTR_DEPRECATED("Please use MTREventIDTypeClusterUnitTestingEventTestEventID",

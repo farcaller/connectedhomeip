@@ -960,6 +960,19 @@ typedef void (*AccountLoginEventListListAttributeCallback)(void * context,
                                                            const chip::app::DataModel::DecodableList<chip::EventId> & data);
 typedef void (*AccountLoginAttributeListListAttributeCallback)(void * context,
                                                                const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
+typedef void (*EnergyManagementPowerAdjustmentCapabilityListAttributeCallback)(
+    void * context,
+    const chip::app::DataModel::Nullable<
+        chip::app::DataModel::DecodableList<chip::app::Clusters::EnergyManagement::Structs::PowerAdjustStruct::DecodableType>> &
+        data);
+typedef void (*EnergyManagementGeneratedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*EnergyManagementAcceptedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*EnergyManagementEventListListAttributeCallback)(void * context,
+                                                               const chip::app::DataModel::DecodableList<chip::EventId> & data);
+typedef void (*EnergyManagementAttributeListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
 typedef void (*ElectricalMeasurementGeneratedCommandListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
 typedef void (*ElectricalMeasurementAcceptedCommandListListAttributeCallback)(

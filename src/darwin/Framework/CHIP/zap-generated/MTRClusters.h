@@ -7484,6 +7484,88 @@ API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @end
 
 /**
+ * Cluster Energy Management
+ *    This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management
+ * System (EMS) which controls an Energy Smart Appliance (ESA).
+ */
+MTR_NEWLY_AVAILABLE
+@interface MTRClusterEnergyManagement : MTRCluster
+
+- (instancetype _Nullable)initWithDevice:(MTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER MTR_NEWLY_AVAILABLE;
+
+- (void)powerAdjustRequestWithParams:(MTREnergyManagementClusterPowerAdjustRequestParams *)params
+                      expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+               expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                          completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)cancelPowerAdjustRequestWithParams:(MTREnergyManagementClusterCancelPowerAdjustRequestParams * _Nullable)params
+                            expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+                     expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                                completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)cancelPowerAdjustRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                             expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                        completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)startTimeAdjustRequestWithParams:(MTREnergyManagementClusterStartTimeAdjustRequestParams *)params
+                          expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+                   expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                              completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)pauseRequestWithParams:(MTREnergyManagementClusterPauseRequestParams * _Nullable)params
+                expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+         expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                    completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)pauseRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                 expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                            completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)resumeRequestWithParams:(MTREnergyManagementClusterResumeRequestParams * _Nullable)params
+                 expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+          expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                     completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)resumeRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                             completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)modifyPowerForecastRequestWithParams:(MTREnergyManagementClusterModifyPowerForecastRequestParams *)params
+                              expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+                       expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                                  completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)requestLimitBasedPowerForecastWithParams:(MTREnergyManagementClusterRequestLimitBasedPowerForecastParams *)params
+                                  expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+                           expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                                      completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEsaTypeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEsaIsGeneratorWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEsaStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAbsMinPowerWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAbsMaxPowerWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributePowerAdjustmentCapabilityWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributePowerForecastWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+/**
  * Cluster Electrical Measurement
  *    Attributes related to the electrical properties of a device. This cluster is used by power outlets and other devices that need
  * to provide instantaneous data as opposed to metrology data which should be retrieved from the metering cluster..

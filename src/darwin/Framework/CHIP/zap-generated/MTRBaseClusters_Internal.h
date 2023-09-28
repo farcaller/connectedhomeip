@@ -384,6 +384,10 @@
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end
 
+@interface MTRBaseClusterEnergyManagement ()
+@property (nonatomic, strong, readonly) MTRBaseDevice * device;
+@end
+
 @interface MTRBaseClusterElectricalMeasurement ()
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end
