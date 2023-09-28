@@ -646,6 +646,12 @@
 #define CHIP_PRINTCLUSTER_ENERGY_MANAGEMENT_CLUSTER
 #endif
 
+#if defined(ZCL_USING_EVSE_MANAGEMENT_CLUSTER_SERVER) || defined(ZCL_USING_EVSE_MANAGEMENT_CLUSTER_CLIENT)
+#define CHIP_PRINTCLUSTER_EVSE_MANAGEMENT_CLUSTER { chip::app::Clusters::EvseManagement::Id, "EVSE Management" },
+#else
+#define CHIP_PRINTCLUSTER_EVSE_MANAGEMENT_CLUSTER
+#endif
+
 #if defined(ZCL_USING_ELECTRICAL_MEASUREMENT_CLUSTER_SERVER) || defined(ZCL_USING_ELECTRICAL_MEASUREMENT_CLUSTER_CLIENT)
 #define CHIP_PRINTCLUSTER_ELECTRICAL_MEASUREMENT_CLUSTER                                                                           \
     { chip::app::Clusters::ElectricalMeasurement::Id, "Electrical Measurement" },
@@ -767,6 +773,7 @@
     CHIP_PRINTCLUSTER_APPLICATION_BASIC_CLUSTER                                                                                    \
     CHIP_PRINTCLUSTER_ACCOUNT_LOGIN_CLUSTER                                                                                        \
     CHIP_PRINTCLUSTER_ENERGY_MANAGEMENT_CLUSTER                                                                                    \
+    CHIP_PRINTCLUSTER_EVSE_MANAGEMENT_CLUSTER                                                                                      \
     CHIP_PRINTCLUSTER_ELECTRICAL_MEASUREMENT_CLUSTER                                                                               \
     CHIP_PRINTCLUSTER_WATER_HEATER_CLUSTER                                                                                         \
     CHIP_PRINTCLUSTER_UNIT_TESTING_CLUSTER                                                                                         \

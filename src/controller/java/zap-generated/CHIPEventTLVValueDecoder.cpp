@@ -4939,6 +4939,58 @@ jobject DecodeEventValue(const app::ConcreteEventPath & aPath, TLV::TLVReader & 
         }
         break;
     }
+    case app::Clusters::EvseManagement::Id: {
+        using namespace app::Clusters::EvseManagement;
+        switch (aPath.mEventId)
+        {
+        case Events::EvConnected::Id: {
+            Events::EvConnected::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_evseSessionId;
+            std::string value_evseSessionIdClassName     = "java/lang/Long";
+            std::string value_evseSessionIdCtorSignature = "(J)V";
+            jlong jnivalue_evseSessionId                 = static_cast<jlong>(cppValue.evseSessionId);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_evseSessionIdClassName.c_str(),
+                                                                        value_evseSessionIdCtorSignature.c_str(),
+                                                                        jnivalue_evseSessionId, value_evseSessionId);
+
+            jobject value_evseState;
+            std::string value_evseStateClassName     = "java/lang/Integer";
+            std::string value_evseStateCtorSignature = "(I)V";
+            jint jnivalue_evseState                  = static_cast<jint>(cppValue.evseState);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jint>(
+                value_evseStateClassName.c_str(), value_evseStateCtorSignature.c_str(), jnivalue_evseState, value_evseState);
+
+            jclass evConnectedStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$EvseManagementClusterEvConnectedEvent", evConnectedStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl, "Could not find class ChipEventStructs$EvseManagementClusterEvConnectedEvent");
+                return nullptr;
+            }
+            jmethodID evConnectedStructCtor =
+                env->GetMethodID(evConnectedStructClass, "<init>", "(Ljava/lang/Long;Ljava/lang/Integer;)V");
+            if (evConnectedStructCtor == nullptr)
+            {
+                ChipLogError(Zcl, "Could not find ChipEventStructs$EvseManagementClusterEvConnectedEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(evConnectedStructClass, evConnectedStructCtor, value_evseSessionId, value_evseState);
+
+            return value;
+        }
+        default:
+            *aError = CHIP_ERROR_IM_MALFORMED_EVENT_PATH_IB;
+            break;
+        }
+        break;
+    }
     case app::Clusters::ElectricalMeasurement::Id: {
         using namespace app::Clusters::ElectricalMeasurement;
         switch (aPath.mEventId)

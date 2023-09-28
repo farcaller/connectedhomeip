@@ -2982,6 +2982,39 @@ public Long duration;
   }
 }
 
+public static class EvseManagementClusterChargingTargetStruct {
+public Integer targetTime;
+public Optional<Integer> targetSoC;
+public Optional<Long> addedEnergy;
+
+  public EvseManagementClusterChargingTargetStruct(
+    Integer targetTime
+      , Optional<Integer> targetSoC
+      , Optional<Long> addedEnergy
+  ) {
+    this.targetTime = targetTime;
+    this.targetSoC = targetSoC;
+    this.addedEnergy = addedEnergy;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterChargingTargetStruct {\n");
+    output.append("\ttargetTime: ");
+    output.append(targetTime);
+        output.append("\n");
+    output.append("\ttargetSoC: ");
+    output.append(targetSoC);
+        output.append("\n");
+    output.append("\taddedEnergy: ");
+    output.append(addedEnergy);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterSimpleStruct {
 public Integer a;
 public Boolean b;

@@ -20,21 +20,22 @@ import chip.devicecontroller.cluster.*
 import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
+
 import java.util.Optional
 
-class EnergyManagementClusterPowerForecastStruct(
-  val forecastId: Int,
-  val activeSlotNumber: Int,
-  val startTime: Long,
-  val endTime: Optional<Long>,
-  val earliestStartTime: Long,
-  val latestEndTime: Long,
-  val isPauseable: Boolean,
-  val slots: List<EnergyManagementClusterSlotStruct>
-) {
-  override fun toString(): String = buildString {
+class EnergyManagementClusterPowerForecastStruct (
+    val forecastId: Int,
+    val activeSlotNumber: Int,
+    val startTime: Long,
+    val endTime: Optional<Long>,
+    val earliestStartTime: Long,
+    val latestEndTime: Long,
+    val isPauseable: Boolean,
+    val slots: List<EnergyManagementClusterSlotStruct>) {
+  override fun toString(): String  = buildString {
     append("EnergyManagementClusterPowerForecastStruct {\n")
     append("\tforecastId : $forecastId\n")
     append("\tactiveSlotNumber : $activeSlotNumber\n")
@@ -54,9 +55,9 @@ class EnergyManagementClusterPowerForecastStruct(
       put(ContextSpecificTag(TAG_ACTIVE_SLOT_NUMBER), activeSlotNumber)
       put(ContextSpecificTag(TAG_START_TIME), startTime)
       if (endTime.isPresent) {
-        val optendTime = endTime.get()
-        put(ContextSpecificTag(TAG_END_TIME), optendTime)
-      }
+      val optendTime = endTime.get()
+      put(ContextSpecificTag(TAG_END_TIME), optendTime)
+    }
       put(ContextSpecificTag(TAG_EARLIEST_START_TIME), earliestStartTime)
       put(ContextSpecificTag(TAG_LATEST_END_TIME), latestEndTime)
       put(ContextSpecificTag(TAG_IS_PAUSEABLE), isPauseable)
@@ -79,41 +80,30 @@ class EnergyManagementClusterPowerForecastStruct(
     private const val TAG_IS_PAUSEABLE = 6
     private const val TAG_SLOTS = 7
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyManagementClusterPowerForecastStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EnergyManagementClusterPowerForecastStruct {
       tlvReader.enterStructure(tag)
       val forecastId = tlvReader.getInt(ContextSpecificTag(TAG_FORECAST_ID))
       val activeSlotNumber = tlvReader.getInt(ContextSpecificTag(TAG_ACTIVE_SLOT_NUMBER))
       val startTime = tlvReader.getLong(ContextSpecificTag(TAG_START_TIME))
-      val endTime =
-        if (tlvReader.isNextTag(ContextSpecificTag(TAG_END_TIME))) {
-          Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_END_TIME)))
-        } else {
-          Optional.empty()
-        }
+      val endTime = if (tlvReader.isNextTag(ContextSpecificTag(TAG_END_TIME))) {
+      Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_END_TIME)))
+    } else {
+      Optional.empty()
+    }
       val earliestStartTime = tlvReader.getLong(ContextSpecificTag(TAG_EARLIEST_START_TIME))
       val latestEndTime = tlvReader.getLong(ContextSpecificTag(TAG_LATEST_END_TIME))
       val isPauseable = tlvReader.getBoolean(ContextSpecificTag(TAG_IS_PAUSEABLE))
-      val slots =
-        buildList<EnergyManagementClusterSlotStruct> {
-          tlvReader.enterList(ContextSpecificTag(TAG_SLOTS))
-          while (!tlvReader.isEndOfContainer()) {
-            add(EnergyManagementClusterSlotStruct.fromTlv(AnonymousTag, tlvReader))
-          }
-          tlvReader.exitContainer()
-        }
-
+      val slots = buildList<EnergyManagementClusterSlotStruct> {
+      tlvReader.enterList(ContextSpecificTag(TAG_SLOTS))
+      while(!tlvReader.isEndOfContainer()) {
+        add(EnergyManagementClusterSlotStruct.fromTlv(AnonymousTag, tlvReader))
+      }
+      tlvReader.exitContainer()
+    }
+      
       tlvReader.exitContainer()
 
-      return EnergyManagementClusterPowerForecastStruct(
-        forecastId,
-        activeSlotNumber,
-        startTime,
-        endTime,
-        earliestStartTime,
-        latestEndTime,
-        isPauseable,
-        slots
-      )
+      return EnergyManagementClusterPowerForecastStruct(forecastId, activeSlotNumber, startTime, endTime, earliestStartTime, latestEndTime, isPauseable, slots)
     }
   }
 }

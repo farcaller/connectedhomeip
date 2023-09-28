@@ -1335,6 +1335,16 @@ static constexpr CommandId Id = 0x00000006;
 } // namespace Commands
 } // namespace EnergyManagement
 
+namespace EvseManagement {
+namespace Commands {
+
+namespace DisableEvse {
+static constexpr CommandId Id = 0x00000001;
+} // namespace DisableEvse
+
+} // namespace Commands
+} // namespace EvseManagement
+
 namespace ElectricalMeasurement {
 namespace Commands {
 

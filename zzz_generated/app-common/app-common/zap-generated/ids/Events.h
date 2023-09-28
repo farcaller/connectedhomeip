@@ -487,6 +487,16 @@ static constexpr EventId Id = 0x00000003;
 } // namespace Events
 } // namespace EnergyManagement
 
+namespace EvseManagement {
+namespace Events {
+
+namespace EvConnected {
+static constexpr EventId Id = 0x00000000;
+} // namespace EvConnected
+
+} // namespace Events
+} // namespace EvseManagement
+
 namespace UnitTesting {
 namespace Events {
 

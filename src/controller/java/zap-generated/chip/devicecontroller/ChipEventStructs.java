@@ -1968,6 +1968,33 @@ public static class EnergyManagementClusterResumedEvent {
   }
 }
 
+public static class EvseManagementClusterEvConnectedEvent {
+public Long evseSessionId;
+public Integer evseState;
+
+  public EvseManagementClusterEvConnectedEvent(
+    Long evseSessionId
+      , Integer evseState
+  ) {
+    this.evseSessionId = evseSessionId;
+    this.evseState = evseState;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterEvConnectedEvent {\n");
+    output.append("\tevseSessionId: ");
+    output.append(evseSessionId);
+        output.append("\n");
+    output.append("\tevseState: ");
+    output.append(evseState);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterTestEventEvent {
 public Integer arg1;
 public Integer arg2;

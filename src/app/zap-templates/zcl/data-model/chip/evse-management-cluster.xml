@@ -18,17 +18,6 @@ limitations under the License.
 <configurator>
   <domain name="CHIP"/>
 
-  <bitmap name="EvseManagementFeature" type="BITMAP32">
-    <cluster code="0x070C"/>
-    <field name="ChargingPreferences" mask="0x1"  optional="true"/>
-    <field name="Sessions"            mask="0x2"  optional="true"/>
-    <field name="SocReporting"        mask="0x4"  optional="true" />
-    <field name="PlugAndCharge"       mask="0x8"  optional="true" />
-    <field name="Rfid"                mask="0x10" optional="true" />
-    <field name="V2x"                 mask="0x20" optional="true" />
-  </bitmap>
-
-
 
   <enum name="EvseStateEnum" type="ENUM8">
     <cluster code="0x070C"/>
@@ -102,13 +91,13 @@ limitations under the License.
 
 
   <cluster>
-    <domain>HVAC</domain>
     <name>EVSE Management</name>
+    <domain>HVAC</domain>
+    <description>This cluster provides an interface for the management of Electric Vehicle Supply Equipment (EVSE).</description>
     <code>0x070C</code>
     <define>EVSE_MANAGEMENT_CLUSTER</define>
     <client init="false" tick="false">true</client>
     <server init="false" tick="false">true</server>
-    <description>This cluster provides an interface for the management of Electric Vehicle Supply Equipment (EVSE).</description>
 
     
     <attribute side="server" code="0x0000" define="EVSE_STATE"       type="EvseStateEnum"     writable="false" optional="false"  isNullable="false" >EvseState</attribute>
@@ -125,7 +114,7 @@ limitations under the License.
 
     <attribute side="server" code="0x0020" define="START_OF_WEEK"              type="StartOfWeekEnum"  writable="false" optional="false"  isNullable="false" >StartOfWeek</attribute >
     <attribute side="server" code="0x0021" define="NUMBER_OF_WEEKLY_TARGETS"   type="INT8U"            writable="false" optional="false"  isNullable="false" >NumberOfWeeklyTargets</attribute >
-    <attribute side="server" code="0x0022" define="NUMBER_OF_DAILY_TARGETS"    type="INT8U"            writable="false" optional="false"  isNullable="false" >NumberOfWeeklyTargets</attribute >
+    <attribute side="server" code="0x0022" define="NUMBER_OF_DAILY_TARGETS"    type="INT8U"            writable="false" optional="false"  isNullable="false" >NumberOfDailyTargets</attribute >
     <attribute side="server" code="0x0023" define="NEXT_CHARGE_START_TIME"     type="INT16U"           writable="false" optional="false"  isNullable="true"  >NextChargeStartTime</attribute >
     <attribute side="server" code="0x0024" define="NEXT_CHARGE_TARGET_TIME"    type="INT16U"           writable="false" optional="false"  isNullable="true"  >NextChargeTargetTime</attribute >
     <attribute side="server" code="0x0025" define="NEXT_CHARGE_REQUIRED_ENERGY" type="INT8U"           writable="false" optional="false"  isNullable="true"  >NextChargeRequiredEnergy</attribute >
@@ -170,7 +159,7 @@ limitations under the License.
       <description>The charging targets SHALL be stored in the EVSE and SHOULD begin at the time of receipt. A status code SHALL be sent in response.</description>
       <arg name="NumberOfTargetsForSequence" type="INT8U"            optional="false"/>
       <arg name="DayOfWeekForSequence"       type="StartOfWeekEnum"  optional="false"/>
-      <arg name="ChargingTargets"            type="ARRAY" entryType="ChargingTargetStruct" length="10"  optional="false" />
+      <arg name="ChargingTargets"            type="ChargingTargetStruct" array="true" length="10"  optional="false" />
     </command>
 
     <command source="client" code="0x06" name="GetTargets" optional="false">
@@ -232,6 +221,16 @@ limitations under the License.
       <field id="0" name="Uid"  type="OCT_STRING"  optional="false"  isNullable="true"/>
     </event>
 
-
   </cluster>
+
+  <bitmap name="EvseManagementFeature" type="BITMAP32">
+    <cluster code="0x070C"/>
+    <field name="ChargingPreferences" mask="0x1"  optional="true"/>
+    <field name="Sessions"            mask="0x2"  optional="true"/>
+    <field name="SocReporting"        mask="0x4"  optional="true" />
+    <field name="PlugAndCharge"       mask="0x8"  optional="true" />
+    <field name="Rfid"                mask="0x10" optional="true" />
+    <field name="V2x"                 mask="0x20" optional="true" />
+  </bitmap>
+
 </configurator>
