@@ -34,5 +34,7 @@ source_set("energy-management-manager") {
   sources = [
     "include/EnergyManagementManager.h",
     "src/EnergyManagementManager.cpp",
+    "include/EvseManagementManager.h",
+    "src/EvseManagementManager.cpp",
   ]
 }

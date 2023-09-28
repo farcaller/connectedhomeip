@@ -4141,7 +4141,7 @@ server cluster EvseManagement = 1804 {
   }
 
   info event Rfid = 5 {
-    nullable OCT_STRING uid = 0;
+    nullable OCTET_STRING uid = 0;
   }
 
   readonly attribute EvseStateEnum evseState = 0;
@@ -4177,9 +4177,53 @@ server cluster EvseManagement = 1804 {
   readonly attribute bitmap32 featureMap = 65532;
   readonly attribute int16u clusterRevision = 65533;
 
+  request struct EnableEvseChargingRequest {
+    nullable INT16U evseEnableTime = 0;
+    INT16U minimumChargeCurrent = 1;
+    INT16U maximumChargeCurrent = 2;
+  }
+
+  request struct EnableEvseDischargingRequest {
+    nullable INT16U evseEnableTime = 0;
+    INT16U maximumDischargeCurrent = 1;
+  }
+
+  request struct SetTargetsRequest {
+    INT8U numberOfTargetsForSequence = 0;
+    StartOfWeekEnum dayOfWeekForSequence = 1;
+    ChargingTargetStruct chargingTargets[] = 2;
+  }
+
+  request struct GetTargetsRequest {
+    StartOfWeekEnum daysToReturn = 0;
+  }
+
   command DisableEvse(): DefaultSuccess = 1;
+  command EnableEvseCharging(EnableEvseChargingRequest): DefaultSuccess = 2;
+  command EnableEvseDischarging(EnableEvseDischargingRequest): DefaultSuccess = 3;
   command StartDiagnostics(): DefaultSuccess = 4;
+  command SetTargets(SetTargetsRequest): DefaultSuccess = 5;
+  command GetTargets(GetTargetsRequest): DefaultSuccess = 6;
   command ClearTargets(): DefaultSuccess = 7;
+}
+
+/** This allows clients to control a hot water heating appliance so it can be used with energy management. It can help consumers save cost (e.g. using power at cheaper times or from local solar PV generation). */
+server cluster WaterHeater = 26208 {
+  bitmap HeaterType : BITMAP8 {
+    kImmersionElement1 = 0x1;
+    kImmersionElement2 = 0x2;
+    kHeatpump = 0x4;
+    kBoiler = 0x8;
+    kOther = 0x10;
+  }
+
+  readonly attribute nullable HeaterType heaterTypes = 0;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
 }
 
 endpoint 0 {
@@ -4687,6 +4731,12 @@ endpoint 1 {
   }
 
   server cluster EvseManagement {
+    emits event EvConnected;
+    emits event EvNotDetected;
+    emits event EnergyTransferStarted;
+    emits event EnergyTransferStopped;
+    emits event Fault;
+    emits event Rfid;
     ram      attribute evseState;
     ram      attribute supplyState;
     ram      attribute evseFault;
@@ -4713,6 +4763,16 @@ endpoint 1 {
     ram      attribute evseSessionEnergyCharged;
     ram      attribute evseSessionEnergyDischarged;
     ram      attribute evseSessionMaximumCurrent;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
+  }
+
+  server cluster WaterHeater {
+    ram      attribute heaterTypes;
     callback attribute generatedCommandList;
     callback attribute acceptedCommandList;
     callback attribute eventList;

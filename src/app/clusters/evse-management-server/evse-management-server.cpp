@@ -39,53 +39,50 @@ void MatterEvseManagementPluginServerInitCallback() {}
 
 void emberAfEvseManagementClusterServerInitCallback(chip::EndpointId endpoint) {}
 
-bool emberAfEvseManagementClusterDisableEvseCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::DisableEvse::DecodableType & commandData)
+bool emberAfEvseManagementClusterDisableEvseCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+                                                     const Commands::DisableEvse::DecodableType & commandData)
 {
     // TODO
     return false;
 }
 
 bool emberAfEvseManagementClusterEnableEvseChargingCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::EnableEvseCharging::DecodableType & commandData)
+                                                            const app::ConcreteCommandPath & commandPath,
+                                                            const Commands::EnableEvseCharging::DecodableType & commandData)
 {
     // TODO
     return false;
 }
 
 bool emberAfEvseManagementClusterEnableEvseDischargingCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::EnableEvseDischarging::DecodableType & commandData)
+                                                               const app::ConcreteCommandPath & commandPath,
+                                                               const Commands::EnableEvseDischarging::DecodableType & commandData)
 {
     // TODO
     return false;
 }
 bool emberAfEvseManagementClusterStartDiagnosticsCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::StartDiagnostics::DecodableType & commandData)
+                                                          const app::ConcreteCommandPath & commandPath,
+                                                          const Commands::StartDiagnostics::DecodableType & commandData)
 {
     // TODO
     return false;
 }
-bool emberAfEvseManagementClusterSetTargetsCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::SetTargets::DecodableType & commandData)
+bool emberAfEvseManagementClusterSetTargetsCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+                                                    const Commands::SetTargets::DecodableType & commandData)
 {
     // TODO
     return false;
 }
-bool emberAfEvseManagementClusterGetTargetsCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::GetTargets::DecodableType & commandData)
+bool emberAfEvseManagementClusterGetTargetsCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+                                                    const Commands::GetTargets::DecodableType & commandData)
 {
     // TODO
     return false;
 }
 bool emberAfEvseManagementClusterClearTargetsCallback(app::CommandHandler * commandObj,
-                    const app::ConcreteCommandPath & commandPath,
-                    const Commands::ClearTargets::DecodableType & commandData)
+                                                      const app::ConcreteCommandPath & commandPath,
+                                                      const Commands::ClearTargets::DecodableType & commandData)
 {
     // TODO
     return false;

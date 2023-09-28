@@ -172,10 +172,8 @@ limitations under the License.
     </command>
 
     <command source="server" code="0x00" name="GetTargetsResponse" optional="false">
-      <description>zzzzzzzzzzzzzzzzzzzzzzz Missing command (from the spec!) zzzzzzzzzzzzzzzzzzzzz.</description>
+      <description>This is the response to the Get Targets message</description>
     </command>
-
-
 
 
     <event code="0x0000" name="EvConnected" priority="info" side="server" optional="false">
@@ -218,7 +216,7 @@ limitations under the License.
 
     <event code="0x0005" name="Rfid" priority="info" side="server" optional="true">
       <description>Generated when a RFID card has been read.</description>
-      <field id="0" name="Uid"  type="OCT_STRING"  optional="false"  isNullable="true"/>
+      <field id="0" name="Uid"  type="OCTET_STRING" length="10" optional="false" isNullable="true"/>
     </event>
 
   </cluster>

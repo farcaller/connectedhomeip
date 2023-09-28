@@ -6687,7 +6687,7 @@ client cluster EvseManagement = 1804 {
   }
 
   info event Rfid = 5 {
-    nullable OCT_STRING uid = 0;
+    nullable OCTET_STRING uid = 0;
   }
 
   readonly attribute EvseStateEnum evseState = 0;
@@ -6725,10 +6725,39 @@ client cluster EvseManagement = 1804 {
   readonly attribute bitmap32 featureMap = 65532;
   readonly attribute int16u clusterRevision = 65533;
 
+  request struct EnableEvseChargingRequest {
+    nullable INT16U evseEnableTime = 0;
+    INT16U minimumChargeCurrent = 1;
+    INT16U maximumChargeCurrent = 2;
+  }
+
+  request struct EnableEvseDischargingRequest {
+    nullable INT16U evseEnableTime = 0;
+    INT16U maximumDischargeCurrent = 1;
+  }
+
+  request struct SetTargetsRequest {
+    INT8U numberOfTargetsForSequence = 0;
+    StartOfWeekEnum dayOfWeekForSequence = 1;
+    ChargingTargetStruct chargingTargets[] = 2;
+  }
+
+  request struct GetTargetsRequest {
+    StartOfWeekEnum daysToReturn = 0;
+  }
+
   /** Stops the power flow between the EV and the EVSE. */
   command DisableEvse(): DefaultSuccess = 1;
+  /** Allows the EVSE to charge the EV for the specified time within the limits specified in the fields of the command. */
+  command EnableEvseCharging(EnableEvseChargingRequest): DefaultSuccess = 2;
+  /** Allows the EVSE to discharge the EV for the specified time within the limits specified in the fields of the command. */
+  command EnableEvseDischarging(EnableEvseDischargingRequest): DefaultSuccess = 3;
   /** The EVSE SHALL enter a Diagnostics state only if the SupplyState attribute is in the Disabled state. */
   command StartDiagnostics(): DefaultSuccess = 4;
+  /** The charging targets SHALL be stored in the EVSE and SHOULD begin at the time of receipt. A status code SHALL be sent in response. */
+  command SetTargets(SetTargetsRequest): DefaultSuccess = 5;
+  /** The EVSE will send in return the Get Charging Targets Response command. */
+  command GetTargets(GetTargetsRequest): DefaultSuccess = 6;
   /** This clears the weekly schedule. */
   command ClearTargets(): DefaultSuccess = 7;
 }
