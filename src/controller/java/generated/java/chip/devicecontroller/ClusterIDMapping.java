@@ -13543,7 +13543,12 @@ public class ClusterIDMapping {
         }
 
         public enum Event {
-            EvConnected(0L),;
+            EvConnected(0L),
+            EvNotDetected(1L),
+            EnergyTransferStarted(2L),
+            EnergyTransferStopped(3L),
+            Fault(4L),
+            Rfid(5L),;
             private final long id;
             Event(long id) {
                 this.id = id;
@@ -13564,7 +13569,13 @@ public class ClusterIDMapping {
         }
 
         public enum Command {
-            DisableEvse(1L),;
+            DisableEvse(1L),
+            EnableEvseCharging(2L),
+            EnableEvseDischarging(3L),
+            StartDiagnostics(4L),
+            SetTargets(5L),
+            GetTargets(6L),
+            ClearTargets(7L),;
             private final long id;
             Command(long id) {
                 this.id = id;
@@ -13582,7 +13593,75 @@ public class ClusterIDMapping {
                 }
                 throw new NoSuchFieldError();
             }
-        }@Override
+        }public enum EnableEvseChargingCommandField {EvseEnableTime(0),MinimumChargeCurrent(1),MaximumChargeCurrent(2),;
+                    private final int id;
+                    EnableEvseChargingCommandField(int id) {
+                        this.id = id;
+                    }
+
+                    public int getID() {
+                        return id;
+                    }
+                    public static EnableEvseChargingCommandField value(int id) throws NoSuchFieldError {
+                        for (EnableEvseChargingCommandField field : EnableEvseChargingCommandField.values()) {
+                        if (field.getID() == id) {
+                            return field;
+                        }
+                        }
+                        throw new NoSuchFieldError();
+                    }
+                }public enum EnableEvseDischargingCommandField {EvseEnableTime(0),MaximumDischargeCurrent(1),;
+                    private final int id;
+                    EnableEvseDischargingCommandField(int id) {
+                        this.id = id;
+                    }
+
+                    public int getID() {
+                        return id;
+                    }
+                    public static EnableEvseDischargingCommandField value(int id) throws NoSuchFieldError {
+                        for (EnableEvseDischargingCommandField field : EnableEvseDischargingCommandField.values()) {
+                        if (field.getID() == id) {
+                            return field;
+                        }
+                        }
+                        throw new NoSuchFieldError();
+                    }
+                }public enum SetTargetsCommandField {NumberOfTargetsForSequence(0),DayOfWeekForSequence(1),ChargingTargets(2),;
+                    private final int id;
+                    SetTargetsCommandField(int id) {
+                        this.id = id;
+                    }
+
+                    public int getID() {
+                        return id;
+                    }
+                    public static SetTargetsCommandField value(int id) throws NoSuchFieldError {
+                        for (SetTargetsCommandField field : SetTargetsCommandField.values()) {
+                        if (field.getID() == id) {
+                            return field;
+                        }
+                        }
+                        throw new NoSuchFieldError();
+                    }
+                }public enum GetTargetsCommandField {DaysToReturn(0),;
+                    private final int id;
+                    GetTargetsCommandField(int id) {
+                        this.id = id;
+                    }
+
+                    public int getID() {
+                        return id;
+                    }
+                    public static GetTargetsCommandField value(int id) throws NoSuchFieldError {
+                        for (GetTargetsCommandField field : GetTargetsCommandField.values()) {
+                        if (field.getID() == id) {
+                            return field;
+                        }
+                        }
+                        throw new NoSuchFieldError();
+                    }
+                }@Override
         public String getAttributeName(long id) throws NoSuchFieldError {
             return Attribute.value(id).toString();
         }

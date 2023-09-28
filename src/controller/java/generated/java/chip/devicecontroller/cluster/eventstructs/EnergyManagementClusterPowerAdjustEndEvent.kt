@@ -17,20 +17,18 @@
 package chip.devicecontroller.cluster.eventstructs
 
 import chip.devicecontroller.cluster.*
-import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
-import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
-
 import java.util.Optional
 
-class EnergyManagementClusterPowerAdjustEndEvent (
-    val cause: Optional<Int>,
-    val duration: Optional<Long>,
-    val energyUse: Optional<Long>) {
-  override fun toString(): String  = buildString {
+class EnergyManagementClusterPowerAdjustEndEvent(
+  val cause: Optional<Int>,
+  val duration: Optional<Long>,
+  val energyUse: Optional<Long>
+) {
+  override fun toString(): String = buildString {
     append("EnergyManagementClusterPowerAdjustEndEvent {\n")
     append("\tcause : $cause\n")
     append("\tduration : $duration\n")
@@ -42,17 +40,17 @@ class EnergyManagementClusterPowerAdjustEndEvent (
     tlvWriter.apply {
       startStructure(tag)
       if (cause.isPresent) {
-      val optcause = cause.get()
-      put(ContextSpecificTag(TAG_CAUSE), optcause)
-    }
+        val optcause = cause.get()
+        put(ContextSpecificTag(TAG_CAUSE), optcause)
+      }
       if (duration.isPresent) {
-      val optduration = duration.get()
-      put(ContextSpecificTag(TAG_DURATION), optduration)
-    }
+        val optduration = duration.get()
+        put(ContextSpecificTag(TAG_DURATION), optduration)
+      }
       if (energyUse.isPresent) {
-      val optenergyUse = energyUse.get()
-      put(ContextSpecificTag(TAG_ENERGY_USE), optenergyUse)
-    }
+        val optenergyUse = energyUse.get()
+        put(ContextSpecificTag(TAG_ENERGY_USE), optenergyUse)
+      }
       endStructure()
     }
   }
@@ -62,24 +60,27 @@ class EnergyManagementClusterPowerAdjustEndEvent (
     private const val TAG_DURATION = 1
     private const val TAG_ENERGY_USE = 2
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EnergyManagementClusterPowerAdjustEndEvent {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyManagementClusterPowerAdjustEndEvent {
       tlvReader.enterStructure(tag)
-      val cause = if (tlvReader.isNextTag(ContextSpecificTag(TAG_CAUSE))) {
-      Optional.of(tlvReader.getInt(ContextSpecificTag(TAG_CAUSE)))
-    } else {
-      Optional.empty()
-    }
-      val duration = if (tlvReader.isNextTag(ContextSpecificTag(TAG_DURATION))) {
-      Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_DURATION)))
-    } else {
-      Optional.empty()
-    }
-      val energyUse = if (tlvReader.isNextTag(ContextSpecificTag(TAG_ENERGY_USE))) {
-      Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_ENERGY_USE)))
-    } else {
-      Optional.empty()
-    }
-      
+      val cause =
+        if (tlvReader.isNextTag(ContextSpecificTag(TAG_CAUSE))) {
+          Optional.of(tlvReader.getInt(ContextSpecificTag(TAG_CAUSE)))
+        } else {
+          Optional.empty()
+        }
+      val duration =
+        if (tlvReader.isNextTag(ContextSpecificTag(TAG_DURATION))) {
+          Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_DURATION)))
+        } else {
+          Optional.empty()
+        }
+      val energyUse =
+        if (tlvReader.isNextTag(ContextSpecificTag(TAG_ENERGY_USE))) {
+          Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_ENERGY_USE)))
+        } else {
+          Optional.empty()
+        }
+
       tlvReader.exitContainer()
 
       return EnergyManagementClusterPowerAdjustEndEvent(cause, duration, energyUse)

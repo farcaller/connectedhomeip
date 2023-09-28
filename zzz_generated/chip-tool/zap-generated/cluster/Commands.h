@@ -10364,6 +10364,12 @@ private:
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * DisableEvse                                                       |   0x01 |
+| * EnableEvseCharging                                                |   0x02 |
+| * EnableEvseDischarging                                             |   0x03 |
+| * StartDiagnostics                                                  |   0x04 |
+| * SetTargets                                                        |   0x05 |
+| * GetTargets                                                        |   0x06 |
+| * ClearTargets                                                      |   0x07 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * EvseState                                                         | 0x0000 |
@@ -10403,6 +10409,11 @@ private:
 |------------------------------------------------------------------------------|
 | Events:                                                             |        |
 | * EvConnected                                                       | 0x0000 |
+| * EvNotDetected                                                     | 0x0001 |
+| * EnergyTransferStarted                                             | 0x0002 |
+| * EnergyTransferStopped                                             | 0x0003 |
+| * Fault                                                             | 0x0004 |
+| * Rfid                                                              | 0x0005 |
 \*----------------------------------------------------------------------------*/
 
 /*
@@ -10439,6 +10450,237 @@ public:
 
 private:
     chip::app::Clusters::EvseManagement::Commands::DisableEvse::Type mRequest;
+};
+
+/*
+ * Command EnableEvseCharging
+ */
+class EvseManagementEnableEvseCharging : public ClusterCommand
+{
+public:
+    EvseManagementEnableEvseCharging(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("enable-evse-charging", credsIssuerConfig)
+    {
+        AddArgument("EvseEnableTime", 0, UINT16_MAX, &mRequest.evseEnableTime);
+        AddArgument("MinimumChargeCurrent", 0, UINT16_MAX, &mRequest.minimumChargeCurrent);
+        AddArgument("MaximumChargeCurrent", 0, UINT16_MAX, &mRequest.maximumChargeCurrent);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::Type mRequest;
+};
+
+/*
+ * Command EnableEvseDischarging
+ */
+class EvseManagementEnableEvseDischarging : public ClusterCommand
+{
+public:
+    EvseManagementEnableEvseDischarging(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("enable-evse-discharging", credsIssuerConfig)
+    {
+        AddArgument("EvseEnableTime", 0, UINT16_MAX, &mRequest.evseEnableTime);
+        AddArgument("MaximumDischargeCurrent", 0, UINT16_MAX, &mRequest.maximumDischargeCurrent);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::Type mRequest;
+};
+
+/*
+ * Command StartDiagnostics
+ */
+class EvseManagementStartDiagnostics : public ClusterCommand
+{
+public:
+    EvseManagementStartDiagnostics(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("start-diagnostics", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::Type mRequest;
+};
+
+/*
+ * Command SetTargets
+ */
+class EvseManagementSetTargets : public ClusterCommand
+{
+public:
+    EvseManagementSetTargets(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("set-targets", credsIssuerConfig), mComplex_ChargingTargets(&mRequest.chargingTargets)
+    {
+        AddArgument("NumberOfTargetsForSequence", 0, UINT8_MAX, &mRequest.numberOfTargetsForSequence);
+        AddArgument("DayOfWeekForSequence", 0, UINT8_MAX, &mRequest.dayOfWeekForSequence);
+        AddArgument("ChargingTargets", &mComplex_ChargingTargets);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::SetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::SetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EvseManagement::Commands::SetTargets::Type mRequest;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::EvseManagement::Structs::ChargingTargetStruct::Type>>
+        mComplex_ChargingTargets;
+};
+
+/*
+ * Command GetTargets
+ */
+class EvseManagementGetTargets : public ClusterCommand
+{
+public:
+    EvseManagementGetTargets(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("get-targets", credsIssuerConfig)
+    {
+        AddArgument("DaysToReturn", 0, UINT8_MAX, &mRequest.daysToReturn);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::GetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::GetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EvseManagement::Commands::GetTargets::Type mRequest;
+};
+
+/*
+ * Command ClearTargets
+ */
+class EvseManagementClearTargets : public ClusterCommand
+{
+public:
+    EvseManagementClearTargets(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("clear-targets", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::ClearTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::ClearTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EvseManagement::Commands::ClearTargets::Type mRequest;
 };
 
 /*----------------------------------------------------------------------------*\
@@ -20718,8 +20960,14 @@ void registerClusterEvseManagement(Commands & commands, CredentialIssuerCommands
         //
         // Commands
         //
-        make_unique<ClusterCommand>(Id, credsIssuerConfig),        //
-        make_unique<EvseManagementDisableEvse>(credsIssuerConfig), //
+        make_unique<ClusterCommand>(Id, credsIssuerConfig),                  //
+        make_unique<EvseManagementDisableEvse>(credsIssuerConfig),           //
+        make_unique<EvseManagementEnableEvseCharging>(credsIssuerConfig),    //
+        make_unique<EvseManagementEnableEvseDischarging>(credsIssuerConfig), //
+        make_unique<EvseManagementStartDiagnostics>(credsIssuerConfig),      //
+        make_unique<EvseManagementSetTargets>(credsIssuerConfig),            //
+        make_unique<EvseManagementGetTargets>(credsIssuerConfig),            //
+        make_unique<EvseManagementClearTargets>(credsIssuerConfig),          //
         //
         // Attributes
         //
@@ -20894,10 +21142,20 @@ void registerClusterEvseManagement(Commands & commands, CredentialIssuerCommands
         //
         // Events
         //
-        make_unique<ReadEvent>(Id, credsIssuerConfig),                                               //
-        make_unique<ReadEvent>(Id, "ev-connected", Events::EvConnected::Id, credsIssuerConfig),      //
-        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                          //
-        make_unique<SubscribeEvent>(Id, "ev-connected", Events::EvConnected::Id, credsIssuerConfig), //
+        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                                    //
+        make_unique<ReadEvent>(Id, "ev-connected", Events::EvConnected::Id, credsIssuerConfig),                           //
+        make_unique<ReadEvent>(Id, "ev-not-detected", Events::EvNotDetected::Id, credsIssuerConfig),                      //
+        make_unique<ReadEvent>(Id, "energy-transfer-started", Events::EnergyTransferStarted::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "energy-transfer-stopped", Events::EnergyTransferStopped::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "fault", Events::Fault::Id, credsIssuerConfig),                                        //
+        make_unique<ReadEvent>(Id, "rfid", Events::Rfid::Id, credsIssuerConfig),                                          //
+        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                               //
+        make_unique<SubscribeEvent>(Id, "ev-connected", Events::EvConnected::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeEvent>(Id, "ev-not-detected", Events::EvNotDetected::Id, credsIssuerConfig),                 //
+        make_unique<SubscribeEvent>(Id, "energy-transfer-started", Events::EnergyTransferStarted::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "energy-transfer-stopped", Events::EnergyTransferStopped::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "fault", Events::Fault::Id, credsIssuerConfig),                                   //
+        make_unique<SubscribeEvent>(Id, "rfid", Events::Rfid::Id, credsIssuerConfig),                                     //
     };
 
     commands.RegisterCluster(clusterName, clusterCommands);

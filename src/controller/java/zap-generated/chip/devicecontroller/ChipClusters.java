@@ -34136,6 +34136,28 @@ public class ChipClusters {
       disableEvse(chipClusterPtr, callback, timedInvokeTimeoutMs);
     }
 
+    public void enableEvseCharging(DefaultClusterCallback callback
+      , @Nullable Integer evseEnableTime, Integer minimumChargeCurrent, Integer maximumChargeCurrent) {
+      enableEvseCharging(chipClusterPtr, callback, evseEnableTime, minimumChargeCurrent, maximumChargeCurrent, null);
+    }
+
+    public void enableEvseCharging(DefaultClusterCallback callback
+      , @Nullable Integer evseEnableTime, Integer minimumChargeCurrent, Integer maximumChargeCurrent
+      , int timedInvokeTimeoutMs) {
+      enableEvseCharging(chipClusterPtr, callback, evseEnableTime, minimumChargeCurrent, maximumChargeCurrent, timedInvokeTimeoutMs);
+    }
+
+    public void enableEvseDischarging(DefaultClusterCallback callback
+      , @Nullable Integer evseEnableTime, Integer maximumDischargeCurrent) {
+      enableEvseDischarging(chipClusterPtr, callback, evseEnableTime, maximumDischargeCurrent, null);
+    }
+
+    public void enableEvseDischarging(DefaultClusterCallback callback
+      , @Nullable Integer evseEnableTime, Integer maximumDischargeCurrent
+      , int timedInvokeTimeoutMs) {
+      enableEvseDischarging(chipClusterPtr, callback, evseEnableTime, maximumDischargeCurrent, timedInvokeTimeoutMs);
+    }
+
     public void startDiagnostics(DefaultClusterCallback callback
       ) {
       startDiagnostics(chipClusterPtr, callback, null);
@@ -34145,6 +34167,28 @@ public class ChipClusters {
       
       , int timedInvokeTimeoutMs) {
       startDiagnostics(chipClusterPtr, callback, timedInvokeTimeoutMs);
+    }
+
+    public void setTargets(DefaultClusterCallback callback
+      , Integer numberOfTargetsForSequence, Integer dayOfWeekForSequence, ArrayList<ChipStructs.EvseManagementClusterChargingTargetStruct> chargingTargets) {
+      setTargets(chipClusterPtr, callback, numberOfTargetsForSequence, dayOfWeekForSequence, chargingTargets, null);
+    }
+
+    public void setTargets(DefaultClusterCallback callback
+      , Integer numberOfTargetsForSequence, Integer dayOfWeekForSequence, ArrayList<ChipStructs.EvseManagementClusterChargingTargetStruct> chargingTargets
+      , int timedInvokeTimeoutMs) {
+      setTargets(chipClusterPtr, callback, numberOfTargetsForSequence, dayOfWeekForSequence, chargingTargets, timedInvokeTimeoutMs);
+    }
+
+    public void getTargets(DefaultClusterCallback callback
+      , Integer daysToReturn) {
+      getTargets(chipClusterPtr, callback, daysToReturn, null);
+    }
+
+    public void getTargets(DefaultClusterCallback callback
+      , Integer daysToReturn
+      , int timedInvokeTimeoutMs) {
+      getTargets(chipClusterPtr, callback, daysToReturn, timedInvokeTimeoutMs);
     }
 
     public void clearTargets(DefaultClusterCallback callback
@@ -34160,12 +34204,30 @@ public class ChipClusters {
     private native void disableEvse(long chipClusterPtr, DefaultClusterCallback Callback
       
       , @Nullable Integer timedInvokeTimeoutMs);
+    private native void enableEvseCharging(long chipClusterPtr, DefaultClusterCallback Callback
+      , @Nullable Integer evseEnableTime, Integer minimumChargeCurrent, Integer maximumChargeCurrent
+      , @Nullable Integer timedInvokeTimeoutMs);
+    private native void enableEvseDischarging(long chipClusterPtr, DefaultClusterCallback Callback
+      , @Nullable Integer evseEnableTime, Integer maximumDischargeCurrent
+      , @Nullable Integer timedInvokeTimeoutMs);
     private native void startDiagnostics(long chipClusterPtr, DefaultClusterCallback Callback
       
+      , @Nullable Integer timedInvokeTimeoutMs);
+    private native void setTargets(long chipClusterPtr, DefaultClusterCallback Callback
+      , Integer numberOfTargetsForSequence, Integer dayOfWeekForSequence, ArrayList<ChipStructs.EvseManagementClusterChargingTargetStruct> chargingTargets
+      , @Nullable Integer timedInvokeTimeoutMs);
+    private native void getTargets(long chipClusterPtr, DefaultClusterCallback Callback
+      , Integer daysToReturn
       , @Nullable Integer timedInvokeTimeoutMs);
     private native void clearTargets(long chipClusterPtr, DefaultClusterCallback Callback
       
       , @Nullable Integer timedInvokeTimeoutMs);
+    public interface GetTargetsResponseCallback {
+      void onSuccess();
+
+      void onError(Exception error);
+    }
+
 
       public interface NextChargeStartTimeAttributeCallback {
         void onSuccess(@Nullable Integer value);

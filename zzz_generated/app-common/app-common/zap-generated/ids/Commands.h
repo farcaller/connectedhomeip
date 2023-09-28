@@ -1338,9 +1338,37 @@ static constexpr CommandId Id = 0x00000006;
 namespace EvseManagement {
 namespace Commands {
 
+namespace GetTargetsResponse {
+static constexpr CommandId Id = 0x00000000;
+} // namespace GetTargetsResponse
+
 namespace DisableEvse {
 static constexpr CommandId Id = 0x00000001;
 } // namespace DisableEvse
+
+namespace EnableEvseCharging {
+static constexpr CommandId Id = 0x00000002;
+} // namespace EnableEvseCharging
+
+namespace EnableEvseDischarging {
+static constexpr CommandId Id = 0x00000003;
+} // namespace EnableEvseDischarging
+
+namespace StartDiagnostics {
+static constexpr CommandId Id = 0x00000004;
+} // namespace StartDiagnostics
+
+namespace SetTargets {
+static constexpr CommandId Id = 0x00000005;
+} // namespace SetTargets
+
+namespace GetTargets {
+static constexpr CommandId Id = 0x00000006;
+} // namespace GetTargets
+
+namespace ClearTargets {
+static constexpr CommandId Id = 0x00000007;
+} // namespace ClearTargets
 
 } // namespace Commands
 } // namespace EvseManagement

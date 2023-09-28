@@ -10558,10 +10558,43 @@ class ChipClusters:
                 "args": {
                 },
             },
+            0x00000002: {
+                "commandId": 0x00000002,
+                "commandName": "EnableEvseCharging",
+                "args": {
+                    "evseEnableTime": "int",
+                    "minimumChargeCurrent": "int",
+                    "maximumChargeCurrent": "int",
+                },
+            },
+            0x00000003: {
+                "commandId": 0x00000003,
+                "commandName": "EnableEvseDischarging",
+                "args": {
+                    "evseEnableTime": "int",
+                    "maximumDischargeCurrent": "int",
+                },
+            },
             0x00000004: {
                 "commandId": 0x00000004,
                 "commandName": "StartDiagnostics",
                 "args": {
+                },
+            },
+            0x00000005: {
+                "commandId": 0x00000005,
+                "commandName": "SetTargets",
+                "args": {
+                    "numberOfTargetsForSequence": "int",
+                    "dayOfWeekForSequence": "int",
+                    "chargingTargets": "ChargingTargetStruct",
+                },
+            },
+            0x00000006: {
+                "commandId": 0x00000006,
+                "commandName": "GetTargets",
+                "args": {
+                    "daysToReturn": "int",
                 },
             },
             0x00000007: {

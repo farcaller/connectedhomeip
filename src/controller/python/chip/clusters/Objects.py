@@ -36248,9 +36248,122 @@ class EvseManagement(Cluster):
 
     class Commands:
         @dataclass
+        class GetTargetsResponse(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000000
+            is_client: typing.ClassVar[bool] = False
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                    ])
+
+        @dataclass
         class DisableEvse(ClusterCommand):
             cluster_id: typing.ClassVar[int] = 0x0000070C
             command_id: typing.ClassVar[int] = 0x00000001
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                    ])
+
+        @dataclass
+        class EnableEvseCharging(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000002
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="evseEnableTime", Tag=0, Type=typing.Union[Nullable, uint]),
+                        ClusterObjectFieldDescriptor(Label="minimumChargeCurrent", Tag=1, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="maximumChargeCurrent", Tag=2, Type=uint),
+                    ])
+
+            evseEnableTime: 'typing.Union[Nullable, uint]' = NullValue
+            minimumChargeCurrent: 'uint' = 0
+            maximumChargeCurrent: 'uint' = 0
+
+        @dataclass
+        class EnableEvseDischarging(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000003
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="evseEnableTime", Tag=0, Type=typing.Union[Nullable, uint]),
+                        ClusterObjectFieldDescriptor(Label="maximumDischargeCurrent", Tag=1, Type=uint),
+                    ])
+
+            evseEnableTime: 'typing.Union[Nullable, uint]' = NullValue
+            maximumDischargeCurrent: 'uint' = 0
+
+        @dataclass
+        class StartDiagnostics(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000004
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                    ])
+
+        @dataclass
+        class SetTargets(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000005
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="numberOfTargetsForSequence", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="dayOfWeekForSequence", Tag=1, Type=EvseManagement.Enums.StartOfWeekEnum),
+                        ClusterObjectFieldDescriptor(Label="chargingTargets", Tag=2, Type=typing.List[EvseManagement.Structs.ChargingTargetStruct]),
+                    ])
+
+            numberOfTargetsForSequence: 'uint' = 0
+            dayOfWeekForSequence: 'EvseManagement.Enums.StartOfWeekEnum' = 0
+            chargingTargets: 'typing.List[EvseManagement.Structs.ChargingTargetStruct]' = field(default_factory=lambda: [])
+
+        @dataclass
+        class GetTargets(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000006
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="daysToReturn", Tag=0, Type=EvseManagement.Enums.StartOfWeekEnum),
+                    ])
+
+            daysToReturn: 'EvseManagement.Enums.StartOfWeekEnum' = 0
+
+        @dataclass
+        class ClearTargets(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x0000070C
+            command_id: typing.ClassVar[int] = 0x00000007
             is_client: typing.ClassVar[bool] = True
             response_type: typing.ClassVar[str] = None
 
@@ -36826,6 +36939,125 @@ class EvseManagement(Cluster):
 
             evseSessionId: 'uint' = 0
             evseState: 'EvseManagement.Enums.EvseStateEnum' = 0
+
+        @dataclass
+        class EvNotDetected(ClusterEvent):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x0000070C
+
+            @ChipUtility.classproperty
+            def event_id(cls) -> int:
+                return 0x00000001
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="evseSessionId", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="evseState", Tag=1, Type=EvseManagement.Enums.EvseStateEnum),
+                        ClusterObjectFieldDescriptor(Label="evseSessionDuration", Tag=2, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="evseSessionEnergyCharged", Tag=3, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="evseSessionEnergyDischarged", Tag=4, Type=uint),
+                    ])
+
+            evseSessionId: 'uint' = 0
+            evseState: 'EvseManagement.Enums.EvseStateEnum' = 0
+            evseSessionDuration: 'uint' = 0
+            evseSessionEnergyCharged: 'uint' = 0
+            evseSessionEnergyDischarged: 'uint' = 0
+
+        @dataclass
+        class EnergyTransferStarted(ClusterEvent):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x0000070C
+
+            @ChipUtility.classproperty
+            def event_id(cls) -> int:
+                return 0x00000002
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="evseSessionId", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="evseState", Tag=1, Type=EvseManagement.Enums.EvseStateEnum),
+                        ClusterObjectFieldDescriptor(Label="evseSessionDuration", Tag=2, Type=int),
+                    ])
+
+            evseSessionId: 'uint' = 0
+            evseState: 'EvseManagement.Enums.EvseStateEnum' = 0
+            evseSessionDuration: 'int' = 0
+
+        @dataclass
+        class EnergyTransferStopped(ClusterEvent):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x0000070C
+
+            @ChipUtility.classproperty
+            def event_id(cls) -> int:
+                return 0x00000003
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="evseSessionId", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="evseState", Tag=1, Type=EvseManagement.Enums.EvseStateEnum),
+                        ClusterObjectFieldDescriptor(Label="reason", Tag=2, Type=EvseManagement.Enums.ReasonEnum),
+                        ClusterObjectFieldDescriptor(Label="energyTransferred", Tag=4, Type=int),
+                    ])
+
+            evseSessionId: 'uint' = 0
+            evseState: 'EvseManagement.Enums.EvseStateEnum' = 0
+            reason: 'EvseManagement.Enums.ReasonEnum' = 0
+            energyTransferred: 'int' = 0
+
+        @dataclass
+        class Fault(ClusterEvent):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x0000070C
+
+            @ChipUtility.classproperty
+            def event_id(cls) -> int:
+                return 0x00000004
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="evseSessionId", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="evseState", Tag=1, Type=EvseManagement.Enums.EvseStateEnum),
+                        ClusterObjectFieldDescriptor(Label="evseFaultPreviousState", Tag=2, Type=EvseManagement.Enums.EvseStateEnum),
+                        ClusterObjectFieldDescriptor(Label="evseFaultCurrentState", Tag=4, Type=EvseManagement.Enums.EvseStateEnum),
+                    ])
+
+            evseSessionId: 'uint' = 0
+            evseState: 'EvseManagement.Enums.EvseStateEnum' = 0
+            evseFaultPreviousState: 'EvseManagement.Enums.EvseStateEnum' = 0
+            evseFaultCurrentState: 'EvseManagement.Enums.EvseStateEnum' = 0
+
+        @dataclass
+        class Rfid(ClusterEvent):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x0000070C
+
+            @ChipUtility.classproperty
+            def event_id(cls) -> int:
+                return 0x00000005
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="uid", Tag=0, Type=typing.Union[Nullable, bytes]),
+                    ])
+
+            uid: 'typing.Union[Nullable, bytes]' = NullValue
 
 
 @dataclass

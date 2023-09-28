@@ -31423,14 +31423,77 @@ using DecodableType = Type;
 namespace Commands {
 // Forward-declarations so we can reference these later.
 
+namespace GetTargetsResponse {
+struct Type;
+struct DecodableType;
+} // namespace GetTargetsResponse
+
 namespace DisableEvse {
 struct Type;
 struct DecodableType;
 } // namespace DisableEvse
 
+namespace EnableEvseCharging {
+struct Type;
+struct DecodableType;
+} // namespace EnableEvseCharging
+
+namespace EnableEvseDischarging {
+struct Type;
+struct DecodableType;
+} // namespace EnableEvseDischarging
+
+namespace StartDiagnostics {
+struct Type;
+struct DecodableType;
+} // namespace StartDiagnostics
+
+namespace SetTargets {
+struct Type;
+struct DecodableType;
+} // namespace SetTargets
+
+namespace GetTargets {
+struct Type;
+struct DecodableType;
+} // namespace GetTargets
+
+namespace ClearTargets {
+struct Type;
+struct DecodableType;
+} // namespace ClearTargets
+
 } // namespace Commands
 
 namespace Commands {
+namespace GetTargetsResponse {
+enum class Fields : uint8_t
+{
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::GetTargetsResponse::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::GetTargetsResponse::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace GetTargetsResponse
 namespace DisableEvse {
 enum class Fields : uint8_t
 {
@@ -31459,6 +31522,205 @@ public:
     CHIP_ERROR Decode(TLV::TLVReader & reader);
 };
 }; // namespace DisableEvse
+namespace EnableEvseCharging {
+enum class Fields : uint8_t
+{
+    kEvseEnableTime       = 0,
+    kMinimumChargeCurrent = 1,
+    kMaximumChargeCurrent = 2,
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::EnableEvseCharging::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    DataModel::Nullable<uint16_t> evseEnableTime;
+    uint16_t minimumChargeCurrent = static_cast<uint16_t>(0);
+    uint16_t maximumChargeCurrent = static_cast<uint16_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::EnableEvseCharging::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    DataModel::Nullable<uint16_t> evseEnableTime;
+    uint16_t minimumChargeCurrent = static_cast<uint16_t>(0);
+    uint16_t maximumChargeCurrent = static_cast<uint16_t>(0);
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace EnableEvseCharging
+namespace EnableEvseDischarging {
+enum class Fields : uint8_t
+{
+    kEvseEnableTime          = 0,
+    kMaximumDischargeCurrent = 1,
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::EnableEvseDischarging::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    DataModel::Nullable<uint16_t> evseEnableTime;
+    uint16_t maximumDischargeCurrent = static_cast<uint16_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::EnableEvseDischarging::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    DataModel::Nullable<uint16_t> evseEnableTime;
+    uint16_t maximumDischargeCurrent = static_cast<uint16_t>(0);
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace EnableEvseDischarging
+namespace StartDiagnostics {
+enum class Fields : uint8_t
+{
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::StartDiagnostics::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::StartDiagnostics::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace StartDiagnostics
+namespace SetTargets {
+enum class Fields : uint8_t
+{
+    kNumberOfTargetsForSequence = 0,
+    kDayOfWeekForSequence       = 1,
+    kChargingTargets            = 2,
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::SetTargets::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    uint8_t numberOfTargetsForSequence   = static_cast<uint8_t>(0);
+    StartOfWeekEnum dayOfWeekForSequence = static_cast<StartOfWeekEnum>(0);
+    DataModel::List<const Structs::ChargingTargetStruct::Type> chargingTargets;
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::SetTargets::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    uint8_t numberOfTargetsForSequence   = static_cast<uint8_t>(0);
+    StartOfWeekEnum dayOfWeekForSequence = static_cast<StartOfWeekEnum>(0);
+    DataModel::DecodableList<Structs::ChargingTargetStruct::DecodableType> chargingTargets;
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace SetTargets
+namespace GetTargets {
+enum class Fields : uint8_t
+{
+    kDaysToReturn = 0,
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::GetTargets::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    StartOfWeekEnum daysToReturn = static_cast<StartOfWeekEnum>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::GetTargets::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    StartOfWeekEnum daysToReturn = static_cast<StartOfWeekEnum>(0);
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace GetTargets
+namespace ClearTargets {
+enum class Fields : uint8_t
+{
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::ClearTargets::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::ClearTargets::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace ClearTargets
 } // namespace Commands
 
 namespace Attributes {
@@ -31923,6 +32185,207 @@ public:
     CHIP_ERROR Decode(TLV::TLVReader & reader);
 };
 } // namespace EvConnected
+namespace EvNotDetected {
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+
+enum class Fields : uint8_t
+{
+    kEvseSessionId               = 0,
+    kEvseState                   = 1,
+    kEvseSessionDuration         = 2,
+    kEvseSessionEnergyCharged    = 3,
+    kEvseSessionEnergyDischarged = 4,
+};
+
+struct Type
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::EvNotDetected::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+    static constexpr bool kIsFabricScoped = false;
+
+    uint32_t evseSessionId               = static_cast<uint32_t>(0);
+    EvseStateEnum evseState              = static_cast<EvseStateEnum>(0);
+    uint32_t evseSessionDuration         = static_cast<uint32_t>(0);
+    uint32_t evseSessionEnergyCharged    = static_cast<uint32_t>(0);
+    uint32_t evseSessionEnergyDischarged = static_cast<uint32_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+struct DecodableType
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::EvNotDetected::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    uint32_t evseSessionId               = static_cast<uint32_t>(0);
+    EvseStateEnum evseState              = static_cast<EvseStateEnum>(0);
+    uint32_t evseSessionDuration         = static_cast<uint32_t>(0);
+    uint32_t evseSessionEnergyCharged    = static_cast<uint32_t>(0);
+    uint32_t evseSessionEnergyDischarged = static_cast<uint32_t>(0);
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+} // namespace EvNotDetected
+namespace EnergyTransferStarted {
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+
+enum class Fields : uint8_t
+{
+    kEvseSessionId       = 0,
+    kEvseState           = 1,
+    kEvseSessionDuration = 2,
+};
+
+struct Type
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::EnergyTransferStarted::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+    static constexpr bool kIsFabricScoped = false;
+
+    uint32_t evseSessionId      = static_cast<uint32_t>(0);
+    EvseStateEnum evseState     = static_cast<EvseStateEnum>(0);
+    int16_t evseSessionDuration = static_cast<int16_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+struct DecodableType
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::EnergyTransferStarted::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    uint32_t evseSessionId      = static_cast<uint32_t>(0);
+    EvseStateEnum evseState     = static_cast<EvseStateEnum>(0);
+    int16_t evseSessionDuration = static_cast<int16_t>(0);
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+} // namespace EnergyTransferStarted
+namespace EnergyTransferStopped {
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+
+enum class Fields : uint8_t
+{
+    kEvseSessionId     = 0,
+    kEvseState         = 1,
+    kReason            = 2,
+    kEnergyTransferred = 4,
+};
+
+struct Type
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::EnergyTransferStopped::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+    static constexpr bool kIsFabricScoped = false;
+
+    uint32_t evseSessionId    = static_cast<uint32_t>(0);
+    EvseStateEnum evseState   = static_cast<EvseStateEnum>(0);
+    ReasonEnum reason         = static_cast<ReasonEnum>(0);
+    int32_t energyTransferred = static_cast<int32_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+struct DecodableType
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::EnergyTransferStopped::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    uint32_t evseSessionId    = static_cast<uint32_t>(0);
+    EvseStateEnum evseState   = static_cast<EvseStateEnum>(0);
+    ReasonEnum reason         = static_cast<ReasonEnum>(0);
+    int32_t energyTransferred = static_cast<int32_t>(0);
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+} // namespace EnergyTransferStopped
+namespace Fault {
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+
+enum class Fields : uint8_t
+{
+    kEvseSessionId          = 0,
+    kEvseState              = 1,
+    kEvseFaultPreviousState = 2,
+    kEvseFaultCurrentState  = 4,
+};
+
+struct Type
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::Fault::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+    static constexpr bool kIsFabricScoped = false;
+
+    uint32_t evseSessionId               = static_cast<uint32_t>(0);
+    EvseStateEnum evseState              = static_cast<EvseStateEnum>(0);
+    EvseStateEnum evseFaultPreviousState = static_cast<EvseStateEnum>(0);
+    EvseStateEnum evseFaultCurrentState  = static_cast<EvseStateEnum>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+struct DecodableType
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::Fault::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    uint32_t evseSessionId               = static_cast<uint32_t>(0);
+    EvseStateEnum evseState              = static_cast<EvseStateEnum>(0);
+    EvseStateEnum evseFaultPreviousState = static_cast<EvseStateEnum>(0);
+    EvseStateEnum evseFaultCurrentState  = static_cast<EvseStateEnum>(0);
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+} // namespace Fault
+namespace Rfid {
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+
+enum class Fields : uint8_t
+{
+    kUid = 0,
+};
+
+struct Type
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::Rfid::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+    static constexpr bool kIsFabricScoped = false;
+
+    DataModel::Nullable<chip::ByteSpan> uid;
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+struct DecodableType
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::Rfid::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::EvseManagement::Id; }
+
+    DataModel::Nullable<chip::ByteSpan> uid;
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+} // namespace Rfid
 } // namespace Events
 } // namespace EvseManagement
 namespace ElectricalMeasurement {

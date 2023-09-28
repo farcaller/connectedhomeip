@@ -9569,6 +9569,42 @@ bool emberAfEvseManagementClusterDisableEvseCallback(
     chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
     const chip::app::Clusters::EvseManagement::Commands::DisableEvse::DecodableType & commandData);
 /**
+ * @brief EVSE Management Cluster EnableEvseCharging Command callback (from client)
+ */
+bool emberAfEvseManagementClusterEnableEvseChargingCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster EnableEvseDischarging Command callback (from client)
+ */
+bool emberAfEvseManagementClusterEnableEvseDischargingCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster StartDiagnostics Command callback (from client)
+ */
+bool emberAfEvseManagementClusterStartDiagnosticsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster SetTargets Command callback (from client)
+ */
+bool emberAfEvseManagementClusterSetTargetsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::SetTargets::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster GetTargets Command callback (from client)
+ */
+bool emberAfEvseManagementClusterGetTargetsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::GetTargets::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster ClearTargets Command callback (from client)
+ */
+bool emberAfEvseManagementClusterClearTargetsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::ClearTargets::DecodableType & commandData);
+/**
  * @brief Electrical Measurement Cluster GetProfileInfoCommand Command callback (from client)
  */
 bool emberAfElectricalMeasurementClusterGetProfileInfoCommandCallback(

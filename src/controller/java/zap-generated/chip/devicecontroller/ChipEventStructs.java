@@ -1995,6 +1995,183 @@ public Integer evseState;
   }
 }
 
+public static class EvseManagementClusterEvNotDetectedEvent {
+public Long evseSessionId;
+public Integer evseState;
+public Long evseSessionDuration;
+public Long evseSessionEnergyCharged;
+public Long evseSessionEnergyDischarged;
+
+  public EvseManagementClusterEvNotDetectedEvent(
+    Long evseSessionId
+      , Integer evseState
+      , Long evseSessionDuration
+      , Long evseSessionEnergyCharged
+      , Long evseSessionEnergyDischarged
+  ) {
+    this.evseSessionId = evseSessionId;
+    this.evseState = evseState;
+    this.evseSessionDuration = evseSessionDuration;
+    this.evseSessionEnergyCharged = evseSessionEnergyCharged;
+    this.evseSessionEnergyDischarged = evseSessionEnergyDischarged;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterEvNotDetectedEvent {\n");
+    output.append("\tevseSessionId: ");
+    output.append(evseSessionId);
+        output.append("\n");
+    output.append("\tevseState: ");
+    output.append(evseState);
+        output.append("\n");
+    output.append("\tevseSessionDuration: ");
+    output.append(evseSessionDuration);
+        output.append("\n");
+    output.append("\tevseSessionEnergyCharged: ");
+    output.append(evseSessionEnergyCharged);
+        output.append("\n");
+    output.append("\tevseSessionEnergyDischarged: ");
+    output.append(evseSessionEnergyDischarged);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EvseManagementClusterEnergyTransferStartedEvent {
+public Long evseSessionId;
+public Integer evseState;
+public Integer evseSessionDuration;
+
+  public EvseManagementClusterEnergyTransferStartedEvent(
+    Long evseSessionId
+      , Integer evseState
+      , Integer evseSessionDuration
+  ) {
+    this.evseSessionId = evseSessionId;
+    this.evseState = evseState;
+    this.evseSessionDuration = evseSessionDuration;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterEnergyTransferStartedEvent {\n");
+    output.append("\tevseSessionId: ");
+    output.append(evseSessionId);
+        output.append("\n");
+    output.append("\tevseState: ");
+    output.append(evseState);
+        output.append("\n");
+    output.append("\tevseSessionDuration: ");
+    output.append(evseSessionDuration);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EvseManagementClusterEnergyTransferStoppedEvent {
+public Long evseSessionId;
+public Integer evseState;
+public Integer reason;
+public Long energyTransferred;
+
+  public EvseManagementClusterEnergyTransferStoppedEvent(
+    Long evseSessionId
+      , Integer evseState
+      , Integer reason
+      , Long energyTransferred
+  ) {
+    this.evseSessionId = evseSessionId;
+    this.evseState = evseState;
+    this.reason = reason;
+    this.energyTransferred = energyTransferred;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterEnergyTransferStoppedEvent {\n");
+    output.append("\tevseSessionId: ");
+    output.append(evseSessionId);
+        output.append("\n");
+    output.append("\tevseState: ");
+    output.append(evseState);
+        output.append("\n");
+    output.append("\treason: ");
+    output.append(reason);
+        output.append("\n");
+    output.append("\tenergyTransferred: ");
+    output.append(energyTransferred);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EvseManagementClusterFaultEvent {
+public Long evseSessionId;
+public Integer evseState;
+public Integer evseFaultPreviousState;
+public Integer evseFaultCurrentState;
+
+  public EvseManagementClusterFaultEvent(
+    Long evseSessionId
+      , Integer evseState
+      , Integer evseFaultPreviousState
+      , Integer evseFaultCurrentState
+  ) {
+    this.evseSessionId = evseSessionId;
+    this.evseState = evseState;
+    this.evseFaultPreviousState = evseFaultPreviousState;
+    this.evseFaultCurrentState = evseFaultCurrentState;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterFaultEvent {\n");
+    output.append("\tevseSessionId: ");
+    output.append(evseSessionId);
+        output.append("\n");
+    output.append("\tevseState: ");
+    output.append(evseState);
+        output.append("\n");
+    output.append("\tevseFaultPreviousState: ");
+    output.append(evseFaultPreviousState);
+        output.append("\n");
+    output.append("\tevseFaultCurrentState: ");
+    output.append(evseFaultCurrentState);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class EvseManagementClusterRfidEvent {
+public @Nullable byte[] uid;
+
+  public EvseManagementClusterRfidEvent(
+    @Nullable byte[] uid
+  ) {
+    this.uid = uid;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("EvseManagementClusterRfidEvent {\n");
+    output.append("\tuid: ");
+    output.append(Arrays.toString(uid));
+    output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterTestEventEvent {
 public Integer arg1;
 public Integer arg2;

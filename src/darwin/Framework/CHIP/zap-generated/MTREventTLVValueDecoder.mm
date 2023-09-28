@@ -3296,6 +3296,155 @@ static id _Nullable DecodeEventPayloadForEVSEManagementCluster(EventId aEventId,
 
         return value;
     }
+    case Events::EvNotDetected::Id: {
+        Events::EvNotDetected::DecodableType cppValue;
+        *aError = DataModel::Decode(aReader, cppValue);
+        if (*aError != CHIP_NO_ERROR) {
+            return nil;
+        }
+
+        __auto_type * value = [MTREVSEManagementClusterEvNotDetectedEvent new];
+
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionId];
+            value.evseSessionId = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.evseState)];
+            value.evseState = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionDuration];
+            value.evseSessionDuration = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionEnergyCharged];
+            value.evseSessionEnergyCharged = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionEnergyDischarged];
+            value.evseSessionEnergyDischarged = memberValue;
+        } while (0);
+
+        return value;
+    }
+    case Events::EnergyTransferStarted::Id: {
+        Events::EnergyTransferStarted::DecodableType cppValue;
+        *aError = DataModel::Decode(aReader, cppValue);
+        if (*aError != CHIP_NO_ERROR) {
+            return nil;
+        }
+
+        __auto_type * value = [MTREVSEManagementClusterEnergyTransferStartedEvent new];
+
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionId];
+            value.evseSessionId = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.evseState)];
+            value.evseState = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithShort:cppValue.evseSessionDuration];
+            value.evseSessionDuration = memberValue;
+        } while (0);
+
+        return value;
+    }
+    case Events::EnergyTransferStopped::Id: {
+        Events::EnergyTransferStopped::DecodableType cppValue;
+        *aError = DataModel::Decode(aReader, cppValue);
+        if (*aError != CHIP_NO_ERROR) {
+            return nil;
+        }
+
+        __auto_type * value = [MTREVSEManagementClusterEnergyTransferStoppedEvent new];
+
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionId];
+            value.evseSessionId = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.evseState)];
+            value.evseState = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.reason)];
+            value.reason = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithInt:cppValue.energyTransferred];
+            value.energyTransferred = memberValue;
+        } while (0);
+
+        return value;
+    }
+    case Events::Fault::Id: {
+        Events::Fault::DecodableType cppValue;
+        *aError = DataModel::Decode(aReader, cppValue);
+        if (*aError != CHIP_NO_ERROR) {
+            return nil;
+        }
+
+        __auto_type * value = [MTREVSEManagementClusterFaultEvent new];
+
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.evseSessionId];
+            value.evseSessionId = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.evseState)];
+            value.evseState = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.evseFaultPreviousState)];
+            value.evseFaultPreviousState = memberValue;
+        } while (0);
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue.evseFaultCurrentState)];
+            value.evseFaultCurrentState = memberValue;
+        } while (0);
+
+        return value;
+    }
+    case Events::Rfid::Id: {
+        Events::Rfid::DecodableType cppValue;
+        *aError = DataModel::Decode(aReader, cppValue);
+        if (*aError != CHIP_NO_ERROR) {
+            return nil;
+        }
+
+        __auto_type * value = [MTREVSEManagementClusterRfidEvent new];
+
+        do {
+            NSData * _Nullable memberValue;
+            if (cppValue.uid.IsNull()) {
+                memberValue = nil;
+            } else {
+                memberValue = AsData(cppValue.uid.Value());
+            }
+            value.uid = memberValue;
+        } while (0);
+
+        return value;
+    }
     default: {
         break;
     }
