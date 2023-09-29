@@ -40,6 +40,7 @@
         "electrical-measurement-cluster.xml",
         "energy-management-cluster.xml",
         "ethernet-network-diagnostics-cluster.xml",
+        "evse-management-cluster.xml",
         "fan-control-cluster.xml",
         "fault-injection-cluster.xml",
         "fixed-label-cluster.xml",

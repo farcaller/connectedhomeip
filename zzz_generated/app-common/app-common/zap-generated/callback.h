@@ -793,6 +793,14 @@ void emberAfAccountLoginClusterInitCallback(chip::EndpointId endpoint);
  */
 void emberAfEnergyManagementClusterInitCallback(chip::EndpointId endpoint);
 
+/** @brief EVSE Management Cluster Init
+ *
+ * Cluster Init
+ *
+ * @param endpoint    Endpoint that is being initialized
+ */
+void emberAfEvseManagementClusterInitCallback(chip::EndpointId endpoint);
+
 /** @brief Electrical Measurement Cluster Init
  *
  * Cluster Init
@@ -8167,6 +8175,84 @@ void emberAfEnergyManagementClusterServerTickCallback(chip::EndpointId endpoint)
 void emberAfEnergyManagementClusterClientTickCallback(chip::EndpointId endpoint);
 
 //
+// EVSE Management Cluster
+//
+
+/** @brief EVSE Management Cluster Server Init
+ *
+ * Server Init
+ *
+ * @param endpoint    Endpoint that is being initialized
+ */
+void emberAfEvseManagementClusterServerInitCallback(chip::EndpointId endpoint);
+
+/** @brief EVSE Management Cluster Server Shutdown
+ *
+ * Server Shutdown
+ *
+ * @param endpoint    Endpoint that is being shutdown
+ */
+void MatterEvseManagementClusterServerShutdownCallback(chip::EndpointId endpoint);
+
+/** @brief EVSE Management Cluster Client Init
+ *
+ * Client Init
+ *
+ * @param endpoint    Endpoint that is being initialized
+ */
+void emberAfEvseManagementClusterClientInitCallback(chip::EndpointId endpoint);
+
+/** @brief EVSE Management Cluster Server Attribute Changed
+ *
+ * Server Attribute Changed
+ *
+ * @param attributePath Concrete attribute path that changed
+ */
+void MatterEvseManagementClusterServerAttributeChangedCallback(const chip::app::ConcreteAttributePath & attributePath);
+
+/** @brief EVSE Management Cluster Server Pre Attribute Changed
+ *
+ * Server Pre Attribute Changed
+ *
+ * @param attributePath Concrete attribute path to be changed
+ * @param attributeType Attribute type
+ * @param size          Attribute size
+ * @param value         Attribute value
+ */
+chip::Protocols::InteractionModel::Status
+MatterEvseManagementClusterServerPreAttributeChangedCallback(const chip::app::ConcreteAttributePath & attributePath,
+                                                             EmberAfAttributeType attributeType, uint16_t size, uint8_t * value);
+
+/** @brief EVSE Management Cluster Client Pre Attribute Changed
+ *
+ * Client Pre Attribute Changed
+ *
+ * @param attributePath Concrete attribute path to be changed
+ * @param attributeType Attribute type
+ * @param size          Attribute size
+ * @param value         Attribute value
+ */
+chip::Protocols::InteractionModel::Status
+MatterEvseManagementClusterClientPreAttributeChangedCallback(const chip::app::ConcreteAttributePath & attributePath,
+                                                             EmberAfAttributeType attributeType, uint16_t size, uint8_t * value);
+
+/** @brief EVSE Management Cluster Server Tick
+ *
+ * Server Tick
+ *
+ * @param endpoint  Endpoint that is being served
+ */
+void emberAfEvseManagementClusterServerTickCallback(chip::EndpointId endpoint);
+
+/** @brief EVSE Management Cluster Client Tick
+ *
+ * Client Tick
+ *
+ * @param endpoint  Endpoint that is being served
+ */
+void emberAfEvseManagementClusterClientTickCallback(chip::EndpointId endpoint);
+
+//
 // Electrical Measurement Cluster
 //
 
@@ -9476,6 +9562,48 @@ bool emberAfEnergyManagementClusterModifyPowerForecastRequestCallback(
 bool emberAfEnergyManagementClusterRequestLimitBasedPowerForecastCallback(
     chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
     const chip::app::Clusters::EnergyManagement::Commands::RequestLimitBasedPowerForecast::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster DisableEvse Command callback (from client)
+ */
+bool emberAfEvseManagementClusterDisableEvseCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::DisableEvse::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster EnableEvseCharging Command callback (from client)
+ */
+bool emberAfEvseManagementClusterEnableEvseChargingCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster EnableEvseDischarging Command callback (from client)
+ */
+bool emberAfEvseManagementClusterEnableEvseDischargingCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster StartDiagnostics Command callback (from client)
+ */
+bool emberAfEvseManagementClusterStartDiagnosticsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster SetTargets Command callback (from client)
+ */
+bool emberAfEvseManagementClusterSetTargetsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::SetTargets::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster GetTargets Command callback (from client)
+ */
+bool emberAfEvseManagementClusterGetTargetsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::GetTargets::DecodableType & commandData);
+/**
+ * @brief EVSE Management Cluster ClearTargets Command callback (from client)
+ */
+bool emberAfEvseManagementClusterClearTargetsCallback(
+    chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
+    const chip::app::Clusters::EvseManagement::Commands::ClearTargets::DecodableType & commandData);
 /**
  * @brief Electrical Measurement Cluster GetProfileInfoCommand Command callback (from client)
  */

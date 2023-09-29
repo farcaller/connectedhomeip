@@ -5721,6 +5721,251 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@implementation MTREVSEManagementClusterChargingTargetStruct
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _targetTime = @(0);
+
+        _targetSoC = nil;
+
+        _addedEnergy = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterChargingTargetStruct alloc] init];
+
+    other.targetTime = self.targetTime;
+    other.targetSoC = self.targetSoC;
+    other.addedEnergy = self.addedEnergy;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: targetTime:%@; targetSoC:%@; addedEnergy:%@; >",
+                                             NSStringFromClass([self class]), _targetTime, _targetSoC, _addedEnergy];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterEvConnectedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseSessionId = @(0);
+
+        _evseState = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterEvConnectedEvent alloc] init];
+
+    other.evseSessionId = self.evseSessionId;
+    other.evseState = self.evseState;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString
+        stringWithFormat:@"<%@: evseSessionId:%@; evseState:%@; >", NSStringFromClass([self class]), _evseSessionId, _evseState];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterEvNotDetectedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseSessionId = @(0);
+
+        _evseState = @(0);
+
+        _evseSessionDuration = @(0);
+
+        _evseSessionEnergyCharged = @(0);
+
+        _evseSessionEnergyDischarged = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterEvNotDetectedEvent alloc] init];
+
+    other.evseSessionId = self.evseSessionId;
+    other.evseState = self.evseState;
+    other.evseSessionDuration = self.evseSessionDuration;
+    other.evseSessionEnergyCharged = self.evseSessionEnergyCharged;
+    other.evseSessionEnergyDischarged = self.evseSessionEnergyDischarged;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: evseSessionId:%@; evseState:%@; evseSessionDuration:%@; "
+                                                              @"evseSessionEnergyCharged:%@; evseSessionEnergyDischarged:%@; >",
+                                             NSStringFromClass([self class]), _evseSessionId, _evseState, _evseSessionDuration,
+                                             _evseSessionEnergyCharged, _evseSessionEnergyDischarged];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterEnergyTransferStartedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseSessionId = @(0);
+
+        _evseState = @(0);
+
+        _evseSessionDuration = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterEnergyTransferStartedEvent alloc] init];
+
+    other.evseSessionId = self.evseSessionId;
+    other.evseState = self.evseState;
+    other.evseSessionDuration = self.evseSessionDuration;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: evseSessionId:%@; evseState:%@; evseSessionDuration:%@; >",
+                                             NSStringFromClass([self class]), _evseSessionId, _evseState, _evseSessionDuration];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterEnergyTransferStoppedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseSessionId = @(0);
+
+        _evseState = @(0);
+
+        _reason = @(0);
+
+        _energyTransferred = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterEnergyTransferStoppedEvent alloc] init];
+
+    other.evseSessionId = self.evseSessionId;
+    other.evseState = self.evseState;
+    other.reason = self.reason;
+    other.energyTransferred = self.energyTransferred;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: evseSessionId:%@; evseState:%@; reason:%@; energyTransferred:%@; >",
+                  NSStringFromClass([self class]), _evseSessionId, _evseState, _reason, _energyTransferred];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterFaultEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseSessionId = @(0);
+
+        _evseState = @(0);
+
+        _evseFaultPreviousState = @(0);
+
+        _evseFaultCurrentState = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterFaultEvent alloc] init];
+
+    other.evseSessionId = self.evseSessionId;
+    other.evseState = self.evseState;
+    other.evseFaultPreviousState = self.evseFaultPreviousState;
+    other.evseFaultCurrentState = self.evseFaultCurrentState;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: evseSessionId:%@; evseState:%@; evseFaultPreviousState:%@; evseFaultCurrentState:%@; >",
+                  NSStringFromClass([self class]), _evseSessionId, _evseState, _evseFaultPreviousState, _evseFaultCurrentState];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterRfidEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _uid = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTREVSEManagementClusterRfidEvent alloc] init];
+
+    other.uid = self.uid;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: uid:%@; >", NSStringFromClass([self class]), [_uid base64EncodedStringWithOptions:0]];
+    return descriptionString;
+}
+
+@end
+
 @implementation MTRUnitTestingClusterSimpleStruct
 - (instancetype)init
 {

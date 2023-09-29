@@ -13886,6 +13886,254 @@ public class ClusterInfoMapping {
         }
       }
 
+      public static class DelegatedEvseManagementClusterGetTargetsResponseCallback implements ChipClusters.EvseManagementCluster.GetTargetsResponseCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+        @Override
+        public void onSuccess() {
+           Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+           callback.onSuccess(responseValues);
+        }
+
+        @Override
+        public void onError(Exception error) {
+          callback.onFailure(error);
+        }
+      }
+
+      public static class DelegatedEvseManagementClusterNextChargeStartTimeAttributeCallback implements ChipClusters.EvseManagementCluster.NextChargeStartTimeAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterNextChargeTargetTimeAttributeCallback implements ChipClusters.EvseManagementCluster.NextChargeTargetTimeAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterNextChargeRequiredEnergyAttributeCallback implements ChipClusters.EvseManagementCluster.NextChargeRequiredEnergyAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterNextChargeTargetSocAttributeCallback implements ChipClusters.EvseManagementCluster.NextChargeTargetSocAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterApproxEvEfficiencyAttributeCallback implements ChipClusters.EvseManagementCluster.ApproxEvEfficiencyAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterStateOfChargeAttributeCallback implements ChipClusters.EvseManagementCluster.StateOfChargeAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterBatteryCapacityAttributeCallback implements ChipClusters.EvseManagementCluster.BatteryCapacityAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable Integer value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterVehicleIdAttributeCallback implements ChipClusters.EvseManagementCluster.VehicleIdAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable String value) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "String");
+          responseValues.put(commandResponseInfo, value);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterGeneratedCommandListAttributeCallback implements ChipClusters.EvseManagementCluster.GeneratedCommandListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterAcceptedCommandListAttributeCallback implements ChipClusters.EvseManagementCluster.AcceptedCommandListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterEventListAttributeCallback implements ChipClusters.EvseManagementCluster.EventListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedEvseManagementClusterAttributeListAttributeCallback implements ChipClusters.EvseManagementCluster.AttributeListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+
       public static class DelegatedElectricalMeasurementClusterGetProfileInfoResponseCommandCallback implements ChipClusters.ElectricalMeasurementCluster.GetProfileInfoResponseCommandCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
@@ -15616,6 +15864,9 @@ public class ClusterInfoMapping {
       ClusterInfo energyManagementClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.EnergyManagementCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("energyManagement", energyManagementClusterInfo);
+      ClusterInfo evseManagementClusterInfo = new ClusterInfo(
+        (ptr, endpointId) -> new ChipClusters.EvseManagementCluster(ptr, endpointId), new HashMap<>());
+      clusterMap.put("evseManagement", evseManagementClusterInfo);
       ClusterInfo electricalMeasurementClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.ElectricalMeasurementCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("electricalMeasurement", electricalMeasurementClusterInfo);
@@ -15727,6 +15978,7 @@ public class ClusterInfoMapping {
       destination.get("applicationBasic").combineCommands(source.get("applicationBasic"));
       destination.get("accountLogin").combineCommands(source.get("accountLogin"));
       destination.get("energyManagement").combineCommands(source.get("energyManagement"));
+      destination.get("evseManagement").combineCommands(source.get("evseManagement"));
       destination.get("electricalMeasurement").combineCommands(source.get("electricalMeasurement"));
       destination.get("waterHeater").combineCommands(source.get("waterHeater"));
       destination.get("unitTesting").combineCommands(source.get("unitTesting"));
@@ -20146,6 +20398,134 @@ public class ClusterInfoMapping {
        );
        energyManagementClusterInteractionInfoMap.put("requestLimitBasedPowerForecast", energyManagementrequestLimitBasedPowerForecastInteractionInfo);
      commandMap.put("energyManagement", energyManagementClusterInteractionInfoMap);
+     Map<String, InteractionInfo> evseManagementClusterInteractionInfoMap = new LinkedHashMap<>();
+     Map<String, CommandParameterInfo> evseManagementdisableEvseCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo evseManagementdisableEvseInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .disableEvse((DefaultClusterCallback) callback
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementdisableEvseCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("disableEvse", evseManagementdisableEvseInteractionInfo);
+     Map<String, CommandParameterInfo> evseManagementenableEvseChargingCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo evseManagementenableEvseChargingevseEnableTimeCommandParameterInfo = new CommandParameterInfo("evseEnableTime", Integer.class, Integer.class);
+       evseManagementenableEvseChargingCommandParams.put("evseEnableTime",evseManagementenableEvseChargingevseEnableTimeCommandParameterInfo);
+      
+       CommandParameterInfo evseManagementenableEvseChargingminimumChargeCurrentCommandParameterInfo = new CommandParameterInfo("minimumChargeCurrent", Integer.class, Integer.class);
+       evseManagementenableEvseChargingCommandParams.put("minimumChargeCurrent",evseManagementenableEvseChargingminimumChargeCurrentCommandParameterInfo);
+      
+       CommandParameterInfo evseManagementenableEvseChargingmaximumChargeCurrentCommandParameterInfo = new CommandParameterInfo("maximumChargeCurrent", Integer.class, Integer.class);
+       evseManagementenableEvseChargingCommandParams.put("maximumChargeCurrent",evseManagementenableEvseChargingmaximumChargeCurrentCommandParameterInfo);
+     
+       InteractionInfo evseManagementenableEvseChargingInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .enableEvseCharging((DefaultClusterCallback) callback
+           , (Integer)
+           commandArguments.get("evseEnableTime")
+           , (Integer)
+           commandArguments.get("minimumChargeCurrent")
+           , (Integer)
+           commandArguments.get("maximumChargeCurrent")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementenableEvseChargingCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("enableEvseCharging", evseManagementenableEvseChargingInteractionInfo);
+     Map<String, CommandParameterInfo> evseManagementenableEvseDischargingCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo evseManagementenableEvseDischargingevseEnableTimeCommandParameterInfo = new CommandParameterInfo("evseEnableTime", Integer.class, Integer.class);
+       evseManagementenableEvseDischargingCommandParams.put("evseEnableTime",evseManagementenableEvseDischargingevseEnableTimeCommandParameterInfo);
+      
+       CommandParameterInfo evseManagementenableEvseDischargingmaximumDischargeCurrentCommandParameterInfo = new CommandParameterInfo("maximumDischargeCurrent", Integer.class, Integer.class);
+       evseManagementenableEvseDischargingCommandParams.put("maximumDischargeCurrent",evseManagementenableEvseDischargingmaximumDischargeCurrentCommandParameterInfo);
+     
+       InteractionInfo evseManagementenableEvseDischargingInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .enableEvseDischarging((DefaultClusterCallback) callback
+           , (Integer)
+           commandArguments.get("evseEnableTime")
+           , (Integer)
+           commandArguments.get("maximumDischargeCurrent")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementenableEvseDischargingCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("enableEvseDischarging", evseManagementenableEvseDischargingInteractionInfo);
+     Map<String, CommandParameterInfo> evseManagementstartDiagnosticsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo evseManagementstartDiagnosticsInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .startDiagnostics((DefaultClusterCallback) callback
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementstartDiagnosticsCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("startDiagnostics", evseManagementstartDiagnosticsInteractionInfo);
+     Map<String, CommandParameterInfo> evseManagementsetTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo evseManagementsetTargetsnumberOfTargetsForSequenceCommandParameterInfo = new CommandParameterInfo("numberOfTargetsForSequence", Integer.class, Integer.class);
+       evseManagementsetTargetsCommandParams.put("numberOfTargetsForSequence",evseManagementsetTargetsnumberOfTargetsForSequenceCommandParameterInfo);
+      
+       CommandParameterInfo evseManagementsetTargetsdayOfWeekForSequenceCommandParameterInfo = new CommandParameterInfo("dayOfWeekForSequence", Integer.class, Integer.class);
+       evseManagementsetTargetsCommandParams.put("dayOfWeekForSequence",evseManagementsetTargetsdayOfWeekForSequenceCommandParameterInfo);
+      
+       InteractionInfo evseManagementsetTargetsInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .setTargets((DefaultClusterCallback) callback
+           , (Integer)
+           commandArguments.get("numberOfTargetsForSequence")
+           , (Integer)
+           commandArguments.get("dayOfWeekForSequence")
+           , (ArrayList<ChipStructs.EvseManagementClusterChargingTargetStruct>)
+           commandArguments.get("chargingTargets")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementsetTargetsCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("setTargets", evseManagementsetTargetsInteractionInfo);
+     Map<String, CommandParameterInfo> evseManagementgetTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo evseManagementgetTargetsdaysToReturnCommandParameterInfo = new CommandParameterInfo("daysToReturn", Integer.class, Integer.class);
+       evseManagementgetTargetsCommandParams.put("daysToReturn",evseManagementgetTargetsdaysToReturnCommandParameterInfo);
+     
+       InteractionInfo evseManagementgetTargetsInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .getTargets((DefaultClusterCallback) callback
+           , (Integer)
+           commandArguments.get("daysToReturn")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementgetTargetsCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("getTargets", evseManagementgetTargetsInteractionInfo);
+     Map<String, CommandParameterInfo> evseManagementclearTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo evseManagementclearTargetsInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.EvseManagementCluster) cluster)
+           .clearTargets((DefaultClusterCallback) callback
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           evseManagementclearTargetsCommandParams
+       );
+       evseManagementClusterInteractionInfoMap.put("clearTargets", evseManagementclearTargetsInteractionInfo);
+     commandMap.put("evseManagement", evseManagementClusterInteractionInfoMap);
      Map<String, InteractionInfo> electricalMeasurementClusterInteractionInfoMap = new LinkedHashMap<>();
      Map<String, CommandParameterInfo> electricalMeasurementgetProfileInfoCommandCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
        InteractionInfo electricalMeasurementgetProfileInfoCommandInteractionInfo = new InteractionInfo(

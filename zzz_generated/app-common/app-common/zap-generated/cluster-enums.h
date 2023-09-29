@@ -4115,6 +4115,108 @@ enum class EnergyManagementFeature : uint32_t
 };
 } // namespace EnergyManagement
 
+namespace EvseManagement {
+
+// Enum for EvseFaultEnum
+enum class EvseFaultEnum : uint8_t
+{
+    kNoError           = 0x00,
+    kEvseMeterFailure  = 0x01,
+    kOverVoltage       = 0x02,
+    kUnderVoltage      = 0x03,
+    kOverCurrent       = 0x04,
+    kContactWetFailure = 0x05,
+    kContactDryFailure = 0x06,
+    kGroundFault       = 0x07,
+    kPowerLoss         = 0x08,
+    kPowerQuality      = 0x09,
+    kPilotShortCircuit = 0x0A,
+    kEmergencyStop     = 0x0B,
+    kEvDisconnected    = 0x0C,
+    kWrongPowerSupply  = 0x0D,
+    kLiveNeutralSwap   = 0x0E,
+    kOverTemperature   = 0x0F,
+    kOther             = 0xFF,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 16,
+};
+
+// Enum for EvseStateEnum
+enum class EvseStateEnum : uint8_t
+{
+    kNotPluggedIn         = 0x00,
+    kPluggedInIdle        = 0x01,
+    kPluggedInCharging    = 0x02,
+    kPluggedInDischarging = 0x03,
+    kSessionEnding        = 0x04,
+    kFault                = 0xFF,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 5,
+};
+
+// Enum for ReasonEnum
+enum class ReasonEnum : uint8_t
+{
+    kEvStopped   = 0x00,
+    kEvseStopped = 0x01,
+    kOther       = 0xFF,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 2,
+};
+
+// Enum for StartOfWeekEnum
+enum class StartOfWeekEnum : uint8_t
+{
+    kSunday    = 0x00,
+    kMonday    = 0x01,
+    kTuesday   = 0x02,
+    kWednesday = 0x03,
+    kThursday  = 0x04,
+    kFriday    = 0x05,
+    kSaturday  = 0x06,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 7,
+};
+
+// Enum for SupplyStateEnum
+enum class SupplyStateEnum : uint8_t
+{
+    kDisabled            = 0x00,
+    kChargingEnabled     = 0x01,
+    kDischargingEnabled  = 0x02,
+    kDisabledError       = 0x03,
+    kDisabledDiagnostics = 0x04,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 5,
+};
+
+// Bitmap for EvseManagementFeature
+enum class EvseManagementFeature : uint32_t
+{
+    kChargingPreferences = 0x1,
+    kSessions            = 0x2,
+    kSocReporting        = 0x4,
+    kPlugAndCharge       = 0x8,
+    kRfid                = 0x10,
+    kV2x                 = 0x20,
+};
+} // namespace EvseManagement
+
 namespace ElectricalMeasurement {} // namespace ElectricalMeasurement
 
 namespace WaterHeater {

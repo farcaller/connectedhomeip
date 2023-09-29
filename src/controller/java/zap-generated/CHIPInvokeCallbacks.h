@@ -778,6 +778,21 @@ private:
     jobject javaCallbackRef;
 };
 
+class CHIPEvseManagementClusterGetTargetsResponseCallback
+    : public Callback::Callback<CHIPEvseManagementClusterGetTargetsResponseCallbackType>
+{
+public:
+    CHIPEvseManagementClusterGetTargetsResponseCallback(jobject javaCallback);
+
+    ~CHIPEvseManagementClusterGetTargetsResponseCallback();
+
+    static void CallbackFn(void * context,
+                           const chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType & data);
+
+private:
+    jobject javaCallbackRef;
+};
+
 class CHIPElectricalMeasurementClusterGetProfileInfoResponseCommandCallback
     : public Callback::Callback<CHIPElectricalMeasurementClusterGetProfileInfoResponseCommandCallbackType>
 {

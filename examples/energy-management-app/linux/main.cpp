@@ -17,6 +17,7 @@
  */
 
 #include "EnergyManagementManager.h"
+#include "EvseManagementManager.h"
 #include <AppMain.h>
 
 #include <app-common/zap-generated/ids/Attributes.h>
@@ -121,6 +122,15 @@ int main(int argc, char * argv[])
         chip::DeviceLayer::PlatformMgr().Shutdown();
         return -1;
     }
+
+    err = EvseManagementMgr().Init();
+    if (err != CHIP_NO_ERROR)
+    {
+        ChipLogError(AppServer, "Failed to initialize evse-management manager: %" CHIP_ERROR_FORMAT, err.Format());
+        chip::DeviceLayer::PlatformMgr().Shutdown();
+        return -1;
+    }
+
 
 #if defined(CHIP_IMGUI_ENABLED) && CHIP_IMGUI_ENABLED
     example::Ui::ImguiUi ui;

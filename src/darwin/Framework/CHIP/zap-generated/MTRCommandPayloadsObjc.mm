@@ -12718,6 +12718,299 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
+@implementation MTREVSEManagementClusterGetTargetsResponseParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterGetTargetsResponseParams alloc] init];
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error
+{
+    if (!(self = [super init])) {
+        return nil;
+    }
+
+    using DecodableType = chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType;
+    chip::System::PacketBufferHandle buffer = [MTRBaseDevice _responseDataForCommand:responseValue
+                                                                           clusterID:DecodableType::GetClusterId()
+                                                                           commandID:DecodableType::GetCommandId()
+                                                                               error:error];
+    if (buffer.IsNull()) {
+        return nil;
+    }
+
+    chip::TLV::TLVReader reader;
+    reader.Init(buffer->Start(), buffer->DataLength());
+
+    CHIP_ERROR err = reader.Next(chip::TLV::AnonymousTag());
+    if (err == CHIP_NO_ERROR) {
+        DecodableType decodedStruct;
+        err = chip::app::DataModel::Decode(reader, decodedStruct);
+        if (err == CHIP_NO_ERROR) {
+            err = [self _setFieldsFromDecodableStruct:decodedStruct];
+            if (err == CHIP_NO_ERROR) {
+                return self;
+            }
+        }
+    }
+
+    NSString * errorStr = [NSString stringWithFormat:@"Command payload decoding failed: %s", err.AsString()];
+    MTR_LOG_ERROR("%s", errorStr.UTF8String);
+    if (error != nil) {
+        NSDictionary * userInfo = @{ NSLocalizedFailureReasonErrorKey : NSLocalizedString(errorStr, nil) };
+        *error = [NSError errorWithDomain:MTRErrorDomain code:MTRErrorCodeSchemaMismatch userInfo:userInfo];
+    }
+    return nil;
+}
+
+@end
+
+@implementation MTREVSEManagementClusterGetTargetsResponseParams (InternalMethods)
+
+- (CHIP_ERROR)_setFieldsFromDecodableStruct:
+    (const chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType &)decodableStruct
+{
+    return CHIP_NO_ERROR;
+}
+@end
+@implementation MTREVSEManagementClusterDisableEvseParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterDisableEvseParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTREVSEManagementClusterEnableEvseChargingParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseEnableTime = nil;
+
+        _minimumChargeCurrent = @(0);
+
+        _maximumChargeCurrent = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterEnableEvseChargingParams alloc] init];
+
+    other.evseEnableTime = self.evseEnableTime;
+    other.minimumChargeCurrent = self.minimumChargeCurrent;
+    other.maximumChargeCurrent = self.maximumChargeCurrent;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: evseEnableTime:%@; minimumChargeCurrent:%@; maximumChargeCurrent:%@; >",
+                  NSStringFromClass([self class]), _evseEnableTime, _minimumChargeCurrent, _maximumChargeCurrent];
+    return descriptionString;
+}
+
+@end
+@implementation MTREVSEManagementClusterEnableEvseDischargingParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _evseEnableTime = nil;
+
+        _maximumDischargeCurrent = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterEnableEvseDischargingParams alloc] init];
+
+    other.evseEnableTime = self.evseEnableTime;
+    other.maximumDischargeCurrent = self.maximumDischargeCurrent;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: evseEnableTime:%@; maximumDischargeCurrent:%@; >",
+                                             NSStringFromClass([self class]), _evseEnableTime, _maximumDischargeCurrent];
+    return descriptionString;
+}
+
+@end
+@implementation MTREVSEManagementClusterStartDiagnosticsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterStartDiagnosticsParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTREVSEManagementClusterSetTargetsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _numberOfTargetsForSequence = @(0);
+
+        _dayOfWeekForSequence = @(0);
+
+        _chargingTargets = [NSArray array];
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterSetTargetsParams alloc] init];
+
+    other.numberOfTargetsForSequence = self.numberOfTargetsForSequence;
+    other.dayOfWeekForSequence = self.dayOfWeekForSequence;
+    other.chargingTargets = self.chargingTargets;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: numberOfTargetsForSequence:%@; dayOfWeekForSequence:%@; chargingTargets:%@; >",
+                  NSStringFromClass([self class]), _numberOfTargetsForSequence, _dayOfWeekForSequence, _chargingTargets];
+    return descriptionString;
+}
+
+@end
+@implementation MTREVSEManagementClusterGetTargetsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _daysToReturn = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterGetTargetsParams alloc] init];
+
+    other.daysToReturn = self.daysToReturn;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: daysToReturn:%@; >", NSStringFromClass([self class]), _daysToReturn];
+    return descriptionString;
+}
+
+@end
+@implementation MTREVSEManagementClusterClearTargetsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREVSEManagementClusterClearTargetsParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
 @implementation MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams
 - (instancetype)init
 {

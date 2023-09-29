@@ -383,6 +383,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface MTREVSEManagementClusterGetTargetsResponseParams (InternalMethods)
+
+- (CHIP_ERROR)_setFieldsFromDecodableStruct:
+    (const chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType &)decodableStruct;
+
+@end
+
 @interface MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams (InternalMethods)
 
 - (CHIP_ERROR)_setFieldsFromDecodableStruct:
