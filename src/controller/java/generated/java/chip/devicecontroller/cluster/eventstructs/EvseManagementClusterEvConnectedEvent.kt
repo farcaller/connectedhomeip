@@ -17,13 +17,19 @@
 package chip.devicecontroller.cluster.eventstructs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EvseManagementClusterEvConnectedEvent(val evseSessionId: Long, val evseState: Int) {
-  override fun toString(): String = buildString {
+import java.util.Optional
+
+class EvseManagementClusterEvConnectedEvent (
+    val evseSessionId: Long,
+    val evseState: Int) {
+  override fun toString(): String  = buildString {
     append("EvseManagementClusterEvConnectedEvent {\n")
     append("\tevseSessionId : $evseSessionId\n")
     append("\tevseState : $evseState\n")
@@ -43,11 +49,11 @@ class EvseManagementClusterEvConnectedEvent(val evseSessionId: Long, val evseSta
     private const val TAG_EVSE_SESSION_ID = 0
     private const val TAG_EVSE_STATE = 1
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterEvConnectedEvent {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EvseManagementClusterEvConnectedEvent {
       tlvReader.enterStructure(tag)
       val evseSessionId = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ID))
       val evseState = tlvReader.getInt(ContextSpecificTag(TAG_EVSE_STATE))
-
+      
       tlvReader.exitContainer()
 
       return EvseManagementClusterEvConnectedEvent(evseSessionId, evseState)

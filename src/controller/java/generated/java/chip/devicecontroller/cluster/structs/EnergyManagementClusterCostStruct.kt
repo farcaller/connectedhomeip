@@ -17,19 +17,21 @@
 package chip.devicecontroller.cluster.structs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
+
 import java.util.Optional
 
-class EnergyManagementClusterCostStruct(
-  val costType: Int,
-  val value: Long?,
-  val decimalPoints: Int,
-  val currency: Optional<Int>
-) {
-  override fun toString(): String = buildString {
+class EnergyManagementClusterCostStruct (
+    val costType: Int,
+    val value: Long?,
+    val decimalPoints: Int,
+    val currency: Optional<Int>) {
+  override fun toString(): String  = buildString {
     append("EnergyManagementClusterCostStruct {\n")
     append("\tcostType : $costType\n")
     append("\tvalue : $value\n")
@@ -43,15 +45,15 @@ class EnergyManagementClusterCostStruct(
       startStructure(tag)
       put(ContextSpecificTag(TAG_COST_TYPE), costType)
       if (value != null) {
-        put(ContextSpecificTag(TAG_VALUE), value)
-      } else {
-        putNull(ContextSpecificTag(TAG_VALUE))
-      }
+      put(ContextSpecificTag(TAG_VALUE), value)
+    } else {
+      putNull(ContextSpecificTag(TAG_VALUE))
+    }
       put(ContextSpecificTag(TAG_DECIMAL_POINTS), decimalPoints)
       if (currency.isPresent) {
-        val optcurrency = currency.get()
-        put(ContextSpecificTag(TAG_CURRENCY), optcurrency)
-      }
+      val optcurrency = currency.get()
+      put(ContextSpecificTag(TAG_CURRENCY), optcurrency)
+    }
       endStructure()
     }
   }
@@ -62,24 +64,22 @@ class EnergyManagementClusterCostStruct(
     private const val TAG_DECIMAL_POINTS = 2
     private const val TAG_CURRENCY = 3
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyManagementClusterCostStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EnergyManagementClusterCostStruct {
       tlvReader.enterStructure(tag)
       val costType = tlvReader.getInt(ContextSpecificTag(TAG_COST_TYPE))
-      val value =
-        if (!tlvReader.isNull()) {
-          tlvReader.getLong(ContextSpecificTag(TAG_VALUE))
-        } else {
-          tlvReader.getNull(ContextSpecificTag(TAG_VALUE))
-          null
-        }
+      val value = if (!tlvReader.isNull()) {
+      tlvReader.getLong(ContextSpecificTag(TAG_VALUE))
+    } else {
+      tlvReader.getNull(ContextSpecificTag(TAG_VALUE))
+      null
+    }
       val decimalPoints = tlvReader.getInt(ContextSpecificTag(TAG_DECIMAL_POINTS))
-      val currency =
-        if (tlvReader.isNextTag(ContextSpecificTag(TAG_CURRENCY))) {
-          Optional.of(tlvReader.getInt(ContextSpecificTag(TAG_CURRENCY)))
-        } else {
-          Optional.empty()
-        }
-
+      val currency = if (tlvReader.isNextTag(ContextSpecificTag(TAG_CURRENCY))) {
+      Optional.of(tlvReader.getInt(ContextSpecificTag(TAG_CURRENCY)))
+    } else {
+      Optional.empty()
+    }
+      
       tlvReader.exitContainer()
 
       return EnergyManagementClusterCostStruct(costType, value, decimalPoints, currency)

@@ -1773,6 +1773,44 @@ MTR_NEWLY_AVAILABLE
 @property (nonatomic, copy) NSData * _Nullable uid MTR_NEWLY_AVAILABLE;
 @end
 
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull order MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable measurement MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull measurementType MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull measured MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable percentTypical MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable percentMin MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable percentMax MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable fixedTypical MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable fixedMin MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable fixedMax MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalPowerMeasurementClusterMeasurementRangeStruct : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull measurementType MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable min MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable minTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable max MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable maxTimestamp MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull measurementType MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull min MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull minTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull max MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull maxTimestamp MTR_NEWLY_AVAILABLE;
+@end
+
 API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @interface MTRUnitTestingClusterSimpleStruct : NSObject <NSCopying>
 @property (nonatomic, copy) NSNumber * _Nonnull a API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));

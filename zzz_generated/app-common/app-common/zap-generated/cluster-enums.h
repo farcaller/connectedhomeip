@@ -4232,6 +4232,54 @@ enum class HeaterType : uint8_t
 };
 } // namespace WaterHeater
 
+namespace ElectricalPowerMeasurement {
+
+// Enum for MeasurementTypeEnum
+enum class MeasurementTypeEnum : uint8_t
+{
+    kUnspecified    = 0x00,
+    kVoltage        = 0x01,
+    kCurrent        = 0x02,
+    kActivePower    = 0x03,
+    kRMSCurrent     = 0x04,
+    kRMSPower       = 0x05,
+    kApparentPower  = 0x06,
+    kReactivePower  = 0x07,
+    kFrequency      = 0x08,
+    kPowerFactor    = 0x09,
+    kLineCurrent    = 0x0A,
+    kNeutralCurrent = 0x0B,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 12,
+};
+
+// Enum for PowerModeEnum
+enum class PowerModeEnum : uint8_t
+{
+    kUnspecified = 0x00,
+    kDc          = 0x01,
+    kAc          = 0x02,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 3,
+};
+
+// Bitmap for ElectricalPowerMeasurementFeature
+enum class ElectricalPowerMeasurementFeature : uint32_t
+{
+    kDirectCurrent      = 0x1,
+    kAlternatingCurrent = 0x2,
+    kThreePhasePower    = 0x4,
+    kHarmonics          = 0x8,
+    kPowerQuality       = 0x10,
+};
+} // namespace ElectricalPowerMeasurement
+
 namespace UnitTesting {
 
 // Enum for SimpleEnum

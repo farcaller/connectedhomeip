@@ -18,6 +18,7 @@
 
 #include "EnergyManagementManager.h"
 #include "EvseManagementManager.h"
+#include "ElectricalPowerMeasurementManager.h"
 #include <AppMain.h>
 
 #include <app-common/zap-generated/ids/Attributes.h>
@@ -127,6 +128,13 @@ int main(int argc, char * argv[])
     if (err != CHIP_NO_ERROR)
     {
         ChipLogError(AppServer, "Failed to initialize evse-management manager: %" CHIP_ERROR_FORMAT, err.Format());
+        chip::DeviceLayer::PlatformMgr().Shutdown();
+        return -1;
+    }
+    err = ElectricalPowerMeasurementManagerMgr().Init();
+    if (err != CHIP_NO_ERROR)
+    {
+        ChipLogError(AppServer, "Failed to initialize electrical-power-measurement manager: %" CHIP_ERROR_FORMAT, err.Format());
         chip::DeviceLayer::PlatformMgr().Shutdown();
         return -1;
     }

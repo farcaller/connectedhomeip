@@ -36,5 +36,7 @@ source_set("energy-management-manager") {
     "src/EnergyManagementManager.cpp",
     "include/EvseManagementManager.h",
     "src/EvseManagementManager.cpp",
+    "include/ElectricalPowerMeasurementManager.h",
+    "src/ElectricalPowerMeasurementManager.cpp",
   ]
 }

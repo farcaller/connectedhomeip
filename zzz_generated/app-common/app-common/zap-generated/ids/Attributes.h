@@ -6703,6 +6703,100 @@ static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
 } // namespace Attributes
 } // namespace WaterHeater
 
+namespace ElectricalPowerMeasurement {
+namespace Attributes {
+
+namespace PowerMode {
+static constexpr AttributeId Id = 0x00000000;
+} // namespace PowerMode
+
+namespace Accuracy {
+static constexpr AttributeId Id = 0x00000001;
+} // namespace Accuracy
+
+namespace Ranges {
+static constexpr AttributeId Id = 0x00000002;
+} // namespace Ranges
+
+namespace Voltage {
+static constexpr AttributeId Id = 0x00000003;
+} // namespace Voltage
+
+namespace Current {
+static constexpr AttributeId Id = 0x00000004;
+} // namespace Current
+
+namespace ActivePower {
+static constexpr AttributeId Id = 0x00000005;
+} // namespace ActivePower
+
+namespace RmsCurrent {
+static constexpr AttributeId Id = 0x00000006;
+} // namespace RmsCurrent
+
+namespace RmsPower {
+static constexpr AttributeId Id = 0x00000007;
+} // namespace RmsPower
+
+namespace ApparentPower {
+static constexpr AttributeId Id = 0x00000008;
+} // namespace ApparentPower
+
+namespace ReactivePower {
+static constexpr AttributeId Id = 0x00000009;
+} // namespace ReactivePower
+
+namespace Frequency {
+static constexpr AttributeId Id = 0x0000000A;
+} // namespace Frequency
+
+namespace HarmonicCurrents {
+static constexpr AttributeId Id = 0x0000000B;
+} // namespace HarmonicCurrents
+
+namespace HarmonicPhases {
+static constexpr AttributeId Id = 0x0000000C;
+} // namespace HarmonicPhases
+
+namespace PowerFactor {
+static constexpr AttributeId Id = 0x0000000D;
+} // namespace PowerFactor
+
+namespace LineCurrent {
+static constexpr AttributeId Id = 0x0000000E;
+} // namespace LineCurrent
+
+namespace NeutralCurrent {
+static constexpr AttributeId Id = 0x0000000F;
+} // namespace NeutralCurrent
+
+namespace GeneratedCommandList {
+static constexpr AttributeId Id = Globals::Attributes::GeneratedCommandList::Id;
+} // namespace GeneratedCommandList
+
+namespace AcceptedCommandList {
+static constexpr AttributeId Id = Globals::Attributes::AcceptedCommandList::Id;
+} // namespace AcceptedCommandList
+
+namespace EventList {
+static constexpr AttributeId Id = Globals::Attributes::EventList::Id;
+} // namespace EventList
+
+namespace AttributeList {
+static constexpr AttributeId Id = Globals::Attributes::AttributeList::Id;
+} // namespace AttributeList
+
+namespace FeatureMap {
+static constexpr AttributeId Id = Globals::Attributes::FeatureMap::Id;
+} // namespace FeatureMap
+
+namespace ClusterRevision {
+static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
+} // namespace ClusterRevision
+
+} // namespace Attributes
+} // namespace ElectricalPowerMeasurement
+
 namespace UnitTesting {
 namespace Attributes {
 

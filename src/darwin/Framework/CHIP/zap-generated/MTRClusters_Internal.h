@@ -401,6 +401,10 @@
 @property (nonatomic, readonly) MTRDevice * device;
 @end
 
+@interface MTRClusterElectricalPowerMeasurement ()
+@property (nonatomic, readonly) MTRDevice * device;
+@end
+
 @interface MTRClusterUnitTesting ()
 @property (nonatomic, readonly) MTRDevice * device;
 @end

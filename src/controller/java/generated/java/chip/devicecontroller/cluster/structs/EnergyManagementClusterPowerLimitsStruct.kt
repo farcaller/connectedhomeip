@@ -17,18 +17,21 @@
 package chip.devicecontroller.cluster.structs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EnergyManagementClusterPowerLimitsStruct(
-  val startTime: Long,
-  val duration: Long,
-  val nominalPower: Int,
-  val maximumEnergy: Long
-) {
-  override fun toString(): String = buildString {
+import java.util.Optional
+
+class EnergyManagementClusterPowerLimitsStruct (
+    val startTime: Long,
+    val duration: Long,
+    val nominalPower: Int,
+    val maximumEnergy: Long) {
+  override fun toString(): String  = buildString {
     append("EnergyManagementClusterPowerLimitsStruct {\n")
     append("\tstartTime : $startTime\n")
     append("\tduration : $duration\n")
@@ -54,21 +57,16 @@ class EnergyManagementClusterPowerLimitsStruct(
     private const val TAG_NOMINAL_POWER = 2
     private const val TAG_MAXIMUM_ENERGY = 3
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyManagementClusterPowerLimitsStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EnergyManagementClusterPowerLimitsStruct {
       tlvReader.enterStructure(tag)
       val startTime = tlvReader.getLong(ContextSpecificTag(TAG_START_TIME))
       val duration = tlvReader.getLong(ContextSpecificTag(TAG_DURATION))
       val nominalPower = tlvReader.getInt(ContextSpecificTag(TAG_NOMINAL_POWER))
       val maximumEnergy = tlvReader.getLong(ContextSpecificTag(TAG_MAXIMUM_ENERGY))
-
+      
       tlvReader.exitContainer()
 
-      return EnergyManagementClusterPowerLimitsStruct(
-        startTime,
-        duration,
-        nominalPower,
-        maximumEnergy
-      )
+      return EnergyManagementClusterPowerLimitsStruct(startTime, duration, nominalPower, maximumEnergy)
     }
   }
 }

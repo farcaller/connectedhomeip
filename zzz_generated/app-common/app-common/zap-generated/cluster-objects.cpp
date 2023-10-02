@@ -24755,6 +24755,324 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
 namespace Events {} // namespace Events
 
 } // namespace WaterHeater
+namespace ElectricalPowerMeasurement {
+namespace Structs {
+namespace HarmonicMeasurementStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kOrder), order));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMeasurement), measurement));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kOrder):
+            ReturnErrorOnFailure(DataModel::Decode(reader, order));
+            break;
+        case to_underlying(Fields::kMeasurement):
+            ReturnErrorOnFailure(DataModel::Decode(reader, measurement));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace HarmonicMeasurementStruct
+namespace MeasurementAccuracyStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMeasurementType), measurementType));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMeasured), measured));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPercentTypical), percentTypical));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPercentMin), percentMin));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPercentMax), percentMax));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kFixedTypical), fixedTypical));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kFixedMin), fixedMin));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kFixedMax), fixedMax));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kMeasurementType):
+            ReturnErrorOnFailure(DataModel::Decode(reader, measurementType));
+            break;
+        case to_underlying(Fields::kMeasured):
+            ReturnErrorOnFailure(DataModel::Decode(reader, measured));
+            break;
+        case to_underlying(Fields::kPercentTypical):
+            ReturnErrorOnFailure(DataModel::Decode(reader, percentTypical));
+            break;
+        case to_underlying(Fields::kPercentMin):
+            ReturnErrorOnFailure(DataModel::Decode(reader, percentMin));
+            break;
+        case to_underlying(Fields::kPercentMax):
+            ReturnErrorOnFailure(DataModel::Decode(reader, percentMax));
+            break;
+        case to_underlying(Fields::kFixedTypical):
+            ReturnErrorOnFailure(DataModel::Decode(reader, fixedTypical));
+            break;
+        case to_underlying(Fields::kFixedMin):
+            ReturnErrorOnFailure(DataModel::Decode(reader, fixedMin));
+            break;
+        case to_underlying(Fields::kFixedMax):
+            ReturnErrorOnFailure(DataModel::Decode(reader, fixedMax));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace MeasurementAccuracyStruct
+namespace MeasurementRangeStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMeasurementType), measurementType));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMin), min));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinTimestamp), minTimestamp));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMax), max));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxTimestamp), maxTimestamp));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kMeasurementType):
+            ReturnErrorOnFailure(DataModel::Decode(reader, measurementType));
+            break;
+        case to_underlying(Fields::kMin):
+            ReturnErrorOnFailure(DataModel::Decode(reader, min));
+            break;
+        case to_underlying(Fields::kMinTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minTimestamp));
+            break;
+        case to_underlying(Fields::kMax):
+            ReturnErrorOnFailure(DataModel::Decode(reader, max));
+            break;
+        case to_underlying(Fields::kMaxTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxTimestamp));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace MeasurementRangeStruct
+} // namespace Structs
+
+namespace Commands {} // namespace Commands
+
+namespace Attributes {
+CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path)
+{
+    switch (path.mAttributeId)
+    {
+    case Attributes::PowerMode::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, powerMode));
+        break;
+    case Attributes::Accuracy::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, accuracy));
+        break;
+    case Attributes::Ranges::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, ranges));
+        break;
+    case Attributes::Voltage::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, voltage));
+        break;
+    case Attributes::Current::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, current));
+        break;
+    case Attributes::ActivePower::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, activePower));
+        break;
+    case Attributes::RmsCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, rmsCurrent));
+        break;
+    case Attributes::RmsPower::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, rmsPower));
+        break;
+    case Attributes::ApparentPower::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, apparentPower));
+        break;
+    case Attributes::ReactivePower::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, reactivePower));
+        break;
+    case Attributes::Frequency::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, frequency));
+        break;
+    case Attributes::HarmonicCurrents::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, harmonicCurrents));
+        break;
+    case Attributes::HarmonicPhases::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, harmonicPhases));
+        break;
+    case Attributes::PowerFactor::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, powerFactor));
+        break;
+    case Attributes::LineCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, lineCurrent));
+        break;
+    case Attributes::NeutralCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, neutralCurrent));
+        break;
+    case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));
+        break;
+    case Attributes::AcceptedCommandList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, acceptedCommandList));
+        break;
+    case Attributes::EventList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, eventList));
+        break;
+    case Attributes::AttributeList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, attributeList));
+        break;
+    case Attributes::FeatureMap::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, featureMap));
+        break;
+    case Attributes::ClusterRevision::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, clusterRevision));
+        break;
+    default:
+        break;
+    }
+
+    return CHIP_NO_ERROR;
+}
+} // namespace Attributes
+
+namespace Events {
+namespace MeasurementPeriodRange {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMeasurementType), measurementType));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodStart), periodStart));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodEnd), periodEnd));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMin), min));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinTimestamp), minTimestamp));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMax), max));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxTimestamp), maxTimestamp));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kMeasurementType):
+            ReturnErrorOnFailure(DataModel::Decode(reader, measurementType));
+            break;
+        case to_underlying(Fields::kPeriodStart):
+            ReturnErrorOnFailure(DataModel::Decode(reader, periodStart));
+            break;
+        case to_underlying(Fields::kPeriodEnd):
+            ReturnErrorOnFailure(DataModel::Decode(reader, periodEnd));
+            break;
+        case to_underlying(Fields::kMin):
+            ReturnErrorOnFailure(DataModel::Decode(reader, min));
+            break;
+        case to_underlying(Fields::kMinTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minTimestamp));
+            break;
+        case to_underlying(Fields::kMax):
+            ReturnErrorOnFailure(DataModel::Decode(reader, max));
+            break;
+        case to_underlying(Fields::kMaxTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxTimestamp));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace MeasurementPeriodRange.
+} // namespace Events
+
+} // namespace ElectricalPowerMeasurement
 namespace UnitTesting {
 namespace Structs {
 namespace SimpleStruct {

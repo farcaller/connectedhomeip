@@ -2172,6 +2172,63 @@ public @Nullable byte[] uid;
   }
 }
 
+public static class ElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent {
+public Integer measurementType;
+public Long periodStart;
+public Long periodEnd;
+public Long min;
+public Long minTimestamp;
+public Long max;
+public Long maxTimestamp;
+
+  public ElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent(
+    Integer measurementType
+      , Long periodStart
+      , Long periodEnd
+      , Long min
+      , Long minTimestamp
+      , Long max
+      , Long maxTimestamp
+  ) {
+    this.measurementType = measurementType;
+    this.periodStart = periodStart;
+    this.periodEnd = periodEnd;
+    this.min = min;
+    this.minTimestamp = minTimestamp;
+    this.max = max;
+    this.maxTimestamp = maxTimestamp;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent {\n");
+    output.append("\tmeasurementType: ");
+    output.append(measurementType);
+        output.append("\n");
+    output.append("\tperiodStart: ");
+    output.append(periodStart);
+        output.append("\n");
+    output.append("\tperiodEnd: ");
+    output.append(periodEnd);
+        output.append("\n");
+    output.append("\tmin: ");
+    output.append(min);
+        output.append("\n");
+    output.append("\tminTimestamp: ");
+    output.append(minTimestamp);
+        output.append("\n");
+    output.append("\tmax: ");
+    output.append(max);
+        output.append("\n");
+    output.append("\tmaxTimestamp: ");
+    output.append(maxTimestamp);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterTestEventEvent {
 public Integer arg1;
 public Integer arg2;
