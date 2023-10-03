@@ -5444,6 +5444,78 @@ static BOOL AttributeIsSpecifiedInElectricalPowerMeasurementCluster(AttributeId 
     }
     }
 }
+static BOOL AttributeIsSpecifiedInElectricalEnergyMeasurementCluster(AttributeId aAttributeId)
+{
+    using namespace Clusters::ElectricalEnergyMeasurement;
+    switch (aAttributeId) {
+    case Attributes::Measured::Id: {
+        return YES;
+    }
+    case Attributes::CumulativeEnergyConsumedTime::Id: {
+        return YES;
+    }
+    case Attributes::CumulativeEnergyConsumed::Id: {
+        return YES;
+    }
+    case Attributes::CumulativeEnergyDeliveredTime::Id: {
+        return YES;
+    }
+    case Attributes::CumulativeEnergyDelivered::Id: {
+        return YES;
+    }
+    case Attributes::PeriodicEnergyConsumedStartTime::Id: {
+        return YES;
+    }
+    case Attributes::PeriodicEnergyConsumedEndTime::Id: {
+        return YES;
+    }
+    case Attributes::PeriodicEnergyConsumed::Id: {
+        return YES;
+    }
+    case Attributes::PeriodicEnergyDeliveredStartTime::Id: {
+        return YES;
+    }
+    case Attributes::PeriodicEnergyDeliveredEndTime::Id: {
+        return YES;
+    }
+    case Attributes::PeriodicEnergyDelivered::Id: {
+        return YES;
+    }
+    case Attributes::SystemTime::Id: {
+        return YES;
+    }
+    case Attributes::EphemeralEnergyConsumedStartTime::Id: {
+        return YES;
+    }
+    case Attributes::EphemeralEnergyConsumedEndTime::Id: {
+        return YES;
+    }
+    case Attributes::EphemeralEnergyConsumed::Id: {
+        return YES;
+    }
+    case Attributes::GeneratedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::AcceptedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::EventList::Id: {
+        return YES;
+    }
+    case Attributes::AttributeList::Id: {
+        return YES;
+    }
+    case Attributes::FeatureMap::Id: {
+        return YES;
+    }
+    case Attributes::ClusterRevision::Id: {
+        return YES;
+    }
+    default: {
+        return NO;
+    }
+    }
+}
 static BOOL AttributeIsSpecifiedInUnitTestingCluster(AttributeId aAttributeId)
 {
     using namespace Clusters::UnitTesting;
@@ -6008,6 +6080,9 @@ BOOL MTRAttributeIsSpecified(ClusterId aClusterId, AttributeId aAttributeId)
     }
     case Clusters::ElectricalPowerMeasurement::Id: {
         return AttributeIsSpecifiedInElectricalPowerMeasurementCluster(aAttributeId);
+    }
+    case Clusters::ElectricalEnergyMeasurement::Id: {
+        return AttributeIsSpecifiedInElectricalEnergyMeasurementCluster(aAttributeId);
     }
     case Clusters::UnitTesting::Id: {
         return AttributeIsSpecifiedInUnitTestingCluster(aAttributeId);

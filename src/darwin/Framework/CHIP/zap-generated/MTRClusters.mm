@@ -29120,6 +29120,209 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
 
 @end
 
+@implementation MTRClusterElectricalEnergyMeasurement
+
+- (instancetype)initWithDevice:(MTRDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
+{
+    if (self = [super initWithEndpointID:endpointID queue:queue]) {
+        if (device == nil) {
+            return nil;
+        }
+
+        _device = device;
+    }
+    return self;
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeMeasuredWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeMeasuredID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyConsumedTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyConsumedTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyConsumedID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyDeliveredTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyDeliveredTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyDeliveredWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyDeliveredID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedStartTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:
+                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedStartTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedEndTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedEndTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredStartTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:
+                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredStartTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredEndTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredEndTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeSystemTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeSystemTimeID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedStartTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:
+                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedStartTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedEndTimeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedEndTimeID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeGeneratedCommandListID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeAcceptedCommandListID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEventListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeAttributeListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeFeatureMapID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params
+{
+    return
+        [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                       clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                                     attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeClusterRevisionID)
+                                          params:params];
+}
+
+@end
+
 @implementation MTRClusterUnitTesting
 
 - (instancetype)initWithDevice:(MTRDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue

@@ -6797,6 +6797,96 @@ static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
 } // namespace Attributes
 } // namespace ElectricalPowerMeasurement
 
+namespace ElectricalEnergyMeasurement {
+namespace Attributes {
+
+namespace Measured {
+static constexpr AttributeId Id = 0x00000000;
+} // namespace Measured
+
+namespace CumulativeEnergyConsumedTime {
+static constexpr AttributeId Id = 0x00000001;
+} // namespace CumulativeEnergyConsumedTime
+
+namespace CumulativeEnergyConsumed {
+static constexpr AttributeId Id = 0x00000002;
+} // namespace CumulativeEnergyConsumed
+
+namespace CumulativeEnergyDeliveredTime {
+static constexpr AttributeId Id = 0x00000003;
+} // namespace CumulativeEnergyDeliveredTime
+
+namespace CumulativeEnergyDelivered {
+static constexpr AttributeId Id = 0x00000004;
+} // namespace CumulativeEnergyDelivered
+
+namespace PeriodicEnergyConsumedStartTime {
+static constexpr AttributeId Id = 0x00000005;
+} // namespace PeriodicEnergyConsumedStartTime
+
+namespace PeriodicEnergyConsumedEndTime {
+static constexpr AttributeId Id = 0x00000006;
+} // namespace PeriodicEnergyConsumedEndTime
+
+namespace PeriodicEnergyConsumed {
+static constexpr AttributeId Id = 0x00000007;
+} // namespace PeriodicEnergyConsumed
+
+namespace PeriodicEnergyDeliveredStartTime {
+static constexpr AttributeId Id = 0x00000008;
+} // namespace PeriodicEnergyDeliveredStartTime
+
+namespace PeriodicEnergyDeliveredEndTime {
+static constexpr AttributeId Id = 0x00000009;
+} // namespace PeriodicEnergyDeliveredEndTime
+
+namespace PeriodicEnergyDelivered {
+static constexpr AttributeId Id = 0x0000000A;
+} // namespace PeriodicEnergyDelivered
+
+namespace SystemTime {
+static constexpr AttributeId Id = 0x0000000B;
+} // namespace SystemTime
+
+namespace EphemeralEnergyConsumedStartTime {
+static constexpr AttributeId Id = 0x0000000C;
+} // namespace EphemeralEnergyConsumedStartTime
+
+namespace EphemeralEnergyConsumedEndTime {
+static constexpr AttributeId Id = 0x0000000D;
+} // namespace EphemeralEnergyConsumedEndTime
+
+namespace EphemeralEnergyConsumed {
+static constexpr AttributeId Id = 0x0000000E;
+} // namespace EphemeralEnergyConsumed
+
+namespace GeneratedCommandList {
+static constexpr AttributeId Id = Globals::Attributes::GeneratedCommandList::Id;
+} // namespace GeneratedCommandList
+
+namespace AcceptedCommandList {
+static constexpr AttributeId Id = Globals::Attributes::AcceptedCommandList::Id;
+} // namespace AcceptedCommandList
+
+namespace EventList {
+static constexpr AttributeId Id = Globals::Attributes::EventList::Id;
+} // namespace EventList
+
+namespace AttributeList {
+static constexpr AttributeId Id = Globals::Attributes::AttributeList::Id;
+} // namespace AttributeList
+
+namespace FeatureMap {
+static constexpr AttributeId Id = Globals::Attributes::FeatureMap::Id;
+} // namespace FeatureMap
+
+namespace ClusterRevision {
+static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
+} // namespace ClusterRevision
+
+} // namespace Attributes
+} // namespace ElectricalEnergyMeasurement
+
 namespace UnitTesting {
 namespace Attributes {
 

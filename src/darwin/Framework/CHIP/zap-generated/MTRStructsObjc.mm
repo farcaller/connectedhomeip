@@ -6138,6 +6138,170 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@implementation MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _consumedTimestamp = @(0);
+
+        _energyConsumed = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent alloc] init];
+
+    other.consumedTimestamp = self.consumedTimestamp;
+    other.energyConsumed = self.energyConsumed;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: consumedTimestamp:%@; energyConsumed:%@; >",
+                                             NSStringFromClass([self class]), _consumedTimestamp, _energyConsumed];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _deliveredTimestamp = @(0);
+
+        _energyDelivered = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent alloc] init];
+
+    other.deliveredTimestamp = self.deliveredTimestamp;
+    other.energyDelivered = self.energyDelivered;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: deliveredTimestamp:%@; energyDelivered:%@; >",
+                                             NSStringFromClass([self class]), _deliveredTimestamp, _energyDelivered];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _periodStart = @(0);
+
+        _periodEnd = @(0);
+
+        _energyConsumed = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent alloc] init];
+
+    other.periodStart = self.periodStart;
+    other.periodEnd = self.periodEnd;
+    other.energyConsumed = self.energyConsumed;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyConsumed:%@; >",
+                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyConsumed];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _periodStart = @(0);
+
+        _periodEnd = @(0);
+
+        _energyDelivered = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent alloc] init];
+
+    other.periodStart = self.periodStart;
+    other.periodEnd = self.periodEnd;
+    other.energyDelivered = self.energyDelivered;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyDelivered:%@; >",
+                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyDelivered];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _periodStart = @(0);
+
+        _periodEnd = @(0);
+
+        _energyConsumed = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent alloc] init];
+
+    other.periodStart = self.periodStart;
+    other.periodEnd = self.periodEnd;
+    other.energyConsumed = self.energyConsumed;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyConsumed:%@; >",
+                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyConsumed];
+    return descriptionString;
+}
+
+@end
+
 @implementation MTRUnitTestingClusterSimpleStruct
 - (instancetype)init
 {

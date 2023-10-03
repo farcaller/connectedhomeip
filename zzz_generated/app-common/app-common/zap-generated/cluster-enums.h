@@ -4280,6 +4280,19 @@ enum class ElectricalPowerMeasurementFeature : uint32_t
 };
 } // namespace ElectricalPowerMeasurement
 
+namespace ElectricalEnergyMeasurement {
+
+// Bitmap for ElectricalEnergyMeasurementFeature
+enum class ElectricalEnergyMeasurementFeature : uint32_t
+{
+    kConsumedEnergy   = 0x1,
+    kDeliveredEnergy  = 0x2,
+    kCumulativeEnergy = 0x4,
+    kPeriodicEnergy   = 0x8,
+    kEphemeralEnergy  = 0x10,
+};
+} // namespace ElectricalEnergyMeasurement
+
 namespace UnitTesting {
 
 // Enum for SimpleEnum

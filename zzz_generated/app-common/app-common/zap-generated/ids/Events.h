@@ -527,6 +527,32 @@ static constexpr EventId Id = 0x00000000;
 } // namespace Events
 } // namespace ElectricalPowerMeasurement
 
+namespace ElectricalEnergyMeasurement {
+namespace Events {
+
+namespace CumulativeEnergyConsumed {
+static constexpr EventId Id = 0x00000000;
+} // namespace CumulativeEnergyConsumed
+
+namespace CumulativeEnergyDelivered {
+static constexpr EventId Id = 0x00000001;
+} // namespace CumulativeEnergyDelivered
+
+namespace PeriodicEnergyConsumed {
+static constexpr EventId Id = 0x00000003;
+} // namespace PeriodicEnergyConsumed
+
+namespace PeriodicEnergyDelivered {
+static constexpr EventId Id = 0x00000004;
+} // namespace PeriodicEnergyDelivered
+
+namespace EphemeralEnergyConsumed {
+static constexpr EventId Id = 0x00000005;
+} // namespace EphemeralEnergyConsumed
+
+} // namespace Events
+} // namespace ElectricalEnergyMeasurement
+
 namespace UnitTesting {
 namespace Events {
 

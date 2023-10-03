@@ -2229,6 +2229,159 @@ public Long maxTimestamp;
   }
 }
 
+public static class ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent {
+public Long consumedTimestamp;
+public Long energyConsumed;
+
+  public ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent(
+    Long consumedTimestamp
+      , Long energyConsumed
+  ) {
+    this.consumedTimestamp = consumedTimestamp;
+    this.energyConsumed = energyConsumed;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent {\n");
+    output.append("\tconsumedTimestamp: ");
+    output.append(consumedTimestamp);
+        output.append("\n");
+    output.append("\tenergyConsumed: ");
+    output.append(energyConsumed);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent {
+public Long deliveredTimestamp;
+public Long energyDelivered;
+
+  public ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent(
+    Long deliveredTimestamp
+      , Long energyDelivered
+  ) {
+    this.deliveredTimestamp = deliveredTimestamp;
+    this.energyDelivered = energyDelivered;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent {\n");
+    output.append("\tdeliveredTimestamp: ");
+    output.append(deliveredTimestamp);
+        output.append("\n");
+    output.append("\tenergyDelivered: ");
+    output.append(energyDelivered);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent {
+public Long periodStart;
+public Long periodEnd;
+public Long energyConsumed;
+
+  public ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent(
+    Long periodStart
+      , Long periodEnd
+      , Long energyConsumed
+  ) {
+    this.periodStart = periodStart;
+    this.periodEnd = periodEnd;
+    this.energyConsumed = energyConsumed;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent {\n");
+    output.append("\tperiodStart: ");
+    output.append(periodStart);
+        output.append("\n");
+    output.append("\tperiodEnd: ");
+    output.append(periodEnd);
+        output.append("\n");
+    output.append("\tenergyConsumed: ");
+    output.append(energyConsumed);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent {
+public Long periodStart;
+public Long periodEnd;
+public Long energyDelivered;
+
+  public ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent(
+    Long periodStart
+      , Long periodEnd
+      , Long energyDelivered
+  ) {
+    this.periodStart = periodStart;
+    this.periodEnd = periodEnd;
+    this.energyDelivered = energyDelivered;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent {\n");
+    output.append("\tperiodStart: ");
+    output.append(periodStart);
+        output.append("\n");
+    output.append("\tperiodEnd: ");
+    output.append(periodEnd);
+        output.append("\n");
+    output.append("\tenergyDelivered: ");
+    output.append(energyDelivered);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent {
+public Long periodStart;
+public Long periodEnd;
+public Long energyConsumed;
+
+  public ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent(
+    Long periodStart
+      , Long periodEnd
+      , Long energyConsumed
+  ) {
+    this.periodStart = periodStart;
+    this.periodEnd = periodEnd;
+    this.energyConsumed = energyConsumed;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent {\n");
+    output.append("\tperiodStart: ");
+    output.append(periodStart);
+        output.append("\n");
+    output.append("\tperiodEnd: ");
+    output.append(periodEnd);
+        output.append("\n");
+    output.append("\tenergyConsumed: ");
+    output.append(energyConsumed);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterTestEventEvent {
 public Integer arg1;
 public Integer arg2;

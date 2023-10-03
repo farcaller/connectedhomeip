@@ -320,6 +320,7 @@ typedef NS_ENUM(uint32_t, MTRClusterIDType) {
     MTRClusterIDTypeElectricalMeasurementID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000B04,
     MTRClusterIDTypeWaterHeaterID MTR_NEWLY_AVAILABLE = 0x00006660,
     MTRClusterIDTypeElectricalPowerMeasurementID MTR_NEWLY_AVAILABLE = 0x00006661,
+    MTRClusterIDTypeElectricalEnergyMeasurementID MTR_NEWLY_AVAILABLE = 0x00006662,
     MTRClusterIDTypeUnitTestingID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0xFFF1FC05,
 };
 
@@ -8226,6 +8227,37 @@ typedef NS_ENUM(uint32_t, MTRAttributeIDType) {
     MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeClusterRevisionID MTR_NEWLY_AVAILABLE
     = MTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster ElectricalEnergyMeasurement attributes
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeMeasuredID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyConsumedTimeID MTR_NEWLY_AVAILABLE = 0x00000001,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyConsumedID MTR_NEWLY_AVAILABLE = 0x00000002,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyDeliveredTimeID MTR_NEWLY_AVAILABLE = 0x00000003,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyDeliveredID MTR_NEWLY_AVAILABLE = 0x00000004,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedStartTimeID MTR_NEWLY_AVAILABLE = 0x00000005,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedEndTimeID MTR_NEWLY_AVAILABLE = 0x00000006,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedID MTR_NEWLY_AVAILABLE = 0x00000007,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredStartTimeID MTR_NEWLY_AVAILABLE
+    = 0x00000008,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredEndTimeID MTR_NEWLY_AVAILABLE = 0x00000009,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredID MTR_NEWLY_AVAILABLE = 0x0000000A,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeSystemTimeID MTR_NEWLY_AVAILABLE = 0x0000000B,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedStartTimeID MTR_NEWLY_AVAILABLE
+    = 0x0000000C,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedEndTimeID MTR_NEWLY_AVAILABLE = 0x0000000D,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedID MTR_NEWLY_AVAILABLE = 0x0000000E,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeGeneratedCommandListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeAcceptedCommandListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEventListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeEventListID,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeAttributeListID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeAttributeListID,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeFeatureMapID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeClusterRevisionID MTR_NEWLY_AVAILABLE
+    = MTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster TestCluster deprecated attribute names
     MTRClusterTestClusterAttributeBooleanID MTR_DEPRECATED("Please use MTRAttributeIDTypeClusterUnitTestingAttributeBooleanID",
         ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
@@ -10875,6 +10907,13 @@ typedef NS_ENUM(uint32_t, MTREventIDType) {
 
     // Cluster ElectricalPowerMeasurement events
     MTREventIDTypeClusterElectricalPowerMeasurementEventMeasurementPeriodRangeID MTR_NEWLY_AVAILABLE = 0x00000000,
+
+    // Cluster ElectricalEnergyMeasurement events
+    MTREventIDTypeClusterElectricalEnergyMeasurementEventCumulativeEnergyConsumedID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTREventIDTypeClusterElectricalEnergyMeasurementEventCumulativeEnergyDeliveredID MTR_NEWLY_AVAILABLE = 0x00000001,
+    MTREventIDTypeClusterElectricalEnergyMeasurementEventPeriodicEnergyConsumedID MTR_NEWLY_AVAILABLE = 0x00000003,
+    MTREventIDTypeClusterElectricalEnergyMeasurementEventPeriodicEnergyDeliveredID MTR_NEWLY_AVAILABLE = 0x00000004,
+    MTREventIDTypeClusterElectricalEnergyMeasurementEventEphemeralEnergyConsumedID MTR_NEWLY_AVAILABLE = 0x00000005,
 
     // Cluster TestCluster deprecated event names
     MTRClusterTestClusterEventTestEventID MTR_DEPRECATED("Please use MTREventIDTypeClusterUnitTestingEventTestEventID",

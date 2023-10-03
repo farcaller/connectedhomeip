@@ -5388,6 +5388,277 @@ jobject DecodeEventValue(const app::ConcreteEventPath & aPath, TLV::TLVReader & 
         }
         break;
     }
+    case app::Clusters::ElectricalEnergyMeasurement::Id: {
+        using namespace app::Clusters::ElectricalEnergyMeasurement;
+        switch (aPath.mEventId)
+        {
+        case Events::CumulativeEnergyConsumed::Id: {
+            Events::CumulativeEnergyConsumed::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_consumedTimestamp;
+            std::string value_consumedTimestampClassName     = "java/lang/Long";
+            std::string value_consumedTimestampCtorSignature = "(J)V";
+            jlong jnivalue_consumedTimestamp                 = static_cast<jlong>(cppValue.consumedTimestamp);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_consumedTimestampClassName.c_str(),
+                                                                        value_consumedTimestampCtorSignature.c_str(),
+                                                                        jnivalue_consumedTimestamp, value_consumedTimestamp);
+
+            jobject value_energyConsumed;
+            std::string value_energyConsumedClassName     = "java/lang/Long";
+            std::string value_energyConsumedCtorSignature = "(J)V";
+            jlong jnivalue_energyConsumed                 = static_cast<jlong>(cppValue.energyConsumed);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_energyConsumedClassName.c_str(),
+                                                                        value_energyConsumedCtorSignature.c_str(),
+                                                                        jnivalue_energyConsumed, value_energyConsumed);
+
+            jclass cumulativeEnergyConsumedStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent",
+                cumulativeEnergyConsumedStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(
+                    Zcl, "Could not find class ChipEventStructs$ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent");
+                return nullptr;
+            }
+            jmethodID cumulativeEnergyConsumedStructCtor =
+                env->GetMethodID(cumulativeEnergyConsumedStructClass, "<init>", "(Ljava/lang/Long;Ljava/lang/Long;)V");
+            if (cumulativeEnergyConsumedStructCtor == nullptr)
+            {
+                ChipLogError(
+                    Zcl,
+                    "Could not find ChipEventStructs$ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(cumulativeEnergyConsumedStructClass, cumulativeEnergyConsumedStructCtor,
+                                           value_consumedTimestamp, value_energyConsumed);
+
+            return value;
+        }
+        case Events::CumulativeEnergyDelivered::Id: {
+            Events::CumulativeEnergyDelivered::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_deliveredTimestamp;
+            std::string value_deliveredTimestampClassName     = "java/lang/Long";
+            std::string value_deliveredTimestampCtorSignature = "(J)V";
+            jlong jnivalue_deliveredTimestamp                 = static_cast<jlong>(cppValue.deliveredTimestamp);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_deliveredTimestampClassName.c_str(),
+                                                                        value_deliveredTimestampCtorSignature.c_str(),
+                                                                        jnivalue_deliveredTimestamp, value_deliveredTimestamp);
+
+            jobject value_energyDelivered;
+            std::string value_energyDeliveredClassName     = "java/lang/Long";
+            std::string value_energyDeliveredCtorSignature = "(J)V";
+            jlong jnivalue_energyDelivered                 = static_cast<jlong>(cppValue.energyDelivered);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_energyDeliveredClassName.c_str(),
+                                                                        value_energyDeliveredCtorSignature.c_str(),
+                                                                        jnivalue_energyDelivered, value_energyDelivered);
+
+            jclass cumulativeEnergyDeliveredStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent",
+                cumulativeEnergyDeliveredStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(
+                    Zcl, "Could not find class ChipEventStructs$ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent");
+                return nullptr;
+            }
+            jmethodID cumulativeEnergyDeliveredStructCtor =
+                env->GetMethodID(cumulativeEnergyDeliveredStructClass, "<init>", "(Ljava/lang/Long;Ljava/lang/Long;)V");
+            if (cumulativeEnergyDeliveredStructCtor == nullptr)
+            {
+                ChipLogError(
+                    Zcl,
+                    "Could not find ChipEventStructs$ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(cumulativeEnergyDeliveredStructClass, cumulativeEnergyDeliveredStructCtor,
+                                           value_deliveredTimestamp, value_energyDelivered);
+
+            return value;
+        }
+        case Events::PeriodicEnergyConsumed::Id: {
+            Events::PeriodicEnergyConsumed::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_periodStart;
+            std::string value_periodStartClassName     = "java/lang/Long";
+            std::string value_periodStartCtorSignature = "(J)V";
+            jlong jnivalue_periodStart                 = static_cast<jlong>(cppValue.periodStart);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_periodStartClassName.c_str(),
+                                                                        value_periodStartCtorSignature.c_str(),
+                                                                        jnivalue_periodStart, value_periodStart);
+
+            jobject value_periodEnd;
+            std::string value_periodEndClassName     = "java/lang/Long";
+            std::string value_periodEndCtorSignature = "(J)V";
+            jlong jnivalue_periodEnd                 = static_cast<jlong>(cppValue.periodEnd);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
+                value_periodEndClassName.c_str(), value_periodEndCtorSignature.c_str(), jnivalue_periodEnd, value_periodEnd);
+
+            jobject value_energyConsumed;
+            std::string value_energyConsumedClassName     = "java/lang/Long";
+            std::string value_energyConsumedCtorSignature = "(J)V";
+            jlong jnivalue_energyConsumed                 = static_cast<jlong>(cppValue.energyConsumed);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_energyConsumedClassName.c_str(),
+                                                                        value_energyConsumedCtorSignature.c_str(),
+                                                                        jnivalue_energyConsumed, value_energyConsumed);
+
+            jclass periodicEnergyConsumedStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent",
+                periodicEnergyConsumedStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl,
+                             "Could not find class ChipEventStructs$ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent");
+                return nullptr;
+            }
+            jmethodID periodicEnergyConsumedStructCtor = env->GetMethodID(periodicEnergyConsumedStructClass, "<init>",
+                                                                          "(Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;)V");
+            if (periodicEnergyConsumedStructCtor == nullptr)
+            {
+                ChipLogError(
+                    Zcl,
+                    "Could not find ChipEventStructs$ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(periodicEnergyConsumedStructClass, periodicEnergyConsumedStructCtor, value_periodStart,
+                                           value_periodEnd, value_energyConsumed);
+
+            return value;
+        }
+        case Events::PeriodicEnergyDelivered::Id: {
+            Events::PeriodicEnergyDelivered::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_periodStart;
+            std::string value_periodStartClassName     = "java/lang/Long";
+            std::string value_periodStartCtorSignature = "(J)V";
+            jlong jnivalue_periodStart                 = static_cast<jlong>(cppValue.periodStart);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_periodStartClassName.c_str(),
+                                                                        value_periodStartCtorSignature.c_str(),
+                                                                        jnivalue_periodStart, value_periodStart);
+
+            jobject value_periodEnd;
+            std::string value_periodEndClassName     = "java/lang/Long";
+            std::string value_periodEndCtorSignature = "(J)V";
+            jlong jnivalue_periodEnd                 = static_cast<jlong>(cppValue.periodEnd);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
+                value_periodEndClassName.c_str(), value_periodEndCtorSignature.c_str(), jnivalue_periodEnd, value_periodEnd);
+
+            jobject value_energyDelivered;
+            std::string value_energyDeliveredClassName     = "java/lang/Long";
+            std::string value_energyDeliveredCtorSignature = "(J)V";
+            jlong jnivalue_energyDelivered                 = static_cast<jlong>(cppValue.energyDelivered);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_energyDeliveredClassName.c_str(),
+                                                                        value_energyDeliveredCtorSignature.c_str(),
+                                                                        jnivalue_energyDelivered, value_energyDelivered);
+
+            jclass periodicEnergyDeliveredStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent",
+                periodicEnergyDeliveredStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(
+                    Zcl, "Could not find class ChipEventStructs$ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent");
+                return nullptr;
+            }
+            jmethodID periodicEnergyDeliveredStructCtor = env->GetMethodID(periodicEnergyDeliveredStructClass, "<init>",
+                                                                           "(Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;)V");
+            if (periodicEnergyDeliveredStructCtor == nullptr)
+            {
+                ChipLogError(
+                    Zcl,
+                    "Could not find ChipEventStructs$ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(periodicEnergyDeliveredStructClass, periodicEnergyDeliveredStructCtor, value_periodStart,
+                                           value_periodEnd, value_energyDelivered);
+
+            return value;
+        }
+        case Events::EphemeralEnergyConsumed::Id: {
+            Events::EphemeralEnergyConsumed::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_periodStart;
+            std::string value_periodStartClassName     = "java/lang/Long";
+            std::string value_periodStartCtorSignature = "(J)V";
+            jlong jnivalue_periodStart                 = static_cast<jlong>(cppValue.periodStart);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_periodStartClassName.c_str(),
+                                                                        value_periodStartCtorSignature.c_str(),
+                                                                        jnivalue_periodStart, value_periodStart);
+
+            jobject value_periodEnd;
+            std::string value_periodEndClassName     = "java/lang/Long";
+            std::string value_periodEndCtorSignature = "(J)V";
+            jlong jnivalue_periodEnd                 = static_cast<jlong>(cppValue.periodEnd);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
+                value_periodEndClassName.c_str(), value_periodEndCtorSignature.c_str(), jnivalue_periodEnd, value_periodEnd);
+
+            jobject value_energyConsumed;
+            std::string value_energyConsumedClassName     = "java/lang/Long";
+            std::string value_energyConsumedCtorSignature = "(J)V";
+            jlong jnivalue_energyConsumed                 = static_cast<jlong>(cppValue.energyConsumed);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_energyConsumedClassName.c_str(),
+                                                                        value_energyConsumedCtorSignature.c_str(),
+                                                                        jnivalue_energyConsumed, value_energyConsumed);
+
+            jclass ephemeralEnergyConsumedStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent",
+                ephemeralEnergyConsumedStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(
+                    Zcl, "Could not find class ChipEventStructs$ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent");
+                return nullptr;
+            }
+            jmethodID ephemeralEnergyConsumedStructCtor = env->GetMethodID(ephemeralEnergyConsumedStructClass, "<init>",
+                                                                           "(Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;)V");
+            if (ephemeralEnergyConsumedStructCtor == nullptr)
+            {
+                ChipLogError(
+                    Zcl,
+                    "Could not find ChipEventStructs$ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(ephemeralEnergyConsumedStructClass, ephemeralEnergyConsumedStructCtor, value_periodStart,
+                                           value_periodEnd, value_energyConsumed);
+
+            return value;
+        }
+        default:
+            *aError = CHIP_ERROR_IM_MALFORMED_EVENT_PATH_IB;
+            break;
+        }
+        break;
+    }
     case app::Clusters::UnitTesting::Id: {
         using namespace app::Clusters::UnitTesting;
         switch (aPath.mEventId)

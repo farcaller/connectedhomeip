@@ -1811,6 +1811,39 @@ MTR_NEWLY_AVAILABLE
 @property (nonatomic, copy) NSNumber * _Nonnull maxTimestamp MTR_NEWLY_AVAILABLE;
 @end
 
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull consumedTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyConsumed MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull deliveredTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyDelivered MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyConsumed MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyDelivered MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyConsumed MTR_NEWLY_AVAILABLE;
+@end
+
 API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @interface MTRUnitTestingClusterSimpleStruct : NSObject <NSCopying>
 @property (nonatomic, copy) NSNumber * _Nonnull a API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));

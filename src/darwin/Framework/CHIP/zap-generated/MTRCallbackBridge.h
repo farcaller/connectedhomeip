@@ -1897,6 +1897,14 @@ typedef void (*ElectricalPowerMeasurementEventListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::EventId> & data);
 typedef void (*ElectricalPowerMeasurementAttributeListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
+typedef void (*ElectricalEnergyMeasurementGeneratedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*ElectricalEnergyMeasurementAcceptedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*ElectricalEnergyMeasurementEventListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::EventId> & data);
+typedef void (*ElectricalEnergyMeasurementAttributeListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
 typedef void (*UnitTestingBitmap8AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>);
 typedef void (*UnitTestingBitmap16AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>);
 typedef void (*UnitTestingBitmap32AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>);
@@ -19001,6 +19009,140 @@ public:
     void OnSubscriptionEstablished();
     using MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge::KeepAliveOnCallback;
     using MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalEnergyMeasurementGeneratedCommandListListAttributeCallback>
+{
+public:
+    MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementGeneratedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                                  MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementGeneratedCommandListListAttributeCallback>(queue, handler, action,
+                                                                                                OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalEnergyMeasurementGeneratedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalEnergyMeasurementAcceptedCommandListListAttributeCallback>
+{
+public:
+    MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementAcceptedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                                 MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementAcceptedCommandListListAttributeCallback>(queue, handler, action,
+                                                                                               OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalEnergyMeasurementAcceptedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalEnergyMeasurementEventListListAttributeCallback>
+{
+public:
+    MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementEventListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                       MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementEventListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::EventId> & value);
+};
+
+class MTRElectricalEnergyMeasurementEventListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalEnergyMeasurementEventListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalEnergyMeasurementEventListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalEnergyMeasurementAttributeListListAttributeCallback>
+{
+public:
+    MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementAttributeListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                           MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalEnergyMeasurementAttributeListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & value);
+};
+
+class MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalEnergyMeasurementAttributeListListAttributeCallbackBridge::OnDone;
 
 private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;
