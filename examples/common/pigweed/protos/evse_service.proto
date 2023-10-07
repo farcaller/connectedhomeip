@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+import 'pw_protobuf_protos/common.proto';
+
+package chip.rpc;
+
+enum EvseStateEnum {
+    kNotPluggedIn         = 0x00;
+    kPluggedInIdle        = 0x01;
+    kPluggedInCharging    = 0x02;
+    kPluggedInDischarging = 0x03;
+    kSessionEnding        = 0x04;
+    kFault                = 0xFF;
+}
+
+enum FaultStateEnum {
+    kNoError           = 0x00;
+    kEvseMeterFailure  = 0x01;
+    kOverVoltage       = 0x02;
+    kUnderVoltage      = 0x03;
+    kOverCurrent       = 0x04;
+    kContactWetFailure = 0x05;
+    kContactDryFailure = 0x06;
+    kGroundFault       = 0x07;
+    kPowerLoss         = 0x08;
+    kPowerQuality      = 0x09;
+    kPilotShortCircuit = 0x0A;
+    kEmergencyStop     = 0x0B;
+    kEvDisconnected    = 0x0C;
+    kWrongPowerSupply  = 0x0D;
+    kLiveNeutralSwap   = 0x0E;
+    kOverTemperature   = 0x0F;
+    kOther             = 0xFF;
+}
+
+message CurrentLimitMsg {
+  // Current limit in Amps
+  uint32 current = 1;
+}
+
+message EvseStateMsg {
+  EvseStateEnum state = 1;
+}
+
+message FaultMsg {
+  FaultStateEnum state = 1;
+}
+
+
+service Evse {
+  // Set functions will return OK if all supported fields are successfully applied, any
+  // unsupported fields will be ignored.
+  rpc SetMaxHardwareCurrentLimit(CurrentLimitMsg) returns (pw.protobuf.Empty){}
+  rpc SetCircuitCapacity(CurrentLimitMsg) returns (pw.protobuf.Empty){}
+  rpc SetCableAssemblyCurrentLimit(CurrentLimitMsg) returns (pw.protobuf.Empty){}
+  rpc SetUserMaximumChargeCurrent(CurrentLimitMsg) returns (pw.protobuf.Empty){}
+  rpc SetEvseState(EvseStateMsg) returns (pw.protobuf.Empty){}
+  rpc SetFault(FaultMsg) returns (pw.protobuf.Empty){}
+
+}

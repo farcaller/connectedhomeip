@@ -64,6 +64,7 @@ from pw_tokenizer.detokenize import Detokenizer
 # isort: off
 from attributes_service import attributes_service_pb2
 from button_service import button_service_pb2
+from evse_service import evse_service_pb2
 from descriptor_service import descriptor_service_pb2
 from device_service import device_service_pb2
 from echo_service import echo_pb2
@@ -85,6 +86,7 @@ PROTOS = [attributes_service_pb2,
           descriptor_service_pb2,
           device_service_pb2,
           echo_pb2,
+          evse_service_pb2,
           lighting_service_pb2,
           locking_service_pb2,
           ot_cli_service_pb2,
