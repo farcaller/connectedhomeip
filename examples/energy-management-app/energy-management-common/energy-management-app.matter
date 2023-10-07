@@ -4237,6 +4237,156 @@ server cluster WaterHeater = 26208 {
   readonly attribute int16u clusterRevision = 65533;
 }
 
+/** This cluster provides a mechanism for querying data about electrical power as measured by the device. */
+server cluster ElectricalPowerMeasurement = 26209 {
+  enum MeasurementTypeEnum : ENUM8 {
+    kUnspecified = 0;
+    kVoltage = 1;
+    kCurrent = 2;
+    kActivePower = 3;
+    kRMSCurrent = 4;
+    kRMSPower = 5;
+    kApparentPower = 6;
+    kReactivePower = 7;
+    kFrequency = 8;
+    kPowerFactor = 9;
+    kLineCurrent = 10;
+    kNeutralCurrent = 11;
+  }
+
+  enum PowerModeEnum : ENUM8 {
+    kUnspecified = 0;
+    kDC = 1;
+    kAC = 2;
+  }
+
+  bitmap ElectricalPowerMeasurementFeature : BITMAP32 {
+    kDirectCurrent = 0x1;
+    kAlternatingCurrent = 0x2;
+    kThreePhasePower = 0x4;
+    kHarmonics = 0x8;
+    kPowerQuality = 0x10;
+  }
+
+  struct HarmonicMeasurementStruct {
+    int8u order = 0;
+    nullable int32s measurement = 1;
+  }
+
+  struct MeasurementAccuracyStruct {
+    MeasurementTypeEnum measurementType = 0;
+    boolean measured = 1;
+    optional percent100ths percentTypical = 2;
+    optional percent100ths percentMin = 3;
+    optional percent100ths percentMax = 4;
+    optional int64s fixedTypical = 5;
+    optional int64s fixedMin = 6;
+    optional int64s fixedMax = 7;
+  }
+
+  struct MeasurementRangeStruct {
+    MeasurementTypeEnum measurementType = 0;
+    nullable int64s min = 1;
+    nullable epoch_s minTimestamp = 2;
+    nullable int64s max = 3;
+    nullable epoch_s maxTimestamp = 4;
+  }
+
+  info event MeasurementPeriodRange = 0 {
+    MeasurementTypeEnum measurementType = 0;
+    epoch_s periodStart = 1;
+    epoch_s periodEnd = 2;
+    INT64S min = 3;
+    epoch_s minTimestamp = 4;
+    INT64S max = 5;
+    epoch_s maxTimestamp = 6;
+  }
+
+  readonly attribute PowerModeEnum powerMode = 0;
+  readonly attribute MeasurementAccuracyStruct accuracy[] = 1;
+  readonly attribute MeasurementRangeStruct ranges[] = 2;
+  readonly attribute nullable int64s voltage = 3;
+  readonly attribute nullable int64s current = 4;
+  readonly attribute nullable int64s activePower = 5;
+  readonly attribute nullable int64s rmsCurrent = 6;
+  readonly attribute nullable int64s rmsPower = 7;
+  readonly attribute nullable int64s apparentPower = 8;
+  readonly attribute nullable int64s reactivePower = 9;
+  readonly attribute nullable int64s frequency = 10;
+  readonly attribute nullable HarmonicMeasurementStruct harmonicCurrents[] = 11;
+  readonly attribute nullable HarmonicMeasurementStruct harmonicPhases[] = 12;
+  readonly attribute nullable int64s powerFactor = 13;
+  readonly attribute nullable int64s lineCurrent = 14;
+  readonly attribute nullable int64s neutralCurrent = 15;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+}
+
+/** This cluster provides a mechanism for querying data about the electrical energy consumed or provided by the device. */
+server cluster ElectricalEnergyMeasurement = 26210 {
+  bitmap ElectricalEnergyMeasurementFeature : BITMAP32 {
+    kConsumedEnergy = 0x1;
+    kDeliveredEnergy = 0x2;
+    kCumulativeEnergy = 0x4;
+    kPeriodicEnergy = 0x8;
+    kEphemeralEnergy = 0x10;
+  }
+
+  info event CumulativeEnergyConsumed = 0 {
+    epoch_s consumedTimestamp = 0;
+    INT64U energyConsumed = 1;
+  }
+
+  info event CumulativeEnergyDelivered = 1 {
+    epoch_s deliveredTimestamp = 0;
+    INT64U energyDelivered = 1;
+  }
+
+  info event PeriodicEnergyConsumed = 3 {
+    epoch_s periodStart = 0;
+    epoch_s periodEnd = 1;
+    INT64U energyConsumed = 2;
+  }
+
+  info event PeriodicEnergyDelivered = 4 {
+    epoch_s periodStart = 0;
+    epoch_s periodEnd = 1;
+    INT64U energyDelivered = 2;
+  }
+
+  info event EphemeralEnergyConsumed = 5 {
+    systime_ms periodStart = 0;
+    systime_ms periodEnd = 1;
+    INT64U energyConsumed = 2;
+  }
+
+  readonly attribute boolean measured = 0;
+  readonly attribute nullable epoch_s cumulativeEnergyConsumedTime = 1;
+  readonly attribute nullable int64u cumulativeEnergyConsumed = 2;
+  readonly attribute nullable epoch_s cumulativeEnergyDeliveredTime = 3;
+  readonly attribute nullable int64u cumulativeEnergyDelivered = 4;
+  readonly attribute nullable epoch_s periodicEnergyConsumedStartTime = 5;
+  readonly attribute nullable epoch_s periodicEnergyConsumedEndTime = 6;
+  readonly attribute nullable int64u periodicEnergyConsumed = 7;
+  readonly attribute nullable epoch_s periodicEnergyDeliveredStartTime = 8;
+  readonly attribute nullable epoch_s periodicEnergyDeliveredEndTime = 9;
+  readonly attribute nullable int64u periodicEnergyDelivered = 10;
+  readonly attribute systime_ms systemTime = 11;
+  readonly attribute nullable systime_ms ephemeralEnergyConsumedStartTime = 12;
+  readonly attribute nullable systime_ms ephemeralEnergyConsumedEndTime = 13;
+  readonly attribute nullable int64u ephemeralEnergyConsumed = 14;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+}
+
 endpoint 0 {
   device type ma_rootdevice = 22, version 1;
 
@@ -4794,6 +4944,55 @@ endpoint 1 {
 
   server cluster WaterHeater {
     ram      attribute heaterTypes;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
+  }
+
+  server cluster ElectricalPowerMeasurement {
+    ram      attribute powerMode;
+    callback attribute accuracy;
+    callback attribute ranges;
+    ram      attribute voltage;
+    ram      attribute current;
+    ram      attribute activePower;
+    ram      attribute rmsCurrent;
+    ram      attribute rmsPower;
+    ram      attribute apparentPower;
+    ram      attribute reactivePower;
+    ram      attribute frequency;
+    callback attribute harmonicCurrents;
+    callback attribute harmonicPhases;
+    ram      attribute powerFactor;
+    ram      attribute lineCurrent;
+    ram      attribute neutralCurrent;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
+  }
+
+  server cluster ElectricalEnergyMeasurement {
+    ram      attribute measured;
+    ram      attribute cumulativeEnergyConsumedTime;
+    ram      attribute cumulativeEnergyConsumed;
+    ram      attribute cumulativeEnergyDeliveredTime;
+    ram      attribute cumulativeEnergyDelivered;
+    ram      attribute periodicEnergyConsumedStartTime;
+    ram      attribute periodicEnergyConsumedEndTime;
+    ram      attribute periodicEnergyConsumed;
+    ram      attribute periodicEnergyDeliveredStartTime;
+    ram      attribute periodicEnergyDeliveredEndTime;
+    ram      attribute periodicEnergyDelivered;
+    ram      attribute systemTime;
+    ram      attribute ephemeralEnergyConsumedStartTime;
+    ram      attribute ephemeralEnergyConsumedEndTime;
+    ram      attribute ephemeralEnergyConsumed;
     callback attribute generatedCommandList;
     callback attribute acceptedCommandList;
     callback attribute eventList;

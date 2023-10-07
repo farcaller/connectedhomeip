@@ -7042,6 +7042,67 @@ client cluster ElectricalPowerMeasurement = 26209 {
   readonly attribute int16u clusterRevision = 65533;
 }
 
+/** This cluster provides a mechanism for querying data about the electrical energy consumed or provided by the device. */
+client cluster ElectricalEnergyMeasurement = 26210 {
+  bitmap ElectricalEnergyMeasurementFeature : BITMAP32 {
+    kConsumedEnergy = 0x1;
+    kDeliveredEnergy = 0x2;
+    kCumulativeEnergy = 0x4;
+    kPeriodicEnergy = 0x8;
+    kEphemeralEnergy = 0x10;
+  }
+
+  info event CumulativeEnergyConsumed = 0 {
+    epoch_s consumedTimestamp = 0;
+    INT64U energyConsumed = 1;
+  }
+
+  info event CumulativeEnergyDelivered = 1 {
+    epoch_s deliveredTimestamp = 0;
+    INT64U energyDelivered = 1;
+  }
+
+  info event PeriodicEnergyConsumed = 3 {
+    epoch_s periodStart = 0;
+    epoch_s periodEnd = 1;
+    INT64U energyConsumed = 2;
+  }
+
+  info event PeriodicEnergyDelivered = 4 {
+    epoch_s periodStart = 0;
+    epoch_s periodEnd = 1;
+    INT64U energyDelivered = 2;
+  }
+
+  info event EphemeralEnergyConsumed = 5 {
+    systime_ms periodStart = 0;
+    systime_ms periodEnd = 1;
+    INT64U energyConsumed = 2;
+  }
+
+  readonly attribute boolean measured = 0;
+  readonly attribute nullable epoch_s cumulativeEnergyConsumedTime = 1;
+  readonly attribute nullable int64u cumulativeEnergyConsumed = 2;
+  readonly attribute nullable epoch_s cumulativeEnergyDeliveredTime = 3;
+  readonly attribute nullable int64u cumulativeEnergyDelivered = 4;
+  readonly attribute nullable epoch_s periodicEnergyConsumedStartTime = 5;
+  readonly attribute nullable epoch_s periodicEnergyConsumedEndTime = 6;
+  readonly attribute nullable int64u periodicEnergyConsumed = 7;
+  readonly attribute nullable epoch_s periodicEnergyDeliveredStartTime = 8;
+  readonly attribute nullable epoch_s periodicEnergyDeliveredEndTime = 9;
+  readonly attribute nullable int64u periodicEnergyDelivered = 10;
+  readonly attribute systime_ms systemTime = 11;
+  readonly attribute nullable systime_ms ephemeralEnergyConsumedStartTime = 12;
+  readonly attribute nullable systime_ms ephemeralEnergyConsumedEndTime = 13;
+  readonly attribute nullable int64u ephemeralEnergyConsumed = 14;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+}
+
 /** The Test Cluster is meant to validate the generated code */
 client cluster UnitTesting = 4294048773 {
   enum SimpleEnum : ENUM8 {

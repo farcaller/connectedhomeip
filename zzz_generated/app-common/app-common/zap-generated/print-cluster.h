@@ -672,6 +672,14 @@
 #define CHIP_PRINTCLUSTER_ELECTRICAL_POWER_MEASUREMENT_CLUSTER
 #endif
 
+#if defined(ZCL_USING_ELECTRICAL_ENERGY_MEASUREMENT_CLUSTER_SERVER) ||                                                             \
+    defined(ZCL_USING_ELECTRICAL_ENERGY_MEASUREMENT_CLUSTER_CLIENT)
+#define CHIP_PRINTCLUSTER_ELECTRICAL_ENERGY_MEASUREMENT_CLUSTER                                                                    \
+    { chip::app::Clusters::ElectricalEnergyMeasurement::Id, "Electrical Energy Measurement" },
+#else
+#define CHIP_PRINTCLUSTER_ELECTRICAL_ENERGY_MEASUREMENT_CLUSTER
+#endif
+
 #if defined(ZCL_USING_UNIT_TESTING_CLUSTER_SERVER) || defined(ZCL_USING_UNIT_TESTING_CLUSTER_CLIENT)
 #define CHIP_PRINTCLUSTER_UNIT_TESTING_CLUSTER { chip::app::Clusters::UnitTesting::Id, "Unit Testing" },
 #else
@@ -784,6 +792,7 @@
     CHIP_PRINTCLUSTER_ELECTRICAL_MEASUREMENT_CLUSTER                                                                               \
     CHIP_PRINTCLUSTER_WATER_HEATER_CLUSTER                                                                                         \
     CHIP_PRINTCLUSTER_ELECTRICAL_POWER_MEASUREMENT_CLUSTER                                                                         \
+    CHIP_PRINTCLUSTER_ELECTRICAL_ENERGY_MEASUREMENT_CLUSTER                                                                        \
     CHIP_PRINTCLUSTER_UNIT_TESTING_CLUSTER                                                                                         \
     CHIP_PRINTCLUSTER_FAULT_INJECTION_CLUSTER
 

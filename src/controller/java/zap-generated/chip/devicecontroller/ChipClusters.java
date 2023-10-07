@@ -38381,6 +38381,502 @@ public class ChipClusters {
 , int minInterval, int maxInterval);
   }
 
+  public static class ElectricalEnergyMeasurementCluster extends BaseChipCluster {
+    public static final long CLUSTER_ID = 0x00006662L;
+
+    public ElectricalEnergyMeasurementCluster(long devicePtr, int endpointId) {
+      super(devicePtr, endpointId);
+    }
+
+    @Override
+    public native long initWithDevice(long devicePtr, int endpointId);
+
+      public interface CumulativeEnergyConsumedTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface CumulativeEnergyConsumedAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface CumulativeEnergyDeliveredTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface CumulativeEnergyDeliveredAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface PeriodicEnergyConsumedStartTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface PeriodicEnergyConsumedEndTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface PeriodicEnergyConsumedAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface PeriodicEnergyDeliveredStartTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface PeriodicEnergyDeliveredEndTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface PeriodicEnergyDeliveredAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface EphemeralEnergyConsumedStartTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface EphemeralEnergyConsumedEndTimeAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface EphemeralEnergyConsumedAttributeCallback {
+        void onSuccess(@Nullable Long value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface GeneratedCommandListAttributeCallback {
+        void onSuccess( List<Long> valueList);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface AcceptedCommandListAttributeCallback {
+        void onSuccess( List<Long> valueList);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface EventListAttributeCallback {
+        void onSuccess( List<Long> valueList);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface AttributeListAttributeCallback {
+        void onSuccess( List<Long> valueList);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+
+    public void readMeasuredAttribute(
+      BooleanAttributeCallback callback
+    ) {
+      readMeasuredAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeMeasuredAttribute(
+        BooleanAttributeCallback callback
+,
+      int minInterval, int maxInterval) {
+      subscribeMeasuredAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readCumulativeEnergyConsumedTimeAttribute(
+      CumulativeEnergyConsumedTimeAttributeCallback callback
+    ) {
+      readCumulativeEnergyConsumedTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeCumulativeEnergyConsumedTimeAttribute(
+        CumulativeEnergyConsumedTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeCumulativeEnergyConsumedTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readCumulativeEnergyConsumedAttribute(
+      CumulativeEnergyConsumedAttributeCallback callback
+    ) {
+      readCumulativeEnergyConsumedAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeCumulativeEnergyConsumedAttribute(
+        CumulativeEnergyConsumedAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeCumulativeEnergyConsumedAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readCumulativeEnergyDeliveredTimeAttribute(
+      CumulativeEnergyDeliveredTimeAttributeCallback callback
+    ) {
+      readCumulativeEnergyDeliveredTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeCumulativeEnergyDeliveredTimeAttribute(
+        CumulativeEnergyDeliveredTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeCumulativeEnergyDeliveredTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readCumulativeEnergyDeliveredAttribute(
+      CumulativeEnergyDeliveredAttributeCallback callback
+    ) {
+      readCumulativeEnergyDeliveredAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeCumulativeEnergyDeliveredAttribute(
+        CumulativeEnergyDeliveredAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeCumulativeEnergyDeliveredAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readPeriodicEnergyConsumedStartTimeAttribute(
+      PeriodicEnergyConsumedStartTimeAttributeCallback callback
+    ) {
+      readPeriodicEnergyConsumedStartTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribePeriodicEnergyConsumedStartTimeAttribute(
+        PeriodicEnergyConsumedStartTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribePeriodicEnergyConsumedStartTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readPeriodicEnergyConsumedEndTimeAttribute(
+      PeriodicEnergyConsumedEndTimeAttributeCallback callback
+    ) {
+      readPeriodicEnergyConsumedEndTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribePeriodicEnergyConsumedEndTimeAttribute(
+        PeriodicEnergyConsumedEndTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribePeriodicEnergyConsumedEndTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readPeriodicEnergyConsumedAttribute(
+      PeriodicEnergyConsumedAttributeCallback callback
+    ) {
+      readPeriodicEnergyConsumedAttribute(chipClusterPtr, callback);
+    }
+    public void subscribePeriodicEnergyConsumedAttribute(
+        PeriodicEnergyConsumedAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribePeriodicEnergyConsumedAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readPeriodicEnergyDeliveredStartTimeAttribute(
+      PeriodicEnergyDeliveredStartTimeAttributeCallback callback
+    ) {
+      readPeriodicEnergyDeliveredStartTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribePeriodicEnergyDeliveredStartTimeAttribute(
+        PeriodicEnergyDeliveredStartTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribePeriodicEnergyDeliveredStartTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readPeriodicEnergyDeliveredEndTimeAttribute(
+      PeriodicEnergyDeliveredEndTimeAttributeCallback callback
+    ) {
+      readPeriodicEnergyDeliveredEndTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribePeriodicEnergyDeliveredEndTimeAttribute(
+        PeriodicEnergyDeliveredEndTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribePeriodicEnergyDeliveredEndTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readPeriodicEnergyDeliveredAttribute(
+      PeriodicEnergyDeliveredAttributeCallback callback
+    ) {
+      readPeriodicEnergyDeliveredAttribute(chipClusterPtr, callback);
+    }
+    public void subscribePeriodicEnergyDeliveredAttribute(
+        PeriodicEnergyDeliveredAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribePeriodicEnergyDeliveredAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readSystemTimeAttribute(
+      LongAttributeCallback callback
+    ) {
+      readSystemTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeSystemTimeAttribute(
+        LongAttributeCallback callback
+,
+      int minInterval, int maxInterval) {
+      subscribeSystemTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readEphemeralEnergyConsumedStartTimeAttribute(
+      EphemeralEnergyConsumedStartTimeAttributeCallback callback
+    ) {
+      readEphemeralEnergyConsumedStartTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeEphemeralEnergyConsumedStartTimeAttribute(
+        EphemeralEnergyConsumedStartTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeEphemeralEnergyConsumedStartTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readEphemeralEnergyConsumedEndTimeAttribute(
+      EphemeralEnergyConsumedEndTimeAttributeCallback callback
+    ) {
+      readEphemeralEnergyConsumedEndTimeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeEphemeralEnergyConsumedEndTimeAttribute(
+        EphemeralEnergyConsumedEndTimeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeEphemeralEnergyConsumedEndTimeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readEphemeralEnergyConsumedAttribute(
+      EphemeralEnergyConsumedAttributeCallback callback
+    ) {
+      readEphemeralEnergyConsumedAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeEphemeralEnergyConsumedAttribute(
+        EphemeralEnergyConsumedAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeEphemeralEnergyConsumedAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readGeneratedCommandListAttribute(
+      GeneratedCommandListAttributeCallback callback
+    ) {
+      readGeneratedCommandListAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeGeneratedCommandListAttribute(
+        GeneratedCommandListAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeGeneratedCommandListAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readAcceptedCommandListAttribute(
+      AcceptedCommandListAttributeCallback callback
+    ) {
+      readAcceptedCommandListAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeAcceptedCommandListAttribute(
+        AcceptedCommandListAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeAcceptedCommandListAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readEventListAttribute(
+      EventListAttributeCallback callback
+    ) {
+      readEventListAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeEventListAttribute(
+        EventListAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeEventListAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readAttributeListAttribute(
+      AttributeListAttributeCallback callback
+    ) {
+      readAttributeListAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeAttributeListAttribute(
+        AttributeListAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeAttributeListAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readFeatureMapAttribute(
+      LongAttributeCallback callback
+    ) {
+      readFeatureMapAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeFeatureMapAttribute(
+        LongAttributeCallback callback
+,
+      int minInterval, int maxInterval) {
+      subscribeFeatureMapAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readClusterRevisionAttribute(
+      IntegerAttributeCallback callback
+    ) {
+      readClusterRevisionAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeClusterRevisionAttribute(
+        IntegerAttributeCallback callback
+,
+      int minInterval, int maxInterval) {
+      subscribeClusterRevisionAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    private native void readMeasuredAttribute(long chipClusterPtr,
+        BooleanAttributeCallback callback
+    );
+    private native void subscribeMeasuredAttribute(long chipClusterPtr,
+        BooleanAttributeCallback callback
+, int minInterval, int maxInterval);
+
+    private native void readCumulativeEnergyConsumedTimeAttribute(long chipClusterPtr,
+        CumulativeEnergyConsumedTimeAttributeCallback callback
+    );
+    private native void subscribeCumulativeEnergyConsumedTimeAttribute(long chipClusterPtr,
+        CumulativeEnergyConsumedTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readCumulativeEnergyConsumedAttribute(long chipClusterPtr,
+        CumulativeEnergyConsumedAttributeCallback callback
+    );
+    private native void subscribeCumulativeEnergyConsumedAttribute(long chipClusterPtr,
+        CumulativeEnergyConsumedAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readCumulativeEnergyDeliveredTimeAttribute(long chipClusterPtr,
+        CumulativeEnergyDeliveredTimeAttributeCallback callback
+    );
+    private native void subscribeCumulativeEnergyDeliveredTimeAttribute(long chipClusterPtr,
+        CumulativeEnergyDeliveredTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readCumulativeEnergyDeliveredAttribute(long chipClusterPtr,
+        CumulativeEnergyDeliveredAttributeCallback callback
+    );
+    private native void subscribeCumulativeEnergyDeliveredAttribute(long chipClusterPtr,
+        CumulativeEnergyDeliveredAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readPeriodicEnergyConsumedStartTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyConsumedStartTimeAttributeCallback callback
+    );
+    private native void subscribePeriodicEnergyConsumedStartTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyConsumedStartTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readPeriodicEnergyConsumedEndTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyConsumedEndTimeAttributeCallback callback
+    );
+    private native void subscribePeriodicEnergyConsumedEndTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyConsumedEndTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readPeriodicEnergyConsumedAttribute(long chipClusterPtr,
+        PeriodicEnergyConsumedAttributeCallback callback
+    );
+    private native void subscribePeriodicEnergyConsumedAttribute(long chipClusterPtr,
+        PeriodicEnergyConsumedAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readPeriodicEnergyDeliveredStartTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyDeliveredStartTimeAttributeCallback callback
+    );
+    private native void subscribePeriodicEnergyDeliveredStartTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyDeliveredStartTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readPeriodicEnergyDeliveredEndTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyDeliveredEndTimeAttributeCallback callback
+    );
+    private native void subscribePeriodicEnergyDeliveredEndTimeAttribute(long chipClusterPtr,
+        PeriodicEnergyDeliveredEndTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readPeriodicEnergyDeliveredAttribute(long chipClusterPtr,
+        PeriodicEnergyDeliveredAttributeCallback callback
+    );
+    private native void subscribePeriodicEnergyDeliveredAttribute(long chipClusterPtr,
+        PeriodicEnergyDeliveredAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readSystemTimeAttribute(long chipClusterPtr,
+        LongAttributeCallback callback
+    );
+    private native void subscribeSystemTimeAttribute(long chipClusterPtr,
+        LongAttributeCallback callback
+, int minInterval, int maxInterval);
+
+    private native void readEphemeralEnergyConsumedStartTimeAttribute(long chipClusterPtr,
+        EphemeralEnergyConsumedStartTimeAttributeCallback callback
+    );
+    private native void subscribeEphemeralEnergyConsumedStartTimeAttribute(long chipClusterPtr,
+        EphemeralEnergyConsumedStartTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readEphemeralEnergyConsumedEndTimeAttribute(long chipClusterPtr,
+        EphemeralEnergyConsumedEndTimeAttributeCallback callback
+    );
+    private native void subscribeEphemeralEnergyConsumedEndTimeAttribute(long chipClusterPtr,
+        EphemeralEnergyConsumedEndTimeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readEphemeralEnergyConsumedAttribute(long chipClusterPtr,
+        EphemeralEnergyConsumedAttributeCallback callback
+    );
+    private native void subscribeEphemeralEnergyConsumedAttribute(long chipClusterPtr,
+        EphemeralEnergyConsumedAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readGeneratedCommandListAttribute(long chipClusterPtr,
+        GeneratedCommandListAttributeCallback callback
+    );
+    private native void subscribeGeneratedCommandListAttribute(long chipClusterPtr,
+        GeneratedCommandListAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readAcceptedCommandListAttribute(long chipClusterPtr,
+        AcceptedCommandListAttributeCallback callback
+    );
+    private native void subscribeAcceptedCommandListAttribute(long chipClusterPtr,
+        AcceptedCommandListAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readEventListAttribute(long chipClusterPtr,
+        EventListAttributeCallback callback
+    );
+    private native void subscribeEventListAttribute(long chipClusterPtr,
+        EventListAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readAttributeListAttribute(long chipClusterPtr,
+        AttributeListAttributeCallback callback
+    );
+    private native void subscribeAttributeListAttribute(long chipClusterPtr,
+        AttributeListAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readFeatureMapAttribute(long chipClusterPtr,
+        LongAttributeCallback callback
+    );
+    private native void subscribeFeatureMapAttribute(long chipClusterPtr,
+        LongAttributeCallback callback
+, int minInterval, int maxInterval);
+
+    private native void readClusterRevisionAttribute(long chipClusterPtr,
+        IntegerAttributeCallback callback
+    );
+    private native void subscribeClusterRevisionAttribute(long chipClusterPtr,
+        IntegerAttributeCallback callback
+, int minInterval, int maxInterval);
+  }
+
   public static class UnitTestingCluster extends BaseChipCluster {
     public static final long CLUSTER_ID = 0xFFF1FC05L;
 

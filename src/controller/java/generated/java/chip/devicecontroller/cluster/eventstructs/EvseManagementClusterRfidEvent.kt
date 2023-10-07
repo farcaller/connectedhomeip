@@ -17,18 +17,13 @@
 package chip.devicecontroller.cluster.eventstructs
 
 import chip.devicecontroller.cluster.*
-import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
-import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-import java.util.Optional
-
-class EvseManagementClusterRfidEvent (
-    val uid: ByteArray?) {
-  override fun toString(): String  = buildString {
+class EvseManagementClusterRfidEvent(val uid: ByteArray?) {
+  override fun toString(): String = buildString {
     append("EvseManagementClusterRfidEvent {\n")
     append("\tuid : $uid\n")
     append("}\n")
@@ -38,10 +33,10 @@ class EvseManagementClusterRfidEvent (
     tlvWriter.apply {
       startStructure(tag)
       if (uid != null) {
-      put(ContextSpecificTag(TAG_UID), uid)
-    } else {
-      putNull(ContextSpecificTag(TAG_UID))
-    }
+        put(ContextSpecificTag(TAG_UID), uid)
+      } else {
+        putNull(ContextSpecificTag(TAG_UID))
+      }
       endStructure()
     }
   }
@@ -49,15 +44,16 @@ class EvseManagementClusterRfidEvent (
   companion object {
     private const val TAG_UID = 0
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EvseManagementClusterRfidEvent {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterRfidEvent {
       tlvReader.enterStructure(tag)
-      val uid = if (!tlvReader.isNull()) {
-      tlvReader.getByteArray(ContextSpecificTag(TAG_UID))
-    } else {
-      tlvReader.getNull(ContextSpecificTag(TAG_UID))
-      null
-    }
-      
+      val uid =
+        if (!tlvReader.isNull()) {
+          tlvReader.getByteArray(ContextSpecificTag(TAG_UID))
+        } else {
+          tlvReader.getNull(ContextSpecificTag(TAG_UID))
+          null
+        }
+
       tlvReader.exitContainer()
 
       return EvseManagementClusterRfidEvent(uid)

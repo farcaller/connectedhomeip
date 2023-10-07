@@ -322,6 +322,9 @@ static constexpr ClusterId Id = 0x00006660;
 namespace ElectricalPowerMeasurement {
 static constexpr ClusterId Id = 0x00006661;
 } // namespace ElectricalPowerMeasurement
+namespace ElectricalEnergyMeasurement {
+static constexpr ClusterId Id = 0x00006662;
+} // namespace ElectricalEnergyMeasurement
 namespace UnitTesting {
 static constexpr ClusterId Id = 0xFFF1FC05;
 } // namespace UnitTesting

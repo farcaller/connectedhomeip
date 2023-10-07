@@ -24,6 +24,7 @@
    <xi:include href="chip/dishwasher-alarm-cluster.xml" />
    <xi:include href="chip/dishwasher-mode-cluster.xml" />
    <xi:include href="chip/door-lock-cluster.xml" />
+   <xi:include href="chip/electrical-energy-measurement-cluster.xml" />
    <xi:include href="chip/electrical-power-measurement-cluster.xml" />
    <xi:include href="chip/energy-management-cluster.xml" />
    <xi:include href="chip/ethernet-network-diagnostics-cluster.xml" />
