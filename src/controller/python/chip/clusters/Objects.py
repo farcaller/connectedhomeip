@@ -35542,7 +35542,7 @@ class EnergyManagement(Cluster):
             kUnknownEnumValue = 11,
 
     class Bitmaps:
-        class EnergyManagementFeature(IntFlag):
+        class Feature(IntFlag):
             kPowerAdjustment = 0x1
             kPowerForecastReporting = 0x2
             kPowerForecastAdjustment = 0x4
@@ -36222,7 +36222,7 @@ class EvseManagement(Cluster):
             kUnknownEnumValue = 5,
 
     class Bitmaps:
-        class EvseManagementFeature(IntFlag):
+        class Feature(IntFlag):
             kChargingPreferences = 0x1
             kSessions = 0x2
             kSocReporting = 0x4
@@ -39817,7 +39817,7 @@ class ElectricalPowerMeasurement(Cluster):
             kUnknownEnumValue = 3,
 
     class Bitmaps:
-        class ElectricalPowerMeasurementFeature(IntFlag):
+        class Feature(IntFlag):
             kDirectCurrent = 0x1
             kAlternatingCurrent = 0x2
             kThreePhasePower = 0x4
@@ -40322,7 +40322,7 @@ class ElectricalEnergyMeasurement(Cluster):
     clusterRevision: 'uint' = None
 
     class Bitmaps:
-        class ElectricalEnergyMeasurementFeature(IntFlag):
+        class Feature(IntFlag):
             kConsumedEnergy = 0x1
             kDeliveredEnergy = 0x2
             kCumulativeEnergy = 0x4

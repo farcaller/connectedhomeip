@@ -3919,7 +3919,7 @@ server cluster EnergyManagement = 1798 {
     kOther = 255;
   }
 
-  bitmap EnergyManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kPowerAdjustment = 0x1;
     kPowerForecastReporting = 0x2;
     kPowerForecastAdjustment = 0x4;
@@ -4092,7 +4092,7 @@ server cluster EvseManagement = 1804 {
     kDisabledDiagnostics = 4;
   }
 
-  bitmap EvseManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kChargingPreferences = 0x1;
     kSessions = 0x2;
     kSocReporting = 0x4;
@@ -4153,6 +4153,8 @@ server cluster EvseManagement = 1804 {
   readonly attribute int16u minimumChargeCurrent = 6;
   readonly attribute int16u maximumChargeCurrent = 7;
   readonly attribute int16u maximumdDischargeCurrent = 8;
+  attribute int16u userMaximumChargeCurrent = 9;
+  attribute int16u randomisationDelayWindow = 10;
   readonly attribute StartOfWeekEnum startOfWeek = 32;
   readonly attribute int8u numberOfWeeklyTargets = 33;
   readonly attribute int8u numberOfDailyTargets = 34;
@@ -4260,7 +4262,7 @@ server cluster ElectricalPowerMeasurement = 26209 {
     kAC = 2;
   }
 
-  bitmap ElectricalPowerMeasurementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kDirectCurrent = 0x1;
     kAlternatingCurrent = 0x2;
     kThreePhasePower = 0x4;
@@ -4328,7 +4330,7 @@ server cluster ElectricalPowerMeasurement = 26209 {
 
 /** This cluster provides a mechanism for querying data about the electrical energy consumed or provided by the device. */
 server cluster ElectricalEnergyMeasurement = 26210 {
-  bitmap ElectricalEnergyMeasurementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kConsumedEnergy = 0x1;
     kDeliveredEnergy = 0x2;
     kCumulativeEnergy = 0x4;
@@ -4907,6 +4909,8 @@ endpoint 1 {
     ram      attribute minimumChargeCurrent;
     ram      attribute maximumChargeCurrent;
     ram      attribute maximumdDischargeCurrent;
+    ram      attribute userMaximumChargeCurrent;
+    ram      attribute randomisationDelayWindow;
     ram      attribute startOfWeek;
     ram      attribute numberOfWeeklyTargets;
     ram      attribute numberOfDailyTargets;

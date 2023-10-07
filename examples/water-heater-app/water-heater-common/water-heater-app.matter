@@ -2024,7 +2024,7 @@ server cluster EnergyManagement = 1798 {
     kOther = 255;
   }
 
-  bitmap EnergyManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kPowerAdjustment = 0x1;
     kPowerForecastReporting = 0x2;
     kPowerForecastAdjustment = 0x4;

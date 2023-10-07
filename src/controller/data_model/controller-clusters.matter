@@ -6458,7 +6458,7 @@ client cluster EnergyManagement = 1798 {
     kOther = 255;
   }
 
-  bitmap EnergyManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kPowerAdjustment = 0x1;
     kPowerForecastReporting = 0x2;
     kPowerForecastAdjustment = 0x4;
@@ -6638,7 +6638,7 @@ client cluster EvseManagement = 1804 {
     kDisabledDiagnostics = 4;
   }
 
-  bitmap EvseManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kChargingPreferences = 0x1;
     kSessions = 0x2;
     kSocReporting = 0x4;
@@ -6976,7 +6976,7 @@ client cluster ElectricalPowerMeasurement = 26209 {
     kAC = 2;
   }
 
-  bitmap ElectricalPowerMeasurementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kDirectCurrent = 0x1;
     kAlternatingCurrent = 0x2;
     kThreePhasePower = 0x4;
@@ -7044,7 +7044,7 @@ client cluster ElectricalPowerMeasurement = 26209 {
 
 /** This cluster provides a mechanism for querying data about the electrical energy consumed or provided by the device. */
 client cluster ElectricalEnergyMeasurement = 26210 {
-  bitmap ElectricalEnergyMeasurementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kConsumedEnergy = 0x1;
     kDeliveredEnergy = 0x2;
     kCumulativeEnergy = 0x4;
