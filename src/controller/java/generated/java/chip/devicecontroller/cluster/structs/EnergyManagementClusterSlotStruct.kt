@@ -20,29 +20,28 @@ import chip.devicecontroller.cluster.*
 import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
-import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
-
 import java.util.Optional
 
-class EnergyManagementClusterSlotStruct (
-    val minDuration: Long,
-    val maxDuration: Long,
-    val defaultDuration: Long,
-    val elapsedSlotTime: Long,
-    val remainingSlotTime: Long,
-    val slotIsPauseable: Boolean,
-    val nominalPower: Int,
-    val minPower: Int,
-    val maxPower: Int,
-    val nominalEnergy: Long,
-    val costs: Optional<List<EnergyManagementClusterCostStruct>>,
-    val minPowerAdjustment: Int,
-    val maxPowerAdjustment: Int,
-    val minimumDurationAdjustment: Long,
-    val maximumDurationAdjustment: Long) {
-  override fun toString(): String  = buildString {
+class EnergyManagementClusterSlotStruct(
+  val minDuration: Long,
+  val maxDuration: Long,
+  val defaultDuration: Long,
+  val elapsedSlotTime: Long,
+  val remainingSlotTime: Long,
+  val slotIsPauseable: Boolean,
+  val nominalPower: Int,
+  val minPower: Int,
+  val maxPower: Int,
+  val nominalEnergy: Long,
+  val costs: Optional<List<EnergyManagementClusterCostStruct>>,
+  val minPowerAdjustment: Int,
+  val maxPowerAdjustment: Int,
+  val minimumDurationAdjustment: Long,
+  val maximumDurationAdjustment: Long
+) {
+  override fun toString(): String = buildString {
     append("EnergyManagementClusterSlotStruct {\n")
     append("\tminDuration : $minDuration\n")
     append("\tmaxDuration : $maxDuration\n")
@@ -76,13 +75,13 @@ class EnergyManagementClusterSlotStruct (
       put(ContextSpecificTag(TAG_MAX_POWER), maxPower)
       put(ContextSpecificTag(TAG_NOMINAL_ENERGY), nominalEnergy)
       if (costs.isPresent) {
-      val optcosts = costs.get()
-      startList(ContextSpecificTag(TAG_COSTS))
-      for (item in optcosts.iterator()) {
-        item.toTlv(AnonymousTag, this)
+        val optcosts = costs.get()
+        startList(ContextSpecificTag(TAG_COSTS))
+        for (item in optcosts.iterator()) {
+          item.toTlv(AnonymousTag, this)
+        }
+        endList()
       }
-      endList()
-    }
       put(ContextSpecificTag(TAG_MIN_POWER_ADJUSTMENT), minPowerAdjustment)
       put(ContextSpecificTag(TAG_MAX_POWER_ADJUSTMENT), maxPowerAdjustment)
       put(ContextSpecificTag(TAG_MINIMUM_DURATION_ADJUSTMENT), minimumDurationAdjustment)
@@ -108,7 +107,7 @@ class EnergyManagementClusterSlotStruct (
     private const val TAG_MINIMUM_DURATION_ADJUSTMENT = 13
     private const val TAG_MAXIMUM_DURATION_ADJUSTMENT = 14
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EnergyManagementClusterSlotStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyManagementClusterSlotStruct {
       tlvReader.enterStructure(tag)
       val minDuration = tlvReader.getLong(ContextSpecificTag(TAG_MIN_DURATION))
       val maxDuration = tlvReader.getLong(ContextSpecificTag(TAG_MAX_DURATION))
@@ -120,25 +119,46 @@ class EnergyManagementClusterSlotStruct (
       val minPower = tlvReader.getInt(ContextSpecificTag(TAG_MIN_POWER))
       val maxPower = tlvReader.getInt(ContextSpecificTag(TAG_MAX_POWER))
       val nominalEnergy = tlvReader.getLong(ContextSpecificTag(TAG_NOMINAL_ENERGY))
-      val costs = if (tlvReader.isNextTag(ContextSpecificTag(TAG_COSTS))) {
-      Optional.of(buildList<EnergyManagementClusterCostStruct> {
-      tlvReader.enterList(ContextSpecificTag(TAG_COSTS))
-      while(!tlvReader.isEndOfContainer()) {
-        add(EnergyManagementClusterCostStruct.fromTlv(AnonymousTag, tlvReader))
-      }
-      tlvReader.exitContainer()
-    })
-    } else {
-      Optional.empty()
-    }
+      val costs =
+        if (tlvReader.isNextTag(ContextSpecificTag(TAG_COSTS))) {
+          Optional.of(
+            buildList<EnergyManagementClusterCostStruct> {
+              tlvReader.enterList(ContextSpecificTag(TAG_COSTS))
+              while (!tlvReader.isEndOfContainer()) {
+                add(EnergyManagementClusterCostStruct.fromTlv(AnonymousTag, tlvReader))
+              }
+              tlvReader.exitContainer()
+            }
+          )
+        } else {
+          Optional.empty()
+        }
       val minPowerAdjustment = tlvReader.getInt(ContextSpecificTag(TAG_MIN_POWER_ADJUSTMENT))
       val maxPowerAdjustment = tlvReader.getInt(ContextSpecificTag(TAG_MAX_POWER_ADJUSTMENT))
-      val minimumDurationAdjustment = tlvReader.getLong(ContextSpecificTag(TAG_MINIMUM_DURATION_ADJUSTMENT))
-      val maximumDurationAdjustment = tlvReader.getLong(ContextSpecificTag(TAG_MAXIMUM_DURATION_ADJUSTMENT))
-      
+      val minimumDurationAdjustment =
+        tlvReader.getLong(ContextSpecificTag(TAG_MINIMUM_DURATION_ADJUSTMENT))
+      val maximumDurationAdjustment =
+        tlvReader.getLong(ContextSpecificTag(TAG_MAXIMUM_DURATION_ADJUSTMENT))
+
       tlvReader.exitContainer()
 
-      return EnergyManagementClusterSlotStruct(minDuration, maxDuration, defaultDuration, elapsedSlotTime, remainingSlotTime, slotIsPauseable, nominalPower, minPower, maxPower, nominalEnergy, costs, minPowerAdjustment, maxPowerAdjustment, minimumDurationAdjustment, maximumDurationAdjustment)
+      return EnergyManagementClusterSlotStruct(
+        minDuration,
+        maxDuration,
+        defaultDuration,
+        elapsedSlotTime,
+        remainingSlotTime,
+        slotIsPauseable,
+        nominalPower,
+        minPower,
+        maxPower,
+        nominalEnergy,
+        costs,
+        minPowerAdjustment,
+        maxPowerAdjustment,
+        minimumDurationAdjustment,
+        maximumDurationAdjustment
+      )
     }
   }
 }

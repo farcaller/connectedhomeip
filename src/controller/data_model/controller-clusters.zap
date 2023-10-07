@@ -27585,10 +27585,10 @@
           ]
         },
         {
-          "name": "Electrical Measurement",
+          "name": "Electrical Power Measurement",
           "code": 2820,
           "mfgCode": null,
-          "define": "ELECTRICAL_MEASUREMENT_CLUSTER",
+          "define": "ELECTRICAL_POWER_MEASUREMENT_CLUSTER",
           "side": "client",
           "enabled": 1,
           "attributes": [
@@ -27627,19 +27627,19 @@
           ]
         },
         {
-          "name": "Electrical Measurement",
+          "name": "Electrical Power Measurement",
           "code": 2820,
           "mfgCode": null,
-          "define": "ELECTRICAL_MEASUREMENT_CLUSTER",
+          "define": "ELECTRICAL_POWER_MEASUREMENT_CLUSTER",
           "side": "server",
           "enabled": 0,
           "attributes": [
             {
-              "name": "measurement type",
+              "name": "PowerMode",
               "code": 0,
               "mfgCode": null,
               "side": "server",
-              "type": "bitmap32",
+              "type": "PowerModeEnum",
               "included": 1,
               "storageOption": "RAM",
               "singleton": 0,
