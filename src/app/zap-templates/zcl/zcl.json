@@ -38,6 +38,7 @@
         "dishwasher-mode-cluster.xml",
         "door-lock-cluster.xml",
         "electrical-measurement-cluster.xml",
+        "electrical-power-measurement-cluster.xml",
         "energy-management-cluster.xml",
         "ethernet-network-diagnostics-cluster.xml",
         "evse-management-cluster.xml",

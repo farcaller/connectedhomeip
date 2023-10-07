@@ -8247,6 +8247,66 @@ MTR_NEWLY_AVAILABLE
 @end
 
 /**
+ * Cluster Electrical Power Measurement
+ *    This cluster provides a mechanism for querying data about electrical power as measured by the device.
+ */
+MTR_NEWLY_AVAILABLE
+@interface MTRClusterElectricalPowerMeasurement : MTRCluster
+
+- (instancetype _Nullable)initWithDevice:(MTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributePowerModeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAccuracyWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeRangesWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeVoltageWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeActivePowerWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeRmsCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeRmsPowerWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeApparentPowerWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeReactivePowerWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeFrequencyWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeHarmonicCurrentsWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeHarmonicPhasesWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributePowerFactorWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeLineCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNeutralCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+/**
  * Cluster Unit Testing
  *    The Test Cluster is meant to validate the generated code
  */

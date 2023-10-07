@@ -817,6 +817,14 @@ void emberAfElectricalMeasurementClusterInitCallback(chip::EndpointId endpoint);
  */
 void emberAfWaterHeaterClusterInitCallback(chip::EndpointId endpoint);
 
+/** @brief Electrical Power Measurement Cluster Init
+ *
+ * Cluster Init
+ *
+ * @param endpoint    Endpoint that is being initialized
+ */
+void emberAfElectricalPowerMeasurementClusterInitCallback(chip::EndpointId endpoint);
+
 /** @brief Unit Testing Cluster Init
  *
  * Cluster Init
@@ -8405,6 +8413,82 @@ void emberAfWaterHeaterClusterServerTickCallback(chip::EndpointId endpoint);
  * @param endpoint  Endpoint that is being served
  */
 void emberAfWaterHeaterClusterClientTickCallback(chip::EndpointId endpoint);
+
+//
+// Electrical Power Measurement Cluster
+//
+
+/** @brief Electrical Power Measurement Cluster Server Init
+ *
+ * Server Init
+ *
+ * @param endpoint    Endpoint that is being initialized
+ */
+void emberAfElectricalPowerMeasurementClusterServerInitCallback(chip::EndpointId endpoint);
+
+/** @brief Electrical Power Measurement Cluster Server Shutdown
+ *
+ * Server Shutdown
+ *
+ * @param endpoint    Endpoint that is being shutdown
+ */
+void MatterElectricalPowerMeasurementClusterServerShutdownCallback(chip::EndpointId endpoint);
+
+/** @brief Electrical Power Measurement Cluster Client Init
+ *
+ * Client Init
+ *
+ * @param endpoint    Endpoint that is being initialized
+ */
+void emberAfElectricalPowerMeasurementClusterClientInitCallback(chip::EndpointId endpoint);
+
+/** @brief Electrical Power Measurement Cluster Server Attribute Changed
+ *
+ * Server Attribute Changed
+ *
+ * @param attributePath Concrete attribute path that changed
+ */
+void MatterElectricalPowerMeasurementClusterServerAttributeChangedCallback(const chip::app::ConcreteAttributePath & attributePath);
+
+/** @brief Electrical Power Measurement Cluster Server Pre Attribute Changed
+ *
+ * Server Pre Attribute Changed
+ *
+ * @param attributePath Concrete attribute path to be changed
+ * @param attributeType Attribute type
+ * @param size          Attribute size
+ * @param value         Attribute value
+ */
+chip::Protocols::InteractionModel::Status MatterElectricalPowerMeasurementClusterServerPreAttributeChangedCallback(
+    const chip::app::ConcreteAttributePath & attributePath, EmberAfAttributeType attributeType, uint16_t size, uint8_t * value);
+
+/** @brief Electrical Power Measurement Cluster Client Pre Attribute Changed
+ *
+ * Client Pre Attribute Changed
+ *
+ * @param attributePath Concrete attribute path to be changed
+ * @param attributeType Attribute type
+ * @param size          Attribute size
+ * @param value         Attribute value
+ */
+chip::Protocols::InteractionModel::Status MatterElectricalPowerMeasurementClusterClientPreAttributeChangedCallback(
+    const chip::app::ConcreteAttributePath & attributePath, EmberAfAttributeType attributeType, uint16_t size, uint8_t * value);
+
+/** @brief Electrical Power Measurement Cluster Server Tick
+ *
+ * Server Tick
+ *
+ * @param endpoint  Endpoint that is being served
+ */
+void emberAfElectricalPowerMeasurementClusterServerTickCallback(chip::EndpointId endpoint);
+
+/** @brief Electrical Power Measurement Cluster Client Tick
+ *
+ * Client Tick
+ *
+ * @param endpoint  Endpoint that is being served
+ */
+void emberAfElectricalPowerMeasurementClusterClientTickCallback(chip::EndpointId endpoint);
 
 //
 // Unit Testing Cluster

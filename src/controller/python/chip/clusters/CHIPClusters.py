@@ -11708,6 +11708,146 @@ class ChipClusters:
             },
         },
     }
+    _ELECTRICAL_POWER_MEASUREMENT_CLUSTER_INFO = {
+        "clusterName": "ElectricalPowerMeasurement",
+        "clusterId": 0x00006661,
+        "commands": {
+        },
+        "attributes": {
+            0x00000000: {
+                "attributeName": "PowerMode",
+                "attributeId": 0x00000000,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000001: {
+                "attributeName": "Accuracy",
+                "attributeId": 0x00000001,
+                "type": "",
+                "reportable": True,
+            },
+            0x00000002: {
+                "attributeName": "Ranges",
+                "attributeId": 0x00000002,
+                "type": "",
+                "reportable": True,
+            },
+            0x00000003: {
+                "attributeName": "Voltage",
+                "attributeId": 0x00000003,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000004: {
+                "attributeName": "Current",
+                "attributeId": 0x00000004,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000005: {
+                "attributeName": "ActivePower",
+                "attributeId": 0x00000005,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000006: {
+                "attributeName": "RmsCurrent",
+                "attributeId": 0x00000006,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000007: {
+                "attributeName": "RmsPower",
+                "attributeId": 0x00000007,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000008: {
+                "attributeName": "ApparentPower",
+                "attributeId": 0x00000008,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000009: {
+                "attributeName": "ReactivePower",
+                "attributeId": 0x00000009,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000000A: {
+                "attributeName": "Frequency",
+                "attributeId": 0x0000000A,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000000B: {
+                "attributeName": "HarmonicCurrents",
+                "attributeId": 0x0000000B,
+                "type": "",
+                "reportable": True,
+            },
+            0x0000000C: {
+                "attributeName": "HarmonicPhases",
+                "attributeId": 0x0000000C,
+                "type": "",
+                "reportable": True,
+            },
+            0x0000000D: {
+                "attributeName": "PowerFactor",
+                "attributeId": 0x0000000D,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000000E: {
+                "attributeName": "LineCurrent",
+                "attributeId": 0x0000000E,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000000F: {
+                "attributeName": "NeutralCurrent",
+                "attributeId": 0x0000000F,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFF8: {
+                "attributeName": "GeneratedCommandList",
+                "attributeId": 0x0000FFF8,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFF9: {
+                "attributeName": "AcceptedCommandList",
+                "attributeId": 0x0000FFF9,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFA: {
+                "attributeName": "EventList",
+                "attributeId": 0x0000FFFA,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFB: {
+                "attributeName": "AttributeList",
+                "attributeId": 0x0000FFFB,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFC: {
+                "attributeName": "FeatureMap",
+                "attributeId": 0x0000FFFC,
+                "type": "int",
+                "reportable": True,
+            },
+            0x0000FFFD: {
+                "attributeName": "ClusterRevision",
+                "attributeId": 0x0000FFFD,
+                "type": "int",
+                "reportable": True,
+            },
+        },
+    }
     _UNIT_TESTING_CLUSTER_INFO = {
         "clusterName": "UnitTesting",
         "clusterId": 0xFFF1FC05,
@@ -12659,6 +12799,7 @@ class ChipClusters:
         0x0000070C: _EVSE_MANAGEMENT_CLUSTER_INFO,
         0x00000B04: _ELECTRICAL_MEASUREMENT_CLUSTER_INFO,
         0x00006660: _WATER_HEATER_CLUSTER_INFO,
+        0x00006661: _ELECTRICAL_POWER_MEASUREMENT_CLUSTER_INFO,
         0xFFF1FC05: _UNIT_TESTING_CLUSTER_INFO,
         0xFFF1FC06: _FAULT_INJECTION_CLUSTER_INFO,
     }
@@ -12762,6 +12903,7 @@ class ChipClusters:
         "EvseManagement": _EVSE_MANAGEMENT_CLUSTER_INFO,
         "ElectricalMeasurement": _ELECTRICAL_MEASUREMENT_CLUSTER_INFO,
         "WaterHeater": _WATER_HEATER_CLUSTER_INFO,
+        "ElectricalPowerMeasurement": _ELECTRICAL_POWER_MEASUREMENT_CLUSTER_INFO,
         "UnitTesting": _UNIT_TESTING_CLUSTER_INFO,
         "FaultInjection": _FAULT_INJECTION_CLUSTER_INFO,
     }

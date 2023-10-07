@@ -17,19 +17,22 @@
 package chip.devicecontroller.cluster.eventstructs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EvseManagementClusterEvNotDetectedEvent(
-  val evseSessionId: Long,
-  val evseState: Int,
-  val evseSessionDuration: Long,
-  val evseSessionEnergyCharged: Long,
-  val evseSessionEnergyDischarged: Long
-) {
-  override fun toString(): String = buildString {
+import java.util.Optional
+
+class EvseManagementClusterEvNotDetectedEvent (
+    val evseSessionId: Long,
+    val evseState: Int,
+    val evseSessionDuration: Long,
+    val evseSessionEnergyCharged: Long,
+    val evseSessionEnergyDischarged: Long) {
+  override fun toString(): String  = buildString {
     append("EvseManagementClusterEvNotDetectedEvent {\n")
     append("\tevseSessionId : $evseSessionId\n")
     append("\tevseState : $evseState\n")
@@ -58,25 +61,17 @@ class EvseManagementClusterEvNotDetectedEvent(
     private const val TAG_EVSE_SESSION_ENERGY_CHARGED = 3
     private const val TAG_EVSE_SESSION_ENERGY_DISCHARGED = 4
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterEvNotDetectedEvent {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EvseManagementClusterEvNotDetectedEvent {
       tlvReader.enterStructure(tag)
       val evseSessionId = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ID))
       val evseState = tlvReader.getInt(ContextSpecificTag(TAG_EVSE_STATE))
       val evseSessionDuration = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_DURATION))
-      val evseSessionEnergyCharged =
-        tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ENERGY_CHARGED))
-      val evseSessionEnergyDischarged =
-        tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ENERGY_DISCHARGED))
-
+      val evseSessionEnergyCharged = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ENERGY_CHARGED))
+      val evseSessionEnergyDischarged = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ENERGY_DISCHARGED))
+      
       tlvReader.exitContainer()
 
-      return EvseManagementClusterEvNotDetectedEvent(
-        evseSessionId,
-        evseState,
-        evseSessionDuration,
-        evseSessionEnergyCharged,
-        evseSessionEnergyDischarged
-      )
+      return EvseManagementClusterEvNotDetectedEvent(evseSessionId, evseState, evseSessionDuration, evseSessionEnergyCharged, evseSessionEnergyDischarged)
     }
   }
 }

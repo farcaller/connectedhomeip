@@ -17,17 +17,20 @@
 package chip.devicecontroller.cluster.structs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EnergyManagementClusterSlotAdjustmentStruct(
-  val slotIndex: Int,
-  val nominalPower: Int,
-  val duration: Long
-) {
-  override fun toString(): String = buildString {
+import java.util.Optional
+
+class EnergyManagementClusterSlotAdjustmentStruct (
+    val slotIndex: Int,
+    val nominalPower: Int,
+    val duration: Long) {
+  override fun toString(): String  = buildString {
     append("EnergyManagementClusterSlotAdjustmentStruct {\n")
     append("\tslotIndex : $slotIndex\n")
     append("\tnominalPower : $nominalPower\n")
@@ -50,12 +53,12 @@ class EnergyManagementClusterSlotAdjustmentStruct(
     private const val TAG_NOMINAL_POWER = 1
     private const val TAG_DURATION = 2
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyManagementClusterSlotAdjustmentStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EnergyManagementClusterSlotAdjustmentStruct {
       tlvReader.enterStructure(tag)
       val slotIndex = tlvReader.getInt(ContextSpecificTag(TAG_SLOT_INDEX))
       val nominalPower = tlvReader.getInt(ContextSpecificTag(TAG_NOMINAL_POWER))
       val duration = tlvReader.getLong(ContextSpecificTag(TAG_DURATION))
-
+      
       tlvReader.exitContainer()
 
       return EnergyManagementClusterSlotAdjustmentStruct(slotIndex, nominalPower, duration)

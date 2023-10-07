@@ -3153,6 +3153,175 @@ void ComplexArgumentParser::Finalize(chip::app::Clusters::EvseManagement::Struct
     ComplexArgumentParser::Finalize(request.addedEnergy);
 }
 
+CHIP_ERROR
+ComplexArgumentParser::Setup(const char * label,
+                             chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type & request,
+                             Json::Value & value)
+{
+    VerifyOrReturnError(value.isObject(), CHIP_ERROR_INVALID_ARGUMENT);
+
+    // Copy to track which members we already processed.
+    Json::Value valueCopy(value);
+
+    ReturnErrorOnFailure(
+        ComplexArgumentParser::EnsureMemberExist("HarmonicMeasurementStruct.order", "order", value.isMember("order")));
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("HarmonicMeasurementStruct.measurement", "measurement",
+                                                                  value.isMember("measurement")));
+
+    char labelWithMember[kMaxLabelLength];
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "order");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.order, value["order"]));
+    valueCopy.removeMember("order");
+
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "measurement");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.measurement, value["measurement"]));
+    valueCopy.removeMember("measurement");
+
+    return ComplexArgumentParser::EnsureNoMembersRemaining(label, valueCopy);
+}
+
+void ComplexArgumentParser::Finalize(
+    chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type & request)
+{
+    ComplexArgumentParser::Finalize(request.order);
+    ComplexArgumentParser::Finalize(request.measurement);
+}
+
+CHIP_ERROR
+ComplexArgumentParser::Setup(const char * label,
+                             chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::Type & request,
+                             Json::Value & value)
+{
+    VerifyOrReturnError(value.isObject(), CHIP_ERROR_INVALID_ARGUMENT);
+
+    // Copy to track which members we already processed.
+    Json::Value valueCopy(value);
+
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("MeasurementAccuracyStruct.measurementType", "measurementType",
+                                                                  value.isMember("measurementType")));
+    ReturnErrorOnFailure(
+        ComplexArgumentParser::EnsureMemberExist("MeasurementAccuracyStruct.measured", "measured", value.isMember("measured")));
+
+    char labelWithMember[kMaxLabelLength];
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "measurementType");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.measurementType, value["measurementType"]));
+    valueCopy.removeMember("measurementType");
+
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "measured");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.measured, value["measured"]));
+    valueCopy.removeMember("measured");
+
+    if (value.isMember("percentTypical"))
+    {
+        snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "percentTypical");
+        ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.percentTypical, value["percentTypical"]));
+    }
+    valueCopy.removeMember("percentTypical");
+
+    if (value.isMember("percentMin"))
+    {
+        snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "percentMin");
+        ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.percentMin, value["percentMin"]));
+    }
+    valueCopy.removeMember("percentMin");
+
+    if (value.isMember("percentMax"))
+    {
+        snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "percentMax");
+        ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.percentMax, value["percentMax"]));
+    }
+    valueCopy.removeMember("percentMax");
+
+    if (value.isMember("fixedTypical"))
+    {
+        snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "fixedTypical");
+        ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.fixedTypical, value["fixedTypical"]));
+    }
+    valueCopy.removeMember("fixedTypical");
+
+    if (value.isMember("fixedMin"))
+    {
+        snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "fixedMin");
+        ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.fixedMin, value["fixedMin"]));
+    }
+    valueCopy.removeMember("fixedMin");
+
+    if (value.isMember("fixedMax"))
+    {
+        snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "fixedMax");
+        ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.fixedMax, value["fixedMax"]));
+    }
+    valueCopy.removeMember("fixedMax");
+
+    return ComplexArgumentParser::EnsureNoMembersRemaining(label, valueCopy);
+}
+
+void ComplexArgumentParser::Finalize(
+    chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::Type & request)
+{
+    ComplexArgumentParser::Finalize(request.measurementType);
+    ComplexArgumentParser::Finalize(request.measured);
+    ComplexArgumentParser::Finalize(request.percentTypical);
+    ComplexArgumentParser::Finalize(request.percentMin);
+    ComplexArgumentParser::Finalize(request.percentMax);
+    ComplexArgumentParser::Finalize(request.fixedTypical);
+    ComplexArgumentParser::Finalize(request.fixedMin);
+    ComplexArgumentParser::Finalize(request.fixedMax);
+}
+
+CHIP_ERROR
+ComplexArgumentParser::Setup(const char * label,
+                             chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::Type & request,
+                             Json::Value & value)
+{
+    VerifyOrReturnError(value.isObject(), CHIP_ERROR_INVALID_ARGUMENT);
+
+    // Copy to track which members we already processed.
+    Json::Value valueCopy(value);
+
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("MeasurementRangeStruct.measurementType", "measurementType",
+                                                                  value.isMember("measurementType")));
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("MeasurementRangeStruct.min", "min", value.isMember("min")));
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("MeasurementRangeStruct.minTimestamp", "minTimestamp",
+                                                                  value.isMember("minTimestamp")));
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("MeasurementRangeStruct.max", "max", value.isMember("max")));
+    ReturnErrorOnFailure(ComplexArgumentParser::EnsureMemberExist("MeasurementRangeStruct.maxTimestamp", "maxTimestamp",
+                                                                  value.isMember("maxTimestamp")));
+
+    char labelWithMember[kMaxLabelLength];
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "measurementType");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.measurementType, value["measurementType"]));
+    valueCopy.removeMember("measurementType");
+
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "min");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.min, value["min"]));
+    valueCopy.removeMember("min");
+
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "minTimestamp");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.minTimestamp, value["minTimestamp"]));
+    valueCopy.removeMember("minTimestamp");
+
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "max");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.max, value["max"]));
+    valueCopy.removeMember("max");
+
+    snprintf(labelWithMember, sizeof(labelWithMember), "%s.%s", label, "maxTimestamp");
+    ReturnErrorOnFailure(ComplexArgumentParser::Setup(labelWithMember, request.maxTimestamp, value["maxTimestamp"]));
+    valueCopy.removeMember("maxTimestamp");
+
+    return ComplexArgumentParser::EnsureNoMembersRemaining(label, valueCopy);
+}
+
+void ComplexArgumentParser::Finalize(
+    chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::Type & request)
+{
+    ComplexArgumentParser::Finalize(request.measurementType);
+    ComplexArgumentParser::Finalize(request.min);
+    ComplexArgumentParser::Finalize(request.minTimestamp);
+    ComplexArgumentParser::Finalize(request.max);
+    ComplexArgumentParser::Finalize(request.maxTimestamp);
+}
+
 CHIP_ERROR ComplexArgumentParser::Setup(const char * label, chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type & request,
                                         Json::Value & value)
 {

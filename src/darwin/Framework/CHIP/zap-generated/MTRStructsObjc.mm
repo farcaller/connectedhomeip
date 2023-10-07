@@ -5966,6 +5966,178 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@implementation MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _order = @(0);
+
+        _measurement = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct alloc] init];
+
+    other.order = self.order;
+    other.measurement = self.measurement;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: order:%@; measurement:%@; >", NSStringFromClass([self class]), _order, _measurement];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _measurementType = @(0);
+
+        _measured = @(0);
+
+        _percentTypical = nil;
+
+        _percentMin = nil;
+
+        _percentMax = nil;
+
+        _fixedTypical = nil;
+
+        _fixedMin = nil;
+
+        _fixedMax = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct alloc] init];
+
+    other.measurementType = self.measurementType;
+    other.measured = self.measured;
+    other.percentTypical = self.percentTypical;
+    other.percentMin = self.percentMin;
+    other.percentMax = self.percentMax;
+    other.fixedTypical = self.fixedTypical;
+    other.fixedMin = self.fixedMin;
+    other.fixedMax = self.fixedMax;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: measurementType:%@; measured:%@; percentTypical:%@; percentMin:%@; percentMax:%@; "
+                                   @"fixedTypical:%@; fixedMin:%@; fixedMax:%@; >",
+                  NSStringFromClass([self class]), _measurementType, _measured, _percentTypical, _percentMin, _percentMax,
+                  _fixedTypical, _fixedMin, _fixedMax];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _measurementType = @(0);
+
+        _min = nil;
+
+        _minTimestamp = nil;
+
+        _max = nil;
+
+        _maxTimestamp = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalPowerMeasurementClusterMeasurementRangeStruct alloc] init];
+
+    other.measurementType = self.measurementType;
+    other.min = self.min;
+    other.minTimestamp = self.minTimestamp;
+    other.max = self.max;
+    other.maxTimestamp = self.maxTimestamp;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: measurementType:%@; min:%@; minTimestamp:%@; max:%@; maxTimestamp:%@; >",
+                  NSStringFromClass([self class]), _measurementType, _min, _minTimestamp, _max, _maxTimestamp];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _measurementType = @(0);
+
+        _periodStart = @(0);
+
+        _periodEnd = @(0);
+
+        _min = @(0);
+
+        _minTimestamp = @(0);
+
+        _max = @(0);
+
+        _maxTimestamp = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent alloc] init];
+
+    other.measurementType = self.measurementType;
+    other.periodStart = self.periodStart;
+    other.periodEnd = self.periodEnd;
+    other.min = self.min;
+    other.minTimestamp = self.minTimestamp;
+    other.max = self.max;
+    other.maxTimestamp = self.maxTimestamp;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString
+        stringWithFormat:
+            @"<%@: measurementType:%@; periodStart:%@; periodEnd:%@; min:%@; minTimestamp:%@; max:%@; maxTimestamp:%@; >",
+        NSStringFromClass([self class]), _measurementType, _periodStart, _periodEnd, _min, _minTimestamp, _max, _maxTimestamp];
+    return descriptionString;
+}
+
+@end
+
 @implementation MTRUnitTestingClusterSimpleStruct
 - (instancetype)init
 {

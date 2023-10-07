@@ -28925,6 +28925,201 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
 
 @end
 
+@implementation MTRClusterElectricalPowerMeasurement
+
+- (instancetype)initWithDevice:(MTRDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
+{
+    if (self = [super initWithEndpointID:endpointID queue:queue]) {
+        if (device == nil) {
+            return nil;
+        }
+
+        _device = device;
+    }
+    return self;
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePowerModeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributePowerModeID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAccuracyWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeAccuracyID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeRangesWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeRangesID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeVoltageWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeVoltageID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeCurrentWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeCurrentID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeActivePowerWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeActivePowerID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeRmsCurrentWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeRmsCurrentID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeRmsPowerWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeRmsPowerID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeApparentPowerWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeApparentPowerID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeReactivePowerWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeReactivePowerID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeFrequencyWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeFrequencyID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeHarmonicCurrentsWithParams:(MTRReadParams * _Nullable)params
+{
+    return
+        [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                       clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                     attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeHarmonicCurrentsID)
+                                          params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeHarmonicPhasesWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeHarmonicPhasesID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributePowerFactorWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributePowerFactorID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeLineCurrentWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeLineCurrentID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeNeutralCurrentWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeNeutralCurrentID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeGeneratedCommandListID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeAcceptedCommandListID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeEventListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeAttributeListID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeFeatureMapID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeElectricalPowerMeasurementID)
+                                        attributeID:@(MTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeClusterRevisionID)
+                                             params:params];
+}
+
+@end
+
 @implementation MTRClusterUnitTesting
 
 - (instancetype)initWithDevice:(MTRDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue

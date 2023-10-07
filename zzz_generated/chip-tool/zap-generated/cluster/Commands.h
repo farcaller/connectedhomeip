@@ -132,6 +132,7 @@
 | EvseManagement                                                      | 0x070C |
 | ElectricalMeasurement                                               | 0x0B04 |
 | WaterHeater                                                         | 0x6660 |
+| ElectricalPowerMeasurement                                          | 0x6661 |
 | UnitTesting                                                         | 0xFFF1FC05|
 | FaultInjection                                                      | 0xFFF1FC06|
 \*----------------------------------------------------------------------------*/
@@ -10962,6 +10963,39 @@ public:
 private:
     chip::app::Clusters::WaterHeater::Commands::SetUtcTime::Type mRequest;
 };
+
+/*----------------------------------------------------------------------------*\
+| Cluster ElectricalPowerMeasurement                                  | 0x6661 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * PowerMode                                                         | 0x0000 |
+| * Accuracy                                                          | 0x0001 |
+| * Ranges                                                            | 0x0002 |
+| * Voltage                                                           | 0x0003 |
+| * Current                                                           | 0x0004 |
+| * ActivePower                                                       | 0x0005 |
+| * RmsCurrent                                                        | 0x0006 |
+| * RmsPower                                                          | 0x0007 |
+| * ApparentPower                                                     | 0x0008 |
+| * ReactivePower                                                     | 0x0009 |
+| * Frequency                                                         | 0x000A |
+| * HarmonicCurrents                                                  | 0x000B |
+| * HarmonicPhases                                                    | 0x000C |
+| * PowerFactor                                                       | 0x000D |
+| * LineCurrent                                                       | 0x000E |
+| * NeutralCurrent                                                    | 0x000F |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+| * MeasurementPeriodRange                                            | 0x0000 |
+\*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*\
 | Cluster UnitTesting                                                 | 0xFFF1FC05 |
@@ -21912,6 +21946,134 @@ void registerClusterWaterHeater(Commands & commands, CredentialIssuerCommands * 
 
     commands.RegisterCluster(clusterName, clusterCommands);
 }
+void registerClusterElectricalPowerMeasurement(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
+{
+    using namespace chip::app::Clusters::ElectricalPowerMeasurement;
+
+    const char * clusterName = "ElectricalPowerMeasurement";
+
+    commands_list clusterCommands = {
+        //
+        // Commands
+        //
+        make_unique<ClusterCommand>(Id, credsIssuerConfig), //
+        //
+        // Attributes
+        //
+        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                                 //
+        make_unique<ReadAttribute>(Id, "power-mode", Attributes::PowerMode::Id, credsIssuerConfig),                        //
+        make_unique<ReadAttribute>(Id, "accuracy", Attributes::Accuracy::Id, credsIssuerConfig),                           //
+        make_unique<ReadAttribute>(Id, "ranges", Attributes::Ranges::Id, credsIssuerConfig),                               //
+        make_unique<ReadAttribute>(Id, "voltage", Attributes::Voltage::Id, credsIssuerConfig),                             //
+        make_unique<ReadAttribute>(Id, "current", Attributes::Current::Id, credsIssuerConfig),                             //
+        make_unique<ReadAttribute>(Id, "active-power", Attributes::ActivePower::Id, credsIssuerConfig),                    //
+        make_unique<ReadAttribute>(Id, "rms-current", Attributes::RmsCurrent::Id, credsIssuerConfig),                      //
+        make_unique<ReadAttribute>(Id, "rms-power", Attributes::RmsPower::Id, credsIssuerConfig),                          //
+        make_unique<ReadAttribute>(Id, "apparent-power", Attributes::ApparentPower::Id, credsIssuerConfig),                //
+        make_unique<ReadAttribute>(Id, "reactive-power", Attributes::ReactivePower::Id, credsIssuerConfig),                //
+        make_unique<ReadAttribute>(Id, "frequency", Attributes::Frequency::Id, credsIssuerConfig),                         //
+        make_unique<ReadAttribute>(Id, "harmonic-currents", Attributes::HarmonicCurrents::Id, credsIssuerConfig),          //
+        make_unique<ReadAttribute>(Id, "harmonic-phases", Attributes::HarmonicPhases::Id, credsIssuerConfig),              //
+        make_unique<ReadAttribute>(Id, "power-factor", Attributes::PowerFactor::Id, credsIssuerConfig),                    //
+        make_unique<ReadAttribute>(Id, "line-current", Attributes::LineCurrent::Id, credsIssuerConfig),                    //
+        make_unique<ReadAttribute>(Id, "neutral-current", Attributes::NeutralCurrent::Id, credsIssuerConfig),              //
+        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
+        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
+        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
+        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
+        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                              //
+        make_unique<WriteAttribute<chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum>>(
+            Id, "power-mode", 0, UINT8_MAX, Attributes::PowerMode::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<
+            const chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::Type>>>(
+            Id, "accuracy", Attributes::Accuracy::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<
+            const chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::Type>>>(
+            Id, "ranges", Attributes::Ranges::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(
+            Id, "voltage", INT64_MIN, INT64_MAX, Attributes::Voltage::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(
+            Id, "current", INT64_MIN, INT64_MAX, Attributes::Current::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "active-power", INT64_MIN, INT64_MAX,
+                                                                             Attributes::ActivePower::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "rms-current", INT64_MIN, INT64_MAX,
+                                                                             Attributes::RmsCurrent::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(
+            Id, "rms-power", INT64_MIN, INT64_MAX, Attributes::RmsPower::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "apparent-power", INT64_MIN, INT64_MAX,
+                                                                             Attributes::ApparentPower::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "reactive-power", INT64_MIN, INT64_MAX,
+                                                                             Attributes::ReactivePower::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(
+            Id, "frequency", INT64_MIN, INT64_MAX, Attributes::Frequency::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::Nullable<chip::app::DataModel::List<
+            const chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type>>>>(
+            Id, "harmonic-currents", Attributes::HarmonicCurrents::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::Nullable<chip::app::DataModel::List<
+            const chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type>>>>(
+            Id, "harmonic-phases", Attributes::HarmonicPhases::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "power-factor", INT64_MIN, INT64_MAX,
+                                                                             Attributes::PowerFactor::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "line-current", INT64_MIN, INT64_MAX,
+                                                                             Attributes::LineCurrent::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int64_t>>>(Id, "neutral-current", INT64_MIN, INT64_MAX,
+                                                                             Attributes::NeutralCurrent::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
+            Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
+            credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
+            Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::EventId>>>(
+            Id, "event-list", Attributes::EventList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::AttributeId>>>(
+            Id, "attribute-list", Attributes::AttributeList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "feature-map", 0, UINT32_MAX, Attributes::FeatureMap::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint16_t>>(Id, "cluster-revision", 0, UINT16_MAX, Attributes::ClusterRevision::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig),                                //
+        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                                 //
+        make_unique<SubscribeAttribute>(Id, "power-mode", Attributes::PowerMode::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "accuracy", Attributes::Accuracy::Id, credsIssuerConfig),                           //
+        make_unique<SubscribeAttribute>(Id, "ranges", Attributes::Ranges::Id, credsIssuerConfig),                               //
+        make_unique<SubscribeAttribute>(Id, "voltage", Attributes::Voltage::Id, credsIssuerConfig),                             //
+        make_unique<SubscribeAttribute>(Id, "current", Attributes::Current::Id, credsIssuerConfig),                             //
+        make_unique<SubscribeAttribute>(Id, "active-power", Attributes::ActivePower::Id, credsIssuerConfig),                    //
+        make_unique<SubscribeAttribute>(Id, "rms-current", Attributes::RmsCurrent::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeAttribute>(Id, "rms-power", Attributes::RmsPower::Id, credsIssuerConfig),                          //
+        make_unique<SubscribeAttribute>(Id, "apparent-power", Attributes::ApparentPower::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "reactive-power", Attributes::ReactivePower::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "frequency", Attributes::Frequency::Id, credsIssuerConfig),                         //
+        make_unique<SubscribeAttribute>(Id, "harmonic-currents", Attributes::HarmonicCurrents::Id, credsIssuerConfig),          //
+        make_unique<SubscribeAttribute>(Id, "harmonic-phases", Attributes::HarmonicPhases::Id, credsIssuerConfig),              //
+        make_unique<SubscribeAttribute>(Id, "power-factor", Attributes::PowerFactor::Id, credsIssuerConfig),                    //
+        make_unique<SubscribeAttribute>(Id, "line-current", Attributes::LineCurrent::Id, credsIssuerConfig),                    //
+        make_unique<SubscribeAttribute>(Id, "neutral-current", Attributes::NeutralCurrent::Id, credsIssuerConfig),              //
+        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
+        //
+        // Events
+        //
+        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                                      //
+        make_unique<ReadEvent>(Id, "measurement-period-range", Events::MeasurementPeriodRange::Id, credsIssuerConfig),      //
+        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                                 //
+        make_unique<SubscribeEvent>(Id, "measurement-period-range", Events::MeasurementPeriodRange::Id, credsIssuerConfig), //
+    };
+
+    commands.RegisterCluster(clusterName, clusterCommands);
+}
 void registerClusterUnitTesting(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
 {
     using namespace chip::app::Clusters::UnitTesting;
@@ -22533,6 +22695,7 @@ void registerClusters(Commands & commands, CredentialIssuerCommands * credsIssue
     registerClusterEvseManagement(commands, credsIssuerConfig);
     registerClusterElectricalMeasurement(commands, credsIssuerConfig);
     registerClusterWaterHeater(commands, credsIssuerConfig);
+    registerClusterElectricalPowerMeasurement(commands, credsIssuerConfig);
     registerClusterUnitTesting(commands, credsIssuerConfig);
     registerClusterFaultInjection(commands, credsIssuerConfig);
 }

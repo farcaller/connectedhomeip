@@ -517,6 +517,16 @@ static constexpr EventId Id = 0x00000005;
 } // namespace Events
 } // namespace EvseManagement
 
+namespace ElectricalPowerMeasurement {
+namespace Events {
+
+namespace MeasurementPeriodRange {
+static constexpr EventId Id = 0x00000000;
+} // namespace MeasurementPeriodRange
+
+} // namespace Events
+} // namespace ElectricalPowerMeasurement
+
 namespace UnitTesting {
 namespace Events {
 

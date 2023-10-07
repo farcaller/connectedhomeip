@@ -236,6 +236,18 @@ static CHIP_ERROR LogValue(const char * label, size_t indent,
 static CHIP_ERROR LogValue(const char * label, size_t indent,
                            const chip::app::Clusters::EvseManagement::Structs::ChargingTargetStruct::DecodableType & value);
 
+static CHIP_ERROR
+LogValue(const char * label, size_t indent,
+         const chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType & value);
+
+static CHIP_ERROR
+LogValue(const char * label, size_t indent,
+         const chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::DecodableType & value);
+
+static CHIP_ERROR
+LogValue(const char * label, size_t indent,
+         const chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::DecodableType & value);
+
 static CHIP_ERROR LogValue(const char * label, size_t indent,
                            const chip::app::Clusters::UnitTesting::Structs::SimpleStruct::DecodableType & value);
 
@@ -447,6 +459,9 @@ static CHIP_ERROR LogValue(const char * label, size_t indent,
                            const chip::app::Clusters::EvseManagement::Events::Fault::DecodableType & value);
 static CHIP_ERROR LogValue(const char * label, size_t indent,
                            const chip::app::Clusters::EvseManagement::Events::Rfid::DecodableType & value);
+static CHIP_ERROR
+LogValue(const char * label, size_t indent,
+         const chip::app::Clusters::ElectricalPowerMeasurement::Events::MeasurementPeriodRange::DecodableType & value);
 static CHIP_ERROR LogValue(const char * label, size_t indent,
                            const chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType & value);
 static CHIP_ERROR LogValue(const char * label, size_t indent,

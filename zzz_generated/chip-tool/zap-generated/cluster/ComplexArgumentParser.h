@@ -382,6 +382,24 @@ static CHIP_ERROR Setup(const char * label, chip::app::Clusters::EvseManagement:
 
 static void Finalize(chip::app::Clusters::EvseManagement::Structs::ChargingTargetStruct::Type & request);
 
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type & request);
+
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::Type & request);
+
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::Type & request);
+
 static CHIP_ERROR Setup(const char * label, chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type & request,
                         Json::Value & value);
 

@@ -841,6 +841,14 @@ typedef void (*NullableEVSEManagementClusterStartOfWeekEnumAttributeCallback)(
 typedef void (*EVSEManagementClusterSupplyStateEnumAttributeCallback)(void *, chip::app::Clusters::EvseManagement::SupplyStateEnum);
 typedef void (*NullableEVSEManagementClusterSupplyStateEnumAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EvseManagement::SupplyStateEnum> &);
+typedef void (*ElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback)(
+    void *, chip::app::Clusters::ElectricalPowerMeasurement::MeasurementTypeEnum);
+typedef void (*NullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::ElectricalPowerMeasurement::MeasurementTypeEnum> &);
+typedef void (*ElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback)(
+    void *, chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum);
+typedef void (*NullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum> &);
 typedef void (*UnitTestingClusterSimpleEnumAttributeCallback)(void *, chip::app::Clusters::UnitTesting::SimpleEnum);
 typedef void (*NullableUnitTestingClusterSimpleEnumAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> &);
@@ -1865,6 +1873,30 @@ typedef void (*WaterHeaterEventListListAttributeCallback)(void * context,
                                                           const chip::app::DataModel::DecodableList<chip::EventId> & data);
 typedef void (*WaterHeaterAttributeListListAttributeCallback)(void * context,
                                                               const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
+typedef void (*ElectricalPowerMeasurementAccuracyListAttributeCallback)(
+    void * context,
+    const chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::DecodableType> & data);
+typedef void (*ElectricalPowerMeasurementRangesListAttributeCallback)(
+    void * context,
+    const chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::DecodableType> & data);
+typedef void (*ElectricalPowerMeasurementHarmonicCurrentsListAttributeCallback)(
+    void * context,
+    const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>> & data);
+typedef void (*ElectricalPowerMeasurementHarmonicPhasesListAttributeCallback)(
+    void * context,
+    const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>> & data);
+typedef void (*ElectricalPowerMeasurementGeneratedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*ElectricalPowerMeasurementAcceptedCommandListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
+typedef void (*ElectricalPowerMeasurementEventListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::EventId> & data);
+typedef void (*ElectricalPowerMeasurementAttributeListListAttributeCallback)(
+    void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
 typedef void (*UnitTestingBitmap8AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>);
 typedef void (*UnitTestingBitmap16AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>);
 typedef void (*UnitTestingBitmap32AttributeCallback)(void *, chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>);
@@ -18696,6 +18728,284 @@ private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;
 };
 
+class MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementAccuracyListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementAccuracyListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                     MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementAccuracyListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::DecodableType> & value);
+};
+
+class MTRElectricalPowerMeasurementAccuracyListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementAccuracyListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementAccuracyListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementRangesListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementRangesListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                   MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementRangesListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::DecodableType> & value);
+};
+
+class MTRElectricalPowerMeasurementRangesListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementRangesListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementRangesListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementHarmonicCurrentsListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementHarmonicCurrentsListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                             MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementHarmonicCurrentsListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>> & value);
+};
+
+class MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementHarmonicCurrentsListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementHarmonicPhasesListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementHarmonicPhasesListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                           MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementHarmonicPhasesListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>> & value);
+};
+
+class MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementHarmonicPhasesListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementGeneratedCommandListListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementGeneratedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                                 MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementGeneratedCommandListListAttributeCallback>(queue, handler, action,
+                                                                                               OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementGeneratedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementAcceptedCommandListListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementAcceptedCommandListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                                MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementAcceptedCommandListListAttributeCallback>(queue, handler, action,
+                                                                                              OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value);
+};
+
+class MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementAcceptedCommandListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementEventListListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementEventListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                      MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementEventListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::EventId> & value);
+};
+
+class MTRElectricalPowerMeasurementEventListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementEventListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementEventListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementAttributeListListAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementAttributeListListAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                          MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementAttributeListListAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & value);
+};
+
+class MTRElectricalPowerMeasurementAttributeListListAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementAttributeListListAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
 class MTRUnitTestingBitmap8AttributeCallbackBridge : public MTRCallbackBridge<UnitTestingBitmap8AttributeCallback>
 {
 public:
@@ -33322,6 +33632,151 @@ public:
     void OnSubscriptionEstablished();
     using MTRNullableEVSEManagementClusterSupplyStateEnumAttributeCallbackBridge::KeepAliveOnCallback;
     using MTRNullableEVSEManagementClusterSupplyStateEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge(dispatch_queue_t queue,
+                                                                                   ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                                   MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback>(queue, handler, action,
+                                                                                                 OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, chip::app::Clusters::ElectricalPowerMeasurement::MeasurementTypeEnum value);
+};
+
+class MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<NullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback>
+{
+public:
+    MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge(dispatch_queue_t queue,
+                                                                                           ResponseHandler handler) :
+        MTRCallbackBridge<NullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback>(queue, handler,
+                                                                                                         OnSuccessFn){};
+
+    MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge(dispatch_queue_t queue,
+                                                                                           ResponseHandler handler,
+                                                                                           MTRActionBlock action) :
+        MTRCallbackBridge<NullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallback>(queue, handler, action,
+                                                                                                         OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::Nullable<chip::app::Clusters::ElectricalPowerMeasurement::MeasurementTypeEnum> & value);
+};
+
+class MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackSubscriptionBridge
+    : public MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge
+{
+public:
+    MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRNullableElectricalPowerMeasurementClusterMeasurementTypeEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<ElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback>
+{
+public:
+    MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<ElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                             MTRActionBlock action) :
+        MTRCallbackBridge<ElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void OnSuccessFn(void * context, chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum value);
+};
+
+class MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackSubscriptionBridge
+    : public MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge
+{
+public:
+    MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge
+    : public MTRCallbackBridge<NullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback>
+{
+public:
+    MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge(dispatch_queue_t queue,
+                                                                                     ResponseHandler handler) :
+        MTRCallbackBridge<NullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge(dispatch_queue_t queue,
+                                                                                     ResponseHandler handler,
+                                                                                     MTRActionBlock action) :
+        MTRCallbackBridge<NullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallback>(queue, handler, action,
+                                                                                                   OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::Nullable<chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum> & value);
+};
+
+class MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackSubscriptionBridge
+    : public MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge
+{
+public:
+    MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackSubscriptionBridge(
+        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
+        MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRNullableElectricalPowerMeasurementClusterPowerModeEnumAttributeCallbackBridge::OnDone;
 
 private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;

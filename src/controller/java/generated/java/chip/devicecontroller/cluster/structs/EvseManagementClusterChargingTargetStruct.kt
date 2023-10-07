@@ -17,18 +17,20 @@
 package chip.devicecontroller.cluster.structs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
+
 import java.util.Optional
 
-class EvseManagementClusterChargingTargetStruct(
-  val targetTime: Int,
-  val targetSoC: Optional<Int>,
-  val addedEnergy: Optional<Long>
-) {
-  override fun toString(): String = buildString {
+class EvseManagementClusterChargingTargetStruct (
+    val targetTime: Int,
+    val targetSoC: Optional<Int>,
+    val addedEnergy: Optional<Long>) {
+  override fun toString(): String  = buildString {
     append("EvseManagementClusterChargingTargetStruct {\n")
     append("\ttargetTime : $targetTime\n")
     append("\ttargetSoC : $targetSoC\n")
@@ -41,13 +43,13 @@ class EvseManagementClusterChargingTargetStruct(
       startStructure(tag)
       put(ContextSpecificTag(TAG_TARGET_TIME), targetTime)
       if (targetSoC.isPresent) {
-        val opttargetSoC = targetSoC.get()
-        put(ContextSpecificTag(TAG_TARGET_SO_C), opttargetSoC)
-      }
+      val opttargetSoC = targetSoC.get()
+      put(ContextSpecificTag(TAG_TARGET_SO_C), opttargetSoC)
+    }
       if (addedEnergy.isPresent) {
-        val optaddedEnergy = addedEnergy.get()
-        put(ContextSpecificTag(TAG_ADDED_ENERGY), optaddedEnergy)
-      }
+      val optaddedEnergy = addedEnergy.get()
+      put(ContextSpecificTag(TAG_ADDED_ENERGY), optaddedEnergy)
+    }
       endStructure()
     }
   }
@@ -57,22 +59,20 @@ class EvseManagementClusterChargingTargetStruct(
     private const val TAG_TARGET_SO_C = 1
     private const val TAG_ADDED_ENERGY = 2
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterChargingTargetStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EvseManagementClusterChargingTargetStruct {
       tlvReader.enterStructure(tag)
       val targetTime = tlvReader.getInt(ContextSpecificTag(TAG_TARGET_TIME))
-      val targetSoC =
-        if (tlvReader.isNextTag(ContextSpecificTag(TAG_TARGET_SO_C))) {
-          Optional.of(tlvReader.getInt(ContextSpecificTag(TAG_TARGET_SO_C)))
-        } else {
-          Optional.empty()
-        }
-      val addedEnergy =
-        if (tlvReader.isNextTag(ContextSpecificTag(TAG_ADDED_ENERGY))) {
-          Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_ADDED_ENERGY)))
-        } else {
-          Optional.empty()
-        }
-
+      val targetSoC = if (tlvReader.isNextTag(ContextSpecificTag(TAG_TARGET_SO_C))) {
+      Optional.of(tlvReader.getInt(ContextSpecificTag(TAG_TARGET_SO_C)))
+    } else {
+      Optional.empty()
+    }
+      val addedEnergy = if (tlvReader.isNextTag(ContextSpecificTag(TAG_ADDED_ENERGY))) {
+      Optional.of(tlvReader.getLong(ContextSpecificTag(TAG_ADDED_ENERGY)))
+    } else {
+      Optional.empty()
+    }
+      
       tlvReader.exitContainer()
 
       return EvseManagementClusterChargingTargetStruct(targetTime, targetSoC, addedEnergy)

@@ -3204,6 +3204,42 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(EvseManagement::SupplyS
     }
 }
 
+static auto __attribute__((unused)) EnsureKnownEnumValue(ElectricalPowerMeasurement::MeasurementTypeEnum val)
+{
+    using EnumType = ElectricalPowerMeasurement::MeasurementTypeEnum;
+    switch (val)
+    {
+    case EnumType::kUnspecified:
+    case EnumType::kVoltage:
+    case EnumType::kCurrent:
+    case EnumType::kActivePower:
+    case EnumType::kRMSCurrent:
+    case EnumType::kRMSPower:
+    case EnumType::kApparentPower:
+    case EnumType::kReactivePower:
+    case EnumType::kFrequency:
+    case EnumType::kPowerFactor:
+    case EnumType::kLineCurrent:
+    case EnumType::kNeutralCurrent:
+        return val;
+    default:
+        return static_cast<EnumType>(12);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(ElectricalPowerMeasurement::PowerModeEnum val)
+{
+    using EnumType = ElectricalPowerMeasurement::PowerModeEnum;
+    switch (val)
+    {
+    case EnumType::kUnspecified:
+    case EnumType::kDc:
+    case EnumType::kAc:
+        return val;
+    default:
+        return static_cast<EnumType>(3);
+    }
+}
+
 static auto __attribute__((unused)) EnsureKnownEnumValue(UnitTesting::SimpleEnum val)
 {
     using EnumType = UnitTesting::SimpleEnum;

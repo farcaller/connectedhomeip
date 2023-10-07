@@ -34427,6 +34427,428 @@ struct TypeInfo
 };
 } // namespace Attributes
 } // namespace WaterHeater
+namespace ElectricalPowerMeasurement {
+namespace Structs {
+namespace HarmonicMeasurementStruct {
+enum class Fields : uint8_t
+{
+    kOrder       = 0,
+    kMeasurement = 1,
+};
+
+struct Type
+{
+public:
+    uint8_t order = static_cast<uint8_t>(0);
+    DataModel::Nullable<int32_t> measurement;
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+
+    static constexpr bool kIsFabricScoped = false;
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+using DecodableType = Type;
+
+} // namespace HarmonicMeasurementStruct
+namespace MeasurementAccuracyStruct {
+enum class Fields : uint8_t
+{
+    kMeasurementType = 0,
+    kMeasured        = 1,
+    kPercentTypical  = 2,
+    kPercentMin      = 3,
+    kPercentMax      = 4,
+    kFixedTypical    = 5,
+    kFixedMin        = 6,
+    kFixedMax        = 7,
+};
+
+struct Type
+{
+public:
+    MeasurementTypeEnum measurementType = static_cast<MeasurementTypeEnum>(0);
+    bool measured                       = static_cast<bool>(0);
+    Optional<chip::Percent100ths> percentTypical;
+    Optional<chip::Percent100ths> percentMin;
+    Optional<chip::Percent100ths> percentMax;
+    Optional<int64_t> fixedTypical;
+    Optional<int64_t> fixedMin;
+    Optional<int64_t> fixedMax;
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+
+    static constexpr bool kIsFabricScoped = false;
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+using DecodableType = Type;
+
+} // namespace MeasurementAccuracyStruct
+namespace MeasurementRangeStruct {
+enum class Fields : uint8_t
+{
+    kMeasurementType = 0,
+    kMin             = 1,
+    kMinTimestamp    = 2,
+    kMax             = 3,
+    kMaxTimestamp    = 4,
+};
+
+struct Type
+{
+public:
+    MeasurementTypeEnum measurementType = static_cast<MeasurementTypeEnum>(0);
+    DataModel::Nullable<int64_t> min;
+    DataModel::Nullable<uint32_t> minTimestamp;
+    DataModel::Nullable<int64_t> max;
+    DataModel::Nullable<uint32_t> maxTimestamp;
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+
+    static constexpr bool kIsFabricScoped = false;
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+using DecodableType = Type;
+
+} // namespace MeasurementRangeStruct
+} // namespace Structs
+
+namespace Attributes {
+
+namespace PowerMode {
+struct TypeInfo
+{
+    using Type             = chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum;
+    using DecodableType    = chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum;
+    using DecodableArgType = chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::PowerMode::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace PowerMode
+namespace Accuracy {
+struct TypeInfo
+{
+    using Type =
+        chip::app::DataModel::List<const chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::Type>;
+    using DecodableType = chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::DecodableType>;
+    using DecodableArgType = const chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementAccuracyStruct::DecodableType> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::Accuracy::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace Accuracy
+namespace Ranges {
+struct TypeInfo
+{
+    using Type =
+        chip::app::DataModel::List<const chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::Type>;
+    using DecodableType = chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::DecodableType>;
+    using DecodableArgType = const chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::MeasurementRangeStruct::DecodableType> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::Ranges::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace Ranges
+namespace Voltage {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::Voltage::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace Voltage
+namespace Current {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::Current::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace Current
+namespace ActivePower {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::ActivePower::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace ActivePower
+namespace RmsCurrent {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::RmsCurrent::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace RmsCurrent
+namespace RmsPower {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::RmsPower::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace RmsPower
+namespace ApparentPower {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::ApparentPower::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace ApparentPower
+namespace ReactivePower {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::ReactivePower::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace ReactivePower
+namespace Frequency {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::Frequency::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace Frequency
+namespace HarmonicCurrents {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<chip::app::DataModel::List<
+        const chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type>>;
+    using DecodableType    = chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::HarmonicCurrents::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace HarmonicCurrents
+namespace HarmonicPhases {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<chip::app::DataModel::List<
+        const chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type>>;
+    using DecodableType    = chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<
+        chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::DecodableType>> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::HarmonicPhases::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace HarmonicPhases
+namespace PowerFactor {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::PowerFactor::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace PowerFactor
+namespace LineCurrent {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::LineCurrent::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace LineCurrent
+namespace NeutralCurrent {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<int64_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<int64_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::NeutralCurrent::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace NeutralCurrent
+namespace GeneratedCommandList {
+struct TypeInfo : public Clusters::Globals::Attributes::GeneratedCommandList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+};
+} // namespace GeneratedCommandList
+namespace AcceptedCommandList {
+struct TypeInfo : public Clusters::Globals::Attributes::AcceptedCommandList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+};
+} // namespace AcceptedCommandList
+namespace EventList {
+struct TypeInfo : public Clusters::Globals::Attributes::EventList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+};
+} // namespace EventList
+namespace AttributeList {
+struct TypeInfo : public Clusters::Globals::Attributes::AttributeList::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+};
+} // namespace AttributeList
+namespace FeatureMap {
+struct TypeInfo : public Clusters::Globals::Attributes::FeatureMap::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+};
+} // namespace FeatureMap
+namespace ClusterRevision {
+struct TypeInfo : public Clusters::Globals::Attributes::ClusterRevision::TypeInfo
+{
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+};
+} // namespace ClusterRevision
+
+struct TypeInfo
+{
+    struct DecodableType
+    {
+        static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+
+        CHIP_ERROR Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path);
+
+        Attributes::PowerMode::TypeInfo::DecodableType powerMode =
+            static_cast<chip::app::Clusters::ElectricalPowerMeasurement::PowerModeEnum>(0);
+        Attributes::Accuracy::TypeInfo::DecodableType accuracy;
+        Attributes::Ranges::TypeInfo::DecodableType ranges;
+        Attributes::Voltage::TypeInfo::DecodableType voltage;
+        Attributes::Current::TypeInfo::DecodableType current;
+        Attributes::ActivePower::TypeInfo::DecodableType activePower;
+        Attributes::RmsCurrent::TypeInfo::DecodableType rmsCurrent;
+        Attributes::RmsPower::TypeInfo::DecodableType rmsPower;
+        Attributes::ApparentPower::TypeInfo::DecodableType apparentPower;
+        Attributes::ReactivePower::TypeInfo::DecodableType reactivePower;
+        Attributes::Frequency::TypeInfo::DecodableType frequency;
+        Attributes::HarmonicCurrents::TypeInfo::DecodableType harmonicCurrents;
+        Attributes::HarmonicPhases::TypeInfo::DecodableType harmonicPhases;
+        Attributes::PowerFactor::TypeInfo::DecodableType powerFactor;
+        Attributes::LineCurrent::TypeInfo::DecodableType lineCurrent;
+        Attributes::NeutralCurrent::TypeInfo::DecodableType neutralCurrent;
+        Attributes::GeneratedCommandList::TypeInfo::DecodableType generatedCommandList;
+        Attributes::AcceptedCommandList::TypeInfo::DecodableType acceptedCommandList;
+        Attributes::EventList::TypeInfo::DecodableType eventList;
+        Attributes::AttributeList::TypeInfo::DecodableType attributeList;
+        Attributes::FeatureMap::TypeInfo::DecodableType featureMap           = static_cast<uint32_t>(0);
+        Attributes::ClusterRevision::TypeInfo::DecodableType clusterRevision = static_cast<uint16_t>(0);
+    };
+};
+} // namespace Attributes
+namespace Events {
+namespace MeasurementPeriodRange {
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+
+enum class Fields : uint8_t
+{
+    kMeasurementType = 0,
+    kPeriodStart     = 1,
+    kPeriodEnd       = 2,
+    kMin             = 3,
+    kMinTimestamp    = 4,
+    kMax             = 5,
+    kMaxTimestamp    = 6,
+};
+
+struct Type
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::MeasurementPeriodRange::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+    static constexpr bool kIsFabricScoped = false;
+
+    MeasurementTypeEnum measurementType = static_cast<MeasurementTypeEnum>(0);
+    uint32_t periodStart                = static_cast<uint32_t>(0);
+    uint32_t periodEnd                  = static_cast<uint32_t>(0);
+    int64_t min                         = static_cast<int64_t>(0);
+    uint32_t minTimestamp               = static_cast<uint32_t>(0);
+    int64_t max                         = static_cast<int64_t>(0);
+    uint32_t maxTimestamp               = static_cast<uint32_t>(0);
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+};
+
+struct DecodableType
+{
+public:
+    static constexpr PriorityLevel GetPriorityLevel() { return kPriorityLevel; }
+    static constexpr EventId GetEventId() { return Events::MeasurementPeriodRange::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::ElectricalPowerMeasurement::Id; }
+
+    MeasurementTypeEnum measurementType = static_cast<MeasurementTypeEnum>(0);
+    uint32_t periodStart                = static_cast<uint32_t>(0);
+    uint32_t periodEnd                  = static_cast<uint32_t>(0);
+    int64_t min                         = static_cast<int64_t>(0);
+    uint32_t minTimestamp               = static_cast<uint32_t>(0);
+    int64_t max                         = static_cast<int64_t>(0);
+    uint32_t maxTimestamp               = static_cast<uint32_t>(0);
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+} // namespace MeasurementPeriodRange
+} // namespace Events
+} // namespace ElectricalPowerMeasurement
 namespace UnitTesting {
 namespace Structs {
 namespace SimpleStruct {

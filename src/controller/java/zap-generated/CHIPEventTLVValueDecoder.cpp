@@ -5290,6 +5290,104 @@ jobject DecodeEventValue(const app::ConcreteEventPath & aPath, TLV::TLVReader & 
         }
         break;
     }
+    case app::Clusters::ElectricalPowerMeasurement::Id: {
+        using namespace app::Clusters::ElectricalPowerMeasurement;
+        switch (aPath.mEventId)
+        {
+        case Events::MeasurementPeriodRange::Id: {
+            Events::MeasurementPeriodRange::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_measurementType;
+            std::string value_measurementTypeClassName     = "java/lang/Integer";
+            std::string value_measurementTypeCtorSignature = "(I)V";
+            jint jnivalue_measurementType                  = static_cast<jint>(cppValue.measurementType);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jint>(value_measurementTypeClassName.c_str(),
+                                                                       value_measurementTypeCtorSignature.c_str(),
+                                                                       jnivalue_measurementType, value_measurementType);
+
+            jobject value_periodStart;
+            std::string value_periodStartClassName     = "java/lang/Long";
+            std::string value_periodStartCtorSignature = "(J)V";
+            jlong jnivalue_periodStart                 = static_cast<jlong>(cppValue.periodStart);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_periodStartClassName.c_str(),
+                                                                        value_periodStartCtorSignature.c_str(),
+                                                                        jnivalue_periodStart, value_periodStart);
+
+            jobject value_periodEnd;
+            std::string value_periodEndClassName     = "java/lang/Long";
+            std::string value_periodEndCtorSignature = "(J)V";
+            jlong jnivalue_periodEnd                 = static_cast<jlong>(cppValue.periodEnd);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
+                value_periodEndClassName.c_str(), value_periodEndCtorSignature.c_str(), jnivalue_periodEnd, value_periodEnd);
+
+            jobject value_min;
+            std::string value_minClassName     = "java/lang/Long";
+            std::string value_minCtorSignature = "(J)V";
+            jlong jnivalue_min                 = static_cast<jlong>(cppValue.min);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_minClassName.c_str(), value_minCtorSignature.c_str(),
+                                                                        jnivalue_min, value_min);
+
+            jobject value_minTimestamp;
+            std::string value_minTimestampClassName     = "java/lang/Long";
+            std::string value_minTimestampCtorSignature = "(J)V";
+            jlong jnivalue_minTimestamp                 = static_cast<jlong>(cppValue.minTimestamp);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_minTimestampClassName.c_str(),
+                                                                        value_minTimestampCtorSignature.c_str(),
+                                                                        jnivalue_minTimestamp, value_minTimestamp);
+
+            jobject value_max;
+            std::string value_maxClassName     = "java/lang/Long";
+            std::string value_maxCtorSignature = "(J)V";
+            jlong jnivalue_max                 = static_cast<jlong>(cppValue.max);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_maxClassName.c_str(), value_maxCtorSignature.c_str(),
+                                                                        jnivalue_max, value_max);
+
+            jobject value_maxTimestamp;
+            std::string value_maxTimestampClassName     = "java/lang/Long";
+            std::string value_maxTimestampCtorSignature = "(J)V";
+            jlong jnivalue_maxTimestamp                 = static_cast<jlong>(cppValue.maxTimestamp);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(value_maxTimestampClassName.c_str(),
+                                                                        value_maxTimestampCtorSignature.c_str(),
+                                                                        jnivalue_maxTimestamp, value_maxTimestamp);
+
+            jclass measurementPeriodRangeStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$ElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent",
+                measurementPeriodRangeStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl,
+                             "Could not find class ChipEventStructs$ElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent");
+                return nullptr;
+            }
+            jmethodID measurementPeriodRangeStructCtor =
+                env->GetMethodID(measurementPeriodRangeStructClass, "<init>",
+                                 "(Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/"
+                                 "Long;Ljava/lang/Long;)V");
+            if (measurementPeriodRangeStructCtor == nullptr)
+            {
+                ChipLogError(
+                    Zcl,
+                    "Could not find ChipEventStructs$ElectricalPowerMeasurementClusterMeasurementPeriodRangeEvent constructor");
+                return nullptr;
+            }
+
+            jobject value =
+                env->NewObject(measurementPeriodRangeStructClass, measurementPeriodRangeStructCtor, value_measurementType,
+                               value_periodStart, value_periodEnd, value_min, value_minTimestamp, value_max, value_maxTimestamp);
+
+            return value;
+        }
+        default:
+            *aError = CHIP_ERROR_IM_MALFORMED_EVENT_PATH_IB;
+            break;
+        }
+        break;
+    }
     case app::Clusters::UnitTesting::Id: {
         using namespace app::Clusters::UnitTesting;
         switch (aPath.mEventId)

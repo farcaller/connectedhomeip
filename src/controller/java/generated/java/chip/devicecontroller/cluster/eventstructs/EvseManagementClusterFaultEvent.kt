@@ -17,18 +17,21 @@
 package chip.devicecontroller.cluster.eventstructs
 
 import chip.devicecontroller.cluster.*
+import chip.tlv.AnonymousTag
 import chip.tlv.ContextSpecificTag
 import chip.tlv.Tag
+import chip.tlv.TlvParsingException
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EvseManagementClusterFaultEvent(
-  val evseSessionId: Long,
-  val evseState: Int,
-  val evseFaultPreviousState: Int,
-  val evseFaultCurrentState: Int
-) {
-  override fun toString(): String = buildString {
+import java.util.Optional
+
+class EvseManagementClusterFaultEvent (
+    val evseSessionId: Long,
+    val evseState: Int,
+    val evseFaultPreviousState: Int,
+    val evseFaultCurrentState: Int) {
+  override fun toString(): String  = buildString {
     append("EvseManagementClusterFaultEvent {\n")
     append("\tevseSessionId : $evseSessionId\n")
     append("\tevseState : $evseState\n")
@@ -54,22 +57,16 @@ class EvseManagementClusterFaultEvent(
     private const val TAG_EVSE_FAULT_PREVIOUS_STATE = 2
     private const val TAG_EVSE_FAULT_CURRENT_STATE = 4
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterFaultEvent {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader) : EvseManagementClusterFaultEvent {
       tlvReader.enterStructure(tag)
       val evseSessionId = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ID))
       val evseState = tlvReader.getInt(ContextSpecificTag(TAG_EVSE_STATE))
-      val evseFaultPreviousState =
-        tlvReader.getInt(ContextSpecificTag(TAG_EVSE_FAULT_PREVIOUS_STATE))
+      val evseFaultPreviousState = tlvReader.getInt(ContextSpecificTag(TAG_EVSE_FAULT_PREVIOUS_STATE))
       val evseFaultCurrentState = tlvReader.getInt(ContextSpecificTag(TAG_EVSE_FAULT_CURRENT_STATE))
-
+      
       tlvReader.exitContainer()
 
-      return EvseManagementClusterFaultEvent(
-        evseSessionId,
-        evseState,
-        evseFaultPreviousState,
-        evseFaultCurrentState
-      )
+      return EvseManagementClusterFaultEvent(evseSessionId, evseState, evseFaultPreviousState, evseFaultCurrentState)
     }
   }
 }

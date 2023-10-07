@@ -400,6 +400,10 @@
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end
 
+@interface MTRBaseClusterElectricalPowerMeasurement ()
+@property (nonatomic, strong, readonly) MTRBaseDevice * device;
+@end
+
 @interface MTRBaseClusterUnitTesting ()
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end

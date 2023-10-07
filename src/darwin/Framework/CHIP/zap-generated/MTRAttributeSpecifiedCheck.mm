@@ -5369,6 +5369,81 @@ static BOOL AttributeIsSpecifiedInWaterHeaterCluster(AttributeId aAttributeId)
     }
     }
 }
+static BOOL AttributeIsSpecifiedInElectricalPowerMeasurementCluster(AttributeId aAttributeId)
+{
+    using namespace Clusters::ElectricalPowerMeasurement;
+    switch (aAttributeId) {
+    case Attributes::PowerMode::Id: {
+        return YES;
+    }
+    case Attributes::Accuracy::Id: {
+        return YES;
+    }
+    case Attributes::Ranges::Id: {
+        return YES;
+    }
+    case Attributes::Voltage::Id: {
+        return YES;
+    }
+    case Attributes::Current::Id: {
+        return YES;
+    }
+    case Attributes::ActivePower::Id: {
+        return YES;
+    }
+    case Attributes::RmsCurrent::Id: {
+        return YES;
+    }
+    case Attributes::RmsPower::Id: {
+        return YES;
+    }
+    case Attributes::ApparentPower::Id: {
+        return YES;
+    }
+    case Attributes::ReactivePower::Id: {
+        return YES;
+    }
+    case Attributes::Frequency::Id: {
+        return YES;
+    }
+    case Attributes::HarmonicCurrents::Id: {
+        return YES;
+    }
+    case Attributes::HarmonicPhases::Id: {
+        return YES;
+    }
+    case Attributes::PowerFactor::Id: {
+        return YES;
+    }
+    case Attributes::LineCurrent::Id: {
+        return YES;
+    }
+    case Attributes::NeutralCurrent::Id: {
+        return YES;
+    }
+    case Attributes::GeneratedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::AcceptedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::EventList::Id: {
+        return YES;
+    }
+    case Attributes::AttributeList::Id: {
+        return YES;
+    }
+    case Attributes::FeatureMap::Id: {
+        return YES;
+    }
+    case Attributes::ClusterRevision::Id: {
+        return YES;
+    }
+    default: {
+        return NO;
+    }
+    }
+}
 static BOOL AttributeIsSpecifiedInUnitTestingCluster(AttributeId aAttributeId)
 {
     using namespace Clusters::UnitTesting;
@@ -5930,6 +6005,9 @@ BOOL MTRAttributeIsSpecified(ClusterId aClusterId, AttributeId aAttributeId)
     }
     case Clusters::WaterHeater::Id: {
         return AttributeIsSpecifiedInWaterHeaterCluster(aAttributeId);
+    }
+    case Clusters::ElectricalPowerMeasurement::Id: {
+        return AttributeIsSpecifiedInElectricalPowerMeasurementCluster(aAttributeId);
     }
     case Clusters::UnitTesting::Id: {
         return AttributeIsSpecifiedInUnitTestingCluster(aAttributeId);

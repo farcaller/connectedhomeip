@@ -319,6 +319,9 @@ static constexpr ClusterId Id = 0x00000B04;
 namespace WaterHeater {
 static constexpr ClusterId Id = 0x00006660;
 } // namespace WaterHeater
+namespace ElectricalPowerMeasurement {
+static constexpr ClusterId Id = 0x00006661;
+} // namespace ElectricalPowerMeasurement
 namespace UnitTesting {
 static constexpr ClusterId Id = 0xFFF1FC05;
 } // namespace UnitTesting

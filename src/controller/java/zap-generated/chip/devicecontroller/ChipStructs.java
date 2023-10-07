@@ -3015,6 +3015,141 @@ public Optional<Long> addedEnergy;
   }
 }
 
+public static class ElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
+public Integer order;
+public @Nullable Long measurement;
+
+  public ElectricalPowerMeasurementClusterHarmonicMeasurementStruct(
+    Integer order
+      , @Nullable Long measurement
+  ) {
+    this.order = order;
+    this.measurement = measurement;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalPowerMeasurementClusterHarmonicMeasurementStruct {\n");
+    output.append("\torder: ");
+    output.append(order);
+        output.append("\n");
+    output.append("\tmeasurement: ");
+    output.append(measurement);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalPowerMeasurementClusterMeasurementAccuracyStruct {
+public Integer measurementType;
+public Boolean measured;
+public Optional<Integer> percentTypical;
+public Optional<Integer> percentMin;
+public Optional<Integer> percentMax;
+public Optional<Long> fixedTypical;
+public Optional<Long> fixedMin;
+public Optional<Long> fixedMax;
+
+  public ElectricalPowerMeasurementClusterMeasurementAccuracyStruct(
+    Integer measurementType
+      , Boolean measured
+      , Optional<Integer> percentTypical
+      , Optional<Integer> percentMin
+      , Optional<Integer> percentMax
+      , Optional<Long> fixedTypical
+      , Optional<Long> fixedMin
+      , Optional<Long> fixedMax
+  ) {
+    this.measurementType = measurementType;
+    this.measured = measured;
+    this.percentTypical = percentTypical;
+    this.percentMin = percentMin;
+    this.percentMax = percentMax;
+    this.fixedTypical = fixedTypical;
+    this.fixedMin = fixedMin;
+    this.fixedMax = fixedMax;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalPowerMeasurementClusterMeasurementAccuracyStruct {\n");
+    output.append("\tmeasurementType: ");
+    output.append(measurementType);
+        output.append("\n");
+    output.append("\tmeasured: ");
+    output.append(measured);
+        output.append("\n");
+    output.append("\tpercentTypical: ");
+    output.append(percentTypical);
+        output.append("\n");
+    output.append("\tpercentMin: ");
+    output.append(percentMin);
+        output.append("\n");
+    output.append("\tpercentMax: ");
+    output.append(percentMax);
+        output.append("\n");
+    output.append("\tfixedTypical: ");
+    output.append(fixedTypical);
+        output.append("\n");
+    output.append("\tfixedMin: ");
+    output.append(fixedMin);
+        output.append("\n");
+    output.append("\tfixedMax: ");
+    output.append(fixedMax);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalPowerMeasurementClusterMeasurementRangeStruct {
+public Integer measurementType;
+public @Nullable Long min;
+public @Nullable Long minTimestamp;
+public @Nullable Long max;
+public @Nullable Long maxTimestamp;
+
+  public ElectricalPowerMeasurementClusterMeasurementRangeStruct(
+    Integer measurementType
+      , @Nullable Long min
+      , @Nullable Long minTimestamp
+      , @Nullable Long max
+      , @Nullable Long maxTimestamp
+  ) {
+    this.measurementType = measurementType;
+    this.min = min;
+    this.minTimestamp = minTimestamp;
+    this.max = max;
+    this.maxTimestamp = maxTimestamp;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalPowerMeasurementClusterMeasurementRangeStruct {\n");
+    output.append("\tmeasurementType: ");
+    output.append(measurementType);
+        output.append("\n");
+    output.append("\tmin: ");
+    output.append(min);
+        output.append("\n");
+    output.append("\tminTimestamp: ");
+    output.append(minTimestamp);
+        output.append("\n");
+    output.append("\tmax: ");
+    output.append(max);
+        output.append("\n");
+    output.append("\tmaxTimestamp: ");
+    output.append(maxTimestamp);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class UnitTestingClusterSimpleStruct {
 public Integer a;
 public Boolean b;

@@ -4207,6 +4207,17 @@ server cluster EvseManagement = 1804 {
   command ClearTargets(): DefaultSuccess = 7;
 }
 
+/** Attributes related to the electrical properties of a device. This cluster is used by power outlets and other devices that need to provide instantaneous data as opposed to metrology data which should be retrieved from the metering cluster.. */
+server cluster ElectricalMeasurement = 2820 {
+  readonly attribute bitmap32 measurementType = 0;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+}
+
 /** This allows clients to control a hot water heating appliance so it can be used with energy management. It can help consumers save cost (e.g. using power at cheaper times or from local solar PV generation). */
 server cluster WaterHeater = 26208 {
   bitmap HeaterType : BITMAP8 {
@@ -4763,6 +4774,16 @@ endpoint 1 {
     ram      attribute evseSessionEnergyCharged;
     ram      attribute evseSessionEnergyDischarged;
     ram      attribute evseSessionMaximumCurrent;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
+  }
+
+  server cluster ElectricalMeasurement {
+    ram      attribute measurementType;
     callback attribute generatedCommandList;
     callback attribute acceptedCommandList;
     callback attribute eventList;
