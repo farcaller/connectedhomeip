@@ -33,6 +33,10 @@
 #include "pigweed/rpc_services/Device.h"
 #endif // defined(PW_RPC_DEVICE_SERVICE) && PW_RPC_DEVICE_SERVICE
 
+#if defined(PW_RPC_ELEC_SERVICE) && PW_RPC_ELEC_SERVICE
+#include "pigweed/rpc_services/Elec.h"
+#endif // defined(PW_RPC_ELEC_SERVICE) && PW_RPC_ELEC_SERVICE
+
 #if defined(PW_RPC_EVSE_SERVICE) && PW_RPC_EVSE_SERVICE
 #include "pigweed/rpc_services/Evse.h"
 #endif // defined(PW_RPC_EVSE_SERVICE) && PW_RPC_EVSE_SERVICE
@@ -79,6 +83,10 @@ Descriptor descriptor_service;
 Device device_service;
 #endif // defined(PW_RPC_DEVICE_SERVICE) && PW_RPC_DEVICE_SERVICE
 
+#if defined(PW_RPC_ELEC_SERVICE) && PW_RPC_ELEC_SERVICE
+Elec elec_service;
+#endif // defined(PW_RPC_ELEC_SERVICE) && PW_RPC_ELEC_SERVICE
+
 #if defined(PW_RPC_EVSE_SERVICE) && PW_RPC_EVSE_SERVICE
 Evse evse_service;
 #endif // defined(PW_RPC_EVSE_SERVICE) && PW_RPC_EVSE_SERVICE
@@ -104,6 +112,10 @@ void RegisterServices(pw::rpc::Server & server)
 #if defined(PW_RPC_DEVICE_SERVICE) && PW_RPC_DEVICE_SERVICE
     server.RegisterService(device_service);
 #endif // defined(PW_RPC_DEVICE_SERVICE) && PW_RPC_DEVICE_SERVICE
+
+#if defined(PW_RPC_ELEC_SERVICE) && PW_RPC_ELEC_SERVICE
+    server.RegisterService(elec_service);
+#endif // defined(PW_RPC_ELEC_SERVICE) && PW_RPC_ELEC_SERVICE
 
 #if defined(PW_RPC_EVSE_SERVICE) && PW_RPC_EVSE_SERVICE
     server.RegisterService(evse_service);
