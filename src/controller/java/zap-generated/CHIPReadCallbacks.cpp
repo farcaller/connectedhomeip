@@ -51022,9 +51022,9 @@ void CHIPElectricalPowerMeasurementAttributeListAttributeCallback::CallbackFn(
     env->CallVoidMethod(javaCallbackRef, javaMethod, arrayListObj);
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyConsumedTimeAttributeCallbackType>(CallbackFn,
+CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback::
+    CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyImportedTimeAttributeCallbackType>(CallbackFn,
                                                                                                                       this),
     keepAlive(keepAlive)
 {
@@ -51042,8 +51042,8 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51054,7 +51054,7 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint32_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51063,8 +51063,8 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallbac
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallback *>(context),
+    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback, decltype(&maybeDestroy)>
+        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyImportedTimeAttributeCallback *>(context),
                     maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
@@ -51093,9 +51093,9 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedTimeAttributeCallbac
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::
-    CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyConsumedAttributeCallbackType>(CallbackFn, this),
+CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback::
+    CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyImportedAttributeCallbackType>(CallbackFn, this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51112,8 +51112,8 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback()
+CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51124,7 +51124,7 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51133,8 +51133,8 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::C
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
-        reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback *>(context), maybeDestroy);
+    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
+        reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyImportedAttributeCallback *>(context), maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
     javaCallbackRef = cppCallback.get()->javaCallbackRef;
@@ -51162,10 +51162,10 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyConsumedAttributeCallback::C
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredTimeAttributeCallbackType>(CallbackFn,
-                                                                                                                       this),
+CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback::
+    CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyExportedTimeAttributeCallbackType>(CallbackFn,
+                                                                                                                      this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51182,8 +51182,8 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51194,7 +51194,7 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint32_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51203,8 +51203,8 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallba
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallback *>(context),
+    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback, decltype(&maybeDestroy)>
+        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyExportedTimeAttributeCallback *>(context),
                     maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
@@ -51233,10 +51233,9 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredTimeAttributeCallba
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::
-    CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredAttributeCallbackType>(CallbackFn,
-                                                                                                                   this),
+CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback::
+    CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterCumulativeEnergyExportedAttributeCallbackType>(CallbackFn, this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51253,8 +51252,8 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback()
+CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51265,7 +51264,7 @@ CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51274,8 +51273,8 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback, decltype(&maybeDestroy)> cppCallback(
-        reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback *>(context), maybeDestroy);
+    std::unique_ptr<CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
+        reinterpret_cast<CHIPElectricalEnergyMeasurementCumulativeEnergyExportedAttributeCallback *>(context), maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
     javaCallbackRef = cppCallback.get()->javaCallbackRef;
@@ -51303,9 +51302,9 @@ void CHIPElectricalEnergyMeasurementCumulativeEnergyDeliveredAttributeCallback::
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyConsumedStartTimeAttributeCallbackType>(CallbackFn,
+CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback::
+    CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyImportedStartTimeAttributeCallbackType>(CallbackFn,
                                                                                                                          this),
     keepAlive(keepAlive)
 {
@@ -51323,8 +51322,8 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback:
     }
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51335,7 +51334,7 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback:
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint32_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51344,8 +51343,8 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCall
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCallback *>(context),
+    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback, decltype(&maybeDestroy)>
+        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyImportedStartTimeAttributeCallback *>(context),
                     maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
@@ -51374,9 +51373,9 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedStartTimeAttributeCall
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEndTimeAttributeCallbackType>(CallbackFn,
+CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback::
+    CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyImportedEndTimeAttributeCallbackType>(CallbackFn,
                                                                                                                        this),
     keepAlive(keepAlive)
 {
@@ -51394,8 +51393,8 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51406,7 +51405,7 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint32_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51415,8 +51414,8 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallba
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallback *>(context),
+    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback, decltype(&maybeDestroy)>
+        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyImportedEndTimeAttributeCallback *>(context),
                     maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
@@ -51445,9 +51444,9 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedEndTimeAttributeCallba
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::
-    CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyConsumedAttributeCallbackType>(CallbackFn, this),
+CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback::
+    CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyImportedAttributeCallbackType>(CallbackFn, this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51464,8 +51463,8 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback()
+CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51476,7 +51475,7 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51485,8 +51484,8 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::Cal
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
-        reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback *>(context), maybeDestroy);
+    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
+        reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyImportedAttributeCallback *>(context), maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
     javaCallbackRef = cppCallback.get()->javaCallbackRef;
@@ -51514,10 +51513,10 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyConsumedAttributeCallback::Cal
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredStartTimeAttributeCallbackType>(
-        CallbackFn, this),
+CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback::
+    CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyExportedStartTimeAttributeCallbackType>(CallbackFn,
+                                                                                                                         this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51534,8 +51533,8 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback
     }
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51546,7 +51545,7 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint32_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51555,8 +51554,8 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCal
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCallback *>(context),
+    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback, decltype(&maybeDestroy)>
+        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyExportedStartTimeAttributeCallback *>(context),
                     maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
@@ -51585,10 +51584,10 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredStartTimeAttributeCal
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEndTimeAttributeCallbackType>(CallbackFn,
-                                                                                                                        this),
+CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback::
+    CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyExportedEndTimeAttributeCallbackType>(CallbackFn,
+                                                                                                                       this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51605,8 +51604,8 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51617,7 +51616,7 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint32_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51626,8 +51625,8 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallb
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallback *>(context),
+    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback, decltype(&maybeDestroy)>
+        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyExportedEndTimeAttributeCallback *>(context),
                     maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
@@ -51656,9 +51655,9 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredEndTimeAttributeCallb
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::
-    CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredAttributeCallbackType>(CallbackFn, this),
+CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback::
+    CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterPeriodicEnergyExportedAttributeCallbackType>(CallbackFn, this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51675,8 +51674,8 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback()
+CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51687,7 +51686,7 @@ CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51696,8 +51695,8 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::Ca
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback, decltype(&maybeDestroy)> cppCallback(
-        reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback *>(context), maybeDestroy);
+    std::unique_ptr<CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
+        reinterpret_cast<CHIPElectricalEnergyMeasurementPeriodicEnergyExportedAttributeCallback *>(context), maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
     javaCallbackRef = cppCallback.get()->javaCallbackRef;
@@ -51725,10 +51724,9 @@ void CHIPElectricalEnergyMeasurementPeriodicEnergyDeliveredAttributeCallback::Ca
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterEphemeralEnergyConsumedStartTimeAttributeCallbackType>(
-        CallbackFn, this),
+CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback::
+    CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterEphemeralEnergyImportedAttributeCallbackType>(CallbackFn, this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51745,8 +51743,8 @@ CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback
     }
 }
 
-CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51757,7 +51755,7 @@ CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51766,9 +51764,8 @@ void CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCal
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCallback *>(context),
-                    maybeDestroy);
+    std::unique_ptr<CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
+        reinterpret_cast<CHIPElectricalEnergyMeasurementEphemeralEnergyImportedAttributeCallback *>(context), maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
     javaCallbackRef = cppCallback.get()->javaCallbackRef;
@@ -51796,10 +51793,9 @@ void CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedStartTimeAttributeCal
     env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
 }
 
-CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback::
-    CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEndTimeAttributeCallbackType>(CallbackFn,
-                                                                                                                        this),
+CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback::
+    CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback(jobject javaCallback, bool keepAlive) :
+    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterEphemeralEnergyExportedAttributeCallbackType>(CallbackFn, this),
     keepAlive(keepAlive)
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
@@ -51816,8 +51812,8 @@ CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback::
     }
 }
 
-CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback()
+CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback::
+    ~CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback()
 {
     JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
     if (env == nullptr)
@@ -51828,7 +51824,7 @@ CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback::
     env->DeleteGlobalRef(javaCallbackRef);
 }
 
-void CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback::CallbackFn(
+void CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback::CallbackFn(
     void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
 {
     chip::DeviceLayer::StackUnlock unlock;
@@ -51837,78 +51833,8 @@ void CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallb
     jobject javaCallbackRef;
 
     VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback, decltype(&maybeDestroy)>
-        cppCallback(reinterpret_cast<CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedEndTimeAttributeCallback *>(context),
-                    maybeDestroy);
-
-    // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
-    javaCallbackRef = cppCallback.get()->javaCallbackRef;
-    VerifyOrReturn(javaCallbackRef != nullptr,
-                   ChipLogProgress(Zcl, "Early return from attribute callback since Java callback is null"));
-
-    jmethodID javaMethod;
-    err = chip::JniReferences::GetInstance().FindMethod(env, javaCallbackRef, "onSuccess", "(Ljava/lang/Long;)V", &javaMethod);
-    VerifyOrReturn(err == CHIP_NO_ERROR, ChipLogError(Zcl, "Could not find onSuccess() method"));
-
-    jobject javaValue;
-    if (value.IsNull())
-    {
-        javaValue = nullptr;
-    }
-    else
-    {
-        std::string javaValueClassName     = "java/lang/Long";
-        std::string javaValueCtorSignature = "(J)V";
-        jlong jnijavaValue                 = static_cast<jlong>(value.Value());
-        chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(javaValueClassName.c_str(), javaValueCtorSignature.c_str(),
-                                                                    jnijavaValue, javaValue);
-    }
-
-    env->CallVoidMethod(javaCallbackRef, javaMethod, javaValue);
-}
-
-CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback::
-    CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback(jobject javaCallback, bool keepAlive) :
-    chip::Callback::Callback<CHIPElectricalEnergyMeasurementClusterEphemeralEnergyConsumedAttributeCallbackType>(CallbackFn, this),
-    keepAlive(keepAlive)
-{
-    JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
-    if (env == nullptr)
-    {
-        ChipLogError(Zcl, "Could not create global reference for Java callback");
-        return;
-    }
-
-    javaCallbackRef = env->NewGlobalRef(javaCallback);
-    if (javaCallbackRef == nullptr)
-    {
-        ChipLogError(Zcl, "Could not create global reference for Java callback");
-    }
-}
-
-CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback::
-    ~CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback()
-{
-    JNIEnv * env = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
-    if (env == nullptr)
-    {
-        ChipLogError(Zcl, "Could not delete global reference for Java callback");
-        return;
-    }
-    env->DeleteGlobalRef(javaCallbackRef);
-}
-
-void CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback::CallbackFn(
-    void * context, const chip::app::DataModel::Nullable<uint64_t> & value)
-{
-    chip::DeviceLayer::StackUnlock unlock;
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    JNIEnv * env   = chip::JniReferences::GetInstance().GetEnvForCurrentThread();
-    jobject javaCallbackRef;
-
-    VerifyOrReturn(env != nullptr, ChipLogError(Zcl, "Could not get JNI env"));
-    std::unique_ptr<CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
-        reinterpret_cast<CHIPElectricalEnergyMeasurementEphemeralEnergyConsumedAttributeCallback *>(context), maybeDestroy);
+    std::unique_ptr<CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback, decltype(&maybeDestroy)> cppCallback(
+        reinterpret_cast<CHIPElectricalEnergyMeasurementEphemeralEnergyExportedAttributeCallback *>(context), maybeDestroy);
 
     // It's valid for javaCallbackRef to be nullptr if the Java code passed in a null callback.
     javaCallbackRef = cppCallback.get()->javaCallbackRef;

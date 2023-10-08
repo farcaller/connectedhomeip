@@ -8319,45 +8319,40 @@ MTR_NEWLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> *)readAttributeMeasuredWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyConsumedTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyImportedTimeWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyImportedWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyDeliveredTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyExportedTimeWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyDeliveredWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyExportedWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedStartTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyImportedStartTimeWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedEndTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyImportedEndTimeWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyImportedWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredStartTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyExportedStartTimeWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredEndTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyExportedEndTimeWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyExportedWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeSystemTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedStartTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyImportedWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedEndTimeWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyExportedWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;

@@ -2229,153 +2229,174 @@ public Long maxTimestamp;
   }
 }
 
-public static class ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent {
-public Long consumedTimestamp;
-public Long energyConsumed;
+public static class ElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent {
+public Long importedTimestamp;
+public Long energyImported;
 
-  public ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent(
-    Long consumedTimestamp
-      , Long energyConsumed
+  public ElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent(
+    Long importedTimestamp
+      , Long energyImported
   ) {
-    this.consumedTimestamp = consumedTimestamp;
-    this.energyConsumed = energyConsumed;
+    this.importedTimestamp = importedTimestamp;
+    this.energyImported = energyImported;
   }
 
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();
-    output.append("ElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent {\n");
-    output.append("\tconsumedTimestamp: ");
-    output.append(consumedTimestamp);
+    output.append("ElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent {\n");
+    output.append("\timportedTimestamp: ");
+    output.append(importedTimestamp);
         output.append("\n");
-    output.append("\tenergyConsumed: ");
-    output.append(energyConsumed);
+    output.append("\tenergyImported: ");
+    output.append(energyImported);
         output.append("\n");
     output.append("}\n");
     return output.toString();
   }
 }
 
-public static class ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent {
-public Long deliveredTimestamp;
-public Long energyDelivered;
+public static class ElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent {
+public Long exportedTimestamp;
+public Long energyExported;
 
-  public ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent(
-    Long deliveredTimestamp
-      , Long energyDelivered
+  public ElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent(
+    Long exportedTimestamp
+      , Long energyExported
   ) {
-    this.deliveredTimestamp = deliveredTimestamp;
-    this.energyDelivered = energyDelivered;
+    this.exportedTimestamp = exportedTimestamp;
+    this.energyExported = energyExported;
   }
 
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();
-    output.append("ElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent {\n");
-    output.append("\tdeliveredTimestamp: ");
-    output.append(deliveredTimestamp);
+    output.append("ElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent {\n");
+    output.append("\texportedTimestamp: ");
+    output.append(exportedTimestamp);
         output.append("\n");
-    output.append("\tenergyDelivered: ");
-    output.append(energyDelivered);
+    output.append("\tenergyExported: ");
+    output.append(energyExported);
         output.append("\n");
     output.append("}\n");
     return output.toString();
   }
 }
 
-public static class ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent {
+public static class ElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent {
 public Long periodStart;
 public Long periodEnd;
-public Long energyConsumed;
+public Long energyImported;
 
-  public ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent(
+  public ElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent(
     Long periodStart
       , Long periodEnd
-      , Long energyConsumed
+      , Long energyImported
   ) {
     this.periodStart = periodStart;
     this.periodEnd = periodEnd;
-    this.energyConsumed = energyConsumed;
+    this.energyImported = energyImported;
   }
 
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();
-    output.append("ElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent {\n");
+    output.append("ElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent {\n");
     output.append("\tperiodStart: ");
     output.append(periodStart);
         output.append("\n");
     output.append("\tperiodEnd: ");
     output.append(periodEnd);
         output.append("\n");
-    output.append("\tenergyConsumed: ");
-    output.append(energyConsumed);
+    output.append("\tenergyImported: ");
+    output.append(energyImported);
         output.append("\n");
     output.append("}\n");
     return output.toString();
   }
 }
 
-public static class ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent {
+public static class ElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent {
 public Long periodStart;
 public Long periodEnd;
-public Long energyDelivered;
+public Long energyExported;
 
-  public ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent(
+  public ElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent(
     Long periodStart
       , Long periodEnd
-      , Long energyDelivered
+      , Long energyExported
   ) {
     this.periodStart = periodStart;
     this.periodEnd = periodEnd;
-    this.energyDelivered = energyDelivered;
+    this.energyExported = energyExported;
   }
 
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();
-    output.append("ElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent {\n");
+    output.append("ElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent {\n");
     output.append("\tperiodStart: ");
     output.append(periodStart);
         output.append("\n");
     output.append("\tperiodEnd: ");
     output.append(periodEnd);
         output.append("\n");
-    output.append("\tenergyDelivered: ");
-    output.append(energyDelivered);
+    output.append("\tenergyExported: ");
+    output.append(energyExported);
         output.append("\n");
     output.append("}\n");
     return output.toString();
   }
 }
 
-public static class ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent {
-public Long periodStart;
-public Long periodEnd;
-public Long energyConsumed;
+public static class ElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent {
+public Long importedTimestamp;
+public Long energyImported;
 
-  public ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent(
-    Long periodStart
-      , Long periodEnd
-      , Long energyConsumed
+  public ElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent(
+    Long importedTimestamp
+      , Long energyImported
   ) {
-    this.periodStart = periodStart;
-    this.periodEnd = periodEnd;
-    this.energyConsumed = energyConsumed;
+    this.importedTimestamp = importedTimestamp;
+    this.energyImported = energyImported;
   }
 
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();
-    output.append("ElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent {\n");
-    output.append("\tperiodStart: ");
-    output.append(periodStart);
+    output.append("ElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent {\n");
+    output.append("\timportedTimestamp: ");
+    output.append(importedTimestamp);
         output.append("\n");
-    output.append("\tperiodEnd: ");
-    output.append(periodEnd);
+    output.append("\tenergyImported: ");
+    output.append(energyImported);
         output.append("\n");
-    output.append("\tenergyConsumed: ");
-    output.append(energyConsumed);
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class ElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent {
+public Long exportedTimestamp;
+public Long energyExported;
+
+  public ElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent(
+    Long exportedTimestamp
+      , Long energyExported
+  ) {
+    this.exportedTimestamp = exportedTimestamp;
+    this.energyExported = energyExported;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("ElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent {\n");
+    output.append("\texportedTimestamp: ");
+    output.append(exportedTimestamp);
+        output.append("\n");
+    output.append("\tenergyExported: ");
+    output.append(energyExported);
         output.append("\n");
     output.append("}\n");
     return output.toString();

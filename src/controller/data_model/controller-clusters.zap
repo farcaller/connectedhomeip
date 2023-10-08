@@ -28393,7 +28393,7 @@
               "reportableChange": 0
             },
             {
-              "name": "CumulativeEnergyConsumedTime",
+              "name": "CumulativeEnergyImportedTime",
               "code": 1,
               "mfgCode": null,
               "side": "server",
@@ -28409,7 +28409,7 @@
               "reportableChange": 0
             },
             {
-              "name": "CumulativeEnergyConsumed",
+              "name": "CumulativeEnergyImported",
               "code": 2,
               "mfgCode": null,
               "side": "server",
@@ -28425,7 +28425,7 @@
               "reportableChange": 0
             },
             {
-              "name": "CumulativeEnergyDeliveredTime",
+              "name": "CumulativeEnergyExportedTime",
               "code": 3,
               "mfgCode": null,
               "side": "server",
@@ -28441,7 +28441,7 @@
               "reportableChange": 0
             },
             {
-              "name": "CumulativeEnergyDelivered",
+              "name": "CumulativeEnergyExported",
               "code": 4,
               "mfgCode": null,
               "side": "server",
@@ -28457,7 +28457,7 @@
               "reportableChange": 0
             },
             {
-              "name": "PeriodicEnergyConsumedStartTime",
+              "name": "PeriodicEnergyImportedStartTime",
               "code": 5,
               "mfgCode": null,
               "side": "server",
@@ -28473,7 +28473,7 @@
               "reportableChange": 0
             },
             {
-              "name": "PeriodicEnergyConsumedEndTime",
+              "name": "PeriodicEnergyImportedEndTime",
               "code": 6,
               "mfgCode": null,
               "side": "server",
@@ -28489,7 +28489,7 @@
               "reportableChange": 0
             },
             {
-              "name": "PeriodicEnergyConsumed",
+              "name": "PeriodicEnergyImported",
               "code": 7,
               "mfgCode": null,
               "side": "server",
@@ -28505,7 +28505,7 @@
               "reportableChange": 0
             },
             {
-              "name": "PeriodicEnergyDeliveredStartTime",
+              "name": "PeriodicEnergyExportedStartTime",
               "code": 8,
               "mfgCode": null,
               "side": "server",
@@ -28521,7 +28521,7 @@
               "reportableChange": 0
             },
             {
-              "name": "PeriodicEnergyDeliveredEndTime",
+              "name": "PeriodicEnergyExportedEndTime",
               "code": 9,
               "mfgCode": null,
               "side": "server",
@@ -28537,7 +28537,7 @@
               "reportableChange": 0
             },
             {
-              "name": "PeriodicEnergyDelivered",
+              "name": "PeriodicEnergyExported",
               "code": 10,
               "mfgCode": null,
               "side": "server",
@@ -28553,11 +28553,11 @@
               "reportableChange": 0
             },
             {
-              "name": "SystemTime",
+              "name": "EphemeralEnergyImported",
               "code": 11,
               "mfgCode": null,
               "side": "server",
-              "type": "systime_ms",
+              "type": "int64u",
               "included": 1,
               "storageOption": "RAM",
               "singleton": 0,
@@ -28569,40 +28569,8 @@
               "reportableChange": 0
             },
             {
-              "name": "EphemeralEnergyConsumedStartTime",
+              "name": "EphemeralEnergyExported",
               "code": 12,
-              "mfgCode": null,
-              "side": "server",
-              "type": "systime_ms",
-              "included": 1,
-              "storageOption": "RAM",
-              "singleton": 0,
-              "bounded": 0,
-              "defaultValue": "",
-              "reportable": 1,
-              "minInterval": 1,
-              "maxInterval": 65534,
-              "reportableChange": 0
-            },
-            {
-              "name": "EphemeralEnergyConsumedEndTime",
-              "code": 13,
-              "mfgCode": null,
-              "side": "server",
-              "type": "systime_ms",
-              "included": 1,
-              "storageOption": "RAM",
-              "singleton": 0,
-              "bounded": 0,
-              "defaultValue": "",
-              "reportable": 1,
-              "minInterval": 1,
-              "maxInterval": 65534,
-              "reportableChange": 0
-            },
-            {
-              "name": "EphemeralEnergyConsumed",
-              "code": 14,
               "mfgCode": null,
               "side": "server",
               "type": "int64u",

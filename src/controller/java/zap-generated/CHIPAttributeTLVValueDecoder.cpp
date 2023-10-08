@@ -34530,8 +34530,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
                                                                            jnivalue, value);
             return value;
         }
-        case Attributes::CumulativeEnergyConsumedTime::Id: {
-            using TypeInfo = Attributes::CumulativeEnergyConsumedTime::TypeInfo;
+        case Attributes::CumulativeEnergyImportedTime::Id: {
+            using TypeInfo = Attributes::CumulativeEnergyImportedTime::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34553,8 +34553,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::CumulativeEnergyConsumed::Id: {
-            using TypeInfo = Attributes::CumulativeEnergyConsumed::TypeInfo;
+        case Attributes::CumulativeEnergyImported::Id: {
+            using TypeInfo = Attributes::CumulativeEnergyImported::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34576,8 +34576,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::CumulativeEnergyDeliveredTime::Id: {
-            using TypeInfo = Attributes::CumulativeEnergyDeliveredTime::TypeInfo;
+        case Attributes::CumulativeEnergyExportedTime::Id: {
+            using TypeInfo = Attributes::CumulativeEnergyExportedTime::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34599,8 +34599,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::CumulativeEnergyDelivered::Id: {
-            using TypeInfo = Attributes::CumulativeEnergyDelivered::TypeInfo;
+        case Attributes::CumulativeEnergyExported::Id: {
+            using TypeInfo = Attributes::CumulativeEnergyExported::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34622,8 +34622,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::PeriodicEnergyConsumedStartTime::Id: {
-            using TypeInfo = Attributes::PeriodicEnergyConsumedStartTime::TypeInfo;
+        case Attributes::PeriodicEnergyImportedStartTime::Id: {
+            using TypeInfo = Attributes::PeriodicEnergyImportedStartTime::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34645,8 +34645,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::PeriodicEnergyConsumedEndTime::Id: {
-            using TypeInfo = Attributes::PeriodicEnergyConsumedEndTime::TypeInfo;
+        case Attributes::PeriodicEnergyImportedEndTime::Id: {
+            using TypeInfo = Attributes::PeriodicEnergyImportedEndTime::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34668,8 +34668,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::PeriodicEnergyConsumed::Id: {
-            using TypeInfo = Attributes::PeriodicEnergyConsumed::TypeInfo;
+        case Attributes::PeriodicEnergyImported::Id: {
+            using TypeInfo = Attributes::PeriodicEnergyImported::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34691,8 +34691,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::PeriodicEnergyDeliveredStartTime::Id: {
-            using TypeInfo = Attributes::PeriodicEnergyDeliveredStartTime::TypeInfo;
+        case Attributes::PeriodicEnergyExportedStartTime::Id: {
+            using TypeInfo = Attributes::PeriodicEnergyExportedStartTime::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34714,8 +34714,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::PeriodicEnergyDeliveredEndTime::Id: {
-            using TypeInfo = Attributes::PeriodicEnergyDeliveredEndTime::TypeInfo;
+        case Attributes::PeriodicEnergyExportedEndTime::Id: {
+            using TypeInfo = Attributes::PeriodicEnergyExportedEndTime::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34737,8 +34737,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::PeriodicEnergyDelivered::Id: {
-            using TypeInfo = Attributes::PeriodicEnergyDelivered::TypeInfo;
+        case Attributes::PeriodicEnergyExported::Id: {
+            using TypeInfo = Attributes::PeriodicEnergyExported::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34760,24 +34760,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::SystemTime::Id: {
-            using TypeInfo = Attributes::SystemTime::TypeInfo;
-            TypeInfo::DecodableType cppValue;
-            *aError = app::DataModel::Decode(aReader, cppValue);
-            if (*aError != CHIP_NO_ERROR)
-            {
-                return nullptr;
-            }
-            jobject value;
-            std::string valueClassName     = "java/lang/Long";
-            std::string valueCtorSignature = "(J)V";
-            jlong jnivalue                 = static_cast<jlong>(cppValue);
-            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(valueClassName.c_str(), valueCtorSignature.c_str(),
-                                                                        jnivalue, value);
-            return value;
-        }
-        case Attributes::EphemeralEnergyConsumedStartTime::Id: {
-            using TypeInfo = Attributes::EphemeralEnergyConsumedStartTime::TypeInfo;
+        case Attributes::EphemeralEnergyImported::Id: {
+            using TypeInfo = Attributes::EphemeralEnergyImported::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)
@@ -34799,31 +34783,8 @@ jobject DecodeAttributeValue(const app::ConcreteAttributePath & aPath, TLV::TLVR
             }
             return value;
         }
-        case Attributes::EphemeralEnergyConsumedEndTime::Id: {
-            using TypeInfo = Attributes::EphemeralEnergyConsumedEndTime::TypeInfo;
-            TypeInfo::DecodableType cppValue;
-            *aError = app::DataModel::Decode(aReader, cppValue);
-            if (*aError != CHIP_NO_ERROR)
-            {
-                return nullptr;
-            }
-            jobject value;
-            if (cppValue.IsNull())
-            {
-                value = nullptr;
-            }
-            else
-            {
-                std::string valueClassName     = "java/lang/Long";
-                std::string valueCtorSignature = "(J)V";
-                jlong jnivalue                 = static_cast<jlong>(cppValue.Value());
-                chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(valueClassName.c_str(), valueCtorSignature.c_str(),
-                                                                            jnivalue, value);
-            }
-            return value;
-        }
-        case Attributes::EphemeralEnergyConsumed::Id: {
-            using TypeInfo = Attributes::EphemeralEnergyConsumed::TypeInfo;
+        case Attributes::EphemeralEnergyExported::Id: {
+            using TypeInfo = Attributes::EphemeralEnergyExported::TypeInfo;
             TypeInfo::DecodableType cppValue;
             *aError = app::DataModel::Decode(aReader, cppValue);
             if (*aError != CHIP_NO_ERROR)

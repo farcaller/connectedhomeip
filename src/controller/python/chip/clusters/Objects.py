@@ -40277,20 +40277,18 @@ class ElectricalEnergyMeasurement(Cluster):
         return ClusterObjectDescriptor(
             Fields=[
                 ClusterObjectFieldDescriptor(Label="measured", Tag=0x00000000, Type=bool),
-                ClusterObjectFieldDescriptor(Label="cumulativeEnergyConsumedTime", Tag=0x00000001, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="cumulativeEnergyConsumed", Tag=0x00000002, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="cumulativeEnergyDeliveredTime", Tag=0x00000003, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="cumulativeEnergyDelivered", Tag=0x00000004, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="periodicEnergyConsumedStartTime", Tag=0x00000005, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="periodicEnergyConsumedEndTime", Tag=0x00000006, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="periodicEnergyConsumed", Tag=0x00000007, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="periodicEnergyDeliveredStartTime", Tag=0x00000008, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="periodicEnergyDeliveredEndTime", Tag=0x00000009, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="periodicEnergyDelivered", Tag=0x0000000A, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="systemTime", Tag=0x0000000B, Type=uint),
-                ClusterObjectFieldDescriptor(Label="ephemeralEnergyConsumedStartTime", Tag=0x0000000C, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="ephemeralEnergyConsumedEndTime", Tag=0x0000000D, Type=typing.Union[Nullable, uint]),
-                ClusterObjectFieldDescriptor(Label="ephemeralEnergyConsumed", Tag=0x0000000E, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="cumulativeEnergyImportedTime", Tag=0x00000001, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="cumulativeEnergyImported", Tag=0x00000002, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="cumulativeEnergyExportedTime", Tag=0x00000003, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="cumulativeEnergyExported", Tag=0x00000004, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="periodicEnergyImportedStartTime", Tag=0x00000005, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="periodicEnergyImportedEndTime", Tag=0x00000006, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="periodicEnergyImported", Tag=0x00000007, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="periodicEnergyExportedStartTime", Tag=0x00000008, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="periodicEnergyExportedEndTime", Tag=0x00000009, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="periodicEnergyExported", Tag=0x0000000A, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="ephemeralEnergyImported", Tag=0x0000000B, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="ephemeralEnergyExported", Tag=0x0000000C, Type=typing.Union[Nullable, uint]),
                 ClusterObjectFieldDescriptor(Label="generatedCommandList", Tag=0x0000FFF8, Type=typing.List[uint]),
                 ClusterObjectFieldDescriptor(Label="acceptedCommandList", Tag=0x0000FFF9, Type=typing.List[uint]),
                 ClusterObjectFieldDescriptor(Label="eventList", Tag=0x0000FFFA, Type=typing.List[uint]),
@@ -40300,20 +40298,18 @@ class ElectricalEnergyMeasurement(Cluster):
             ])
 
     measured: 'bool' = None
-    cumulativeEnergyConsumedTime: 'typing.Union[Nullable, uint]' = None
-    cumulativeEnergyConsumed: 'typing.Union[Nullable, uint]' = None
-    cumulativeEnergyDeliveredTime: 'typing.Union[Nullable, uint]' = None
-    cumulativeEnergyDelivered: 'typing.Union[Nullable, uint]' = None
-    periodicEnergyConsumedStartTime: 'typing.Union[Nullable, uint]' = None
-    periodicEnergyConsumedEndTime: 'typing.Union[Nullable, uint]' = None
-    periodicEnergyConsumed: 'typing.Union[Nullable, uint]' = None
-    periodicEnergyDeliveredStartTime: 'typing.Union[Nullable, uint]' = None
-    periodicEnergyDeliveredEndTime: 'typing.Union[Nullable, uint]' = None
-    periodicEnergyDelivered: 'typing.Union[Nullable, uint]' = None
-    systemTime: 'uint' = None
-    ephemeralEnergyConsumedStartTime: 'typing.Union[Nullable, uint]' = None
-    ephemeralEnergyConsumedEndTime: 'typing.Union[Nullable, uint]' = None
-    ephemeralEnergyConsumed: 'typing.Union[Nullable, uint]' = None
+    cumulativeEnergyImportedTime: 'typing.Union[Nullable, uint]' = None
+    cumulativeEnergyImported: 'typing.Union[Nullable, uint]' = None
+    cumulativeEnergyExportedTime: 'typing.Union[Nullable, uint]' = None
+    cumulativeEnergyExported: 'typing.Union[Nullable, uint]' = None
+    periodicEnergyImportedStartTime: 'typing.Union[Nullable, uint]' = None
+    periodicEnergyImportedEndTime: 'typing.Union[Nullable, uint]' = None
+    periodicEnergyImported: 'typing.Union[Nullable, uint]' = None
+    periodicEnergyExportedStartTime: 'typing.Union[Nullable, uint]' = None
+    periodicEnergyExportedEndTime: 'typing.Union[Nullable, uint]' = None
+    periodicEnergyExported: 'typing.Union[Nullable, uint]' = None
+    ephemeralEnergyImported: 'typing.Union[Nullable, uint]' = None
+    ephemeralEnergyExported: 'typing.Union[Nullable, uint]' = None
     generatedCommandList: 'typing.List[uint]' = None
     acceptedCommandList: 'typing.List[uint]' = None
     eventList: 'typing.List[uint]' = None
@@ -40323,8 +40319,8 @@ class ElectricalEnergyMeasurement(Cluster):
 
     class Bitmaps:
         class Feature(IntFlag):
-            kConsumedEnergy = 0x1
-            kDeliveredEnergy = 0x2
+            kImportedEnergy = 0x1
+            kExportedEnergy = 0x2
             kCumulativeEnergy = 0x4
             kPeriodicEnergy = 0x8
             kEphemeralEnergy = 0x10
@@ -40347,7 +40343,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'bool' = False
 
         @dataclass
-        class CumulativeEnergyConsumedTime(ClusterAttributeDescriptor):
+        class CumulativeEnergyImportedTime(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40363,7 +40359,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class CumulativeEnergyConsumed(ClusterAttributeDescriptor):
+        class CumulativeEnergyImported(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40379,7 +40375,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class CumulativeEnergyDeliveredTime(ClusterAttributeDescriptor):
+        class CumulativeEnergyExportedTime(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40395,7 +40391,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class CumulativeEnergyDelivered(ClusterAttributeDescriptor):
+        class CumulativeEnergyExported(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40411,7 +40407,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class PeriodicEnergyConsumedStartTime(ClusterAttributeDescriptor):
+        class PeriodicEnergyImportedStartTime(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40427,7 +40423,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class PeriodicEnergyConsumedEndTime(ClusterAttributeDescriptor):
+        class PeriodicEnergyImportedEndTime(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40443,7 +40439,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class PeriodicEnergyConsumed(ClusterAttributeDescriptor):
+        class PeriodicEnergyImported(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40459,7 +40455,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class PeriodicEnergyDeliveredStartTime(ClusterAttributeDescriptor):
+        class PeriodicEnergyExportedStartTime(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40475,7 +40471,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class PeriodicEnergyDeliveredEndTime(ClusterAttributeDescriptor):
+        class PeriodicEnergyExportedEndTime(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40491,7 +40487,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class PeriodicEnergyDelivered(ClusterAttributeDescriptor):
+        class PeriodicEnergyExported(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40507,7 +40503,7 @@ class ElectricalEnergyMeasurement(Cluster):
             value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class SystemTime(ClusterAttributeDescriptor):
+        class EphemeralEnergyImported(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40518,12 +40514,12 @@ class ElectricalEnergyMeasurement(Cluster):
 
             @ChipUtility.classproperty
             def attribute_type(cls) -> ClusterObjectFieldDescriptor:
-                return ClusterObjectFieldDescriptor(Type=uint)
+                return ClusterObjectFieldDescriptor(Type=typing.Union[Nullable, uint])
 
-            value: 'uint' = 0
+            value: 'typing.Union[Nullable, uint]' = NullValue
 
         @dataclass
-        class EphemeralEnergyConsumedStartTime(ClusterAttributeDescriptor):
+        class EphemeralEnergyExported(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40531,38 +40527,6 @@ class ElectricalEnergyMeasurement(Cluster):
             @ChipUtility.classproperty
             def attribute_id(cls) -> int:
                 return 0x0000000C
-
-            @ChipUtility.classproperty
-            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
-                return ClusterObjectFieldDescriptor(Type=typing.Union[Nullable, uint])
-
-            value: 'typing.Union[Nullable, uint]' = NullValue
-
-        @dataclass
-        class EphemeralEnergyConsumedEndTime(ClusterAttributeDescriptor):
-            @ChipUtility.classproperty
-            def cluster_id(cls) -> int:
-                return 0x00006662
-
-            @ChipUtility.classproperty
-            def attribute_id(cls) -> int:
-                return 0x0000000D
-
-            @ChipUtility.classproperty
-            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
-                return ClusterObjectFieldDescriptor(Type=typing.Union[Nullable, uint])
-
-            value: 'typing.Union[Nullable, uint]' = NullValue
-
-        @dataclass
-        class EphemeralEnergyConsumed(ClusterAttributeDescriptor):
-            @ChipUtility.classproperty
-            def cluster_id(cls) -> int:
-                return 0x00006662
-
-            @ChipUtility.classproperty
-            def attribute_id(cls) -> int:
-                return 0x0000000E
 
             @ChipUtility.classproperty
             def attribute_type(cls) -> ClusterObjectFieldDescriptor:
@@ -40668,7 +40632,7 @@ class ElectricalEnergyMeasurement(Cluster):
 
     class Events:
         @dataclass
-        class CumulativeEnergyConsumed(ClusterEvent):
+        class CumulativeEnergyImported(ClusterEvent):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40681,15 +40645,15 @@ class ElectricalEnergyMeasurement(Cluster):
             def descriptor(cls) -> ClusterObjectDescriptor:
                 return ClusterObjectDescriptor(
                     Fields=[
-                        ClusterObjectFieldDescriptor(Label="consumedTimestamp", Tag=0, Type=uint),
-                        ClusterObjectFieldDescriptor(Label="energyConsumed", Tag=1, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="importedTimestamp", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="energyImported", Tag=1, Type=uint),
                     ])
 
-            consumedTimestamp: 'uint' = 0
-            energyConsumed: 'uint' = 0
+            importedTimestamp: 'uint' = 0
+            energyImported: 'uint' = 0
 
         @dataclass
-        class CumulativeEnergyDelivered(ClusterEvent):
+        class CumulativeEnergyExported(ClusterEvent):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40702,15 +40666,15 @@ class ElectricalEnergyMeasurement(Cluster):
             def descriptor(cls) -> ClusterObjectDescriptor:
                 return ClusterObjectDescriptor(
                     Fields=[
-                        ClusterObjectFieldDescriptor(Label="deliveredTimestamp", Tag=0, Type=uint),
-                        ClusterObjectFieldDescriptor(Label="energyDelivered", Tag=1, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="exportedTimestamp", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="energyExported", Tag=1, Type=uint),
                     ])
 
-            deliveredTimestamp: 'uint' = 0
-            energyDelivered: 'uint' = 0
+            exportedTimestamp: 'uint' = 0
+            energyExported: 'uint' = 0
 
         @dataclass
-        class PeriodicEnergyConsumed(ClusterEvent):
+        class PeriodicEnergyImported(ClusterEvent):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40725,15 +40689,15 @@ class ElectricalEnergyMeasurement(Cluster):
                     Fields=[
                         ClusterObjectFieldDescriptor(Label="periodStart", Tag=0, Type=uint),
                         ClusterObjectFieldDescriptor(Label="periodEnd", Tag=1, Type=uint),
-                        ClusterObjectFieldDescriptor(Label="energyConsumed", Tag=2, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="energyImported", Tag=2, Type=uint),
                     ])
 
             periodStart: 'uint' = 0
             periodEnd: 'uint' = 0
-            energyConsumed: 'uint' = 0
+            energyImported: 'uint' = 0
 
         @dataclass
-        class PeriodicEnergyDelivered(ClusterEvent):
+        class PeriodicEnergyExported(ClusterEvent):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40748,15 +40712,15 @@ class ElectricalEnergyMeasurement(Cluster):
                     Fields=[
                         ClusterObjectFieldDescriptor(Label="periodStart", Tag=0, Type=uint),
                         ClusterObjectFieldDescriptor(Label="periodEnd", Tag=1, Type=uint),
-                        ClusterObjectFieldDescriptor(Label="energyDelivered", Tag=2, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="energyExported", Tag=2, Type=uint),
                     ])
 
             periodStart: 'uint' = 0
             periodEnd: 'uint' = 0
-            energyDelivered: 'uint' = 0
+            energyExported: 'uint' = 0
 
         @dataclass
-        class EphemeralEnergyConsumed(ClusterEvent):
+        class EphemeralEnergyImported(ClusterEvent):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00006662
@@ -40769,14 +40733,33 @@ class ElectricalEnergyMeasurement(Cluster):
             def descriptor(cls) -> ClusterObjectDescriptor:
                 return ClusterObjectDescriptor(
                     Fields=[
-                        ClusterObjectFieldDescriptor(Label="periodStart", Tag=0, Type=uint),
-                        ClusterObjectFieldDescriptor(Label="periodEnd", Tag=1, Type=uint),
-                        ClusterObjectFieldDescriptor(Label="energyConsumed", Tag=2, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="importedTimestamp", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="energyImported", Tag=1, Type=uint),
                     ])
 
-            periodStart: 'uint' = 0
-            periodEnd: 'uint' = 0
-            energyConsumed: 'uint' = 0
+            importedTimestamp: 'uint' = 0
+            energyImported: 'uint' = 0
+
+        @dataclass
+        class EphemeralEnergyExported(ClusterEvent):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x00006662
+
+            @ChipUtility.classproperty
+            def event_id(cls) -> int:
+                return 0x00000006
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                        ClusterObjectFieldDescriptor(Label="exportedTimestamp", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="energyExported", Tag=1, Type=uint),
+                    ])
+
+            exportedTimestamp: 'uint' = 0
+            energyExported: 'uint' = 0
 
 
 @dataclass

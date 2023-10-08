@@ -4285,8 +4285,8 @@ namespace ElectricalEnergyMeasurement {
 // Bitmap for Feature
 enum class Feature : uint32_t
 {
-    kConsumedEnergy   = 0x1,
-    kDeliveredEnergy  = 0x2,
+    kImportedEnergy   = 0x1,
+    kExportedEnergy   = 0x2,
     kCumulativeEnergy = 0x4,
     kPeriodicEnergy   = 0x8,
     kEphemeralEnergy  = 0x10,

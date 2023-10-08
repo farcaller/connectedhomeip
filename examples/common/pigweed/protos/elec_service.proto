@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+import 'pw_protobuf_protos/common.proto';
+
+package chip.rpc;
+
+
+message ElecPowerMeasurementMsg {
+  int64 current = 1;  // in milliamps (mA)
+  int64 voltage = 2;  // in millivolts (mV)
+  int64 power = 3;    // in milliwatts (mW)
+
+  optional int64 frequency = 4; // in millihertz (mHz)
+}
+
+
+message EnergyMeasurementType {
+  CUMMULATIVE = 0x00; // For all time
+  EPHEMERAL   = 0x01; // Since boot
+}
+
+message ElecEnergyMeasurementMsg {
+  uint64 energy_imported = 1;  // mWh
+  uint32 energy_imported_ts = 2;  // epoch-s
+  optional uint64 energy_exported = 3;  // mWh
+  optional uint32 energy_exported_ts = 4;  // epoch-s
+  optional EnergyMeasurementType type = 5 // Cummulative or Ephemeral (default)
+}
+
+service Elec {
+  // Set functions will return OK if all supported fields are successfully applied, any
+  // unsupported fields will be ignored.
+  rpc SendPowerReading(ElecPowerMeasurementMsg) returns (pw.protobuf.Empty){}
+  rpc SendEnergyReading(ElecEnergyMeasurementMsg) returns (pw.protobuf.Empty){})
+}

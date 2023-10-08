@@ -25085,47 +25085,41 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
     case Attributes::Measured::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, measured));
         break;
-    case Attributes::CumulativeEnergyConsumedTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyConsumedTime));
+    case Attributes::CumulativeEnergyImportedTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyImportedTime));
         break;
-    case Attributes::CumulativeEnergyConsumed::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyConsumed));
+    case Attributes::CumulativeEnergyImported::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyImported));
         break;
-    case Attributes::CumulativeEnergyDeliveredTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyDeliveredTime));
+    case Attributes::CumulativeEnergyExportedTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyExportedTime));
         break;
-    case Attributes::CumulativeEnergyDelivered::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyDelivered));
+    case Attributes::CumulativeEnergyExported::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, cumulativeEnergyExported));
         break;
-    case Attributes::PeriodicEnergyConsumedStartTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyConsumedStartTime));
+    case Attributes::PeriodicEnergyImportedStartTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyImportedStartTime));
         break;
-    case Attributes::PeriodicEnergyConsumedEndTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyConsumedEndTime));
+    case Attributes::PeriodicEnergyImportedEndTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyImportedEndTime));
         break;
-    case Attributes::PeriodicEnergyConsumed::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyConsumed));
+    case Attributes::PeriodicEnergyImported::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyImported));
         break;
-    case Attributes::PeriodicEnergyDeliveredStartTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyDeliveredStartTime));
+    case Attributes::PeriodicEnergyExportedStartTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyExportedStartTime));
         break;
-    case Attributes::PeriodicEnergyDeliveredEndTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyDeliveredEndTime));
+    case Attributes::PeriodicEnergyExportedEndTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyExportedEndTime));
         break;
-    case Attributes::PeriodicEnergyDelivered::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyDelivered));
+    case Attributes::PeriodicEnergyExported::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, periodicEnergyExported));
         break;
-    case Attributes::SystemTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, systemTime));
+    case Attributes::EphemeralEnergyImported::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, ephemeralEnergyImported));
         break;
-    case Attributes::EphemeralEnergyConsumedStartTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, ephemeralEnergyConsumedStartTime));
-        break;
-    case Attributes::EphemeralEnergyConsumedEndTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, ephemeralEnergyConsumedEndTime));
-        break;
-    case Attributes::EphemeralEnergyConsumed::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, ephemeralEnergyConsumed));
+    case Attributes::EphemeralEnergyExported::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, ephemeralEnergyExported));
         break;
     case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));
@@ -25154,13 +25148,13 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
 } // namespace Attributes
 
 namespace Events {
-namespace CumulativeEnergyConsumed {
+namespace CumulativeEnergyImported {
 CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
 {
     TLV::TLVType outer;
     ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kConsumedTimestamp), consumedTimestamp));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyConsumed), energyConsumed));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kImportedTimestamp), importedTimestamp));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyImported), energyImported));
     ReturnErrorOnFailure(aWriter.EndContainer(outer));
     return CHIP_NO_ERROR;
 }
@@ -25179,11 +25173,11 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
         }
         switch (TLV::TagNumFromTag(reader.GetTag()))
         {
-        case to_underlying(Fields::kConsumedTimestamp):
-            ReturnErrorOnFailure(DataModel::Decode(reader, consumedTimestamp));
+        case to_underlying(Fields::kImportedTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, importedTimestamp));
             break;
-        case to_underlying(Fields::kEnergyConsumed):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyConsumed));
+        case to_underlying(Fields::kEnergyImported):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyImported));
             break;
         default:
             break;
@@ -25194,14 +25188,14 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
     ReturnErrorOnFailure(reader.ExitContainer(outer));
     return CHIP_NO_ERROR;
 }
-} // namespace CumulativeEnergyConsumed.
-namespace CumulativeEnergyDelivered {
+} // namespace CumulativeEnergyImported.
+namespace CumulativeEnergyExported {
 CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
 {
     TLV::TLVType outer;
     ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDeliveredTimestamp), deliveredTimestamp));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyDelivered), energyDelivered));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kExportedTimestamp), exportedTimestamp));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyExported), energyExported));
     ReturnErrorOnFailure(aWriter.EndContainer(outer));
     return CHIP_NO_ERROR;
 }
@@ -25220,11 +25214,11 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
         }
         switch (TLV::TagNumFromTag(reader.GetTag()))
         {
-        case to_underlying(Fields::kDeliveredTimestamp):
-            ReturnErrorOnFailure(DataModel::Decode(reader, deliveredTimestamp));
+        case to_underlying(Fields::kExportedTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, exportedTimestamp));
             break;
-        case to_underlying(Fields::kEnergyDelivered):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyDelivered));
+        case to_underlying(Fields::kEnergyExported):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyExported));
             break;
         default:
             break;
@@ -25235,15 +25229,15 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
     ReturnErrorOnFailure(reader.ExitContainer(outer));
     return CHIP_NO_ERROR;
 }
-} // namespace CumulativeEnergyDelivered.
-namespace PeriodicEnergyConsumed {
+} // namespace CumulativeEnergyExported.
+namespace PeriodicEnergyImported {
 CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
 {
     TLV::TLVType outer;
     ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
     ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodStart), periodStart));
     ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodEnd), periodEnd));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyConsumed), energyConsumed));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyImported), energyImported));
     ReturnErrorOnFailure(aWriter.EndContainer(outer));
     return CHIP_NO_ERROR;
 }
@@ -25268,8 +25262,8 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
         case to_underlying(Fields::kPeriodEnd):
             ReturnErrorOnFailure(DataModel::Decode(reader, periodEnd));
             break;
-        case to_underlying(Fields::kEnergyConsumed):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyConsumed));
+        case to_underlying(Fields::kEnergyImported):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyImported));
             break;
         default:
             break;
@@ -25280,15 +25274,15 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
     ReturnErrorOnFailure(reader.ExitContainer(outer));
     return CHIP_NO_ERROR;
 }
-} // namespace PeriodicEnergyConsumed.
-namespace PeriodicEnergyDelivered {
+} // namespace PeriodicEnergyImported.
+namespace PeriodicEnergyExported {
 CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
 {
     TLV::TLVType outer;
     ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
     ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodStart), periodStart));
     ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodEnd), periodEnd));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyDelivered), energyDelivered));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyExported), energyExported));
     ReturnErrorOnFailure(aWriter.EndContainer(outer));
     return CHIP_NO_ERROR;
 }
@@ -25313,8 +25307,8 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
         case to_underlying(Fields::kPeriodEnd):
             ReturnErrorOnFailure(DataModel::Decode(reader, periodEnd));
             break;
-        case to_underlying(Fields::kEnergyDelivered):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyDelivered));
+        case to_underlying(Fields::kEnergyExported):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyExported));
             break;
         default:
             break;
@@ -25325,15 +25319,14 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
     ReturnErrorOnFailure(reader.ExitContainer(outer));
     return CHIP_NO_ERROR;
 }
-} // namespace PeriodicEnergyDelivered.
-namespace EphemeralEnergyConsumed {
+} // namespace PeriodicEnergyExported.
+namespace EphemeralEnergyImported {
 CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
 {
     TLV::TLVType outer;
     ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodStart), periodStart));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPeriodEnd), periodEnd));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyConsumed), energyConsumed));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kImportedTimestamp), importedTimestamp));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyImported), energyImported));
     ReturnErrorOnFailure(aWriter.EndContainer(outer));
     return CHIP_NO_ERROR;
 }
@@ -25352,14 +25345,11 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
         }
         switch (TLV::TagNumFromTag(reader.GetTag()))
         {
-        case to_underlying(Fields::kPeriodStart):
-            ReturnErrorOnFailure(DataModel::Decode(reader, periodStart));
+        case to_underlying(Fields::kImportedTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, importedTimestamp));
             break;
-        case to_underlying(Fields::kPeriodEnd):
-            ReturnErrorOnFailure(DataModel::Decode(reader, periodEnd));
-            break;
-        case to_underlying(Fields::kEnergyConsumed):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyConsumed));
+        case to_underlying(Fields::kEnergyImported):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyImported));
             break;
         default:
             break;
@@ -25370,7 +25360,48 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
     ReturnErrorOnFailure(reader.ExitContainer(outer));
     return CHIP_NO_ERROR;
 }
-} // namespace EphemeralEnergyConsumed.
+} // namespace EphemeralEnergyImported.
+namespace EphemeralEnergyExported {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kExportedTimestamp), exportedTimestamp));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyExported), energyExported));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kExportedTimestamp):
+            ReturnErrorOnFailure(DataModel::Decode(reader, exportedTimestamp));
+            break;
+        case to_underlying(Fields::kEnergyExported):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyExported));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EphemeralEnergyExported.
 } // namespace Events
 
 } // namespace ElectricalEnergyMeasurement

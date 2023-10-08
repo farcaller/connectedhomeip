@@ -5198,22 +5198,22 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
     return CHIP_NO_ERROR;
 }
 CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
-                                     const ElectricalEnergyMeasurement::Events::CumulativeEnergyConsumed::DecodableType & value)
+                                     const ElectricalEnergyMeasurement::Events::CumulativeEnergyImported::DecodableType & value)
 {
     DataModelLogger::LogString(label, indent, "{");
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("ConsumedTimestamp", indent + 1, value.consumedTimestamp);
+        CHIP_ERROR err = DataModelLogger::LogValue("ImportedTimestamp", indent + 1, value.importedTimestamp);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'ConsumedTimestamp'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'ImportedTimestamp'");
             return err;
         }
     }
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("EnergyConsumed", indent + 1, value.energyConsumed);
+        CHIP_ERROR err = DataModelLogger::LogValue("EnergyImported", indent + 1, value.energyImported);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyConsumed'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyImported'");
             return err;
         }
     }
@@ -5222,22 +5222,22 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
     return CHIP_NO_ERROR;
 }
 CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
-                                     const ElectricalEnergyMeasurement::Events::CumulativeEnergyDelivered::DecodableType & value)
+                                     const ElectricalEnergyMeasurement::Events::CumulativeEnergyExported::DecodableType & value)
 {
     DataModelLogger::LogString(label, indent, "{");
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("DeliveredTimestamp", indent + 1, value.deliveredTimestamp);
+        CHIP_ERROR err = DataModelLogger::LogValue("ExportedTimestamp", indent + 1, value.exportedTimestamp);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'DeliveredTimestamp'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'ExportedTimestamp'");
             return err;
         }
     }
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("EnergyDelivered", indent + 1, value.energyDelivered);
+        CHIP_ERROR err = DataModelLogger::LogValue("EnergyExported", indent + 1, value.energyExported);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyDelivered'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyExported'");
             return err;
         }
     }
@@ -5246,7 +5246,7 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
     return CHIP_NO_ERROR;
 }
 CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
-                                     const ElectricalEnergyMeasurement::Events::PeriodicEnergyConsumed::DecodableType & value)
+                                     const ElectricalEnergyMeasurement::Events::PeriodicEnergyImported::DecodableType & value)
 {
     DataModelLogger::LogString(label, indent, "{");
     {
@@ -5266,10 +5266,10 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
         }
     }
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("EnergyConsumed", indent + 1, value.energyConsumed);
+        CHIP_ERROR err = DataModelLogger::LogValue("EnergyImported", indent + 1, value.energyImported);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyConsumed'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyImported'");
             return err;
         }
     }
@@ -5278,7 +5278,7 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
     return CHIP_NO_ERROR;
 }
 CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
-                                     const ElectricalEnergyMeasurement::Events::PeriodicEnergyDelivered::DecodableType & value)
+                                     const ElectricalEnergyMeasurement::Events::PeriodicEnergyExported::DecodableType & value)
 {
     DataModelLogger::LogString(label, indent, "{");
     {
@@ -5298,10 +5298,10 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
         }
     }
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("EnergyDelivered", indent + 1, value.energyDelivered);
+        CHIP_ERROR err = DataModelLogger::LogValue("EnergyExported", indent + 1, value.energyExported);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyDelivered'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyExported'");
             return err;
         }
     }
@@ -5310,30 +5310,46 @@ CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
     return CHIP_NO_ERROR;
 }
 CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
-                                     const ElectricalEnergyMeasurement::Events::EphemeralEnergyConsumed::DecodableType & value)
+                                     const ElectricalEnergyMeasurement::Events::EphemeralEnergyImported::DecodableType & value)
 {
     DataModelLogger::LogString(label, indent, "{");
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("PeriodStart", indent + 1, value.periodStart);
+        CHIP_ERROR err = DataModelLogger::LogValue("ImportedTimestamp", indent + 1, value.importedTimestamp);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'PeriodStart'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'ImportedTimestamp'");
             return err;
         }
     }
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("PeriodEnd", indent + 1, value.periodEnd);
+        CHIP_ERROR err = DataModelLogger::LogValue("EnergyImported", indent + 1, value.energyImported);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'PeriodEnd'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyImported'");
+            return err;
+        }
+    }
+    DataModelLogger::LogString(indent, "}");
+
+    return CHIP_NO_ERROR;
+}
+CHIP_ERROR DataModelLogger::LogValue(const char * label, size_t indent,
+                                     const ElectricalEnergyMeasurement::Events::EphemeralEnergyExported::DecodableType & value)
+{
+    DataModelLogger::LogString(label, indent, "{");
+    {
+        CHIP_ERROR err = DataModelLogger::LogValue("ExportedTimestamp", indent + 1, value.exportedTimestamp);
+        if (err != CHIP_NO_ERROR)
+        {
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'ExportedTimestamp'");
             return err;
         }
     }
     {
-        CHIP_ERROR err = DataModelLogger::LogValue("EnergyConsumed", indent + 1, value.energyConsumed);
+        CHIP_ERROR err = DataModelLogger::LogValue("EnergyExported", indent + 1, value.energyExported);
         if (err != CHIP_NO_ERROR)
         {
-            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyConsumed'");
+            DataModelLogger::LogString(indent + 1, "Event truncated due to invalid value for 'EnergyExported'");
             return err;
         }
     }
@@ -14441,75 +14457,65 @@ CHIP_ERROR DataModelLogger::LogAttribute(const chip::app::ConcreteDataAttributeP
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
             return DataModelLogger::LogValue("Measured", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyConsumedTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyImportedTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("CumulativeEnergyConsumedTime", 1, value);
+            return DataModelLogger::LogValue("CumulativeEnergyImportedTime", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyConsumed::Id: {
+        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyImported::Id: {
             chip::app::DataModel::Nullable<uint64_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("CumulativeEnergyConsumed", 1, value);
+            return DataModelLogger::LogValue("CumulativeEnergyImported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyDeliveredTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyExportedTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("CumulativeEnergyDeliveredTime", 1, value);
+            return DataModelLogger::LogValue("CumulativeEnergyExportedTime", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyDelivered::Id: {
+        case ElectricalEnergyMeasurement::Attributes::CumulativeEnergyExported::Id: {
             chip::app::DataModel::Nullable<uint64_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("CumulativeEnergyDelivered", 1, value);
+            return DataModelLogger::LogValue("CumulativeEnergyExported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyConsumedStartTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyImportedStartTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyConsumedStartTime", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyImportedStartTime", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyConsumedEndTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyImportedEndTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyConsumedEndTime", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyImportedEndTime", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyConsumed::Id: {
+        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyImported::Id: {
             chip::app::DataModel::Nullable<uint64_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyConsumed", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyImported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyDeliveredStartTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyExportedStartTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyDeliveredStartTime", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyExportedStartTime", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyDeliveredEndTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyExportedEndTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyDeliveredEndTime", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyExportedEndTime", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyDelivered::Id: {
+        case ElectricalEnergyMeasurement::Attributes::PeriodicEnergyExported::Id: {
             chip::app::DataModel::Nullable<uint64_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyDelivered", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyExported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::SystemTime::Id: {
-            uint64_t value;
-            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("SystemTime", 1, value);
-        }
-        case ElectricalEnergyMeasurement::Attributes::EphemeralEnergyConsumedStartTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::EphemeralEnergyImported::Id: {
             chip::app::DataModel::Nullable<uint64_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("EphemeralEnergyConsumedStartTime", 1, value);
+            return DataModelLogger::LogValue("EphemeralEnergyImported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Attributes::EphemeralEnergyConsumedEndTime::Id: {
+        case ElectricalEnergyMeasurement::Attributes::EphemeralEnergyExported::Id: {
             chip::app::DataModel::Nullable<uint64_t> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("EphemeralEnergyConsumedEndTime", 1, value);
-        }
-        case ElectricalEnergyMeasurement::Attributes::EphemeralEnergyConsumed::Id: {
-            chip::app::DataModel::Nullable<uint64_t> value;
-            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("EphemeralEnergyConsumed", 1, value);
+            return DataModelLogger::LogValue("EphemeralEnergyExported", 1, value);
         }
         case ElectricalEnergyMeasurement::Attributes::GeneratedCommandList::Id: {
             chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -16178,30 +16184,35 @@ CHIP_ERROR DataModelLogger::LogEvent(const chip::app::EventHeader & header, chip
     case ElectricalEnergyMeasurement::Id: {
         switch (header.mPath.mEventId)
         {
-        case ElectricalEnergyMeasurement::Events::CumulativeEnergyConsumed::Id: {
-            chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyConsumed::DecodableType value;
+        case ElectricalEnergyMeasurement::Events::CumulativeEnergyImported::Id: {
+            chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyImported::DecodableType value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("CumulativeEnergyConsumed", 1, value);
+            return DataModelLogger::LogValue("CumulativeEnergyImported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Events::CumulativeEnergyDelivered::Id: {
-            chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyDelivered::DecodableType value;
+        case ElectricalEnergyMeasurement::Events::CumulativeEnergyExported::Id: {
+            chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyExported::DecodableType value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("CumulativeEnergyDelivered", 1, value);
+            return DataModelLogger::LogValue("CumulativeEnergyExported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Events::PeriodicEnergyConsumed::Id: {
-            chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyConsumed::DecodableType value;
+        case ElectricalEnergyMeasurement::Events::PeriodicEnergyImported::Id: {
+            chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyImported::DecodableType value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyConsumed", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyImported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Events::PeriodicEnergyDelivered::Id: {
-            chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyDelivered::DecodableType value;
+        case ElectricalEnergyMeasurement::Events::PeriodicEnergyExported::Id: {
+            chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyExported::DecodableType value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("PeriodicEnergyDelivered", 1, value);
+            return DataModelLogger::LogValue("PeriodicEnergyExported", 1, value);
         }
-        case ElectricalEnergyMeasurement::Events::EphemeralEnergyConsumed::Id: {
-            chip::app::Clusters::ElectricalEnergyMeasurement::Events::EphemeralEnergyConsumed::DecodableType value;
+        case ElectricalEnergyMeasurement::Events::EphemeralEnergyImported::Id: {
+            chip::app::Clusters::ElectricalEnergyMeasurement::Events::EphemeralEnergyImported::DecodableType value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("EphemeralEnergyConsumed", 1, value);
+            return DataModelLogger::LogValue("EphemeralEnergyImported", 1, value);
+        }
+        case ElectricalEnergyMeasurement::Events::EphemeralEnergyExported::Id: {
+            chip::app::Clusters::ElectricalEnergyMeasurement::Events::EphemeralEnergyExported::DecodableType value;
+            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
+            return DataModelLogger::LogValue("EphemeralEnergyExported", 1, value);
         }
         }
         break;

@@ -5451,46 +5451,40 @@ static BOOL AttributeIsSpecifiedInElectricalEnergyMeasurementCluster(AttributeId
     case Attributes::Measured::Id: {
         return YES;
     }
-    case Attributes::CumulativeEnergyConsumedTime::Id: {
+    case Attributes::CumulativeEnergyImportedTime::Id: {
         return YES;
     }
-    case Attributes::CumulativeEnergyConsumed::Id: {
+    case Attributes::CumulativeEnergyImported::Id: {
         return YES;
     }
-    case Attributes::CumulativeEnergyDeliveredTime::Id: {
+    case Attributes::CumulativeEnergyExportedTime::Id: {
         return YES;
     }
-    case Attributes::CumulativeEnergyDelivered::Id: {
+    case Attributes::CumulativeEnergyExported::Id: {
         return YES;
     }
-    case Attributes::PeriodicEnergyConsumedStartTime::Id: {
+    case Attributes::PeriodicEnergyImportedStartTime::Id: {
         return YES;
     }
-    case Attributes::PeriodicEnergyConsumedEndTime::Id: {
+    case Attributes::PeriodicEnergyImportedEndTime::Id: {
         return YES;
     }
-    case Attributes::PeriodicEnergyConsumed::Id: {
+    case Attributes::PeriodicEnergyImported::Id: {
         return YES;
     }
-    case Attributes::PeriodicEnergyDeliveredStartTime::Id: {
+    case Attributes::PeriodicEnergyExportedStartTime::Id: {
         return YES;
     }
-    case Attributes::PeriodicEnergyDeliveredEndTime::Id: {
+    case Attributes::PeriodicEnergyExportedEndTime::Id: {
         return YES;
     }
-    case Attributes::PeriodicEnergyDelivered::Id: {
+    case Attributes::PeriodicEnergyExported::Id: {
         return YES;
     }
-    case Attributes::SystemTime::Id: {
+    case Attributes::EphemeralEnergyImported::Id: {
         return YES;
     }
-    case Attributes::EphemeralEnergyConsumedStartTime::Id: {
-        return YES;
-    }
-    case Attributes::EphemeralEnergyConsumedEndTime::Id: {
-        return YES;
-    }
-    case Attributes::EphemeralEnergyConsumed::Id: {
+    case Attributes::EphemeralEnergyExported::Id: {
         return YES;
     }
     case Attributes::GeneratedCommandList::Id: {

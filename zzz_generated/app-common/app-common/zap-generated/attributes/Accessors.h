@@ -4889,101 +4889,89 @@ EmberAfStatus Get(chip::EndpointId endpoint, bool * value); // boolean
 EmberAfStatus Set(chip::EndpointId endpoint, bool value);
 } // namespace Measured
 
-namespace CumulativeEnergyConsumedTime {
+namespace CumulativeEnergyImportedTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
-} // namespace CumulativeEnergyConsumedTime
+} // namespace CumulativeEnergyImportedTime
 
-namespace CumulativeEnergyConsumed {
+namespace CumulativeEnergyImported {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // int64u
 EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace CumulativeEnergyConsumed
+} // namespace CumulativeEnergyImported
 
-namespace CumulativeEnergyDeliveredTime {
+namespace CumulativeEnergyExportedTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
-} // namespace CumulativeEnergyDeliveredTime
+} // namespace CumulativeEnergyExportedTime
 
-namespace CumulativeEnergyDelivered {
+namespace CumulativeEnergyExported {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // int64u
 EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace CumulativeEnergyDelivered
+} // namespace CumulativeEnergyExported
 
-namespace PeriodicEnergyConsumedStartTime {
+namespace PeriodicEnergyImportedStartTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
-} // namespace PeriodicEnergyConsumedStartTime
+} // namespace PeriodicEnergyImportedStartTime
 
-namespace PeriodicEnergyConsumedEndTime {
+namespace PeriodicEnergyImportedEndTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
-} // namespace PeriodicEnergyConsumedEndTime
+} // namespace PeriodicEnergyImportedEndTime
 
-namespace PeriodicEnergyConsumed {
+namespace PeriodicEnergyImported {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // int64u
 EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace PeriodicEnergyConsumed
+} // namespace PeriodicEnergyImported
 
-namespace PeriodicEnergyDeliveredStartTime {
+namespace PeriodicEnergyExportedStartTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
-} // namespace PeriodicEnergyDeliveredStartTime
+} // namespace PeriodicEnergyExportedStartTime
 
-namespace PeriodicEnergyDeliveredEndTime {
+namespace PeriodicEnergyExportedEndTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
-} // namespace PeriodicEnergyDeliveredEndTime
+} // namespace PeriodicEnergyExportedEndTime
 
-namespace PeriodicEnergyDelivered {
+namespace PeriodicEnergyExported {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // int64u
 EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace PeriodicEnergyDelivered
+} // namespace PeriodicEnergyExported
 
-namespace SystemTime {
-EmberAfStatus Get(chip::EndpointId endpoint, uint64_t * value); // systime_ms
-EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
-} // namespace SystemTime
-
-namespace EphemeralEnergyConsumedStartTime {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // systime_ms
-EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace EphemeralEnergyConsumedStartTime
-
-namespace EphemeralEnergyConsumedEndTime {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // systime_ms
-EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace EphemeralEnergyConsumedEndTime
-
-namespace EphemeralEnergyConsumed {
+namespace EphemeralEnergyImported {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // int64u
 EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
 EmberAfStatus SetNull(chip::EndpointId endpoint);
 EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
-} // namespace EphemeralEnergyConsumed
+} // namespace EphemeralEnergyImported
+
+namespace EphemeralEnergyExported {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint64_t> & value); // int64u
+EmberAfStatus Set(chip::EndpointId endpoint, uint64_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint64_t> & value);
+} // namespace EphemeralEnergyExported
 
 namespace FeatureMap {
 EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // bitmap32

@@ -14188,20 +14188,18 @@ public class ClusterIDMapping {
 
         public enum Attribute {
             Measured(0L),
-            CumulativeEnergyConsumedTime(1L),
-            CumulativeEnergyConsumed(2L),
-            CumulativeEnergyDeliveredTime(3L),
-            CumulativeEnergyDelivered(4L),
-            PeriodicEnergyConsumedStartTime(5L),
-            PeriodicEnergyConsumedEndTime(6L),
-            PeriodicEnergyConsumed(7L),
-            PeriodicEnergyDeliveredStartTime(8L),
-            PeriodicEnergyDeliveredEndTime(9L),
-            PeriodicEnergyDelivered(10L),
-            SystemTime(11L),
-            EphemeralEnergyConsumedStartTime(12L),
-            EphemeralEnergyConsumedEndTime(13L),
-            EphemeralEnergyConsumed(14L),
+            CumulativeEnergyImportedTime(1L),
+            CumulativeEnergyImported(2L),
+            CumulativeEnergyExportedTime(3L),
+            CumulativeEnergyExported(4L),
+            PeriodicEnergyImportedStartTime(5L),
+            PeriodicEnergyImportedEndTime(6L),
+            PeriodicEnergyImported(7L),
+            PeriodicEnergyExportedStartTime(8L),
+            PeriodicEnergyExportedEndTime(9L),
+            PeriodicEnergyExported(10L),
+            EphemeralEnergyImported(11L),
+            EphemeralEnergyExported(12L),
             GeneratedCommandList(65528L),
             AcceptedCommandList(65529L),
             EventList(65530L),
@@ -14228,11 +14226,12 @@ public class ClusterIDMapping {
         }
 
         public enum Event {
-            CumulativeEnergyConsumed(0L),
-            CumulativeEnergyDelivered(1L),
-            PeriodicEnergyConsumed(3L),
-            PeriodicEnergyDelivered(4L),
-            EphemeralEnergyConsumed(5L),;
+            CumulativeEnergyImported(0L),
+            CumulativeEnergyExported(1L),
+            PeriodicEnergyImported(3L),
+            PeriodicEnergyExported(4L),
+            EphemeralEnergyImported(5L),
+            EphemeralEnergyExported(6L),;
             private final long id;
             Event(long id) {
                 this.id = id;

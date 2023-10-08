@@ -3543,58 +3543,58 @@ static id _Nullable DecodeEventPayloadForElectricalEnergyMeasurementCluster(
 {
     using namespace Clusters::ElectricalEnergyMeasurement;
     switch (aEventId) {
-    case Events::CumulativeEnergyConsumed::Id: {
-        Events::CumulativeEnergyConsumed::DecodableType cppValue;
+    case Events::CumulativeEnergyImported::Id: {
+        Events::CumulativeEnergyImported::DecodableType cppValue;
         *aError = DataModel::Decode(aReader, cppValue);
         if (*aError != CHIP_NO_ERROR) {
             return nil;
         }
 
-        __auto_type * value = [MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent new];
+        __auto_type * value = [MTRElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent new];
 
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedInt:cppValue.consumedTimestamp];
-            value.consumedTimestamp = memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.importedTimestamp];
+            value.importedTimestamp = memberValue;
         } while (0);
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyConsumed];
-            value.energyConsumed = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyImported];
+            value.energyImported = memberValue;
         } while (0);
 
         return value;
     }
-    case Events::CumulativeEnergyDelivered::Id: {
-        Events::CumulativeEnergyDelivered::DecodableType cppValue;
+    case Events::CumulativeEnergyExported::Id: {
+        Events::CumulativeEnergyExported::DecodableType cppValue;
         *aError = DataModel::Decode(aReader, cppValue);
         if (*aError != CHIP_NO_ERROR) {
             return nil;
         }
 
-        __auto_type * value = [MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent new];
+        __auto_type * value = [MTRElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent new];
 
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedInt:cppValue.deliveredTimestamp];
-            value.deliveredTimestamp = memberValue;
+            memberValue = [NSNumber numberWithUnsignedInt:cppValue.exportedTimestamp];
+            value.exportedTimestamp = memberValue;
         } while (0);
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyDelivered];
-            value.energyDelivered = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyExported];
+            value.energyExported = memberValue;
         } while (0);
 
         return value;
     }
-    case Events::PeriodicEnergyConsumed::Id: {
-        Events::PeriodicEnergyConsumed::DecodableType cppValue;
+    case Events::PeriodicEnergyImported::Id: {
+        Events::PeriodicEnergyImported::DecodableType cppValue;
         *aError = DataModel::Decode(aReader, cppValue);
         if (*aError != CHIP_NO_ERROR) {
             return nil;
         }
 
-        __auto_type * value = [MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent new];
+        __auto_type * value = [MTRElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent new];
 
         do {
             NSNumber * _Nonnull memberValue;
@@ -3608,20 +3608,20 @@ static id _Nullable DecodeEventPayloadForElectricalEnergyMeasurementCluster(
         } while (0);
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyConsumed];
-            value.energyConsumed = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyImported];
+            value.energyImported = memberValue;
         } while (0);
 
         return value;
     }
-    case Events::PeriodicEnergyDelivered::Id: {
-        Events::PeriodicEnergyDelivered::DecodableType cppValue;
+    case Events::PeriodicEnergyExported::Id: {
+        Events::PeriodicEnergyExported::DecodableType cppValue;
         *aError = DataModel::Decode(aReader, cppValue);
         if (*aError != CHIP_NO_ERROR) {
             return nil;
         }
 
-        __auto_type * value = [MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent new];
+        __auto_type * value = [MTRElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent new];
 
         do {
             NSNumber * _Nonnull memberValue;
@@ -3635,35 +3635,52 @@ static id _Nullable DecodeEventPayloadForElectricalEnergyMeasurementCluster(
         } while (0);
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyDelivered];
-            value.energyDelivered = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyExported];
+            value.energyExported = memberValue;
         } while (0);
 
         return value;
     }
-    case Events::EphemeralEnergyConsumed::Id: {
-        Events::EphemeralEnergyConsumed::DecodableType cppValue;
+    case Events::EphemeralEnergyImported::Id: {
+        Events::EphemeralEnergyImported::DecodableType cppValue;
         *aError = DataModel::Decode(aReader, cppValue);
         if (*aError != CHIP_NO_ERROR) {
             return nil;
         }
 
-        __auto_type * value = [MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent new];
+        __auto_type * value = [MTRElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent new];
 
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.periodStart];
-            value.periodStart = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.importedTimestamp];
+            value.importedTimestamp = memberValue;
         } while (0);
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.periodEnd];
-            value.periodEnd = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyImported];
+            value.energyImported = memberValue;
+        } while (0);
+
+        return value;
+    }
+    case Events::EphemeralEnergyExported::Id: {
+        Events::EphemeralEnergyExported::DecodableType cppValue;
+        *aError = DataModel::Decode(aReader, cppValue);
+        if (*aError != CHIP_NO_ERROR) {
+            return nil;
+        }
+
+        __auto_type * value = [MTRElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent new];
+
+        do {
+            NSNumber * _Nonnull memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.exportedTimestamp];
+            value.exportedTimestamp = memberValue;
         } while (0);
         do {
             NSNumber * _Nonnull memberValue;
-            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyConsumed];
-            value.energyConsumed = memberValue;
+            memberValue = [NSNumber numberWithUnsignedLongLong:cppValue.energyExported];
+            value.energyExported = memberValue;
         } while (0);
 
         return value;
