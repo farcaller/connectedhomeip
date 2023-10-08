@@ -94,6 +94,20 @@ public:
         return pw::OkStatus();
     }
 
+    virtual pw::Status SetSupplyState(const chip_rpc_SupplyStateMsg & request, pw_protobuf_Empty & response)
+    {
+        DeviceLayer::StackLock lock;
+
+        EvseManagement::SupplyStateEnum state;
+        uint32_t value = request.state;
+        state          = (EvseManagement::SupplyStateEnum) value;
+
+        // TODO add call into EvseMgr
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::SupplyState::Set(kEndpoint, state));
+
+        return pw::OkStatus();
+    }
+
     virtual pw::Status SetFault(const chip_rpc_FaultMsg & request, pw_protobuf_Empty & response)
     {
         DeviceLayer::StackLock lock;

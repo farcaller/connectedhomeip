@@ -13,6 +13,14 @@ enum EvseStateEnum {
     kFault                = 0xFF;
 }
 
+enum SupplyStateEnum {
+    kDisabled            = 0x00;
+    kChargingEnabled     = 0x01;
+    kDischargingEnabled  = 0x02;
+    kDisabledError       = 0x03;
+    kDisabledDiagnostics = 0x04;
+}      
+
 enum FaultStateEnum {
     kNoError           = 0x00;
     kEvseMeterFailure  = 0x01;
@@ -42,6 +50,10 @@ message EvseStateMsg {
   EvseStateEnum state = 1;
 }
 
+message SupplyStateMsg {
+  SupplyStateEnum state = 1;
+}
+
 message FaultMsg {
   FaultStateEnum state = 1;
 }
@@ -55,6 +67,7 @@ service Evse {
   rpc SetCableAssemblyCurrentLimit(CurrentLimitMsg) returns (pw.protobuf.Empty){}
   rpc SetUserMaximumChargeCurrent(CurrentLimitMsg) returns (pw.protobuf.Empty){}
   rpc SetEvseState(EvseStateMsg) returns (pw.protobuf.Empty){}
+  rpc SetSupplyState(SupplyStateMsg) returns (pw.protobuf.Empty){}
   rpc SetFault(FaultMsg) returns (pw.protobuf.Empty){}
 
 }
