@@ -14727,7 +14727,7 @@ public class ClusterInfoMapping {
         }
       }
 
-      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyConsumedTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyConsumedTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyImportedTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyImportedTimeAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14746,7 +14746,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyConsumedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyConsumedAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyImportedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyImportedAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14765,7 +14765,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyDeliveredTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyExportedTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyExportedTimeAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14784,7 +14784,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyDeliveredAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterCumulativeEnergyExportedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.CumulativeEnergyExportedAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14803,7 +14803,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyConsumedStartTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyConsumedStartTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyImportedStartTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyImportedStartTimeAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14822,7 +14822,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEndTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyConsumedEndTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyImportedEndTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyImportedEndTimeAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14841,7 +14841,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyConsumedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyConsumedAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyImportedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyImportedAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14860,7 +14860,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredStartTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyDeliveredStartTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyExportedStartTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyExportedStartTimeAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14879,7 +14879,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEndTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyDeliveredEndTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyExportedEndTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyExportedEndTimeAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14898,7 +14898,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyDeliveredAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterPeriodicEnergyExportedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.PeriodicEnergyExportedAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14917,7 +14917,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterEphemeralEnergyConsumedStartTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.EphemeralEnergyConsumedStartTimeAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterEphemeralEnergyImportedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.EphemeralEnergyImportedAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {
@@ -14936,26 +14936,7 @@ public class ClusterInfoMapping {
           callback.onFailure(ex);
         }
       }
-      public static class DelegatedElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEndTimeAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.EphemeralEnergyConsumedEndTimeAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess(@Nullable Long value) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Long");
-          responseValues.put(commandResponseInfo, value);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedElectricalEnergyMeasurementClusterEphemeralEnergyConsumedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.EphemeralEnergyConsumedAttributeCallback, DelegatedClusterCallback {
+      public static class DelegatedElectricalEnergyMeasurementClusterEphemeralEnergyExportedAttributeCallback implements ChipClusters.ElectricalEnergyMeasurementCluster.EphemeralEnergyExportedAttributeCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
         public void setCallbackDelegate(ClusterCommandCallback callback) {

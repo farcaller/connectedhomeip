@@ -6138,69 +6138,69 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@implementation MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent
+@implementation MTRElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent
 - (instancetype)init
 {
     if (self = [super init]) {
 
-        _consumedTimestamp = @(0);
+        _importedTimestamp = @(0);
 
-        _energyConsumed = @(0);
+        _energyImported = @(0);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone * _Nullable)zone
 {
-    auto other = [[MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent alloc] init];
+    auto other = [[MTRElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent alloc] init];
 
-    other.consumedTimestamp = self.consumedTimestamp;
-    other.energyConsumed = self.energyConsumed;
+    other.importedTimestamp = self.importedTimestamp;
+    other.energyImported = self.energyImported;
 
     return other;
 }
 
 - (NSString *)description
 {
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: consumedTimestamp:%@; energyConsumed:%@; >",
-                                             NSStringFromClass([self class]), _consumedTimestamp, _energyConsumed];
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: importedTimestamp:%@; energyImported:%@; >",
+                                             NSStringFromClass([self class]), _importedTimestamp, _energyImported];
     return descriptionString;
 }
 
 @end
 
-@implementation MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent
+@implementation MTRElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent
 - (instancetype)init
 {
     if (self = [super init]) {
 
-        _deliveredTimestamp = @(0);
+        _exportedTimestamp = @(0);
 
-        _energyDelivered = @(0);
+        _energyExported = @(0);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone * _Nullable)zone
 {
-    auto other = [[MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent alloc] init];
+    auto other = [[MTRElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent alloc] init];
 
-    other.deliveredTimestamp = self.deliveredTimestamp;
-    other.energyDelivered = self.energyDelivered;
+    other.exportedTimestamp = self.exportedTimestamp;
+    other.energyExported = self.energyExported;
 
     return other;
 }
 
 - (NSString *)description
 {
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: deliveredTimestamp:%@; energyDelivered:%@; >",
-                                             NSStringFromClass([self class]), _deliveredTimestamp, _energyDelivered];
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: exportedTimestamp:%@; energyExported:%@; >",
+                                             NSStringFromClass([self class]), _exportedTimestamp, _energyExported];
     return descriptionString;
 }
 
 @end
 
-@implementation MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent
+@implementation MTRElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent
 - (instancetype)init
 {
     if (self = [super init]) {
@@ -6209,32 +6209,32 @@ NS_ASSUME_NONNULL_BEGIN
 
         _periodEnd = @(0);
 
-        _energyConsumed = @(0);
+        _energyImported = @(0);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone * _Nullable)zone
 {
-    auto other = [[MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent alloc] init];
+    auto other = [[MTRElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent alloc] init];
 
     other.periodStart = self.periodStart;
     other.periodEnd = self.periodEnd;
-    other.energyConsumed = self.energyConsumed;
+    other.energyImported = self.energyImported;
 
     return other;
 }
 
 - (NSString *)description
 {
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyConsumed:%@; >",
-                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyConsumed];
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyImported:%@; >",
+                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyImported];
     return descriptionString;
 }
 
 @end
 
-@implementation MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent
+@implementation MTRElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent
 - (instancetype)init
 {
     if (self = [super init]) {
@@ -6243,60 +6243,88 @@ NS_ASSUME_NONNULL_BEGIN
 
         _periodEnd = @(0);
 
-        _energyDelivered = @(0);
+        _energyExported = @(0);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone * _Nullable)zone
 {
-    auto other = [[MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent alloc] init];
+    auto other = [[MTRElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent alloc] init];
 
     other.periodStart = self.periodStart;
     other.periodEnd = self.periodEnd;
-    other.energyDelivered = self.energyDelivered;
+    other.energyExported = self.energyExported;
 
     return other;
 }
 
 - (NSString *)description
 {
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyDelivered:%@; >",
-                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyDelivered];
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyExported:%@; >",
+                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyExported];
     return descriptionString;
 }
 
 @end
 
-@implementation MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent
+@implementation MTRElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent
 - (instancetype)init
 {
     if (self = [super init]) {
 
-        _periodStart = @(0);
+        _importedTimestamp = @(0);
 
-        _periodEnd = @(0);
-
-        _energyConsumed = @(0);
+        _energyImported = @(0);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone * _Nullable)zone
 {
-    auto other = [[MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent alloc] init];
+    auto other = [[MTRElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent alloc] init];
 
-    other.periodStart = self.periodStart;
-    other.periodEnd = self.periodEnd;
-    other.energyConsumed = self.energyConsumed;
+    other.importedTimestamp = self.importedTimestamp;
+    other.energyImported = self.energyImported;
 
     return other;
 }
 
 - (NSString *)description
 {
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: periodStart:%@; periodEnd:%@; energyConsumed:%@; >",
-                                             NSStringFromClass([self class]), _periodStart, _periodEnd, _energyConsumed];
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: importedTimestamp:%@; energyImported:%@; >",
+                                             NSStringFromClass([self class]), _importedTimestamp, _energyImported];
+    return descriptionString;
+}
+
+@end
+
+@implementation MTRElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _exportedTimestamp = @(0);
+
+        _energyExported = @(0);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone
+{
+    auto other = [[MTRElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent alloc] init];
+
+    other.exportedTimestamp = self.exportedTimestamp;
+    other.energyExported = self.energyExported;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: exportedTimestamp:%@; energyExported:%@; >",
+                                             NSStringFromClass([self class]), _exportedTimestamp, _energyExported];
     return descriptionString;
 }
 

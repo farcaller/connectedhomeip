@@ -464,19 +464,22 @@ LogValue(const char * label, size_t indent,
          const chip::app::Clusters::ElectricalPowerMeasurement::Events::MeasurementPeriodRange::DecodableType & value);
 static CHIP_ERROR
 LogValue(const char * label, size_t indent,
-         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyConsumed::DecodableType & value);
+         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyImported::DecodableType & value);
 static CHIP_ERROR
 LogValue(const char * label, size_t indent,
-         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyDelivered::DecodableType & value);
+         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::CumulativeEnergyExported::DecodableType & value);
 static CHIP_ERROR
 LogValue(const char * label, size_t indent,
-         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyConsumed::DecodableType & value);
+         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyImported::DecodableType & value);
 static CHIP_ERROR
 LogValue(const char * label, size_t indent,
-         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyDelivered::DecodableType & value);
+         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::PeriodicEnergyExported::DecodableType & value);
 static CHIP_ERROR
 LogValue(const char * label, size_t indent,
-         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::EphemeralEnergyConsumed::DecodableType & value);
+         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::EphemeralEnergyImported::DecodableType & value);
+static CHIP_ERROR
+LogValue(const char * label, size_t indent,
+         const chip::app::Clusters::ElectricalEnergyMeasurement::Events::EphemeralEnergyExported::DecodableType & value);
 static CHIP_ERROR LogValue(const char * label, size_t indent,
                            const chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType & value);
 static CHIP_ERROR LogValue(const char * label, size_t indent,

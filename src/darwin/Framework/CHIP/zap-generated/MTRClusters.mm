@@ -29142,131 +29142,113 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
                                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyConsumedTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyImportedTimeWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyConsumedTimeID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyImportedTimeID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyImportedWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyConsumedID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyImportedID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyDeliveredTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyExportedTimeWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyDeliveredTimeID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyExportedTimeID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyDeliveredWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeCumulativeEnergyExportedWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyDeliveredID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyExportedID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedStartTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyImportedStartTimeWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
                         attributeID:
-                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedStartTimeID)
+                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyImportedStartTimeID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedEndTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyImportedEndTimeWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedEndTimeID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyImportedEndTimeID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyImportedWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyConsumedID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyImportedID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredStartTimeWithParams:(MTRReadParams * _Nullable)params
-{
-    return [self.device
-        readAttributeWithEndpointID:@(self.endpoint)
-                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:
-                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredStartTimeID)
-                             params:params];
-}
-
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredEndTimeWithParams:(MTRReadParams * _Nullable)params
-{
-    return [self.device
-        readAttributeWithEndpointID:@(self.endpoint)
-                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredEndTimeID)
-                             params:params];
-}
-
-- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyDeliveredWithParams:(MTRReadParams * _Nullable)params
-{
-    return [self.device
-        readAttributeWithEndpointID:@(self.endpoint)
-                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyDeliveredID)
-                             params:params];
-}
-
-- (NSDictionary<NSString *, id> *)readAttributeSystemTimeWithParams:(MTRReadParams * _Nullable)params
-{
-    return [self.device readAttributeWithEndpointID:@(self.endpoint)
-                                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeSystemTimeID)
-                                             params:params];
-}
-
-- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedStartTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyExportedStartTimeWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
                         attributeID:
-                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedStartTimeID)
+                            @(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyExportedStartTimeID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedEndTimeWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyExportedEndTimeWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedEndTimeID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyExportedEndTimeID)
                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyConsumedWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributePeriodicEnergyExportedWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device
         readAttributeWithEndpointID:@(self.endpoint)
                           clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
-                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyConsumedID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributePeriodicEnergyExportedID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyImportedWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyImportedID)
+                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEphemeralEnergyExportedWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device
+        readAttributeWithEndpointID:@(self.endpoint)
+                          clusterID:@(MTRClusterIDTypeElectricalEnergyMeasurementID)
+                        attributeID:@(MTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEphemeralEnergyExportedID)
                              params:params];
 }
 

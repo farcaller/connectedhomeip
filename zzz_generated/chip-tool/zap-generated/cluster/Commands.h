@@ -11005,20 +11005,18 @@ private:
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * Measured                                                          | 0x0000 |
-| * CumulativeEnergyConsumedTime                                      | 0x0001 |
-| * CumulativeEnergyConsumed                                          | 0x0002 |
-| * CumulativeEnergyDeliveredTime                                     | 0x0003 |
-| * CumulativeEnergyDelivered                                         | 0x0004 |
-| * PeriodicEnergyConsumedStartTime                                   | 0x0005 |
-| * PeriodicEnergyConsumedEndTime                                     | 0x0006 |
-| * PeriodicEnergyConsumed                                            | 0x0007 |
-| * PeriodicEnergyDeliveredStartTime                                  | 0x0008 |
-| * PeriodicEnergyDeliveredEndTime                                    | 0x0009 |
-| * PeriodicEnergyDelivered                                           | 0x000A |
-| * SystemTime                                                        | 0x000B |
-| * EphemeralEnergyConsumedStartTime                                  | 0x000C |
-| * EphemeralEnergyConsumedEndTime                                    | 0x000D |
-| * EphemeralEnergyConsumed                                           | 0x000E |
+| * CumulativeEnergyImportedTime                                      | 0x0001 |
+| * CumulativeEnergyImported                                          | 0x0002 |
+| * CumulativeEnergyExportedTime                                      | 0x0003 |
+| * CumulativeEnergyExported                                          | 0x0004 |
+| * PeriodicEnergyImportedStartTime                                   | 0x0005 |
+| * PeriodicEnergyImportedEndTime                                     | 0x0006 |
+| * PeriodicEnergyImported                                            | 0x0007 |
+| * PeriodicEnergyExportedStartTime                                   | 0x0008 |
+| * PeriodicEnergyExportedEndTime                                     | 0x0009 |
+| * PeriodicEnergyExported                                            | 0x000A |
+| * EphemeralEnergyImported                                           | 0x000B |
+| * EphemeralEnergyExported                                           | 0x000C |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -11027,11 +11025,12 @@ private:
 | * ClusterRevision                                                   | 0xFFFD |
 |------------------------------------------------------------------------------|
 | Events:                                                             |        |
-| * CumulativeEnergyConsumed                                          | 0x0000 |
-| * CumulativeEnergyDelivered                                         | 0x0001 |
-| * PeriodicEnergyConsumed                                            | 0x0003 |
-| * PeriodicEnergyDelivered                                           | 0x0004 |
-| * EphemeralEnergyConsumed                                           | 0x0005 |
+| * CumulativeEnergyImported                                          | 0x0000 |
+| * CumulativeEnergyExported                                          | 0x0001 |
+| * PeriodicEnergyImported                                            | 0x0003 |
+| * PeriodicEnergyExported                                            | 0x0004 |
+| * EphemeralEnergyImported                                           | 0x0005 |
+| * EphemeralEnergyExported                                           | 0x0006 |
 \*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*\
@@ -22127,30 +22126,26 @@ void registerClusterElectricalEnergyMeasurement(Commands & commands, CredentialI
         //
         make_unique<ReadAttribute>(Id, credsIssuerConfig),                                       //
         make_unique<ReadAttribute>(Id, "measured", Attributes::Measured::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "cumulative-energy-consumed-time", Attributes::CumulativeEnergyConsumedTime::Id,
+        make_unique<ReadAttribute>(Id, "cumulative-energy-imported-time", Attributes::CumulativeEnergyImportedTime::Id,
                                    credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "cumulative-energy-consumed", Attributes::CumulativeEnergyConsumed::Id,
+        make_unique<ReadAttribute>(Id, "cumulative-energy-imported", Attributes::CumulativeEnergyImported::Id,
                                    credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "cumulative-energy-delivered-time", Attributes::CumulativeEnergyDeliveredTime::Id,
+        make_unique<ReadAttribute>(Id, "cumulative-energy-exported-time", Attributes::CumulativeEnergyExportedTime::Id,
                                    credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "cumulative-energy-delivered", Attributes::CumulativeEnergyDelivered::Id,
+        make_unique<ReadAttribute>(Id, "cumulative-energy-exported", Attributes::CumulativeEnergyExported::Id,
                                    credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "periodic-energy-consumed-start-time", Attributes::PeriodicEnergyConsumedStartTime::Id,
+        make_unique<ReadAttribute>(Id, "periodic-energy-imported-start-time", Attributes::PeriodicEnergyImportedStartTime::Id,
                                    credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "periodic-energy-consumed-end-time", Attributes::PeriodicEnergyConsumedEndTime::Id,
+        make_unique<ReadAttribute>(Id, "periodic-energy-imported-end-time", Attributes::PeriodicEnergyImportedEndTime::Id,
                                    credsIssuerConfig),                                                                         //
-        make_unique<ReadAttribute>(Id, "periodic-energy-consumed", Attributes::PeriodicEnergyConsumed::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "periodic-energy-delivered-start-time", Attributes::PeriodicEnergyDeliveredStartTime::Id,
+        make_unique<ReadAttribute>(Id, "periodic-energy-imported", Attributes::PeriodicEnergyImported::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "periodic-energy-exported-start-time", Attributes::PeriodicEnergyExportedStartTime::Id,
                                    credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "periodic-energy-delivered-end-time", Attributes::PeriodicEnergyDeliveredEndTime::Id,
+        make_unique<ReadAttribute>(Id, "periodic-energy-exported-end-time", Attributes::PeriodicEnergyExportedEndTime::Id,
                                    credsIssuerConfig),                                                                           //
-        make_unique<ReadAttribute>(Id, "periodic-energy-delivered", Attributes::PeriodicEnergyDelivered::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "system-time", Attributes::SystemTime::Id, credsIssuerConfig),                            //
-        make_unique<ReadAttribute>(Id, "ephemeral-energy-consumed-start-time", Attributes::EphemeralEnergyConsumedStartTime::Id,
-                                   credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "ephemeral-energy-consumed-end-time", Attributes::EphemeralEnergyConsumedEndTime::Id,
-                                   credsIssuerConfig),                                                                           //
-        make_unique<ReadAttribute>(Id, "ephemeral-energy-consumed", Attributes::EphemeralEnergyConsumed::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "periodic-energy-exported", Attributes::PeriodicEnergyExported::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "ephemeral-energy-imported", Attributes::EphemeralEnergyImported::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "ephemeral-energy-exported", Attributes::EphemeralEnergyExported::Id, credsIssuerConfig), //
         make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig),       //
         make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),         //
         make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                              //
@@ -22160,46 +22155,41 @@ void registerClusterElectricalEnergyMeasurement(Commands & commands, CredentialI
         make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                                    //
         make_unique<WriteAttribute<bool>>(Id, "measured", 0, 1, Attributes::Measured::Id, WriteCommandType::kForceWrite,
                                           credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "cumulative-energy-consumed-time", 0, UINT32_MAX,
-                                                                              Attributes::CumulativeEnergyConsumedTime::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "cumulative-energy-imported-time", 0, UINT32_MAX,
+                                                                              Attributes::CumulativeEnergyImportedTime::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "cumulative-energy-consumed", 0, UINT64_MAX,
-                                                                              Attributes::CumulativeEnergyConsumed::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "cumulative-energy-imported", 0, UINT64_MAX,
+                                                                              Attributes::CumulativeEnergyImported::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "cumulative-energy-delivered-time", 0, UINT32_MAX,
-                                                                              Attributes::CumulativeEnergyDeliveredTime::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "cumulative-energy-exported-time", 0, UINT32_MAX,
+                                                                              Attributes::CumulativeEnergyExportedTime::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "cumulative-energy-delivered", 0, UINT64_MAX,
-                                                                              Attributes::CumulativeEnergyDelivered::Id,
-                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(
-            Id, "periodic-energy-consumed-start-time", 0, UINT32_MAX, Attributes::PeriodicEnergyConsumedStartTime::Id,
-            WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(
-            Id, "periodic-energy-consumed-end-time", 0, UINT32_MAX, Attributes::PeriodicEnergyConsumedEndTime::Id,
-            WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "periodic-energy-consumed", 0, UINT64_MAX,
-                                                                              Attributes::PeriodicEnergyConsumed::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "cumulative-energy-exported", 0, UINT64_MAX,
+                                                                              Attributes::CumulativeEnergyExported::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(
-            Id, "periodic-energy-delivered-start-time", 0, UINT32_MAX, Attributes::PeriodicEnergyDeliveredStartTime::Id,
+            Id, "periodic-energy-imported-start-time", 0, UINT32_MAX, Attributes::PeriodicEnergyImportedStartTime::Id,
             WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(
-            Id, "periodic-energy-delivered-end-time", 0, UINT32_MAX, Attributes::PeriodicEnergyDeliveredEndTime::Id,
+            Id, "periodic-energy-imported-end-time", 0, UINT32_MAX, Attributes::PeriodicEnergyImportedEndTime::Id,
             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "periodic-energy-delivered", 0, UINT64_MAX,
-                                                                              Attributes::PeriodicEnergyDelivered::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "periodic-energy-imported", 0, UINT64_MAX,
+                                                                              Attributes::PeriodicEnergyImported::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint64_t>>(Id, "system-time", 0, UINT64_MAX, Attributes::SystemTime::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(
-            Id, "ephemeral-energy-consumed-start-time", 0, UINT64_MAX, Attributes::EphemeralEnergyConsumedStartTime::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(
+            Id, "periodic-energy-exported-start-time", 0, UINT32_MAX, Attributes::PeriodicEnergyExportedStartTime::Id,
             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(
-            Id, "ephemeral-energy-consumed-end-time", 0, UINT64_MAX, Attributes::EphemeralEnergyConsumedEndTime::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(
+            Id, "periodic-energy-exported-end-time", 0, UINT32_MAX, Attributes::PeriodicEnergyExportedEndTime::Id,
             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "ephemeral-energy-consumed", 0, UINT64_MAX,
-                                                                              Attributes::EphemeralEnergyConsumed::Id,
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "periodic-energy-exported", 0, UINT64_MAX,
+                                                                              Attributes::PeriodicEnergyExported::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "ephemeral-energy-imported", 0, UINT64_MAX,
+                                                                              Attributes::EphemeralEnergyImported::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint64_t>>>(Id, "ephemeral-energy-exported", 0, UINT64_MAX,
+                                                                              Attributes::EphemeralEnergyExported::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
             Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
@@ -22216,32 +22206,29 @@ void registerClusterElectricalEnergyMeasurement(Commands & commands, CredentialI
                                               WriteCommandType::kForceWrite, credsIssuerConfig),      //
         make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                       //
         make_unique<SubscribeAttribute>(Id, "measured", Attributes::Measured::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "cumulative-energy-consumed-time", Attributes::CumulativeEnergyConsumedTime::Id,
+        make_unique<SubscribeAttribute>(Id, "cumulative-energy-imported-time", Attributes::CumulativeEnergyImportedTime::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "cumulative-energy-consumed", Attributes::CumulativeEnergyConsumed::Id,
+        make_unique<SubscribeAttribute>(Id, "cumulative-energy-imported", Attributes::CumulativeEnergyImported::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "cumulative-energy-delivered-time", Attributes::CumulativeEnergyDeliveredTime::Id,
+        make_unique<SubscribeAttribute>(Id, "cumulative-energy-exported-time", Attributes::CumulativeEnergyExportedTime::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "cumulative-energy-delivered", Attributes::CumulativeEnergyDelivered::Id,
+        make_unique<SubscribeAttribute>(Id, "cumulative-energy-exported", Attributes::CumulativeEnergyExported::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "periodic-energy-consumed-start-time", Attributes::PeriodicEnergyConsumedStartTime::Id,
+        make_unique<SubscribeAttribute>(Id, "periodic-energy-imported-start-time", Attributes::PeriodicEnergyImportedStartTime::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "periodic-energy-consumed-end-time", Attributes::PeriodicEnergyConsumedEndTime::Id,
+        make_unique<SubscribeAttribute>(Id, "periodic-energy-imported-end-time", Attributes::PeriodicEnergyImportedEndTime::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "periodic-energy-consumed", Attributes::PeriodicEnergyConsumed::Id,
+        make_unique<SubscribeAttribute>(Id, "periodic-energy-imported", Attributes::PeriodicEnergyImported::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "periodic-energy-delivered-start-time",
-                                        Attributes::PeriodicEnergyDeliveredStartTime::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "periodic-energy-delivered-end-time", Attributes::PeriodicEnergyDeliveredEndTime::Id,
+        make_unique<SubscribeAttribute>(Id, "periodic-energy-exported-start-time", Attributes::PeriodicEnergyExportedStartTime::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "periodic-energy-delivered", Attributes::PeriodicEnergyDelivered::Id,
-                                        credsIssuerConfig),                                                //
-        make_unique<SubscribeAttribute>(Id, "system-time", Attributes::SystemTime::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "ephemeral-energy-consumed-start-time",
-                                        Attributes::EphemeralEnergyConsumedStartTime::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "ephemeral-energy-consumed-end-time", Attributes::EphemeralEnergyConsumedEndTime::Id,
+        make_unique<SubscribeAttribute>(Id, "periodic-energy-exported-end-time", Attributes::PeriodicEnergyExportedEndTime::Id,
                                         credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "ephemeral-energy-consumed", Attributes::EphemeralEnergyConsumed::Id,
+        make_unique<SubscribeAttribute>(Id, "periodic-energy-exported", Attributes::PeriodicEnergyExported::Id,
+                                        credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "ephemeral-energy-imported", Attributes::EphemeralEnergyImported::Id,
+                                        credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "ephemeral-energy-exported", Attributes::EphemeralEnergyExported::Id,
                                         credsIssuerConfig),                                                                     //
         make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
         make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
@@ -22252,18 +22239,20 @@ void registerClusterElectricalEnergyMeasurement(Commands & commands, CredentialI
         //
         // Events
         //
-        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                                            //
-        make_unique<ReadEvent>(Id, "cumulative-energy-consumed", Events::CumulativeEnergyConsumed::Id, credsIssuerConfig),        //
-        make_unique<ReadEvent>(Id, "cumulative-energy-delivered", Events::CumulativeEnergyDelivered::Id, credsIssuerConfig),      //
-        make_unique<ReadEvent>(Id, "periodic-energy-consumed", Events::PeriodicEnergyConsumed::Id, credsIssuerConfig),            //
-        make_unique<ReadEvent>(Id, "periodic-energy-delivered", Events::PeriodicEnergyDelivered::Id, credsIssuerConfig),          //
-        make_unique<ReadEvent>(Id, "ephemeral-energy-consumed", Events::EphemeralEnergyConsumed::Id, credsIssuerConfig),          //
-        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                                       //
-        make_unique<SubscribeEvent>(Id, "cumulative-energy-consumed", Events::CumulativeEnergyConsumed::Id, credsIssuerConfig),   //
-        make_unique<SubscribeEvent>(Id, "cumulative-energy-delivered", Events::CumulativeEnergyDelivered::Id, credsIssuerConfig), //
-        make_unique<SubscribeEvent>(Id, "periodic-energy-consumed", Events::PeriodicEnergyConsumed::Id, credsIssuerConfig),       //
-        make_unique<SubscribeEvent>(Id, "periodic-energy-delivered", Events::PeriodicEnergyDelivered::Id, credsIssuerConfig),     //
-        make_unique<SubscribeEvent>(Id, "ephemeral-energy-consumed", Events::EphemeralEnergyConsumed::Id, credsIssuerConfig),     //
+        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                                          //
+        make_unique<ReadEvent>(Id, "cumulative-energy-imported", Events::CumulativeEnergyImported::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "cumulative-energy-exported", Events::CumulativeEnergyExported::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "periodic-energy-imported", Events::PeriodicEnergyImported::Id, credsIssuerConfig),          //
+        make_unique<ReadEvent>(Id, "periodic-energy-exported", Events::PeriodicEnergyExported::Id, credsIssuerConfig),          //
+        make_unique<ReadEvent>(Id, "ephemeral-energy-imported", Events::EphemeralEnergyImported::Id, credsIssuerConfig),        //
+        make_unique<ReadEvent>(Id, "ephemeral-energy-exported", Events::EphemeralEnergyExported::Id, credsIssuerConfig),        //
+        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                                     //
+        make_unique<SubscribeEvent>(Id, "cumulative-energy-imported", Events::CumulativeEnergyImported::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "cumulative-energy-exported", Events::CumulativeEnergyExported::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "periodic-energy-imported", Events::PeriodicEnergyImported::Id, credsIssuerConfig),     //
+        make_unique<SubscribeEvent>(Id, "periodic-energy-exported", Events::PeriodicEnergyExported::Id, credsIssuerConfig),     //
+        make_unique<SubscribeEvent>(Id, "ephemeral-energy-imported", Events::EphemeralEnergyImported::Id, credsIssuerConfig),   //
+        make_unique<SubscribeEvent>(Id, "ephemeral-energy-exported", Events::EphemeralEnergyExported::Id, credsIssuerConfig),   //
     };
 
     commands.RegisterCluster(clusterName, clusterCommands);

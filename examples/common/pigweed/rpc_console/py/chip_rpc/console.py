@@ -64,6 +64,8 @@ from pw_tokenizer.detokenize import Detokenizer
 # isort: off
 from attributes_service import attributes_service_pb2
 from button_service import button_service_pb2
+from elec_service import elec_service_pb2
+from evse_service import evse_service_pb2
 from descriptor_service import descriptor_service_pb2
 from device_service import device_service_pb2
 from echo_service import echo_pb2
@@ -85,6 +87,8 @@ PROTOS = [attributes_service_pb2,
           descriptor_service_pb2,
           device_service_pb2,
           echo_pb2,
+          elec_service_pb2,
+          evse_service_pb2,
           lighting_service_pb2,
           locking_service_pb2,
           ot_cli_service_pb2,
@@ -124,6 +128,12 @@ def _parse_args():
                        type=str,
                        help='use socket to connect to server, type default for\
             localhost:33000, or manually input the server address:port')
+    
+    parser.add_argument('-n',
+                       '--non_interactive',
+                       type=str,
+                       help='Runs a script in non-interactive mode')
+
     return parser.parse_args()
 
 
@@ -316,7 +326,8 @@ def _read_raw_serial(read: Callable[[], bytes], output):
 
 def console(device: str, baudrate: int,
             token_databases: Collection[tokens.Database],
-            socket_addr: str, output: Any, raw_serial: bool) -> int:
+            socket_addr: str, output: Any, raw_serial: bool,
+            non_interactive: str) -> int:
     """Starts an interactive RPC console for HDLC."""
     # argparse.FileType doesn't correctly handle '-' for binary files.
     if output is sys.stdout:
@@ -366,8 +377,53 @@ def console(device: str, baudrate: int,
     return 0
 
 
+def start_non_interactive(device: str, baudrate: int,
+            token_databases: Collection[tokens.Database],
+            socket_addr: str, output: Any, raw_serial: bool,
+            non_interactive: str) -> int:
+    """Starts an non-interactive RPC session for HDLC."""
+
+    serial_impl = SerialWithLogging
+
+    if socket_addr is None:
+        serial_device = serial_impl(device, baudrate, timeout=0.1)
+        def read(): return serial_device.read(8192)
+        write = serial_device.write
+    else:
+        try:
+            socket_device = SocketClientImpl(socket_addr)
+            read = socket_device.read
+            write = socket_device.write
+        except ValueError:
+            _LOG.exception('Failed to initialize socket at %s', socket_addr)
+            return 1
+
+    client = HdlcRpcClient(read, PROTOS, default_channels(write))
+    with client:
+        print("Calling %s..." % non_interactive)
+        with open(non_interactive) as script:
+            exec(script.read(), globals(), locals())
+        
+        # An example script looks something like this
+        """
+        elec_service = client.rpcs().chip.rpc.Elec
+        # Call some RPCs and check the results.
+        status, payload = elec_service.SendEnergyReading(type=0,energy_imported=3000,energy_imported_ts=1)
+
+        if status.ok():
+            print('The status was', status)
+            print('The payload was', payload)
+        else:
+            print('Uh oh, this RPC returned', status)
+        """
+
 def main() -> int:
-    return console(**vars(_parse_args()))
+    args = _parse_args()
+
+    if args.non_interactive:
+        start_non_interactive(**vars(args))
+    else:    
+        return console(**vars(args))
 
 
 if __name__ == '__main__':

@@ -6458,7 +6458,7 @@ client cluster EnergyManagement = 1798 {
     kOther = 255;
   }
 
-  bitmap EnergyManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kPowerAdjustment = 0x1;
     kPowerForecastReporting = 0x2;
     kPowerForecastAdjustment = 0x4;
@@ -6638,7 +6638,7 @@ client cluster EvseManagement = 1804 {
     kDisabledDiagnostics = 4;
   }
 
-  bitmap EvseManagementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kChargingPreferences = 0x1;
     kSessions = 0x2;
     kSocReporting = 0x4;
@@ -6976,7 +6976,7 @@ client cluster ElectricalPowerMeasurement = 26209 {
     kAC = 2;
   }
 
-  bitmap ElectricalPowerMeasurementFeature : BITMAP32 {
+  bitmap Feature : BITMAP32 {
     kDirectCurrent = 0x1;
     kAlternatingCurrent = 0x2;
     kThreePhasePower = 0x4;
@@ -7044,57 +7044,59 @@ client cluster ElectricalPowerMeasurement = 26209 {
 
 /** This cluster provides a mechanism for querying data about the electrical energy consumed or provided by the device. */
 client cluster ElectricalEnergyMeasurement = 26210 {
-  bitmap ElectricalEnergyMeasurementFeature : BITMAP32 {
-    kConsumedEnergy = 0x1;
-    kDeliveredEnergy = 0x2;
+  bitmap Feature : BITMAP32 {
+    kImportedEnergy = 0x1;
+    kExportedEnergy = 0x2;
     kCumulativeEnergy = 0x4;
     kPeriodicEnergy = 0x8;
     kEphemeralEnergy = 0x10;
   }
 
-  info event CumulativeEnergyConsumed = 0 {
-    epoch_s consumedTimestamp = 0;
-    INT64U energyConsumed = 1;
+  info event CumulativeEnergyImported = 0 {
+    epoch_s importedTimestamp = 0;
+    INT64U energyImported = 1;
   }
 
-  info event CumulativeEnergyDelivered = 1 {
-    epoch_s deliveredTimestamp = 0;
-    INT64U energyDelivered = 1;
+  info event CumulativeEnergyExported = 1 {
+    epoch_s exportedTimestamp = 0;
+    INT64U energyExported = 1;
   }
 
-  info event PeriodicEnergyConsumed = 3 {
+  info event PeriodicEnergyImported = 3 {
     epoch_s periodStart = 0;
     epoch_s periodEnd = 1;
-    INT64U energyConsumed = 2;
+    INT64U energyImported = 2;
   }
 
-  info event PeriodicEnergyDelivered = 4 {
+  info event PeriodicEnergyExported = 4 {
     epoch_s periodStart = 0;
     epoch_s periodEnd = 1;
-    INT64U energyDelivered = 2;
+    INT64U energyExported = 2;
   }
 
-  info event EphemeralEnergyConsumed = 5 {
-    systime_ms periodStart = 0;
-    systime_ms periodEnd = 1;
-    INT64U energyConsumed = 2;
+  info event EphemeralEnergyImported = 5 {
+    systime_ms importedTimestamp = 0;
+    INT64U energyImported = 1;
+  }
+
+  info event EphemeralEnergyExported = 6 {
+    systime_ms exportedTimestamp = 0;
+    INT64U energyExported = 1;
   }
 
   readonly attribute boolean measured = 0;
-  readonly attribute nullable epoch_s cumulativeEnergyConsumedTime = 1;
-  readonly attribute nullable int64u cumulativeEnergyConsumed = 2;
-  readonly attribute nullable epoch_s cumulativeEnergyDeliveredTime = 3;
-  readonly attribute nullable int64u cumulativeEnergyDelivered = 4;
-  readonly attribute nullable epoch_s periodicEnergyConsumedStartTime = 5;
-  readonly attribute nullable epoch_s periodicEnergyConsumedEndTime = 6;
-  readonly attribute nullable int64u periodicEnergyConsumed = 7;
-  readonly attribute nullable epoch_s periodicEnergyDeliveredStartTime = 8;
-  readonly attribute nullable epoch_s periodicEnergyDeliveredEndTime = 9;
-  readonly attribute nullable int64u periodicEnergyDelivered = 10;
-  readonly attribute systime_ms systemTime = 11;
-  readonly attribute nullable systime_ms ephemeralEnergyConsumedStartTime = 12;
-  readonly attribute nullable systime_ms ephemeralEnergyConsumedEndTime = 13;
-  readonly attribute nullable int64u ephemeralEnergyConsumed = 14;
+  readonly attribute nullable epoch_s cumulativeEnergyImportedTime = 1;
+  readonly attribute nullable int64u cumulativeEnergyImported = 2;
+  readonly attribute nullable epoch_s cumulativeEnergyExportedTime = 3;
+  readonly attribute nullable int64u cumulativeEnergyExported = 4;
+  readonly attribute nullable epoch_s periodicEnergyImportedStartTime = 5;
+  readonly attribute nullable epoch_s periodicEnergyImportedEndTime = 6;
+  readonly attribute nullable int64u periodicEnergyImported = 7;
+  readonly attribute nullable epoch_s periodicEnergyExportedStartTime = 8;
+  readonly attribute nullable epoch_s periodicEnergyExportedEndTime = 9;
+  readonly attribute nullable int64u periodicEnergyExported = 10;
+  readonly attribute nullable int64u ephemeralEnergyImported = 11;
+  readonly attribute nullable int64u ephemeralEnergyExported = 12;
   readonly attribute command_id generatedCommandList[] = 65528;
   readonly attribute command_id acceptedCommandList[] = 65529;
   readonly attribute event_id eventList[] = 65530;

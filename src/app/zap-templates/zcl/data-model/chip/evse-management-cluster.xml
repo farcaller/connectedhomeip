@@ -221,7 +221,7 @@ limitations under the License.
 
   </cluster>
 
-  <bitmap name="EvseManagementFeature" type="BITMAP32">
+  <bitmap name="Feature" type="BITMAP32">
     <cluster code="0x070C"/>
     <field name="ChargingPreferences" mask="0x1"  optional="true"/>
     <field name="Sessions"            mask="0x2"  optional="true"/>

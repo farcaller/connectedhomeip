@@ -110,7 +110,7 @@ limitations under the License.
   </cluster>
 
 
-  <bitmap name="ElectricalPowerMeasurementFeature" type="BITMAP32">
+  <bitmap name="Feature" type="BITMAP32">
     <cluster code="0x6661"/>
     <field mask="0x1"  name="DirectCurrent" />
     <field mask="0x2"  name="AlternatingCurrent" />

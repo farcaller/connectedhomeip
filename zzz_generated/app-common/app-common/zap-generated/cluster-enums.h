@@ -4106,8 +4106,8 @@ enum class EsaTypeEnum : uint8_t
     kUnknownEnumValue = 11,
 };
 
-// Bitmap for EnergyManagementFeature
-enum class EnergyManagementFeature : uint32_t
+// Bitmap for Feature
+enum class Feature : uint32_t
 {
     kPowerAdjustment         = 0x1,
     kPowerForecastReporting  = 0x2,
@@ -4205,8 +4205,8 @@ enum class SupplyStateEnum : uint8_t
     kUnknownEnumValue = 5,
 };
 
-// Bitmap for EvseManagementFeature
-enum class EvseManagementFeature : uint32_t
+// Bitmap for Feature
+enum class Feature : uint32_t
 {
     kChargingPreferences = 0x1,
     kSessions            = 0x2,
@@ -4269,8 +4269,8 @@ enum class PowerModeEnum : uint8_t
     kUnknownEnumValue = 3,
 };
 
-// Bitmap for ElectricalPowerMeasurementFeature
-enum class ElectricalPowerMeasurementFeature : uint32_t
+// Bitmap for Feature
+enum class Feature : uint32_t
 {
     kDirectCurrent      = 0x1,
     kAlternatingCurrent = 0x2,
@@ -4282,11 +4282,11 @@ enum class ElectricalPowerMeasurementFeature : uint32_t
 
 namespace ElectricalEnergyMeasurement {
 
-// Bitmap for ElectricalEnergyMeasurementFeature
-enum class ElectricalEnergyMeasurementFeature : uint32_t
+// Bitmap for Feature
+enum class Feature : uint32_t
 {
-    kConsumedEnergy   = 0x1,
-    kDeliveredEnergy  = 0x2,
+    kImportedEnergy   = 0x1,
+    kExportedEnergy   = 0x2,
     kCumulativeEnergy = 0x4,
     kPeriodicEnergy   = 0x8,
     kEphemeralEnergy  = 0x10,

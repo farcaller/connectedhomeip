@@ -1812,36 +1812,41 @@ MTR_NEWLY_AVAILABLE
 @end
 
 MTR_NEWLY_AVAILABLE
-@interface MTRElectricalEnergyMeasurementClusterCumulativeEnergyConsumedEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull consumedTimestamp MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull energyConsumed MTR_NEWLY_AVAILABLE;
+@interface MTRElectricalEnergyMeasurementClusterCumulativeEnergyImportedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull importedTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyImported MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE
-@interface MTRElectricalEnergyMeasurementClusterCumulativeEnergyDeliveredEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull deliveredTimestamp MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull energyDelivered MTR_NEWLY_AVAILABLE;
+@interface MTRElectricalEnergyMeasurementClusterCumulativeEnergyExportedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull exportedTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyExported MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE
-@interface MTRElectricalEnergyMeasurementClusterPeriodicEnergyConsumedEvent : NSObject <NSCopying>
+@interface MTRElectricalEnergyMeasurementClusterPeriodicEnergyImportedEvent : NSObject <NSCopying>
 @property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
 @property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull energyConsumed MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyImported MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE
-@interface MTRElectricalEnergyMeasurementClusterPeriodicEnergyDeliveredEvent : NSObject <NSCopying>
+@interface MTRElectricalEnergyMeasurementClusterPeriodicEnergyExportedEvent : NSObject <NSCopying>
 @property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
 @property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull energyDelivered MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyExported MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE
-@interface MTRElectricalEnergyMeasurementClusterEphemeralEnergyConsumedEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull periodStart MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull periodEnd MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull energyConsumed MTR_NEWLY_AVAILABLE;
+@interface MTRElectricalEnergyMeasurementClusterEphemeralEnergyImportedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull importedTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyImported MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTRElectricalEnergyMeasurementClusterEphemeralEnergyExportedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull exportedTimestamp MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyExported MTR_NEWLY_AVAILABLE;
 @end
 
 API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))

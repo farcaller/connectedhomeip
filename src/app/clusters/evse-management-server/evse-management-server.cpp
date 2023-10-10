@@ -14,6 +14,9 @@
  *    limitations under the License.
  */
 
+#include "DefaultEvseManagementDelegate.h"
+#include "evse-management-delegate.h"
+
 #include <app-common/zap-generated/attributes/Accessors.h>
 #include <app-common/zap-generated/cluster-objects.h>
 #include <app-common/zap-generated/ids/Attributes.h>
@@ -34,6 +37,45 @@ using namespace chip::app;
 using namespace chip::app::Clusters;
 using namespace chip::app::Clusters::EvseManagement;
 using namespace chip::app::Clusters::EvseManagement::Attributes;
+using chip::Protocols::InteractionModel::Status;
+
+// Delegate
+// Implementation
+namespace {
+
+Delegate * gDelegate = nullptr;
+
+Delegate * GetDelegate()
+{
+    if (gDelegate == nullptr)
+    {
+        static DefaultEvseManagementDelegate dg;
+        gDelegate = &dg;
+    }
+    return gDelegate;
+}
+
+} // namespace
+
+namespace chip {
+namespace app {
+namespace Clusters {
+namespace EvseManagement {
+
+void SetDefaultDelegate(Delegate * delegate)
+{
+    gDelegate = delegate;
+}
+
+Delegate * GetDefaultDelegate()
+{
+    return GetDelegate();
+}
+
+} // namespace EvseManagement
+} // namespace Clusters
+} // namespace app
+} // namespace chip
 
 void MatterEvseManagementPluginServerInitCallback() {}
 
@@ -42,31 +84,60 @@ void emberAfEvseManagementClusterServerInitCallback(chip::EndpointId endpoint) {
 bool emberAfEvseManagementClusterDisableEvseCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
                                                      const Commands::DisableEvse::DecodableType & commandData)
 {
-    // TODO
-    return false;
+    Status status = Status::Success;
+
+    status = (CHIP_NO_ERROR == GetDelegate()->DisableEvseCharging()) ? Status::Success : Status::Failure;
+    commandObj->AddStatus(commandPath, status);
+
+    return true;
 }
 
 bool emberAfEvseManagementClusterEnableEvseChargingCallback(app::CommandHandler * commandObj,
                                                             const app::ConcreteCommandPath & commandPath,
                                                             const Commands::EnableEvseCharging::DecodableType & commandData)
 {
-    // TODO
-    return false;
+    Status status = Status::Success;
+
+    const auto & evseEnableTime       = commandData.evseEnableTime;
+    const auto & minimumChargeCurrent = commandData.minimumChargeCurrent;
+    const auto & maximumChargeCurrent = commandData.maximumChargeCurrent;
+
+    status = (CHIP_NO_ERROR == GetDelegate()->EnableEvseCharging(evseEnableTime, minimumChargeCurrent, maximumChargeCurrent))
+        ? Status::Success
+        : Status::Failure;
+
+    commandObj->AddStatus(commandPath, status);
+
+    return true;
 }
 
 bool emberAfEvseManagementClusterEnableEvseDischargingCallback(app::CommandHandler * commandObj,
                                                                const app::ConcreteCommandPath & commandPath,
                                                                const Commands::EnableEvseDischarging::DecodableType & commandData)
 {
-    // TODO
-    return false;
+    Status status = Status::Success;
+
+    const auto & evseEnableTime          = commandData.evseEnableTime;
+    const auto & maximumDischargeCurrent = commandData.maximumDischargeCurrent;
+
+    status = (CHIP_NO_ERROR == GetDelegate()->EnableEvseDischarging(evseEnableTime, maximumDischargeCurrent)) ? Status::Success
+                                                                                                              : Status::Failure;
+
+    commandObj->AddStatus(commandPath, status);
+
+    return true;
 }
+
 bool emberAfEvseManagementClusterStartDiagnosticsCallback(app::CommandHandler * commandObj,
                                                           const app::ConcreteCommandPath & commandPath,
                                                           const Commands::StartDiagnostics::DecodableType & commandData)
 {
-    // TODO
-    return false;
+    Status status = Status::Success;
+
+    status = (CHIP_NO_ERROR == GetDelegate()->StartDiagnostics()) ? Status::Success : Status::Failure;
+    commandObj->AddStatus(commandPath, status);
+
+    return true;
 }
 bool emberAfEvseManagementClusterSetTargetsCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
                                                     const Commands::SetTargets::DecodableType & commandData)
@@ -87,5 +158,3 @@ bool emberAfEvseManagementClusterClearTargetsCallback(app::CommandHandler * comm
     // TODO
     return false;
 }
-
-// GetTargetsResponse  TODO
