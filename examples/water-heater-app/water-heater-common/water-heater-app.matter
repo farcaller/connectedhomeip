@@ -1686,6 +1686,115 @@ server cluster UserLabel = 65 {
   readonly attribute int16u clusterRevision = 65533;
 }
 
+/** An interface for configuring and controlling the functionality of a thermostat. */
+server cluster Thermostat = 513 {
+  enum SetpointAdjustMode : ENUM8 {
+    kHeat = 0;
+    kCool = 1;
+    kBoth = 2;
+  }
+
+  enum ThermostatControlSequence : ENUM8 {
+    kCoolingOnly = 0;
+    kCoolingWithReheat = 1;
+    kHeatingOnly = 2;
+    kHeatingWithReheat = 3;
+    kCoolingAndHeating = 4;
+    kCoolingAndHeatingWithReheat = 5;
+  }
+
+  enum ThermostatRunningMode : ENUM8 {
+    kOff = 0;
+    kCool = 3;
+    kHeat = 4;
+  }
+
+  enum ThermostatSystemMode : ENUM8 {
+    kOff = 0;
+    kAuto = 1;
+    kCool = 3;
+    kHeat = 4;
+    kEmergencyHeat = 5;
+    kPrecooling = 6;
+    kFanOnly = 7;
+    kDry = 8;
+    kSleep = 9;
+  }
+
+  bitmap DayOfWeek : BITMAP8 {
+    kSunday = 0x1;
+    kMonday = 0x2;
+    kTuesday = 0x4;
+    kWednesday = 0x8;
+    kThursday = 0x10;
+    kFriday = 0x20;
+    kSaturday = 0x40;
+    kAway = 0x80;
+  }
+
+  bitmap Feature : BITMAP32 {
+    kHeating = 0x1;
+    kCooling = 0x2;
+    kOccupancy = 0x4;
+    kScheduleConfiguration = 0x8;
+    kSetback = 0x10;
+    kAutoMode = 0x20;
+    kLocalTemperatureNotExposed = 0x40;
+  }
+
+  bitmap ModeForSequence : BITMAP8 {
+    kHeatSetpointPresent = 0x1;
+    kCoolSetpointPresent = 0x2;
+  }
+
+  struct ThermostatScheduleTransition {
+    int16u transitionTime = 0;
+    nullable int16s heatSetpoint = 1;
+    nullable int16s coolSetpoint = 2;
+  }
+
+  readonly attribute nullable int16s localTemperature = 0;
+  readonly attribute int16s absMinHeatSetpointLimit = 3;
+  readonly attribute int16s absMaxHeatSetpointLimit = 4;
+  attribute access(write: manage) ThermostatControlSequence controlSequenceOfOperation = 27;
+  attribute access(write: manage) enum8 systemMode = 28;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+
+  request struct SetpointRaiseLowerRequest {
+    SetpointAdjustMode mode = 0;
+    INT8S amount = 1;
+  }
+
+  request struct SetWeeklyScheduleRequest {
+    INT8U numberOfTransitionsForSequence = 0;
+    DayOfWeek dayOfWeekForSequence = 1;
+    ModeForSequence modeForSequence = 2;
+    ThermostatScheduleTransition transitions[] = 3;
+  }
+
+  request struct GetWeeklyScheduleRequest {
+    DayOfWeek daysToReturn = 0;
+    ModeForSequence modeToReturn = 1;
+  }
+
+  response struct GetWeeklyScheduleResponse = 0 {
+    INT8U numberOfTransitionsForSequence = 0;
+    DayOfWeek dayOfWeekForSequence = 1;
+    ModeForSequence modeForSequence = 2;
+    ThermostatScheduleTransition transitions[] = 3;
+  }
+
+  command SetpointRaiseLower(SetpointRaiseLowerRequest): DefaultSuccess = 0;
+  command access(invoke: manage) SetWeeklySchedule(SetWeeklyScheduleRequest): DefaultSuccess = 1;
+  command GetWeeklySchedule(GetWeeklyScheduleRequest): GetWeeklyScheduleResponse = 2;
+  command access(invoke: manage) ClearWeeklySchedule(): DefaultSuccess = 3;
+}
+
 /** Attributes and commands for controlling the color properties of a color-capable light. */
 server cluster ColorControl = 768 {
   enum ColorLoopAction : ENUM8 {
@@ -1954,6 +2063,19 @@ server cluster ColorControl = 768 {
   command StepColorTemperature(StepColorTemperatureRequest): DefaultSuccess = 76;
 }
 
+/** Attributes and commands for configuring the measurement of temperature, and reporting temperature measurements. */
+server cluster TemperatureMeasurement = 1026 {
+  readonly attribute nullable int16s measuredValue = 0;
+  readonly attribute nullable int16s minMeasuredValue = 1;
+  readonly attribute nullable int16s maxMeasuredValue = 2;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+}
+
 /** Attributes and commands for configuring occupancy sensing, and reporting occupancy status. */
 server cluster OccupancySensing = 1030 {
   enum OccupancySensorTypeEnum : ENUM8 {
@@ -2165,6 +2287,145 @@ server cluster WaterHeater = 26208 {
   }
 
   command SetUtcTime(SetUtcTimeRequest): DefaultSuccess = 0;
+}
+
+/** This cluster provides a mechanism for querying data about electrical power as measured by the device. */
+server cluster ElectricalPowerMeasurement = 26209 {
+  enum MeasurementTypeEnum : ENUM8 {
+    kUnspecified = 0;
+    kVoltage = 1;
+    kCurrent = 2;
+    kActivePower = 3;
+    kRMSCurrent = 4;
+    kRMSPower = 5;
+    kApparentPower = 6;
+    kReactivePower = 7;
+    kFrequency = 8;
+    kPowerFactor = 9;
+    kLineCurrent = 10;
+    kNeutralCurrent = 11;
+  }
+
+  enum PowerModeEnum : ENUM8 {
+    kUnspecified = 0;
+    kDC = 1;
+    kAC = 2;
+  }
+
+  bitmap Feature : BITMAP32 {
+    kDirectCurrent = 0x1;
+    kAlternatingCurrent = 0x2;
+    kThreePhasePower = 0x4;
+    kHarmonics = 0x8;
+    kPowerQuality = 0x10;
+  }
+
+  struct HarmonicMeasurementStruct {
+    int8u order = 0;
+    nullable int32s measurement = 1;
+  }
+
+  struct MeasurementAccuracyStruct {
+    MeasurementTypeEnum measurementType = 0;
+    boolean measured = 1;
+    optional percent100ths percentTypical = 2;
+    optional percent100ths percentMin = 3;
+    optional percent100ths percentMax = 4;
+    optional int64s fixedTypical = 5;
+    optional int64s fixedMin = 6;
+    optional int64s fixedMax = 7;
+  }
+
+  struct MeasurementRangeStruct {
+    MeasurementTypeEnum measurementType = 0;
+    nullable int64s min = 1;
+    nullable epoch_s minTimestamp = 2;
+    nullable int64s max = 3;
+    nullable epoch_s maxTimestamp = 4;
+  }
+
+  info event MeasurementPeriodRange = 0 {
+    MeasurementTypeEnum measurementType = 0;
+    epoch_s periodStart = 1;
+    epoch_s periodEnd = 2;
+    INT64S min = 3;
+    epoch_s minTimestamp = 4;
+    INT64S max = 5;
+    epoch_s maxTimestamp = 6;
+  }
+
+  readonly attribute PowerModeEnum powerMode = 0;
+  readonly attribute MeasurementAccuracyStruct accuracy[] = 1;
+  readonly attribute MeasurementRangeStruct ranges[] = 2;
+  readonly attribute nullable int64s voltage = 3;
+  readonly attribute nullable int64s current = 4;
+  readonly attribute nullable int64s activePower = 5;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+}
+
+/** This cluster provides a mechanism for querying data about the electrical energy consumed or provided by the device. */
+server cluster ElectricalEnergyMeasurement = 26210 {
+  bitmap Feature : BITMAP32 {
+    kImportedEnergy = 0x1;
+    kExportedEnergy = 0x2;
+    kCumulativeEnergy = 0x4;
+    kPeriodicEnergy = 0x8;
+    kEphemeralEnergy = 0x10;
+  }
+
+  info event CumulativeEnergyImported = 0 {
+    epoch_s importedTimestamp = 0;
+    INT64U energyImported = 1;
+  }
+
+  info event CumulativeEnergyExported = 1 {
+    epoch_s exportedTimestamp = 0;
+    INT64U energyExported = 1;
+  }
+
+  info event PeriodicEnergyImported = 3 {
+    epoch_s periodStart = 0;
+    epoch_s periodEnd = 1;
+    INT64U energyImported = 2;
+  }
+
+  info event PeriodicEnergyExported = 4 {
+    epoch_s periodStart = 0;
+    epoch_s periodEnd = 1;
+    INT64U energyExported = 2;
+  }
+
+  info event EphemeralEnergyImported = 5 {
+    systime_ms importedTimestamp = 0;
+    INT64U energyImported = 1;
+  }
+
+  info event EphemeralEnergyExported = 6 {
+    systime_ms exportedTimestamp = 0;
+    INT64U energyExported = 1;
+  }
+
+  readonly attribute boolean measured = 0;
+  readonly attribute nullable epoch_s cumulativeEnergyImportedTime = 1;
+  readonly attribute nullable int64u cumulativeEnergyImported = 2;
+  readonly attribute nullable epoch_s periodicEnergyImportedStartTime = 5;
+  readonly attribute nullable epoch_s periodicEnergyImportedEndTime = 6;
+  readonly attribute nullable int64u periodicEnergyImported = 7;
+  readonly attribute nullable epoch_s periodicEnergyExportedStartTime = 8;
+  readonly attribute nullable epoch_s periodicEnergyExportedEndTime = 9;
+  readonly attribute nullable int64u periodicEnergyExported = 10;
+  readonly attribute nullable int64u ephemeralEnergyImported = 11;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
 }
 
 endpoint 0 {
@@ -2515,6 +2776,20 @@ endpoint 1 {
     callback attribute clusterRevision default = 1;
   }
 
+  server cluster Thermostat {
+    ram      attribute localTemperature;
+    ram      attribute absMinHeatSetpointLimit default = 700;
+    ram      attribute absMaxHeatSetpointLimit default = 3000;
+    ram      attribute controlSequenceOfOperation default = 0x04;
+    ram      attribute systemMode default = 0x01;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 5;
+  }
+
   server cluster ColorControl {
     ram      attribute currentHue default = 0x00;
     ram      attribute currentSaturation default = 0x00;
@@ -2539,6 +2814,18 @@ endpoint 1 {
     ram      attribute startUpColorTemperatureMireds;
     ram      attribute featureMap default = 0x1F;
     ram      attribute clusterRevision default = 5;
+  }
+
+  server cluster TemperatureMeasurement {
+    ram      attribute measuredValue;
+    ram      attribute minMeasuredValue default = 0x0000;
+    ram      attribute maxMeasuredValue default = 0x2134;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
   }
 
   server cluster OccupancySensing {
@@ -2576,6 +2863,40 @@ endpoint 1 {
     callback attribute eventList;
     callback attribute attributeList;
     ram      attribute featureMap default = 1;
+    ram      attribute clusterRevision default = 1;
+  }
+
+  server cluster ElectricalPowerMeasurement {
+    ram      attribute powerMode;
+    callback attribute accuracy;
+    callback attribute ranges;
+    ram      attribute voltage;
+    ram      attribute current;
+    ram      attribute activePower;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
+  }
+
+  server cluster ElectricalEnergyMeasurement {
+    ram      attribute measured;
+    ram      attribute cumulativeEnergyImportedTime;
+    ram      attribute cumulativeEnergyImported;
+    ram      attribute periodicEnergyImportedStartTime;
+    ram      attribute periodicEnergyImportedEndTime;
+    ram      attribute periodicEnergyImported;
+    ram      attribute periodicEnergyExportedStartTime;
+    ram      attribute periodicEnergyExportedEndTime;
+    ram      attribute periodicEnergyExported;
+    ram      attribute ephemeralEnergyImported;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
     ram      attribute clusterRevision default = 1;
   }
 }
