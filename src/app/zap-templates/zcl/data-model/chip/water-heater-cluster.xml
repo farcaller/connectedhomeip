@@ -27,7 +27,7 @@ limitations under the License.
   </bitmap>
 
   <cluster>
-    <domain>HVAC</domain>
+    <domain>Energy Management</domain>
     <name>Water Heater</name>
     <code>0x6660</code>
     <define>WATER_HEATER_CLUSTER</define>
