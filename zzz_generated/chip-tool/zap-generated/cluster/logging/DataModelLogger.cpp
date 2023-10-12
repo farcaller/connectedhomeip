@@ -14292,6 +14292,26 @@ CHIP_ERROR DataModelLogger::LogAttribute(const chip::app::ConcreteDataAttributeP
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
             return DataModelLogger::LogValue("HeaterTypes", 1, value);
         }
+        case WaterHeater::Attributes::HeaterDemand::Id: {
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>> value;
+            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
+            return DataModelLogger::LogValue("HeaterDemand", 1, value);
+        }
+        case WaterHeater::Attributes::TankVolume::Id: {
+            chip::app::DataModel::Nullable<uint16_t> value;
+            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
+            return DataModelLogger::LogValue("TankVolume", 1, value);
+        }
+        case WaterHeater::Attributes::EstimatedHeatRequired::Id: {
+            chip::app::DataModel::Nullable<uint16_t> value;
+            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
+            return DataModelLogger::LogValue("EstimatedHeatRequired", 1, value);
+        }
+        case WaterHeater::Attributes::TankPercentage::Id: {
+            chip::app::DataModel::Nullable<chip::Percent> value;
+            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
+            return DataModelLogger::LogValue("TankPercentage", 1, value);
+        }
         case WaterHeater::Attributes::GeneratedCommandList::Id: {
             chip::app::DataModel::DecodableList<chip::CommandId> value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));

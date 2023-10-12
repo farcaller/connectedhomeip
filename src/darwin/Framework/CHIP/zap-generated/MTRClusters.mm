@@ -28827,14 +28827,14 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
     return self;
 }
 
-- (void)setUtcTimeWithParams:(MTRWaterHeaterClusterSetUtcTimeParams *)params
-              expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
-       expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                  completion:(MTRStatusCompletion)completion
+- (void)boostWithParams:(MTRWaterHeaterClusterBoostParams *)params
+           expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+    expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+               completion:(MTRStatusCompletion)completion
 {
-    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
-                                     self.endpoint, (unsigned int) MTRClusterIDTypeWaterHeaterID,
-                                     (unsigned int) MTRCommandIDTypeClusterWaterHeaterCommandSetUtcTimeID];
+    NSString * logPrefix =
+        [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex, self.endpoint,
+                  (unsigned int) MTRClusterIDTypeWaterHeaterID, (unsigned int) MTRCommandIDTypeClusterWaterHeaterCommandBoostID];
     // Make a copy of params before we go async.
     params = [params copy];
     MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
@@ -28844,14 +28844,63 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
         auto * cluster = [[MTRBaseClusterWaterHeater alloc] initWithDevice:baseDevice
                                                                 endpointID:@(self.endpoint)
                                                                      queue:self.device.queue];
-        [cluster setUtcTimeWithParams:params
-                           completion:^(NSError * _Nullable error) {
-                               MTRClustersLogCompletion(logPrefix, nil, error);
-                               dispatch_async(self.callbackQueue, ^{
-                                   completion(error);
-                               });
-                               [workItem endWork];
-                           }];
+        [cluster boostWithParams:params
+                      completion:^(NSError * _Nullable error) {
+                          MTRClustersLogCompletion(logPrefix, nil, error);
+                          dispatch_async(self.callbackQueue, ^{
+                              completion(error);
+                          });
+                          [workItem endWork];
+                      }];
+    };
+    workItem.readyHandler = readyHandler;
+    MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
+    [self.device.asyncCallbackWorkQueue enqueueWorkItem:workItem];
+
+    if (!expectedValueIntervalMs || ([expectedValueIntervalMs compare:@(0)] == NSOrderedAscending)) {
+        expectedValues = nil;
+    } else {
+        expectedValueIntervalMs = MTRClampedNumber(expectedValueIntervalMs, @(1), @(UINT32_MAX));
+    }
+    if (expectedValues) {
+        [self.device setExpectedValues:expectedValues expectedValueInterval:expectedValueIntervalMs];
+    }
+}
+
+- (void)cancelBoostWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                           completion:(MTRStatusCompletion)completion
+{
+    [self cancelBoostWithParams:nil
+                 expectedValues:expectedValues
+          expectedValueInterval:expectedValueIntervalMs
+                     completion:completion];
+}
+- (void)cancelBoostWithParams:(MTRWaterHeaterClusterCancelBoostParams * _Nullable)params
+               expectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+        expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                   completion:(MTRStatusCompletion)completion
+{
+    NSString * logPrefix = [NSString stringWithFormat:@"MTRDevice command %u %u %u %u", self.device.deviceController.fabricIndex,
+                                     self.endpoint, (unsigned int) MTRClusterIDTypeWaterHeaterID,
+                                     (unsigned int) MTRCommandIDTypeClusterWaterHeaterCommandCancelBoostID];
+    // Make a copy of params before we go async.
+    params = [params copy];
+    MTRAsyncCallbackQueueWorkItem * workItem = [[MTRAsyncCallbackQueueWorkItem alloc] initWithQueue:self.device.queue];
+    MTRAsyncCallbackReadyHandler readyHandler = ^(MTRDevice * device, NSUInteger retryCount) {
+        MTRClustersLogDequeue(logPrefix, self.device.asyncCallbackWorkQueue);
+        auto * baseDevice = [[MTRBaseDevice alloc] initWithNodeID:self.device.nodeID controller:self.device.deviceController];
+        auto * cluster = [[MTRBaseClusterWaterHeater alloc] initWithDevice:baseDevice
+                                                                endpointID:@(self.endpoint)
+                                                                     queue:self.device.queue];
+        [cluster cancelBoostWithParams:params
+                            completion:^(NSError * _Nullable error) {
+                                MTRClustersLogCompletion(logPrefix, nil, error);
+                                dispatch_async(self.callbackQueue, ^{
+                                    completion(error);
+                                });
+                                [workItem endWork];
+                            }];
     };
     workItem.readyHandler = readyHandler;
     MTRClustersLogEnqueue(logPrefix, self.device.asyncCallbackWorkQueue);
@@ -28872,6 +28921,38 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
     return [self.device readAttributeWithEndpointID:@(self.endpoint)
                                           clusterID:@(MTRClusterIDTypeWaterHeaterID)
                                         attributeID:@(MTRAttributeIDTypeClusterWaterHeaterAttributeHeaterTypesID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeHeaterDemandWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeWaterHeaterID)
+                                        attributeID:@(MTRAttributeIDTypeClusterWaterHeaterAttributeHeaterDemandID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeTankVolumeWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeWaterHeaterID)
+                                        attributeID:@(MTRAttributeIDTypeClusterWaterHeaterAttributeTankVolumeID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeEstimatedHeatRequiredWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeWaterHeaterID)
+                                        attributeID:@(MTRAttributeIDTypeClusterWaterHeaterAttributeEstimatedHeatRequiredID)
+                                             params:params];
+}
+
+- (NSDictionary<NSString *, id> *)readAttributeTankPercentageWithParams:(MTRReadParams * _Nullable)params
+{
+    return [self.device readAttributeWithEndpointID:@(self.endpoint)
+                                          clusterID:@(MTRClusterIDTypeWaterHeaterID)
+                                        attributeID:@(MTRAttributeIDTypeClusterWaterHeaterAttributeTankPercentageID)
                                              params:params];
 }
 

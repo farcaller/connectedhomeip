@@ -8222,12 +8222,28 @@ MTR_NEWLY_AVAILABLE
                               endpointID:(NSNumber *)endpointID
                                    queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER MTR_NEWLY_AVAILABLE;
 
-- (void)setUtcTimeWithParams:(MTRWaterHeaterClusterSetUtcTimeParams *)params
-              expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-       expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                  completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)boostWithParams:(MTRWaterHeaterClusterBoostParams *)params
+           expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+    expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+               completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)cancelBoostWithParams:(MTRWaterHeaterClusterCancelBoostParams * _Nullable)params
+               expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+        expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                   completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)cancelBoostWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                           completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributeHeaterTypesWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeHeaterDemandWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeTankVolumeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEstimatedHeatRequiredWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeTankPercentageWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 

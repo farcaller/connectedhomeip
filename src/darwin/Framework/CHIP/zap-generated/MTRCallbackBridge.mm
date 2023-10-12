@@ -19183,6 +19183,33 @@ void MTRWaterHeaterHeaterTypesAttributeCallbackSubscriptionBridge::OnSubscriptio
     }
 }
 
+void MTRWaterHeaterHeaterDemandAttributeCallbackBridge::OnSuccessFn(
+    void * context, const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>> & value)
+{
+    NSNumber * _Nullable objCValue;
+    if (value.IsNull()) {
+        objCValue = nil;
+    } else {
+        objCValue = [NSNumber numberWithUnsignedChar:value.Value().Raw()];
+    }
+    DispatchSuccess(context, objCValue);
+};
+
+void MTRWaterHeaterHeaterDemandAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
+{
+    if (!mQueue) {
+        return;
+    }
+
+    if (mEstablishedHandler != nil) {
+        dispatch_async(mQueue, mEstablishedHandler);
+        // On failure, mEstablishedHandler will be cleaned up by our destructor,
+        // but we can clean it up earlier on successful subscription
+        // establishment.
+        mEstablishedHandler = nil;
+    }
+}
+
 void MTRWaterHeaterGeneratedCommandListListAttributeCallbackBridge::OnSuccessFn(
     void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & value)
 {

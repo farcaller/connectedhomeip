@@ -10914,10 +10914,15 @@ private:
 | Cluster WaterHeater                                                 | 0x6660 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
-| * SetUtcTime                                                        |   0x00 |
+| * Boost                                                             |   0x00 |
+| * CancelBoost                                                       |   0x01 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * HeaterTypes                                                       | 0x0000 |
+| * HeaterDemand                                                      | 0x0001 |
+| * TankVolume                                                        | 0x0002 |
+| * EstimatedHeatRequired                                             | 0x0003 |
+| * TankPercentage                                                    | 0x0004 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -10929,21 +10934,26 @@ private:
 \*----------------------------------------------------------------------------*/
 
 /*
- * Command SetUtcTime
+ * Command Boost
  */
-class WaterHeaterSetUtcTime : public ClusterCommand
+class WaterHeaterBoost : public ClusterCommand
 {
 public:
-    WaterHeaterSetUtcTime(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("set-utc-time", credsIssuerConfig)
+    WaterHeaterBoost(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("boost", credsIssuerConfig)
     {
-        AddArgument("UtcTime", 0, UINT64_MAX, &mRequest.utcTime);
+        AddArgument("TemporarySetpoint", INT16_MIN, INT16_MAX, &mRequest.temporarySetpoint);
+        AddArgument("Duration", 0, UINT16_MAX, &mRequest.duration);
+        AddArgument("TargetPercentage", 0, UINT8_MAX, &mRequest.targetPercentage);
+        AddArgument("TargetReheat", 0, UINT8_MAX, &mRequest.targetReheat);
+        AddArgument("OneShot", 0, 1, &mRequest.oneShot);
+        AddArgument("EmergencyBoost", 0, 1, &mRequest.emergencyBoost);
         ClusterCommand::AddArguments();
     }
 
     CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
     {
         constexpr chip::ClusterId clusterId = chip::app::Clusters::WaterHeater::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::WaterHeater::Commands::SetUtcTime::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::WaterHeater::Commands::Boost::Id;
 
         ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
                         commandId, endpointIds.at(0));
@@ -10953,7 +10963,7 @@ public:
     CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
     {
         constexpr chip::ClusterId clusterId = chip::app::Clusters::WaterHeater::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::WaterHeater::Commands::SetUtcTime::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::WaterHeater::Commands::Boost::Id;
 
         ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
                         groupId);
@@ -10962,7 +10972,43 @@ public:
     }
 
 private:
-    chip::app::Clusters::WaterHeater::Commands::SetUtcTime::Type mRequest;
+    chip::app::Clusters::WaterHeater::Commands::Boost::Type mRequest;
+};
+
+/*
+ * Command CancelBoost
+ */
+class WaterHeaterCancelBoost : public ClusterCommand
+{
+public:
+    WaterHeaterCancelBoost(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("cancel-boost", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::WaterHeater::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::WaterHeater::Commands::CancelBoost::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::WaterHeater::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::WaterHeater::Commands::CancelBoost::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::WaterHeater::Commands::CancelBoost::Type mRequest;
 };
 
 /*----------------------------------------------------------------------------*\
@@ -21936,22 +21982,37 @@ void registerClusterWaterHeater(Commands & commands, CredentialIssuerCommands * 
         //
         // Commands
         //
-        make_unique<ClusterCommand>(Id, credsIssuerConfig),    //
-        make_unique<WaterHeaterSetUtcTime>(credsIssuerConfig), //
+        make_unique<ClusterCommand>(Id, credsIssuerConfig),     //
+        make_unique<WaterHeaterBoost>(credsIssuerConfig),       //
+        make_unique<WaterHeaterCancelBoost>(credsIssuerConfig), //
         //
         // Attributes
         //
-        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                                 //
-        make_unique<ReadAttribute>(Id, "heater-types", Attributes::HeaterTypes::Id, credsIssuerConfig),                    //
-        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
-        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
-        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
-        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
-        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
-        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                              //
+        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                                   //
+        make_unique<ReadAttribute>(Id, "heater-types", Attributes::HeaterTypes::Id, credsIssuerConfig),                      //
+        make_unique<ReadAttribute>(Id, "heater-demand", Attributes::HeaterDemand::Id, credsIssuerConfig),                    //
+        make_unique<ReadAttribute>(Id, "tank-volume", Attributes::TankVolume::Id, credsIssuerConfig),                        //
+        make_unique<ReadAttribute>(Id, "estimated-heat-required", Attributes::EstimatedHeatRequired::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "tank-percentage", Attributes::TankPercentage::Id, credsIssuerConfig),                //
+        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),     //
+        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                          //
+        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                  //
+        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                        //
+        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),              //
+        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                                //
         make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>>>>(
             Id, "heater-types", 0, UINT8_MAX, Attributes::HeaterTypes::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>>>>(
+            Id, "heater-demand", 0, UINT8_MAX, Attributes::HeaterDemand::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(
+            Id, "tank-volume", 0, UINT16_MAX, Attributes::TankVolume::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(Id, "estimated-heat-required", 0, UINT16_MAX,
+                                                                              Attributes::EstimatedHeatRequired::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::Percent>>>(
+            Id, "tank-percentage", 0, UINT8_MAX, Attributes::TankPercentage::Id, WriteCommandType::kForceWrite,
+            credsIssuerConfig), //
         make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
             Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
             credsIssuerConfig), //
@@ -21964,15 +22025,19 @@ void registerClusterWaterHeater(Commands & commands, CredentialIssuerCommands * 
         make_unique<WriteAttribute<uint32_t>>(Id, "feature-map", 0, UINT32_MAX, Attributes::FeatureMap::Id,
                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<uint16_t>>(Id, "cluster-revision", 0, UINT16_MAX, Attributes::ClusterRevision::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig),                                //
-        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                                 //
-        make_unique<SubscribeAttribute>(Id, "heater-types", Attributes::HeaterTypes::Id, credsIssuerConfig),                    //
-        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
-        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
-        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
-        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
-        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
+                                              WriteCommandType::kForceWrite, credsIssuerConfig),                                  //
+        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                                   //
+        make_unique<SubscribeAttribute>(Id, "heater-types", Attributes::HeaterTypes::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeAttribute>(Id, "heater-demand", Attributes::HeaterDemand::Id, credsIssuerConfig),                    //
+        make_unique<SubscribeAttribute>(Id, "tank-volume", Attributes::TankVolume::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "estimated-heat-required", Attributes::EstimatedHeatRequired::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "tank-percentage", Attributes::TankPercentage::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),     //
+        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                          //
+        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                  //
+        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),              //
         //
         // Events
         //

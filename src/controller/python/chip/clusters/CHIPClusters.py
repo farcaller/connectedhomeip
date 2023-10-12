@@ -11657,9 +11657,20 @@ class ChipClusters:
         "commands": {
             0x00000000: {
                 "commandId": 0x00000000,
-                "commandName": "SetUtcTime",
+                "commandName": "Boost",
                 "args": {
-                    "utcTime": "int",
+                    "temporarySetpoint": "int",
+                    "duration": "int",
+                    "targetPercentage": "int",
+                    "targetReheat": "int",
+                    "oneShot": "bool",
+                    "emergencyBoost": "bool",
+                },
+            },
+            0x00000001: {
+                "commandId": 0x00000001,
+                "commandName": "CancelBoost",
+                "args": {
                 },
             },
         },
@@ -11667,6 +11678,30 @@ class ChipClusters:
             0x00000000: {
                 "attributeName": "HeaterTypes",
                 "attributeId": 0x00000000,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000001: {
+                "attributeName": "HeaterDemand",
+                "attributeId": 0x00000001,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000002: {
+                "attributeName": "TankVolume",
+                "attributeId": 0x00000002,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000003: {
+                "attributeName": "EstimatedHeatRequired",
+                "attributeId": 0x00000003,
+                "type": "int",
+                "reportable": True,
+            },
+            0x00000004: {
+                "attributeName": "TankPercentage",
+                "attributeId": 0x00000004,
                 "type": "int",
                 "reportable": True,
             },

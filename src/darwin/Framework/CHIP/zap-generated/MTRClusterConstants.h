@@ -8186,6 +8186,10 @@ typedef NS_ENUM(uint32_t, MTRAttributeIDType) {
 
     // Cluster WaterHeater attributes
     MTRAttributeIDTypeClusterWaterHeaterAttributeHeaterTypesID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTRAttributeIDTypeClusterWaterHeaterAttributeHeaterDemandID MTR_NEWLY_AVAILABLE = 0x00000001,
+    MTRAttributeIDTypeClusterWaterHeaterAttributeTankVolumeID MTR_NEWLY_AVAILABLE = 0x00000002,
+    MTRAttributeIDTypeClusterWaterHeaterAttributeEstimatedHeatRequiredID MTR_NEWLY_AVAILABLE = 0x00000003,
+    MTRAttributeIDTypeClusterWaterHeaterAttributeTankPercentageID MTR_NEWLY_AVAILABLE = 0x00000004,
     MTRAttributeIDTypeClusterWaterHeaterAttributeGeneratedCommandListID MTR_NEWLY_AVAILABLE
     = MTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     MTRAttributeIDTypeClusterWaterHeaterAttributeAcceptedCommandListID MTR_NEWLY_AVAILABLE
@@ -10225,7 +10229,8 @@ typedef NS_ENUM(uint32_t, MTRCommandIDType) {
     = 0x00000001,
 
     // Cluster WaterHeater commands
-    MTRCommandIDTypeClusterWaterHeaterCommandSetUtcTimeID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTRCommandIDTypeClusterWaterHeaterCommandBoostID MTR_NEWLY_AVAILABLE = 0x00000000,
+    MTRCommandIDTypeClusterWaterHeaterCommandCancelBoostID MTR_NEWLY_AVAILABLE = 0x00000001,
 
     // Cluster TestCluster deprecated command id names
     MTRClusterTestClusterCommandTestID MTR_DEPRECATED("Please use MTRCommandIDTypeClusterUnitTestingCommandTestID", ios(16.1, 16.4),

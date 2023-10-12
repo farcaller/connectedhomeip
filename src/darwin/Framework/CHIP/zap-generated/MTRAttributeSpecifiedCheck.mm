@@ -5346,6 +5346,18 @@ static BOOL AttributeIsSpecifiedInWaterHeaterCluster(AttributeId aAttributeId)
     case Attributes::HeaterTypes::Id: {
         return YES;
     }
+    case Attributes::HeaterDemand::Id: {
+        return YES;
+    }
+    case Attributes::TankVolume::Id: {
+        return YES;
+    }
+    case Attributes::EstimatedHeatRequired::Id: {
+        return YES;
+    }
+    case Attributes::TankPercentage::Id: {
+        return YES;
+    }
     case Attributes::GeneratedCommandList::Id: {
         return YES;
     }
