@@ -6676,6 +6676,22 @@ namespace HeaterTypes {
 static constexpr AttributeId Id = 0x00000000;
 } // namespace HeaterTypes
 
+namespace HeaterDemand {
+static constexpr AttributeId Id = 0x00000001;
+} // namespace HeaterDemand
+
+namespace TankVolume {
+static constexpr AttributeId Id = 0x00000002;
+} // namespace TankVolume
+
+namespace EstimatedHeatRequired {
+static constexpr AttributeId Id = 0x00000003;
+} // namespace EstimatedHeatRequired
+
+namespace TankPercentage {
+static constexpr AttributeId Id = 0x00000004;
+} // namespace TankPercentage
+
 namespace GeneratedCommandList {
 static constexpr AttributeId Id = Globals::Attributes::GeneratedCommandList::Id;
 } // namespace GeneratedCommandList

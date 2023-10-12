@@ -26,6 +26,15 @@ limitations under the License.
     <field name="Other"    mask="0x10" />
   </bitmap>
 
+  <bitmap name="HeaterDemand" type="BITMAP8">
+    <cluster code="0x6660" />
+    <field name="ImmersionElement1" mask="0x01" />
+    <field name="ImmersionElement2" mask="0x02" />
+    <field name="Heatpump" mask="0x04" />
+    <field name="Boiler"   mask="0x08" />
+    <field name="Other"    mask="0x10" />
+  </bitmap>
+
   <cluster>
     <domain>Energy Management</domain>
     <name>Water Heater</name>
@@ -34,13 +43,25 @@ limitations under the License.
     <client init="false" tick="false">true</client>
     <server init="false" tick="false">true</server>
     <description>This allows clients to control a hot water heating appliance so it can be used with energy management. It can help consumers save cost (e.g. using power at cheaper times or from local solar PV generation).</description>
-    <!-- Base data types -->
-    <attribute side="server" code="0x0000" define="HEATER_TYPES" type="HeaterType" min="0x00" max="0xff" writable="false" isNullable="true" optional="false" >HeaterTypes</attribute>
 
-    <!-- Test Commands -->
-    <command source="client" code="0x00" name="SetUtcTime" optional="false">
-	<description>TODO Command to be replaced with correct ones when specified.</description>
-	<arg name="UtcTime" type="epoch_us"/>
+    <attribute side="server" code="0x0000" define="HEATER_TYPES"            type="HeaterType"    min="0x00"   max="0xff"   writable="false" isNullable="true" optional="false">HeaterTypes</attribute>
+    <attribute side="server" code="0x0001" define="HEATER_DEMAND"           type="HeaterDemand"  min="0x00"   max="0xff"   writable="false" isNullable="true" optional="false">HeaterDemand</attribute>
+    <attribute side="server" code="0x0002" define="TANK_VOLUME"             type="INT16U"        min="0x0000" max="0xffff" writable="false" isNullable="true" optional="true">TankVolume</attribute>
+    <attribute side="server" code="0x0003" define="ESTIMATED_HEAT_REQUIRED" type="INT16U"        min="0x0000" max="0xffff" writable="false" isNullable="true" optional="true">EstimatedHeatRequired</attribute>
+    <attribute side="server" code="0x0004" define="TANK_PERCENTAGE"         type="Percent"       min="0"      max="100"    writable="false" isNullable="true" optional="true">TankPercentage</attribute>
+
+    <command source="client" code="0x00" name="Boost" optional="false">
+      <description>The Boost command can allow a temporary change in setpoint or target TankPercentage.</description>
+      <arg name="TemporarySetpoint" type="temperature"/>
+      <arg name="Duration"          type="INT16U" optional="false"/>
+      <arg name="TargetPercentage"  type="Percent" optional="true"/>
+      <arg name="TargetReheat"      type="Percent" optional="true"/>
+      <arg name="OneShot"           type="boolean" optional="true"/>
+      <arg name="EmergencyBoost"    type="boolean" optional="true"/>
+    </command>
+
+    <command source="client" code="0x01" name="CancelBoost" optional="false">
+      <description>The Cancel Boost command cancels any active boost operation and returns the system to the previous mode.</description>
     </command>
   </cluster>
 </configurator>

@@ -37682,21 +37682,55 @@ public class ChipClusters {
     @Override
     public native long initWithDevice(long devicePtr, int endpointId);
 
-    public void setUtcTime(DefaultClusterCallback callback
-      , Long utcTime) {
-      setUtcTime(chipClusterPtr, callback, utcTime, null);
+    public void boost(DefaultClusterCallback callback
+      , Integer temporarySetpoint, Integer duration, Optional<Integer> targetPercentage, Optional<Integer> targetReheat, Optional<Boolean> oneShot, Optional<Boolean> emergencyBoost) {
+      boost(chipClusterPtr, callback, temporarySetpoint, duration, targetPercentage, targetReheat, oneShot, emergencyBoost, null);
     }
 
-    public void setUtcTime(DefaultClusterCallback callback
-      , Long utcTime
+    public void boost(DefaultClusterCallback callback
+      , Integer temporarySetpoint, Integer duration, Optional<Integer> targetPercentage, Optional<Integer> targetReheat, Optional<Boolean> oneShot, Optional<Boolean> emergencyBoost
       , int timedInvokeTimeoutMs) {
-      setUtcTime(chipClusterPtr, callback, utcTime, timedInvokeTimeoutMs);
+      boost(chipClusterPtr, callback, temporarySetpoint, duration, targetPercentage, targetReheat, oneShot, emergencyBoost, timedInvokeTimeoutMs);
     }
-    private native void setUtcTime(long chipClusterPtr, DefaultClusterCallback Callback
-      , Long utcTime
+
+    public void cancelBoost(DefaultClusterCallback callback
+      ) {
+      cancelBoost(chipClusterPtr, callback, null);
+    }
+
+    public void cancelBoost(DefaultClusterCallback callback
+      
+      , int timedInvokeTimeoutMs) {
+      cancelBoost(chipClusterPtr, callback, timedInvokeTimeoutMs);
+    }
+    private native void boost(long chipClusterPtr, DefaultClusterCallback Callback
+      , Integer temporarySetpoint, Integer duration, Optional<Integer> targetPercentage, Optional<Integer> targetReheat, Optional<Boolean> oneShot, Optional<Boolean> emergencyBoost
+      , @Nullable Integer timedInvokeTimeoutMs);
+    private native void cancelBoost(long chipClusterPtr, DefaultClusterCallback Callback
+      
       , @Nullable Integer timedInvokeTimeoutMs);
 
       public interface HeaterTypesAttributeCallback {
+        void onSuccess(@Nullable Integer value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface HeaterDemandAttributeCallback {
+        void onSuccess(@Nullable Integer value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface TankVolumeAttributeCallback {
+        void onSuccess(@Nullable Integer value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface EstimatedHeatRequiredAttributeCallback {
+        void onSuccess(@Nullable Integer value);
+        void onError(Exception ex);
+        default void onSubscriptionEstablished(long subscriptionId) {}
+      }
+      public interface TankPercentageAttributeCallback {
         void onSuccess(@Nullable Integer value);
         void onError(Exception ex);
         default void onSubscriptionEstablished(long subscriptionId) {}
@@ -37732,6 +37766,54 @@ public class ChipClusters {
       ,
       int minInterval, int maxInterval) {
       subscribeHeaterTypesAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readHeaterDemandAttribute(
+      HeaterDemandAttributeCallback callback
+    ) {
+      readHeaterDemandAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeHeaterDemandAttribute(
+        HeaterDemandAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeHeaterDemandAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readTankVolumeAttribute(
+      TankVolumeAttributeCallback callback
+    ) {
+      readTankVolumeAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeTankVolumeAttribute(
+        TankVolumeAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeTankVolumeAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readEstimatedHeatRequiredAttribute(
+      EstimatedHeatRequiredAttributeCallback callback
+    ) {
+      readEstimatedHeatRequiredAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeEstimatedHeatRequiredAttribute(
+        EstimatedHeatRequiredAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeEstimatedHeatRequiredAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+    }
+
+    public void readTankPercentageAttribute(
+      TankPercentageAttributeCallback callback
+    ) {
+      readTankPercentageAttribute(chipClusterPtr, callback);
+    }
+    public void subscribeTankPercentageAttribute(
+        TankPercentageAttributeCallback callback
+      ,
+      int minInterval, int maxInterval) {
+      subscribeTankPercentageAttribute(chipClusterPtr, callback, minInterval, maxInterval);
     }
 
     public void readGeneratedCommandListAttribute(
@@ -37811,6 +37893,34 @@ public class ChipClusters {
     );
     private native void subscribeHeaterTypesAttribute(long chipClusterPtr,
         HeaterTypesAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readHeaterDemandAttribute(long chipClusterPtr,
+        HeaterDemandAttributeCallback callback
+    );
+    private native void subscribeHeaterDemandAttribute(long chipClusterPtr,
+        HeaterDemandAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readTankVolumeAttribute(long chipClusterPtr,
+        TankVolumeAttributeCallback callback
+    );
+    private native void subscribeTankVolumeAttribute(long chipClusterPtr,
+        TankVolumeAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readEstimatedHeatRequiredAttribute(long chipClusterPtr,
+        EstimatedHeatRequiredAttributeCallback callback
+    );
+    private native void subscribeEstimatedHeatRequiredAttribute(long chipClusterPtr,
+        EstimatedHeatRequiredAttributeCallback callback
+      , int minInterval, int maxInterval);
+
+    private native void readTankPercentageAttribute(long chipClusterPtr,
+        TankPercentageAttributeCallback callback
+    );
+    private native void subscribeTankPercentageAttribute(long chipClusterPtr,
+        TankPercentageAttributeCallback callback
       , int minInterval, int maxInterval);
 
     private native void readGeneratedCommandListAttribute(long chipClusterPtr,

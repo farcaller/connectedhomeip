@@ -27757,7 +27757,7 @@
           "enabled": 1,
           "commands": [
             {
-              "name": "SetUtcTime",
+              "name": "Boost",
               "code": 0,
               "mfgCode": null,
               "source": "client",

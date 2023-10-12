@@ -1865,6 +1865,8 @@ typedef void (*ElectricalMeasurementAttributeListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::AttributeId> & data);
 typedef void (*WaterHeaterHeaterTypesAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterType>> &);
+typedef void (*WaterHeaterHeaterDemandAttributeCallback)(
+    void *, const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>> &);
 typedef void (*WaterHeaterGeneratedCommandListListAttributeCallback)(
     void * context, const chip::app::DataModel::DecodableList<chip::CommandId> & data);
 typedef void (*WaterHeaterAcceptedCommandListListAttributeCallback)(
@@ -18603,6 +18605,38 @@ public:
     void OnSubscriptionEstablished();
     using MTRWaterHeaterHeaterTypesAttributeCallbackBridge::KeepAliveOnCallback;
     using MTRWaterHeaterHeaterTypesAttributeCallbackBridge::OnDone;
+
+private:
+    MTRSubscriptionEstablishedHandler mEstablishedHandler;
+};
+
+class MTRWaterHeaterHeaterDemandAttributeCallbackBridge : public MTRCallbackBridge<WaterHeaterHeaterDemandAttributeCallback>
+{
+public:
+    MTRWaterHeaterHeaterDemandAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
+        MTRCallbackBridge<WaterHeaterHeaterDemandAttributeCallback>(queue, handler, OnSuccessFn){};
+
+    MTRWaterHeaterHeaterDemandAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action) :
+        MTRCallbackBridge<WaterHeaterHeaterDemandAttributeCallback>(queue, handler, action, OnSuccessFn){};
+
+    static void
+    OnSuccessFn(void * context,
+                const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>> & value);
+};
+
+class MTRWaterHeaterHeaterDemandAttributeCallbackSubscriptionBridge : public MTRWaterHeaterHeaterDemandAttributeCallbackBridge
+{
+public:
+    MTRWaterHeaterHeaterDemandAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
+                                                                  MTRActionBlock action,
+                                                                  MTRSubscriptionEstablishedHandler establishedHandler) :
+        MTRWaterHeaterHeaterDemandAttributeCallbackBridge(queue, handler, action),
+        mEstablishedHandler(establishedHandler)
+    {}
+
+    void OnSubscriptionEstablished();
+    using MTRWaterHeaterHeaterDemandAttributeCallbackBridge::KeepAliveOnCallback;
+    using MTRWaterHeaterHeaterDemandAttributeCallbackBridge::OnDone;
 
 private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;

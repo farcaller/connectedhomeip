@@ -34315,28 +34315,43 @@ namespace WaterHeater {
 namespace Commands {
 // Forward-declarations so we can reference these later.
 
-namespace SetUtcTime {
+namespace Boost {
 struct Type;
 struct DecodableType;
-} // namespace SetUtcTime
+} // namespace Boost
+
+namespace CancelBoost {
+struct Type;
+struct DecodableType;
+} // namespace CancelBoost
 
 } // namespace Commands
 
 namespace Commands {
-namespace SetUtcTime {
+namespace Boost {
 enum class Fields : uint8_t
 {
-    kUtcTime = 0,
+    kTemporarySetpoint = 0,
+    kDuration          = 1,
+    kTargetPercentage  = 2,
+    kTargetReheat      = 3,
+    kOneShot           = 4,
+    kEmergencyBoost    = 5,
 };
 
 struct Type
 {
 public:
     // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
-    static constexpr CommandId GetCommandId() { return Commands::SetUtcTime::Id; }
+    static constexpr CommandId GetCommandId() { return Commands::Boost::Id; }
     static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
 
-    uint64_t utcTime = static_cast<uint64_t>(0);
+    int16_t temporarySetpoint = static_cast<int16_t>(0);
+    uint16_t duration         = static_cast<uint16_t>(0);
+    Optional<chip::Percent> targetPercentage;
+    Optional<chip::Percent> targetReheat;
+    Optional<bool> oneShot;
+    Optional<bool> emergencyBoost;
 
     CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
 
@@ -34348,13 +34363,46 @@ public:
 struct DecodableType
 {
 public:
-    static constexpr CommandId GetCommandId() { return Commands::SetUtcTime::Id; }
+    static constexpr CommandId GetCommandId() { return Commands::Boost::Id; }
     static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
 
-    uint64_t utcTime = static_cast<uint64_t>(0);
+    int16_t temporarySetpoint = static_cast<int16_t>(0);
+    uint16_t duration         = static_cast<uint16_t>(0);
+    Optional<chip::Percent> targetPercentage;
+    Optional<chip::Percent> targetReheat;
+    Optional<bool> oneShot;
+    Optional<bool> emergencyBoost;
     CHIP_ERROR Decode(TLV::TLVReader & reader);
 };
-}; // namespace SetUtcTime
+}; // namespace Boost
+namespace CancelBoost {
+enum class Fields : uint8_t
+{
+};
+
+struct Type
+{
+public:
+    // Use GetCommandId instead of commandId directly to avoid naming conflict with CommandIdentification in ExecutionOfACommand
+    static constexpr CommandId GetCommandId() { return Commands::CancelBoost::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+
+    CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
+
+    using ResponseType = DataModel::NullObjectType;
+
+    static constexpr bool MustUseTimedInvoke() { return false; }
+};
+
+struct DecodableType
+{
+public:
+    static constexpr CommandId GetCommandId() { return Commands::CancelBoost::Id; }
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+
+    CHIP_ERROR Decode(TLV::TLVReader & reader);
+};
+}; // namespace CancelBoost
 } // namespace Commands
 
 namespace Attributes {
@@ -34371,6 +34419,54 @@ struct TypeInfo
     static constexpr bool MustUseTimedWrite() { return false; }
 };
 } // namespace HeaterTypes
+namespace HeaterDemand {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>>;
+    using DecodableType    = chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::WaterHeater::HeaterDemand>> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::HeaterDemand::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace HeaterDemand
+namespace TankVolume {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<uint16_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<uint16_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<uint16_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::TankVolume::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace TankVolume
+namespace EstimatedHeatRequired {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<uint16_t>;
+    using DecodableType    = chip::app::DataModel::Nullable<uint16_t>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<uint16_t> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::EstimatedHeatRequired::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace EstimatedHeatRequired
+namespace TankPercentage {
+struct TypeInfo
+{
+    using Type             = chip::app::DataModel::Nullable<chip::Percent>;
+    using DecodableType    = chip::app::DataModel::Nullable<chip::Percent>;
+    using DecodableArgType = const chip::app::DataModel::Nullable<chip::Percent> &;
+
+    static constexpr ClusterId GetClusterId() { return Clusters::WaterHeater::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::TankPercentage::Id; }
+    static constexpr bool MustUseTimedWrite() { return false; }
+};
+} // namespace TankPercentage
 namespace GeneratedCommandList {
 struct TypeInfo : public Clusters::Globals::Attributes::GeneratedCommandList::TypeInfo
 {
@@ -34417,6 +34513,10 @@ struct TypeInfo
         CHIP_ERROR Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path);
 
         Attributes::HeaterTypes::TypeInfo::DecodableType heaterTypes;
+        Attributes::HeaterDemand::TypeInfo::DecodableType heaterDemand;
+        Attributes::TankVolume::TypeInfo::DecodableType tankVolume;
+        Attributes::EstimatedHeatRequired::TypeInfo::DecodableType estimatedHeatRequired;
+        Attributes::TankPercentage::TypeInfo::DecodableType tankPercentage;
         Attributes::GeneratedCommandList::TypeInfo::DecodableType generatedCommandList;
         Attributes::AcceptedCommandList::TypeInfo::DecodableType acceptedCommandList;
         Attributes::EventList::TypeInfo::DecodableType eventList;

@@ -1398,9 +1398,13 @@ static constexpr CommandId Id = 0x00000001;
 namespace WaterHeater {
 namespace Commands {
 
-namespace SetUtcTime {
+namespace Boost {
 static constexpr CommandId Id = 0x00000000;
-} // namespace SetUtcTime
+} // namespace Boost
+
+namespace CancelBoost {
+static constexpr CommandId Id = 0x00000001;
+} // namespace CancelBoost
 
 } // namespace Commands
 } // namespace WaterHeater
