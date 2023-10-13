@@ -25,38 +25,35 @@
 
 #include <lib/core/CHIPError.h>
 
+bool emberAfEvseManagementClusterDisableEvseChargingCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::DisableEvseCharging::DecodableType & commandData);
+
+bool emberAfEvseManagementClusterEnsableEvseChargingCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::EnsableEvseCharging::DecodableType & commandData);
+
+bool emberAfEvseManagementClusterEnableEvseDischargingCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::DecodableType & commandData);
+
+bool emberAfEvseManagementClusterStartDiagnosticsCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::DecodableType & commandData);
+
+
 class EvseManagementManager
 {
 public:
-    enum Action_t
-    {
-        ON_ACTION = 0,
-        OFF_ACTION,
-        INVALID_ACTION
-    } Action;
-
-    enum State_t
-    {
-        kState_On = 0,
-        kState_Off,
-    } State;
-
+    static void Shutdown();
     CHIP_ERROR Init();
-    bool IsTurnedOn();
-    bool InitiateAction(Action_t aAction);
-
-    using EvseManagementCallback_fn = std::function<void(Action_t)>;
-
-    void SetCallbacks(EvseManagementCallback_fn aActionInitiated_CB, EvseManagementCallback_fn aActionCompleted_CB);
 
 private:
     friend EvseManagementManager & EvseManagementMgr(void);
-    State_t mState;
-
-    EvseManagementCallback_fn mActionInitiated_CB;
-    EvseManagementCallback_fn mActionCompleted_CB;
-
-    void Set(bool aOn);
 
     static EvseManagementManager sEvseManagement;
 };

@@ -18,87 +18,71 @@
  */
 
 #include "EvseManagementManager.h"
+#include <app/clusters/evse-management-server/evse-management-server.h>
 
 #include <lib/support/logging/CHIPLogging.h>
 
 EvseManagementManager EvseManagementManager::sEvseManagement;
+static EvseManagementDelegate *  gEvseManagementDelegate = nullptr;
 
-// TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
-//  We’ll need to review how Robot Vacuum/ Washing machines handle Modes - but this is ok for now.
+void EvseManagementManager::Shutdown()
+{
+    if (gEvseManagementManagerDelegate != nullptr)
+    {
+        delete gEvseManagementManagerDelegate;
+        gEvseManagementManagerDelegate = nullptr;
+    }
+}
+
 CHIP_ERROR EvseManagementManager::Init()
 {
-    mState = kState_On;
     return CHIP_NO_ERROR;
 }
 
-bool EvseManagementManager::IsTurnedOn()
+void emberAfEvseManagementManagerClusterInitCallback(chip::EndpointId endpointId)
 {
-    return mState == kState_On;
+    VerifyOrDie(endpointId == 1);       // this cluster is only enabled for endpoint 1 ??
+    gEvseManagementDelegate  = new EvseManagementDelegate;
+    // what are these options? :  AppServer,NotSpecified,Zcl
+    ChipLogProgress(Zcl, "emberAfEvseManagementManagerClusterInitCallback, endpoint=%d", endpointId);
 }
 
-void EvseManagementManager::SetCallbacks(EvseManagementCallback_fn aActionInitiated_CB, EvseManagementCallback_fn aActionCompleted_CB)
+bool emberAfEvseManagementClusterDisableEvseChargingCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::DisableEvseCharging::DecodableType & commandData)
 {
-    mActionInitiated_CB = aActionInitiated_CB;
-    mActionCompleted_CB = aActionCompleted_CB;
+    bool status = true;
+    ChipLogProgress(Zcl, "emberAfEvseManagementClusterDisableEvseChargingCallback, endpoint=%d", endpointId);
+    return status;
 }
 
-bool EvseManagementManager::InitiateAction(Action_t aAction)
+bool emberAfEvseManagementClusterEnsableEvseChargingCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::EnsableEvseCharging::DecodableType & commandData)
 {
-    // TODO: this function is called InitiateAction because we want to implement some features such as ramping up here.
-    bool action_initiated = false;
-    State_t new_state;
-
-    switch (aAction)
-    {
-    case ON_ACTION:
-        ChipLogProgress(AppServer, "EvseManagementManager::InitiateAction(ON_ACTION)");
-        break;
-    case OFF_ACTION:
-        ChipLogProgress(AppServer, "EvseManagementManager::InitiateAction(OFF_ACTION)");
-        break;
-    default:
-        ChipLogProgress(AppServer, "EvseManagementManager::InitiateAction(unknown)");
-        break;
-    }
-
-    // Initiate On/Off Action only when the previous one is complete.
-    if (mState == kState_Off && aAction == ON_ACTION)
-    {
-        action_initiated = true;
-        new_state        = kState_On;
-    }
-    else if (mState == kState_On && aAction == OFF_ACTION)
-    {
-        action_initiated = true;
-        new_state        = kState_Off;
-    }
-
-    if (action_initiated)
-    {
-        if (mActionInitiated_CB)
-        {
-            mActionInitiated_CB(aAction);
-        }
-
-        Set(new_state == kState_On);
-
-        if (mActionCompleted_CB)
-        {
-            mActionCompleted_CB(aAction);
-        }
-    }
-
-    return action_initiated;
+    bool status = true;
+    ChipLogProgress(Zcl, "emberAfEvseManagementClusterEnsableEvseChargingCallback, endpoint=%d", endpointId);
+    return status;
 }
 
-void EvseManagementManager::Set(bool aOn)
+bool emberAfEvseManagementClusterEnableEvseDischargingCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::DecodableType & commandData)
 {
-    if (aOn)
-    {
-        mState = kState_On;
-    }
-    else
-    {
-        mState = kState_Off;
-    }
+    bool status = true;
+    ChipLogProgress(Zcl, "emberAfEvseManagementClusterEnableEvseDischargingCallback, endpoint=%d", endpointId);
+    return status;
+}
+
+bool emberAfEvseManagementClusterStartDiagnosticsCallback(
+                chip::app::CommandHandler * commandObj,
+                const chip::app::ConcreteCommandPath & commandPath,
+                const chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::DecodableType & commandData)
+{
+    bool status = true;
+    ChipLogProgress(Zcl, "emberAfEvseManagementClusterStartDiagnosticsCallback, endpoint=%d", endpointId);
+    return status;
 }
