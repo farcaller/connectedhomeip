@@ -62,7 +62,7 @@ namespace app {
 namespace Clusters {
 namespace EvseManagement {
 
-void SetDefaultDelegate(EndpointId endpoint, Delegate * delegate)
+void SetDefaultDelegate(Delegate * delegate)
 {
     gDelegate = delegate;
 }

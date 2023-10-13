@@ -16,8 +16,8 @@
  *    limitations under the License.
  */
 
-#include "EnergyManagementManager.h"
-#include "EvseManagementManager.h"
+#include "energy-management-manager.h"
+#include "evse-management-manager.h"
 #include <AppMain.h>
 
 #include <app-common/zap-generated/ids/Attributes.h>

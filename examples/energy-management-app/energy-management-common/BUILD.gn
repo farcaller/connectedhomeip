@@ -26,17 +26,3 @@ chip_data_model("energy-management-common") {
   zap_pregenerated_dir = "${chip_root}/zzz_generated/energy-management-app/zap-generated"
   is_server = true
 }
-
-
-source_set("energy-management-manager") {
-  deps = [ "${chip_root}/src/lib" ]
-  public_configs = [ ":config" ]
-  sources = [
-    "include/EnergyManagementManager.h",
-    "src/EnergyManagementManager.cpp",
-    "include/EvseManagementManager.h",
-    "src/EvseManagementManager.cpp",
-    "include/evse-management-delegate-impl.h",
-    "src/evse-management-delegate-impl.cpp"
-  ]
-}

@@ -36,13 +36,15 @@ config("includes") {
 
 executable("chip-energy-management-app") {
   sources = [
+    "${chip_root}/examples/energy-management-app/energy-management-common/src/evse-management-delegate-impl.cpp",
+    "${chip_root}/examples/energy-management-app/energy-management-common/src/evse-management-manager.cpp",
+    "${chip_root}/examples/energy-management-app/energy-management-common/src/energy-management-manager.cpp",
     "include/CHIPProjectAppConfig.h",
     "main.cpp",
   ]
 
   deps = [
     "${chip_root}/examples/energy-management-app/energy-management-common",
-    "${chip_root}/examples/energy-management-app/energy-management-common:energy-management-manager",
     "${chip_root}/examples/platform/linux:app-main",
     "${chip_root}/src/lib",
   ]
@@ -55,7 +57,10 @@ executable("chip-energy-management-app") {
     ]
   }
 
-  include_dirs = [ "include" ]
+  include_dirs = [
+   "include",
+   "${chip_root}/examples/energy-management-app/energy-management-common/include" 
+  ]
 
   if (chip_enable_pw_rpc) {
     defines = [

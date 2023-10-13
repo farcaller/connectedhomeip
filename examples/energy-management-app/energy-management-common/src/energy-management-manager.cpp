@@ -17,7 +17,7 @@
  *    limitations under the License.
  */
 
-#include "EnergyManagementManager.h"
+#include "energy-management-manager.h"
 
 #include <lib/support/logging/CHIPLogging.h>
 
