@@ -24679,12 +24679,17 @@ namespace Events {} // namespace Events
 namespace WaterHeater {
 
 namespace Commands {
-namespace SetUtcTime {
+namespace Boost {
 CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
 {
     TLV::TLVType outer;
     ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kUtcTime), utcTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTemporarySetpoint), temporarySetpoint));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTargetPercentage), targetPercentage));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTargetReheat), targetReheat));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kOneShot), oneShot));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEmergencyBoost), emergencyBoost));
     ReturnErrorOnFailure(aWriter.EndContainer(outer));
     return CHIP_NO_ERROR;
 }
@@ -24703,8 +24708,23 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
         }
         switch (TLV::TagNumFromTag(reader.GetTag()))
         {
-        case to_underlying(Fields::kUtcTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, utcTime));
+        case to_underlying(Fields::kTemporarySetpoint):
+            ReturnErrorOnFailure(DataModel::Decode(reader, temporarySetpoint));
+            break;
+        case to_underlying(Fields::kDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
+            break;
+        case to_underlying(Fields::kTargetPercentage):
+            ReturnErrorOnFailure(DataModel::Decode(reader, targetPercentage));
+            break;
+        case to_underlying(Fields::kTargetReheat):
+            ReturnErrorOnFailure(DataModel::Decode(reader, targetReheat));
+            break;
+        case to_underlying(Fields::kOneShot):
+            ReturnErrorOnFailure(DataModel::Decode(reader, oneShot));
+            break;
+        case to_underlying(Fields::kEmergencyBoost):
+            ReturnErrorOnFailure(DataModel::Decode(reader, emergencyBoost));
             break;
         default:
             break;
@@ -24715,7 +24735,40 @@ CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
     ReturnErrorOnFailure(reader.ExitContainer(outer));
     return CHIP_NO_ERROR;
 }
-} // namespace SetUtcTime.
+} // namespace Boost.
+namespace CancelBoost {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace CancelBoost.
 } // namespace Commands
 
 namespace Attributes {
@@ -24725,6 +24778,18 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
     {
     case Attributes::HeaterTypes::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, heaterTypes));
+        break;
+    case Attributes::HeaterDemand::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, heaterDemand));
+        break;
+    case Attributes::TankVolume::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, tankVolume));
+        break;
+    case Attributes::EstimatedHeatRequired::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, estimatedHeatRequired));
+        break;
+    case Attributes::TankPercentage::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, tankPercentage));
         break;
     case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));

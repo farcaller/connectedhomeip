@@ -9785,11 +9785,17 @@ bool emberAfElectricalMeasurementClusterGetMeasurementProfileCommandCallback(
     chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
     const chip::app::Clusters::ElectricalMeasurement::Commands::GetMeasurementProfileCommand::DecodableType & commandData);
 /**
- * @brief Water Heater Cluster SetUtcTime Command callback (from client)
+ * @brief Water Heater Cluster Boost Command callback (from client)
  */
-bool emberAfWaterHeaterClusterSetUtcTimeCallback(
+bool emberAfWaterHeaterClusterBoostCallback(chip::app::CommandHandler * commandObj,
+                                            const chip::app::ConcreteCommandPath & commandPath,
+                                            const chip::app::Clusters::WaterHeater::Commands::Boost::DecodableType & commandData);
+/**
+ * @brief Water Heater Cluster CancelBoost Command callback (from client)
+ */
+bool emberAfWaterHeaterClusterCancelBoostCallback(
     chip::app::CommandHandler * commandObj, const chip::app::ConcreteCommandPath & commandPath,
-    const chip::app::Clusters::WaterHeater::Commands::SetUtcTime::DecodableType & commandData);
+    const chip::app::Clusters::WaterHeater::Commands::CancelBoost::DecodableType & commandData);
 /**
  * @brief Unit Testing Cluster Test Command callback (from client)
  */

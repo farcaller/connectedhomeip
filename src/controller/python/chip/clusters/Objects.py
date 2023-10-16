@@ -39576,6 +39576,10 @@ class WaterHeater(Cluster):
         return ClusterObjectDescriptor(
             Fields=[
                 ClusterObjectFieldDescriptor(Label="heaterTypes", Tag=0x00000000, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="heaterDemand", Tag=0x00000001, Type=typing.Union[Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="tankVolume", Tag=0x00000002, Type=typing.Union[None, Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="estimatedHeatRequired", Tag=0x00000003, Type=typing.Union[None, Nullable, uint]),
+                ClusterObjectFieldDescriptor(Label="tankPercentage", Tag=0x00000004, Type=typing.Union[None, Nullable, uint]),
                 ClusterObjectFieldDescriptor(Label="generatedCommandList", Tag=0x0000FFF8, Type=typing.List[uint]),
                 ClusterObjectFieldDescriptor(Label="acceptedCommandList", Tag=0x0000FFF9, Type=typing.List[uint]),
                 ClusterObjectFieldDescriptor(Label="eventList", Tag=0x0000FFFA, Type=typing.List[uint]),
@@ -39585,6 +39589,10 @@ class WaterHeater(Cluster):
             ])
 
     heaterTypes: 'typing.Union[Nullable, uint]' = None
+    heaterDemand: 'typing.Union[Nullable, uint]' = None
+    tankVolume: 'typing.Union[None, Nullable, uint]' = None
+    estimatedHeatRequired: 'typing.Union[None, Nullable, uint]' = None
+    tankPercentage: 'typing.Union[None, Nullable, uint]' = None
     generatedCommandList: 'typing.List[uint]' = None
     acceptedCommandList: 'typing.List[uint]' = None
     eventList: 'typing.List[uint]' = None
@@ -39593,6 +39601,13 @@ class WaterHeater(Cluster):
     clusterRevision: 'uint' = None
 
     class Bitmaps:
+        class HeaterDemand(IntFlag):
+            kImmersionElement1 = 0x1
+            kImmersionElement2 = 0x2
+            kHeatpump = 0x4
+            kBoiler = 0x8
+            kOther = 0x10
+
         class HeaterType(IntFlag):
             kImmersionElement1 = 0x1
             kImmersionElement2 = 0x2
@@ -39602,7 +39617,7 @@ class WaterHeater(Cluster):
 
     class Commands:
         @dataclass
-        class SetUtcTime(ClusterCommand):
+        class Boost(ClusterCommand):
             cluster_id: typing.ClassVar[int] = 0x00006660
             command_id: typing.ClassVar[int] = 0x00000000
             is_client: typing.ClassVar[bool] = True
@@ -39612,10 +39627,33 @@ class WaterHeater(Cluster):
             def descriptor(cls) -> ClusterObjectDescriptor:
                 return ClusterObjectDescriptor(
                     Fields=[
-                        ClusterObjectFieldDescriptor(Label="utcTime", Tag=0, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="temporarySetpoint", Tag=0, Type=int),
+                        ClusterObjectFieldDescriptor(Label="duration", Tag=1, Type=uint),
+                        ClusterObjectFieldDescriptor(Label="targetPercentage", Tag=2, Type=typing.Optional[uint]),
+                        ClusterObjectFieldDescriptor(Label="targetReheat", Tag=3, Type=typing.Optional[uint]),
+                        ClusterObjectFieldDescriptor(Label="oneShot", Tag=4, Type=typing.Optional[bool]),
+                        ClusterObjectFieldDescriptor(Label="emergencyBoost", Tag=5, Type=typing.Optional[bool]),
                     ])
 
-            utcTime: 'uint' = 0
+            temporarySetpoint: 'int' = 0
+            duration: 'uint' = 0
+            targetPercentage: 'typing.Optional[uint]' = None
+            targetReheat: 'typing.Optional[uint]' = None
+            oneShot: 'typing.Optional[bool]' = None
+            emergencyBoost: 'typing.Optional[bool]' = None
+
+        @dataclass
+        class CancelBoost(ClusterCommand):
+            cluster_id: typing.ClassVar[int] = 0x00006660
+            command_id: typing.ClassVar[int] = 0x00000001
+            is_client: typing.ClassVar[bool] = True
+            response_type: typing.ClassVar[str] = None
+
+            @ChipUtility.classproperty
+            def descriptor(cls) -> ClusterObjectDescriptor:
+                return ClusterObjectDescriptor(
+                    Fields=[
+                    ])
 
     class Attributes:
         @dataclass
@@ -39633,6 +39671,70 @@ class WaterHeater(Cluster):
                 return ClusterObjectFieldDescriptor(Type=typing.Union[Nullable, uint])
 
             value: 'typing.Union[Nullable, uint]' = NullValue
+
+        @dataclass
+        class HeaterDemand(ClusterAttributeDescriptor):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x00006660
+
+            @ChipUtility.classproperty
+            def attribute_id(cls) -> int:
+                return 0x00000001
+
+            @ChipUtility.classproperty
+            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
+                return ClusterObjectFieldDescriptor(Type=typing.Union[Nullable, uint])
+
+            value: 'typing.Union[Nullable, uint]' = NullValue
+
+        @dataclass
+        class TankVolume(ClusterAttributeDescriptor):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x00006660
+
+            @ChipUtility.classproperty
+            def attribute_id(cls) -> int:
+                return 0x00000002
+
+            @ChipUtility.classproperty
+            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
+                return ClusterObjectFieldDescriptor(Type=typing.Union[None, Nullable, uint])
+
+            value: 'typing.Union[None, Nullable, uint]' = None
+
+        @dataclass
+        class EstimatedHeatRequired(ClusterAttributeDescriptor):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x00006660
+
+            @ChipUtility.classproperty
+            def attribute_id(cls) -> int:
+                return 0x00000003
+
+            @ChipUtility.classproperty
+            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
+                return ClusterObjectFieldDescriptor(Type=typing.Union[None, Nullable, uint])
+
+            value: 'typing.Union[None, Nullable, uint]' = None
+
+        @dataclass
+        class TankPercentage(ClusterAttributeDescriptor):
+            @ChipUtility.classproperty
+            def cluster_id(cls) -> int:
+                return 0x00006660
+
+            @ChipUtility.classproperty
+            def attribute_id(cls) -> int:
+                return 0x00000004
+
+            @ChipUtility.classproperty
+            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
+                return ClusterObjectFieldDescriptor(Type=typing.Union[None, Nullable, uint])
+
+            value: 'typing.Union[None, Nullable, uint]' = None
 
         @dataclass
         class GeneratedCommandList(ClusterAttributeDescriptor):

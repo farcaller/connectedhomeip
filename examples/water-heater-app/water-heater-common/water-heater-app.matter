@@ -2266,6 +2266,14 @@ server cluster EnergyManagement = 1798 {
 
 /** This allows clients to control a hot water heating appliance so it can be used with energy management. It can help consumers save cost (e.g. using power at cheaper times or from local solar PV generation). */
 server cluster WaterHeater = 26208 {
+  bitmap HeaterDemand : BITMAP8 {
+    kImmersionElement1 = 0x1;
+    kImmersionElement2 = 0x2;
+    kHeatpump = 0x4;
+    kBoiler = 0x8;
+    kOther = 0x10;
+  }
+
   bitmap HeaterType : BITMAP8 {
     kImmersionElement1 = 0x1;
     kImmersionElement2 = 0x2;
@@ -2275,6 +2283,10 @@ server cluster WaterHeater = 26208 {
   }
 
   readonly attribute nullable HeaterType heaterTypes = 0;
+  readonly attribute nullable HeaterDemand heaterDemand = 1;
+  readonly attribute nullable int16u tankVolume = 2;
+  readonly attribute nullable int16u estimatedHeatRequired = 3;
+  readonly attribute nullable Percent tankPercentage = 4;
   readonly attribute command_id generatedCommandList[] = 65528;
   readonly attribute command_id acceptedCommandList[] = 65529;
   readonly attribute event_id eventList[] = 65530;
@@ -2282,11 +2294,17 @@ server cluster WaterHeater = 26208 {
   readonly attribute bitmap32 featureMap = 65532;
   readonly attribute int16u clusterRevision = 65533;
 
-  request struct SetUtcTimeRequest {
-    epoch_us utcTime = 0;
+  request struct BoostRequest {
+    temperature temporarySetpoint = 0;
+    INT16U duration = 1;
+    optional Percent targetPercentage = 2;
+    optional Percent targetReheat = 3;
+    optional boolean oneShot = 4;
+    optional boolean emergencyBoost = 5;
   }
 
-  command SetUtcTime(SetUtcTimeRequest): DefaultSuccess = 0;
+  command Boost(BoostRequest): DefaultSuccess = 0;
+  command CancelBoost(): DefaultSuccess = 1;
 }
 
 /** This cluster provides a mechanism for querying data about electrical power as measured by the device. */
@@ -2858,6 +2876,10 @@ endpoint 1 {
 
   server cluster WaterHeater {
     ram      attribute heaterTypes default = 0x4;
+    ram      attribute heaterDemand;
+    ram      attribute tankVolume;
+    ram      attribute estimatedHeatRequired;
+    ram      attribute tankPercentage;
     callback attribute generatedCommandList;
     callback attribute acceptedCommandList;
     callback attribute eventList;

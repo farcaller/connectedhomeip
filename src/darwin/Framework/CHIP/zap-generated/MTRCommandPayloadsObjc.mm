@@ -13317,12 +13317,22 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
-@implementation MTRWaterHeaterClusterSetUtcTimeParams
+@implementation MTRWaterHeaterClusterBoostParams
 - (instancetype)init
 {
     if (self = [super init]) {
 
-        _utcTime = @(0);
+        _temporarySetpoint = @(0);
+
+        _duration = @(0);
+
+        _targetPercentage = nil;
+
+        _targetReheat = nil;
+
+        _oneShot = nil;
+
+        _emergencyBoost = nil;
         _timedInvokeTimeoutMs = nil;
         _serverSideProcessingTimeout = nil;
     }
@@ -13331,9 +13341,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)copyWithZone:(NSZone * _Nullable)zone;
 {
-    auto other = [[MTRWaterHeaterClusterSetUtcTimeParams alloc] init];
+    auto other = [[MTRWaterHeaterClusterBoostParams alloc] init];
 
-    other.utcTime = self.utcTime;
+    other.temporarySetpoint = self.temporarySetpoint;
+    other.duration = self.duration;
+    other.targetPercentage = self.targetPercentage;
+    other.targetReheat = self.targetReheat;
+    other.oneShot = self.oneShot;
+    other.emergencyBoost = self.emergencyBoost;
     other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
     other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
 
@@ -13342,7 +13357,38 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)description
 {
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: utcTime:%@; >", NSStringFromClass([self class]), _utcTime];
+    NSString * descriptionString = [NSString
+        stringWithFormat:
+            @"<%@: temporarySetpoint:%@; duration:%@; targetPercentage:%@; targetReheat:%@; oneShot:%@; emergencyBoost:%@; >",
+        NSStringFromClass([self class]), _temporarySetpoint, _duration, _targetPercentage, _targetReheat, _oneShot,
+        _emergencyBoost];
+    return descriptionString;
+}
+
+@end
+@implementation MTRWaterHeaterClusterCancelBoostParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRWaterHeaterClusterCancelBoostParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
     return descriptionString;
 }
 

@@ -14,7 +14,6 @@
  *    limitations under the License.
  */
 
-
 #include <app-common/zap-generated/attributes/Accessors.h>
 #include <app-common/zap-generated/cluster-objects.h>
 #include <app-common/zap-generated/ids/Attributes.h>
@@ -30,26 +29,26 @@
 #include <platform/CHIPDeviceLayer.h>
 #include <platform/ConnectivityManager.h>
 
-
 using namespace chip;
 using namespace chip::app;
 using namespace chip::app::Clusters;
 using namespace chip::app::Clusters::WaterHeater;
 using namespace chip::app::Clusters::WaterHeater::Attributes;
 
+void MatterWaterHeaterPluginServerInitCallback() {}
 
-void MatterWaterHeaterPluginServerInitCallback()
-{
-}
+void emberAfWaterHeaterClusterServerInitCallback(chip::EndpointId endpoint) {}
 
-void emberAfWaterHeaterClusterServerInitCallback(chip::EndpointId endpoint)
+// TODO: Command to be replaced with correct ones when specified.
+bool emberAfWaterHeaterClusterBoostCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+                                            const Commands::Boost::DecodableType & commandData)
 {
+    return false;
 }
 
 // TODO: Command to be replaced with correct ones when specified.
-bool emberAfWaterHeaterClusterSetUtcTimeCallback(app::CommandHandler * commandObj,
-                                                    const app::ConcreteCommandPath & commandPath,
-                                                    const Commands::SetUtcTime::DecodableType & commandData)
+bool emberAfWaterHeaterClusterCancelBoostCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+                                                  const Commands::CancelBoost::DecodableType & commandData)
 {
     return false;
 }

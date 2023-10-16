@@ -13952,6 +13952,10 @@ public class ClusterIDMapping {
 
         public enum Attribute {
             HeaterTypes(0L),
+            HeaterDemand(1L),
+            TankVolume(2L),
+            EstimatedHeatRequired(3L),
+            TankPercentage(4L),
             GeneratedCommandList(65528L),
             AcceptedCommandList(65529L),
             EventList(65530L),
@@ -13998,7 +14002,8 @@ public class ClusterIDMapping {
         }
 
         public enum Command {
-            SetUtcTime(0L),;
+            Boost(0L),
+            CancelBoost(1L),;
             private final long id;
             Command(long id) {
                 this.id = id;
@@ -14016,17 +14021,17 @@ public class ClusterIDMapping {
                 }
                 throw new NoSuchFieldError();
             }
-        }public enum SetUtcTimeCommandField {UtcTime(0),;
+        }public enum BoostCommandField {TemporarySetpoint(0),Duration(1),TargetPercentage(2),TargetReheat(3),OneShot(4),EmergencyBoost(5),;
                     private final int id;
-                    SetUtcTimeCommandField(int id) {
+                    BoostCommandField(int id) {
                         this.id = id;
                     }
 
                     public int getID() {
                         return id;
                     }
-                    public static SetUtcTimeCommandField value(int id) throws NoSuchFieldError {
-                        for (SetUtcTimeCommandField field : SetUtcTimeCommandField.values()) {
+                    public static BoostCommandField value(int id) throws NoSuchFieldError {
+                        for (BoostCommandField field : BoostCommandField.values()) {
                         if (field.getID() == id) {
                             return field;
                         }

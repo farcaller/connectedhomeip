@@ -4221,6 +4221,16 @@ namespace ElectricalMeasurement {} // namespace ElectricalMeasurement
 
 namespace WaterHeater {
 
+// Bitmap for HeaterDemand
+enum class HeaterDemand : uint8_t
+{
+    kImmersionElement1 = 0x1,
+    kImmersionElement2 = 0x2,
+    kHeatpump          = 0x4,
+    kBoiler            = 0x8,
+    kOther             = 0x10,
+};
+
 // Bitmap for HeaterType
 enum class HeaterType : uint8_t
 {
