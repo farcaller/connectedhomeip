@@ -16,8 +16,8 @@
  *    limitations under the License.
  */
 
-#include "energy-management-manager.h"
-#include "evse-management-manager.h"
+#include "EnergyManagementManager.h"
+#include "EvseManagementManager.h"
 #include <AppMain.h>
 
 #include <app-common/zap-generated/ids/Attributes.h>
@@ -53,11 +53,38 @@ void emberAfOnOffClusterInitCallback(EndpointId endpoint)
     // TODO: implement any additional Cluster Server init actions
 }
 
+#if 0
 void ApplicationInit()
-{}
+{
+#if CHIP_DEVICE_CONFIG_ENABLE_WPA
+    sWiFiNetworkCommissioningInstance.Init();
+#endif
+}
+#else
+void ApplicationInit()
+{
+#if 0
+    std::string path = kChipEventFifoPathPrefix + std::to_string(getpid());
+
+    if (sChipNamedPipeCommands.Start(path, &sLightingAppCommandDelegate) != CHIP_NO_ERROR)
+    {
+        ChipLogError(NotSpecified, "Failed to start CHIP NamedPipeCommands");
+        sChipNamedPipeCommands.Stop();
+    }
+#endif
+}
+#endif
+
 
 void ApplicationShutdown()
 {
+#if 0
+    if (sChipNamedPipeCommands.Stop() != CHIP_NO_ERROR)
+    {
+        ChipLogError(NotSpecified, "Failed to stop CHIP NamedPipeCommands");
+    }
+#endif
+
     EvseManagementManager::Shutdown();
 }
 
@@ -84,7 +111,19 @@ int main(int argc, char * argv[])
         return -1;
     }
 
+#if defined(CHIP_IMGUI_ENABLED) && CHIP_IMGUI_ENABLED
+    example::Ui::ImguiUi ui;
+
+    ui.AddWindow(std::make_unique<example::Ui::Windows::QRCode>());
+    ui.AddWindow(std::make_unique<example::Ui::Windows::OccupancySensing>(chip::EndpointId(1), "Occupancy"));
+
+//     TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
+//     Not sure what this is about but assume it won’t harm us to have this with occupancy sensing!?
+
+    ChipLinuxAppMainLoop(&ui);
+#else
     ChipLinuxAppMainLoop();
+#endif
 
     return 0;
 }

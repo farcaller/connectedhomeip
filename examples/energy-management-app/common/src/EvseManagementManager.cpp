@@ -17,8 +17,8 @@
  *    limitations under the License.
  */
 
-#include "evse-management-delegate-impl.h"
-#include "evse-management-manager.h"
+#include "EvseManagementDelegateImpl.h"
+#include "EvseManagementManager.h"
 #include "app/clusters/evse-management-server/evse-management-server.h"
 
 #include <lib/support/logging/CHIPLogging.h>
