@@ -30,7 +30,7 @@ class DefaultEvseManagementDelegate : public Delegate
 public:
     DefaultEvseManagementDelegate() : Delegate(){};
 
-    CHIP_ERROR DisableEvseCharging() override;
+    CHIP_ERROR DisableEvse() override;
 
     CHIP_ERROR EnableEvseCharging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
                                   const uint16_t & minimumChargeCurrent, const uint16_t & maximumChargeCurrent) override;

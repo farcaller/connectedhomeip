@@ -86,7 +86,7 @@ bool emberAfEvseManagementClusterDisableEvseCallback(app::CommandHandler * comma
 {
     Status status = Status::Success;
 
-    status = (CHIP_NO_ERROR == GetDelegate()->DisableEvseCharging()) ? Status::Success : Status::Failure;
+    status = (CHIP_NO_ERROR == GetDelegate()->DisableEvse()) ? Status::Success : Status::Failure;
     commandObj->AddStatus(commandPath, status);
 
     return true;

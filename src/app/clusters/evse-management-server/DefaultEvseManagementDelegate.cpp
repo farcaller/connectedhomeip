@@ -20,9 +20,9 @@
 
 using namespace chip::app::Clusters::EvseManagement;
 
-CHIP_ERROR DefaultEvseManagementDelegate::DisableEvseCharging()
+CHIP_ERROR DefaultEvseManagementDelegate::DisableEvse()
 {
-    ChipLogProgress(NotSpecified, "Evse DisableEvseCharging not implemented");
+    ChipLogProgress(NotSpecified, "Evse DisableEvse not implemented");
     return CHIP_ERROR_NOT_IMPLEMENTED;
 }
 
