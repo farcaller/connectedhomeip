@@ -47,10 +47,10 @@ public:
     inline void SetEndpoint(EndpointId ep) { mEndpoint = ep; }
 
     /**
-     * @brief Delegate should implement a handler to disable Evse Charging. It should report CHIP_NO_ERROR if successful and may
+     * @brief Delegate should implement a handler to disable the Evse. It should report CHIP_NO_ERROR if successful and may
      * return other CHIP_ERRORs if it fails
      */
-    virtual CHIP_ERROR DisableEvseCharging() = 0;
+    virtual CHIP_ERROR DisableEvse() = 0;
 
     /**
      * @brief Delegate should implement a handler to enable Evse Charging.
