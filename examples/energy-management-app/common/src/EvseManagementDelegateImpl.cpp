@@ -28,9 +28,9 @@ using namespace chip::app::Clusters::EvseManagement;
 EvseManagementDelegate EvseManagementDelegate::sInstance;
 
 
-CHIP_ERROR EvseManagementDelegate::DisableEvseCharging() 
+CHIP_ERROR EvseManagementDelegate::DisableEvse() 
 {
-    ChipLogProgress(AppServer, "EvseManagementDelegate::DisableEvseCharging()");
+    ChipLogProgress(AppServer, "EvseManagementDelegate::DisableEvse()");
     return CHIP_NO_ERROR;
 }
 
