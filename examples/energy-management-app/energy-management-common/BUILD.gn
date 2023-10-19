@@ -20,7 +20,7 @@ config("config") {
   include_dirs = [ "include" ]
 }
 
-chip_data_model("common") {
+chip_data_model("energy-management-common") {
   zap_file = "energy-management-app.zap"
 
   zap_pregenerated_dir = "${chip_root}/zzz_generated/energy-management-app/zap-generated"
