@@ -17,88 +17,41 @@
  *    limitations under the License.
  */
 
+#include "EvseManagementDelegateImpl.h"
 #include "EvseManagementManager.h"
+#include "app/clusters/evse-management-server/evse-management-server.h"
 
 #include <lib/support/logging/CHIPLogging.h>
 
-EvseManagementManager EvseManagementManager::sEvseManagement;
+using namespace chip;
+using namespace chip::app;
+using namespace chip::app::Clusters;
+using namespace chip::app::Clusters::EvseManagement;
 
-// TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
-//  We’ll need to review how Robot Vacuum/ Washing machines handle Modes - but this is ok for now.
+
+EvseManagementManager EvseManagementManager::sEvseManagement;
+static EvseManagementDelegate *  gEvseManagementDelegate = nullptr;
+
+void EvseManagementManager::Shutdown()
+{
+    if (gEvseManagementDelegate != nullptr)
+    {
+        delete gEvseManagementDelegate;
+        gEvseManagementDelegate = nullptr;
+    }
+}
+
 CHIP_ERROR EvseManagementManager::Init()
 {
-    mState = kState_On;
     return CHIP_NO_ERROR;
 }
 
-bool EvseManagementManager::IsTurnedOn()
+void emberAfEvseManagementManagerClusterInitCallback(chip::EndpointId endpointId)
 {
-    return mState == kState_On;
-}
+    VerifyOrDie(endpointId == 1);       // this cluster is only enabled for endpoint 1 ??
+    gEvseManagementDelegate  = new EvseManagementDelegate;
+    EvseManagement::SetDefaultDelegate(gEvseManagementDelegate);
 
-void EvseManagementManager::SetCallbacks(EvseManagementCallback_fn aActionInitiated_CB, EvseManagementCallback_fn aActionCompleted_CB)
-{
-    mActionInitiated_CB = aActionInitiated_CB;
-    mActionCompleted_CB = aActionCompleted_CB;
-}
-
-bool EvseManagementManager::InitiateAction(Action_t aAction)
-{
-    // TODO: this function is called InitiateAction because we want to implement some features such as ramping up here.
-    bool action_initiated = false;
-    State_t new_state;
-
-    switch (aAction)
-    {
-    case ON_ACTION:
-        ChipLogProgress(AppServer, "EvseManagementManager::InitiateAction(ON_ACTION)");
-        break;
-    case OFF_ACTION:
-        ChipLogProgress(AppServer, "EvseManagementManager::InitiateAction(OFF_ACTION)");
-        break;
-    default:
-        ChipLogProgress(AppServer, "EvseManagementManager::InitiateAction(unknown)");
-        break;
-    }
-
-    // Initiate On/Off Action only when the previous one is complete.
-    if (mState == kState_Off && aAction == ON_ACTION)
-    {
-        action_initiated = true;
-        new_state        = kState_On;
-    }
-    else if (mState == kState_On && aAction == OFF_ACTION)
-    {
-        action_initiated = true;
-        new_state        = kState_Off;
-    }
-
-    if (action_initiated)
-    {
-        if (mActionInitiated_CB)
-        {
-            mActionInitiated_CB(aAction);
-        }
-
-        Set(new_state == kState_On);
-
-        if (mActionCompleted_CB)
-        {
-            mActionCompleted_CB(aAction);
-        }
-    }
-
-    return action_initiated;
-}
-
-void EvseManagementManager::Set(bool aOn)
-{
-    if (aOn)
-    {
-        mState = kState_On;
-    }
-    else
-    {
-        mState = kState_Off;
-    }
+    // what are these options? :  AppServer,NotSpecified,Zcl
+    ChipLogProgress(Zcl, "emberAfEvseManagementManagerClusterInitCallback, endpoint=%d", endpointId);
 }
