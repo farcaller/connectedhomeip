@@ -117,9 +117,9 @@ jobs:
                       src/app/zap-templates/zcl/data-model/chip/door-lock-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/electrical-energy-measurement-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/electrical-power-measurement-cluster.xml \
+                      src/app/zap-templates/zcl/data-model/chip/energy-evse-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/energy-management-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/ethernet-network-diagnostics-cluster.xml \
-                      src/app/zap-templates/zcl/data-model/chip/evse-management-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/fan-control-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/fault-injection-cluster.xml \
                       src/app/zap-templates/zcl/data-model/chip/fixed-label-cluster.xml \

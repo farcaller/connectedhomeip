@@ -18,30 +18,30 @@
 
 #pragma once
 
-#include "evse-management-delegate.h"
+#include "energy-evse-delegate.h"
 
 namespace chip {
 namespace app {
 namespace Clusters {
-namespace EvseManagement {
-class DefaultEvseManagementDelegate : public Delegate
+namespace EnergyEvse {
+class DefaultEnergyEvseDelegate : public Delegate
 {
 
 public:
-    DefaultEvseManagementDelegate() : Delegate(){};
+    DefaultEnergyEvseDelegate() : Delegate(){};
 
-    CHIP_ERROR DisableEvse() override;
+    CHIP_ERROR Disable() override;
 
-    CHIP_ERROR EnableEvseCharging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
-                                  const uint16_t & minimumChargeCurrent, const uint16_t & maximumChargeCurrent) override;
+    CHIP_ERROR EnableCharging(const chip::app::DataModel::Nullable<uint32_t> & enableChargeTimee,
+                              const uint32_t & minimumChargeCurrent, const uint32_t & maximumChargeCurrent) override;
 
-    CHIP_ERROR EnableEvseDischarging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
-                                     const uint16_t & maximumDischargeCurrent) override;
+    CHIP_ERROR EnableDischarging(const chip::app::DataModel::Nullable<uint32_t> & enableDischargeTime,
+                                 const uint32_t & maximumDischargeCurrent) override;
 
     CHIP_ERROR StartDiagnostics() override;
 };
 
-} // namespace EvseManagement
+} // namespace EnergyEvse
 } // namespace Clusters
 } // namespace app
 } // namespace chip

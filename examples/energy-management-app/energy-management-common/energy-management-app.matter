@@ -2168,6 +2168,191 @@ server cluster UserLabel = 65 {
   readonly attribute int16u clusterRevision = 65533;
 }
 
+/** This cluster provides an interface for the management of Electric Vehicle Supply Equipment (EVSE). */
+server cluster EnergyEvse = 153 {
+  enum EnergyTransferStoppedReasonEnum : ENUM8 {
+    kEvStopped = 0;
+    kEvseStopped = 1;
+    kOther = 3;
+  }
+
+  enum EvseStateEnum : ENUM8 {
+    kNotPluggedIn = 0;
+    kPluggedInNoDemand = 1;
+    kPluggedInDemand = 2;
+    kPluggedInCharging = 3;
+    kPluggedInDischarging = 4;
+    kSessionEnding = 5;
+    kFault = 6;
+  }
+
+  enum FaultStateEnum : ENUM8 {
+    kNoError = 0;
+    kEvseMeterFailure = 1;
+    kOverVoltage = 2;
+    kUnderVoltage = 3;
+    kOverCurrent = 4;
+    kContactWetFailure = 5;
+    kContactDryFailure = 6;
+    kGroundFault = 7;
+    kPowerLoss = 8;
+    kPowerQuality = 9;
+    kPilotShortCircuit = 10;
+    kEmergencyStop = 11;
+    kEvDisconnected = 12;
+    kWrongPowerSupply = 13;
+    kLiveNeutralSwap = 14;
+    kOverTemperature = 15;
+    kOther = 255;
+  }
+
+  enum StartOfWeekEnum : ENUM8 {
+    kSunday = 0;
+    kMonday = 1;
+    kTuesday = 2;
+    kWednesday = 3;
+    kThursday = 4;
+    kFriday = 5;
+    kSaturday = 6;
+  }
+
+  enum SupplyStateEnum : ENUM8 {
+    kDisabled = 0;
+    kChargingEnabled = 1;
+    kDischargingEnabled = 2;
+    kDisabledError = 3;
+    kDisabledDiagnostics = 4;
+  }
+
+  bitmap Feature : BITMAP32 {
+    kChargingPreferences = 0x1;
+    kSessions = 0x2;
+    kSocReporting = 0x4;
+    kPlugAndCharge = 0x8;
+    kRfid = 0x10;
+    kV2X = 0x20;
+  }
+
+  bitmap TargetDayOfWeekBitmap : BITMAP8 {
+    kSunday = 0x1;
+    kMonday = 0x2;
+    kTuesday = 0x4;
+    kWednesday = 0x8;
+    kThursday = 0x10;
+    kFriday = 0x20;
+    kSaturday = 0x40;
+    kAway = 0x80;
+  }
+
+  struct ChargingTargetStruct {
+    int16u targetTime = 0;
+    optional int8u targetSoC = 1;
+    optional int32u addedEnergy = 2;
+  }
+
+  info event EVConnected = 0 {
+    INT32U sessionId = 0;
+  }
+
+  info event EVNotDetected = 1 {
+    INT32U sessionId = 0;
+    EvseStateEnum state = 1;
+    elapsed_s sessionDuration = 2;
+    INT32S sessionEnergyCharged = 3;
+    INT32S sessionEnergyDischarged = 4;
+  }
+
+  info event EnergyTransferStarted = 2 {
+    INT32U sessionId = 0;
+    EvseStateEnum state = 1;
+    INT32U maximumCurrent = 2;
+  }
+
+  info event EnergyTransferStopped = 3 {
+    INT32U sessionId = 0;
+    EvseStateEnum state = 1;
+    EnergyTransferStoppedReasonEnum reason = 2;
+    INT32S energyTransferred = 4;
+  }
+
+  info event Fault = 4 {
+    INT32U sessionId = 0;
+    EvseStateEnum state = 1;
+    EvseStateEnum faultStatePreviousState = 2;
+    EvseStateEnum faultStateCurrentState = 4;
+  }
+
+  info event RFID = 5 {
+    nullable OCTET_STRING uid = 0;
+  }
+
+  readonly attribute nullable EvseStateEnum state = 0;
+  readonly attribute SupplyStateEnum supplyState = 1;
+  readonly attribute FaultStateEnum fault = 2;
+  readonly attribute nullable elapsed_s enableChargeTime = 3;
+  readonly attribute nullable elapsed_s enableDischargeTime = 4;
+  readonly attribute int32u circuitCapacity = 5;
+  readonly attribute int32u minimumChargeCurrent = 6;
+  readonly attribute int32u maximumChargeCurrent = 7;
+  readonly attribute int32u maximumdDischargeCurrent = 8;
+  attribute int32u userMaximumChargeCurrent = 9;
+  attribute elapsed_s randomisationDelayWindow = 10;
+  readonly attribute StartOfWeekEnum startOfWeek = 32;
+  readonly attribute int8u numberOfWeeklyTargets = 33;
+  readonly attribute int8u numberOfDailyTargets = 34;
+  readonly attribute nullable epoch_s nextChargeStartTime = 35;
+  readonly attribute nullable epoch_s nextChargeTargetTime = 36;
+  readonly attribute nullable int32s nextChargeRequiredEnergy = 37;
+  readonly attribute nullable int8u nextChargeTargetSoc = 38;
+  attribute nullable int16u approxEvEfficiency = 39;
+  readonly attribute nullable Percent stateOfCharge = 48;
+  readonly attribute nullable int32s batteryCapacity = 49;
+  readonly attribute nullable char_string<32> vehicleId = 50;
+  readonly attribute int32u sessionId = 64;
+  readonly attribute int16u eventSequenceNumber = 65;
+  readonly attribute elapsed_s sessionDuration = 66;
+  readonly attribute int32s sessionEnergyCharged = 67;
+  readonly attribute int32s sessionEnergyDischarged = 68;
+  readonly attribute command_id generatedCommandList[] = 65528;
+  readonly attribute command_id acceptedCommandList[] = 65529;
+  readonly attribute event_id eventList[] = 65530;
+  readonly attribute attrib_id attributeList[] = 65531;
+  readonly attribute bitmap32 featureMap = 65532;
+  readonly attribute int16u clusterRevision = 65533;
+
+  request struct EnableChargingRequest {
+    nullable elapsed_s enableChargeTime = 0;
+    INT32U minimumChargeCurrent = 1;
+    INT32U maximumChargeCurrent = 2;
+  }
+
+  request struct EnableDischargingRequest {
+    nullable elapsed_s enableDischargeTime = 0;
+    INT32U maximumDischargeCurrent = 1;
+  }
+
+  request struct SetTargetsRequest {
+    TargetDayOfWeekBitmap dayOfWeekForSequence = 0;
+    ChargingTargetStruct chargingTargets[] = 1;
+  }
+
+  request struct GetTargetsRequest {
+    TargetDayOfWeekBitmap daysToReturn = 0;
+  }
+
+  response struct GetTargetsResponse = 0 {
+    TargetDayOfWeekBitmap dayOfWeekForSequence = 0;
+    ChargingTargetStruct chargingTargets[] = 1;
+  }
+
+  command Disable(): DefaultSuccess = 1;
+  command EnableCharging(EnableChargingRequest): DefaultSuccess = 2;
+  command EnableDischarging(EnableDischargingRequest): DefaultSuccess = 3;
+  command StartDiagnostics(): DefaultSuccess = 4;
+  command SetTargets(SetTargetsRequest): DefaultSuccess = 5;
+  command GetTargets(GetTargetsRequest): DefaultSuccess = 6;
+}
+
 /** An interface to a generic way to secure a door */
 client cluster DoorLock = 257 {
   enum AlarmCodeEnum : ENUM8 {
@@ -4037,178 +4222,6 @@ server cluster EnergyManagement = 1798 {
   command RequestLimitBasedPowerForecast(RequestLimitBasedPowerForecastRequest): DefaultSuccess = 6;
 }
 
-/** This cluster provides an interface for the management of Electric Vehicle Supply Equipment (EVSE). */
-server cluster EvseManagement = 1804 {
-  enum EvseFaultEnum : ENUM8 {
-    kNoError = 0;
-    kEvseMeterFailure = 1;
-    kOverVoltage = 2;
-    kUnderVoltage = 3;
-    kOverCurrent = 4;
-    kContactWetFailure = 5;
-    kContactDryFailure = 6;
-    kGroundFault = 7;
-    kPowerLoss = 8;
-    kPowerQuality = 9;
-    kPilotShortCircuit = 10;
-    kEmergencyStop = 11;
-    kEvDisconnected = 12;
-    kWrongPowerSupply = 13;
-    kLiveNeutralSwap = 14;
-    kOverTemperature = 15;
-    kOther = 255;
-  }
-
-  enum EvseStateEnum : ENUM8 {
-    kNotPluggedIn = 0;
-    kPluggedInIdle = 1;
-    kPluggedInCharging = 2;
-    kPluggedInDischarging = 3;
-    kSessionEnding = 4;
-    kFault = 255;
-  }
-
-  enum ReasonEnum : ENUM8 {
-    kEvStopped = 0;
-    kEvseStopped = 1;
-    kOther = 255;
-  }
-
-  enum StartOfWeekEnum : ENUM8 {
-    kSunday = 0;
-    kMonday = 1;
-    kTuesday = 2;
-    kWednesday = 3;
-    kThursday = 4;
-    kFriday = 5;
-    kSaturday = 6;
-  }
-
-  enum SupplyStateEnum : ENUM8 {
-    kDisabled = 0;
-    kChargingEnabled = 1;
-    kDischargingEnabled = 2;
-    kDisabledError = 3;
-    kDisabledDiagnostics = 4;
-  }
-
-  bitmap Feature : BITMAP32 {
-    kChargingPreferences = 0x1;
-    kSessions = 0x2;
-    kSocReporting = 0x4;
-    kPlugAndCharge = 0x8;
-    kRfid = 0x10;
-    kV2x = 0x20;
-  }
-
-  struct ChargingTargetStruct {
-    int16u targetTime = 0;
-    optional int8u targetSoC = 1;
-    optional int32u addedEnergy = 2;
-  }
-
-  info event EvConnected = 0 {
-    INT32U evseSessionId = 0;
-    EvseStateEnum evseState = 1;
-  }
-
-  info event EvNotDetected = 1 {
-    INT32U evseSessionId = 0;
-    EvseStateEnum evseState = 1;
-    INT32U evseSessionDuration = 2;
-    INT32U evseSessionEnergyCharged = 3;
-    INT32U evseSessionEnergyDischarged = 4;
-  }
-
-  info event EnergyTransferStarted = 2 {
-    INT32U evseSessionId = 0;
-    EvseStateEnum evseState = 1;
-    INT16S evseSessionDuration = 2;
-  }
-
-  info event EnergyTransferStopped = 3 {
-    INT32U evseSessionId = 0;
-    EvseStateEnum evseState = 1;
-    ReasonEnum reason = 2;
-    INT32S energyTransferred = 4;
-  }
-
-  info event Fault = 4 {
-    INT32U evseSessionId = 0;
-    EvseStateEnum evseState = 1;
-    EvseStateEnum evseFaultPreviousState = 2;
-    EvseStateEnum evseFaultCurrentState = 4;
-  }
-
-  info event Rfid = 5 {
-    nullable OCTET_STRING uid = 0;
-  }
-
-  readonly attribute EvseStateEnum evseState = 0;
-  readonly attribute SupplyStateEnum supplyState = 1;
-  readonly attribute EvseFaultEnum evseFault = 2;
-  attribute int16u enableChargeTime = 3;
-  attribute int16u enableDischargeTime = 4;
-  readonly attribute int16u circuitCapacity = 5;
-  readonly attribute int16u minimumChargeCurrent = 6;
-  readonly attribute int16u maximumChargeCurrent = 7;
-  readonly attribute int16u maximumdDischargeCurrent = 8;
-  attribute int16u userMaximumChargeCurrent = 9;
-  attribute int16u randomisationDelayWindow = 10;
-  readonly attribute StartOfWeekEnum startOfWeek = 32;
-  readonly attribute int8u numberOfWeeklyTargets = 33;
-  readonly attribute int8u numberOfDailyTargets = 34;
-  readonly attribute nullable int16u nextChargeStartTime = 35;
-  readonly attribute nullable int16u nextChargeTargetTime = 36;
-  readonly attribute nullable int8u nextChargeRequiredEnergy = 37;
-  readonly attribute nullable int8u nextChargeTargetSoc = 38;
-  attribute nullable int16u approxEvEfficiency = 39;
-  readonly attribute nullable int8u stateOfCharge = 48;
-  readonly attribute nullable int16u batteryCapacity = 49;
-  readonly attribute nullable char_string<32> vehicleId = 50;
-  readonly attribute int32u evseSessionId = 64;
-  readonly attribute int16u eventSequenceNumber = 65;
-  readonly attribute int32u evseSessionDuration = 66;
-  readonly attribute int32u evseSessionEnergyCharged = 67;
-  readonly attribute int32u evseSessionEnergyDischarged = 68;
-  readonly attribute int16u evseSessionMaximumCurrent = 69;
-  readonly attribute command_id generatedCommandList[] = 65528;
-  readonly attribute command_id acceptedCommandList[] = 65529;
-  readonly attribute event_id eventList[] = 65530;
-  readonly attribute attrib_id attributeList[] = 65531;
-  readonly attribute bitmap32 featureMap = 65532;
-  readonly attribute int16u clusterRevision = 65533;
-
-  request struct EnableEvseChargingRequest {
-    nullable INT16U evseEnableTime = 0;
-    INT16U minimumChargeCurrent = 1;
-    INT16U maximumChargeCurrent = 2;
-  }
-
-  request struct EnableEvseDischargingRequest {
-    nullable INT16U evseEnableTime = 0;
-    INT16U maximumDischargeCurrent = 1;
-  }
-
-  request struct SetTargetsRequest {
-    INT8U numberOfTargetsForSequence = 0;
-    StartOfWeekEnum dayOfWeekForSequence = 1;
-    ChargingTargetStruct chargingTargets[] = 2;
-  }
-
-  request struct GetTargetsRequest {
-    StartOfWeekEnum daysToReturn = 0;
-  }
-
-  command DisableEvse(): DefaultSuccess = 1;
-  command EnableEvseCharging(EnableEvseChargingRequest): DefaultSuccess = 2;
-  command EnableEvseDischarging(EnableEvseDischargingRequest): DefaultSuccess = 3;
-  command StartDiagnostics(): DefaultSuccess = 4;
-  command SetTargets(SetTargetsRequest): DefaultSuccess = 5;
-  command GetTargets(GetTargetsRequest): DefaultSuccess = 6;
-  command ClearTargets(): DefaultSuccess = 7;
-}
-
 /** Attributes related to the electrical properties of a device. This cluster is used by power outlets and other devices that need to provide instantaneous data as opposed to metrology data which should be retrieved from the metering cluster.. */
 server cluster ElectricalMeasurement = 2820 {
   readonly attribute bitmap32 measurementType = 0;
@@ -4757,6 +4770,48 @@ endpoint 1 {
     ram      attribute clusterRevision default = 1;
   }
 
+  server cluster EnergyEvse {
+    emits event EVConnected;
+    emits event EVNotDetected;
+    emits event EnergyTransferStarted;
+    emits event EnergyTransferStopped;
+    emits event Fault;
+    emits event RFID;
+    ram      attribute state;
+    ram      attribute supplyState;
+    ram      attribute fault;
+    ram      attribute enableChargeTime;
+    ram      attribute enableDischargeTime;
+    ram      attribute circuitCapacity default = 0x0;
+    ram      attribute minimumChargeCurrent default = 0x1770;
+    ram      attribute maximumChargeCurrent default = 0x0;
+    ram      attribute maximumdDischargeCurrent default = 0x0;
+    ram      attribute userMaximumChargeCurrent default = 0x0;
+    ram      attribute randomisationDelayWindow default = 600;
+    ram      attribute startOfWeek;
+    ram      attribute numberOfWeeklyTargets default = 0x0;
+    ram      attribute numberOfDailyTargets default = 0x1;
+    ram      attribute nextChargeStartTime;
+    ram      attribute nextChargeTargetTime;
+    ram      attribute nextChargeRequiredEnergy;
+    ram      attribute nextChargeTargetSoc;
+    ram      attribute approxEvEfficiency;
+    ram      attribute stateOfCharge;
+    ram      attribute batteryCapacity;
+    ram      attribute vehicleId;
+    ram      attribute sessionId default = 0x0;
+    ram      attribute eventSequenceNumber default = 0x0001;
+    ram      attribute sessionDuration default = 0x0;
+    ram      attribute sessionEnergyCharged default = 0x0;
+    ram      attribute sessionEnergyDischarged default = 0x0;
+    callback attribute generatedCommandList;
+    callback attribute acceptedCommandList;
+    callback attribute eventList;
+    callback attribute attributeList;
+    ram      attribute featureMap default = 0;
+    ram      attribute clusterRevision default = 1;
+  }
+
   server cluster DoorLock {
     ram      attribute lockState;
     ram      attribute lockType;
@@ -4873,49 +4928,6 @@ endpoint 1 {
     callback attribute eventList;
     callback attribute attributeList;
     ram      attribute featureMap default = 0x7;
-    ram      attribute clusterRevision default = 1;
-  }
-
-  server cluster EvseManagement {
-    emits event EvConnected;
-    emits event EvNotDetected;
-    emits event EnergyTransferStarted;
-    emits event EnergyTransferStopped;
-    emits event Fault;
-    emits event Rfid;
-    ram      attribute evseState;
-    ram      attribute supplyState;
-    ram      attribute evseFault;
-    ram      attribute enableChargeTime;
-    ram      attribute enableDischargeTime;
-    ram      attribute circuitCapacity;
-    ram      attribute minimumChargeCurrent;
-    ram      attribute maximumChargeCurrent;
-    ram      attribute maximumdDischargeCurrent;
-    ram      attribute userMaximumChargeCurrent;
-    ram      attribute randomisationDelayWindow;
-    ram      attribute startOfWeek;
-    ram      attribute numberOfWeeklyTargets;
-    ram      attribute numberOfDailyTargets;
-    ram      attribute nextChargeStartTime;
-    ram      attribute nextChargeTargetTime;
-    ram      attribute nextChargeRequiredEnergy;
-    ram      attribute nextChargeTargetSoc;
-    ram      attribute approxEvEfficiency;
-    ram      attribute stateOfCharge;
-    ram      attribute batteryCapacity;
-    ram      attribute vehicleId;
-    ram      attribute evseSessionId;
-    ram      attribute eventSequenceNumber;
-    ram      attribute evseSessionDuration;
-    ram      attribute evseSessionEnergyCharged;
-    ram      attribute evseSessionEnergyDischarged;
-    ram      attribute evseSessionMaximumCurrent;
-    callback attribute generatedCommandList;
-    callback attribute acceptedCommandList;
-    callback attribute eventList;
-    callback attribute attributeList;
-    ram      attribute featureMap default = 0;
     ram      attribute clusterRevision default = 1;
   }
 

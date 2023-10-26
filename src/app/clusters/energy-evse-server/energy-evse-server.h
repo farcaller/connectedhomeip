@@ -18,26 +18,19 @@
 
 #pragma once
 
-#include <stdbool.h>
-#include <stdint.h>
+#include "energy-evse-delegate.h"
+#include <app-common/zap-generated/cluster-objects.h>
 
-#include <functional>
+namespace chip {
+namespace app {
+namespace Clusters {
+namespace EnergyEvse {
 
-#include <lib/core/CHIPError.h>
+void SetDefaultDelegate(Delegate * delegate);
 
-class EvseManagementManager
-{
-public:
-    static void Shutdown();
-    CHIP_ERROR Init();
+Delegate * GetDefaultDelegate();
 
-private:
-    friend EvseManagementManager & EvseManagementMgr(void);
-
-    static EvseManagementManager sEvseManagement;
-};
-
-inline EvseManagementManager & EvseManagementMgr(void)
-{
-    return EvseManagementManager::sEvseManagement;
-}
+} // namespace EnergyEvse
+} // namespace Clusters
+} // namespace app
+} // namespace chip

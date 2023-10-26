@@ -36,8 +36,8 @@ config("includes") {
 
 executable("chip-energy-management-app") {
   sources = [
-    "${chip_root}/examples/energy-management-app/energy-management-common/src/EvseManagementDelegateImpl.cpp",
-    "${chip_root}/examples/energy-management-app/energy-management-common/src/EvseManagementManager.cpp",
+    "${chip_root}/examples/energy-management-app/energy-management-common/src/EnergyEvseDelegateImpl.cpp",
+    "${chip_root}/examples/energy-management-app/energy-management-common/src/EnergyEvseManager.cpp",
     "${chip_root}/examples/energy-management-app/energy-management-common/src/EnergyManagementManager.cpp",
     "include/CHIPProjectAppConfig.h",
     "main.cpp",

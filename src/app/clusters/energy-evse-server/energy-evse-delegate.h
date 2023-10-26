@@ -24,7 +24,7 @@
 namespace chip {
 namespace app {
 namespace Clusters {
-namespace EvseManagement {
+namespace EnergyEvse {
 
 // typedef void (*OnTimeSyncCompletion)(void * context, TimeSourceEnum timeSource, GranularityEnum granularity);
 // typedef void (*OnFallbackNTPCompletion)(void * context, bool timeSyncSuccessful);
@@ -50,21 +50,21 @@ public:
      * @brief Delegate should implement a handler to disable the Evse. It should report CHIP_NO_ERROR if successful and may
      * return other CHIP_ERRORs if it fails
      */
-    virtual CHIP_ERROR DisableEvse() = 0;
+    virtual CHIP_ERROR Disable() = 0;
 
     /**
      * @brief Delegate should implement a handler to enable Evse Charging.
      * It should report CHIP_NO_ERROR if successful and may return other CHIP_ERRORs if it fails
      */
-    virtual CHIP_ERROR EnableEvseCharging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
-                                          const uint16_t & minimumChargeCurrent, const uint16_t & maximumChargeCurrent) = 0;
+    virtual CHIP_ERROR EnableCharging(const chip::app::DataModel::Nullable<uint32_t> & enableChargeTime,
+                                      const uint32_t & minimumChargeCurrent, const uint32_t & maximumChargeCurrent) = 0;
 
     /**
      * @brief Delegate should implement a handler to enable Evse Discharging.
      * It should report CHIP_NO_ERROR if successful and may return other CHIP_ERRORs if it fails
      */
-    virtual CHIP_ERROR EnableEvseDischarging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
-                                             const uint16_t & maximumDischargeCurrent) = 0;
+    virtual CHIP_ERROR EnableDischarging(const chip::app::DataModel::Nullable<uint32_t> & enableDischargeTime,
+                                         const uint32_t & maximumDischargeCurrent) = 0;
 
     /**
      * @brief Delegate should implement a handler to enable Evse Diagnostics.
@@ -78,7 +78,7 @@ private:
     EndpointId mEndpoint = kRootEndpointId;
 };
 
-} // namespace EvseManagement
+} // namespace EnergyEvse
 } // namespace Clusters
 } // namespace app
 } // namespace chip

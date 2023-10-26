@@ -17,41 +17,40 @@
  *    limitations under the License.
  */
 
-#include "EvseManagementDelegateImpl.h"
-#include "EvseManagementManager.h"
-#include "app/clusters/evse-management-server/evse-management-server.h"
+#include "EnergyEvseManager.h"
+#include "EnergyEvseDelegateImpl.h"
+#include "app/clusters/energy-evse-server/energy-evse-server.h"
 
 #include <lib/support/logging/CHIPLogging.h>
 
 using namespace chip;
 using namespace chip::app;
 using namespace chip::app::Clusters;
-using namespace chip::app::Clusters::EvseManagement;
+using namespace chip::app::Clusters::EnergyEvse;
 
+EnergyEvseManager EnergyEvseManager::sEnergyEvse;
+static EnergyEvseDelegate * gEnergyEvseDelegate = nullptr;
 
-EvseManagementManager EvseManagementManager::sEvseManagement;
-static EvseManagementDelegate *  gEvseManagementDelegate = nullptr;
-
-void EvseManagementManager::Shutdown()
+void EnergyEvseManager::Shutdown()
 {
-    if (gEvseManagementDelegate != nullptr)
+    if (gEnergyEvseDelegate != nullptr)
     {
-        delete gEvseManagementDelegate;
-        gEvseManagementDelegate = nullptr;
+        delete gEnergyEvseDelegate;
+        gEnergyEvseDelegate = nullptr;
     }
 }
 
-CHIP_ERROR EvseManagementManager::Init()
+CHIP_ERROR EnergyEvseManager::Init()
 {
     return CHIP_NO_ERROR;
 }
 
-void emberAfEvseManagementManagerClusterInitCallback(chip::EndpointId endpointId)
+void emberAfEnergyEvseManagerClusterInitCallback(chip::EndpointId endpointId)
 {
-    VerifyOrDie(endpointId == 1);       // this cluster is only enabled for endpoint 1 ??
-    gEvseManagementDelegate  = new EvseManagementDelegate;
-    EvseManagement::SetDefaultDelegate(gEvseManagementDelegate);
+    VerifyOrDie(endpointId == 1); // this cluster is only enabled for endpoint 1 ??
+    gEnergyEvseDelegate = new EnergyEvseDelegate;
+    EnergyEvse::SetDefaultDelegate(gEnergyEvseDelegate);
 
     // what are these options? :  AppServer,NotSpecified,Zcl
-    ChipLogProgress(Zcl, "emberAfEvseManagementManagerClusterInitCallback, endpoint=%d", endpointId);
+    ChipLogProgress(Zcl, "emberAfEnergyEvseManagerClusterInitCallback, endpoint=%d", endpointId);
 }
