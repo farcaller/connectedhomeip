@@ -7931,6 +7931,373 @@ public class ClusterReadMapping {
      
        return result;
     }
+    private static Map<String, InteractionInfo> readEnergyEvseInteractionInfo() {
+       Map<String, InteractionInfo> result = new LinkedHashMap<>();Map<String, CommandParameterInfo> readEnergyEvseStateCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseStateAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readStateAttribute(
+              (ChipClusters.EnergyEvseCluster.StateAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterStateAttributeCallback(),
+          readEnergyEvseStateCommandParams
+        );
+        result.put("readStateAttribute", readEnergyEvseStateAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseSupplyStateCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseSupplyStateAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readSupplyStateAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseSupplyStateCommandParams
+        );
+        result.put("readSupplyStateAttribute", readEnergyEvseSupplyStateAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseFaultCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseFaultAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readFaultAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseFaultCommandParams
+        );
+        result.put("readFaultAttribute", readEnergyEvseFaultAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseEnableChargeTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseEnableChargeTimeAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readEnableChargeTimeAttribute(
+              (ChipClusters.EnergyEvseCluster.EnableChargeTimeAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterEnableChargeTimeAttributeCallback(),
+          readEnergyEvseEnableChargeTimeCommandParams
+        );
+        result.put("readEnableChargeTimeAttribute", readEnergyEvseEnableChargeTimeAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseEnableDischargeTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseEnableDischargeTimeAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readEnableDischargeTimeAttribute(
+              (ChipClusters.EnergyEvseCluster.EnableDischargeTimeAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterEnableDischargeTimeAttributeCallback(),
+          readEnergyEvseEnableDischargeTimeCommandParams
+        );
+        result.put("readEnableDischargeTimeAttribute", readEnergyEvseEnableDischargeTimeAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseCircuitCapacityCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseCircuitCapacityAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readCircuitCapacityAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseCircuitCapacityCommandParams
+        );
+        result.put("readCircuitCapacityAttribute", readEnergyEvseCircuitCapacityAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseMinimumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseMinimumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readMinimumChargeCurrentAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseMinimumChargeCurrentCommandParams
+        );
+        result.put("readMinimumChargeCurrentAttribute", readEnergyEvseMinimumChargeCurrentAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseMaximumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseMaximumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readMaximumChargeCurrentAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseMaximumChargeCurrentCommandParams
+        );
+        result.put("readMaximumChargeCurrentAttribute", readEnergyEvseMaximumChargeCurrentAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseMaximumdDischargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseMaximumdDischargeCurrentAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readMaximumdDischargeCurrentAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseMaximumdDischargeCurrentCommandParams
+        );
+        result.put("readMaximumdDischargeCurrentAttribute", readEnergyEvseMaximumdDischargeCurrentAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseUserMaximumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseUserMaximumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readUserMaximumChargeCurrentAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseUserMaximumChargeCurrentCommandParams
+        );
+        result.put("readUserMaximumChargeCurrentAttribute", readEnergyEvseUserMaximumChargeCurrentAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseRandomisationDelayWindowCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseRandomisationDelayWindowAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readRandomisationDelayWindowAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseRandomisationDelayWindowCommandParams
+        );
+        result.put("readRandomisationDelayWindowAttribute", readEnergyEvseRandomisationDelayWindowAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseStartOfWeekCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseStartOfWeekAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readStartOfWeekAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseStartOfWeekCommandParams
+        );
+        result.put("readStartOfWeekAttribute", readEnergyEvseStartOfWeekAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseNumberOfWeeklyTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseNumberOfWeeklyTargetsAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readNumberOfWeeklyTargetsAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseNumberOfWeeklyTargetsCommandParams
+        );
+        result.put("readNumberOfWeeklyTargetsAttribute", readEnergyEvseNumberOfWeeklyTargetsAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseNumberOfDailyTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseNumberOfDailyTargetsAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readNumberOfDailyTargetsAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseNumberOfDailyTargetsCommandParams
+        );
+        result.put("readNumberOfDailyTargetsAttribute", readEnergyEvseNumberOfDailyTargetsAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseNextChargeStartTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseNextChargeStartTimeAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readNextChargeStartTimeAttribute(
+              (ChipClusters.EnergyEvseCluster.NextChargeStartTimeAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterNextChargeStartTimeAttributeCallback(),
+          readEnergyEvseNextChargeStartTimeCommandParams
+        );
+        result.put("readNextChargeStartTimeAttribute", readEnergyEvseNextChargeStartTimeAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseNextChargeTargetTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseNextChargeTargetTimeAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readNextChargeTargetTimeAttribute(
+              (ChipClusters.EnergyEvseCluster.NextChargeTargetTimeAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterNextChargeTargetTimeAttributeCallback(),
+          readEnergyEvseNextChargeTargetTimeCommandParams
+        );
+        result.put("readNextChargeTargetTimeAttribute", readEnergyEvseNextChargeTargetTimeAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseNextChargeRequiredEnergyCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseNextChargeRequiredEnergyAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readNextChargeRequiredEnergyAttribute(
+              (ChipClusters.EnergyEvseCluster.NextChargeRequiredEnergyAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterNextChargeRequiredEnergyAttributeCallback(),
+          readEnergyEvseNextChargeRequiredEnergyCommandParams
+        );
+        result.put("readNextChargeRequiredEnergyAttribute", readEnergyEvseNextChargeRequiredEnergyAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseNextChargeTargetSocCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseNextChargeTargetSocAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readNextChargeTargetSocAttribute(
+              (ChipClusters.EnergyEvseCluster.NextChargeTargetSocAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterNextChargeTargetSocAttributeCallback(),
+          readEnergyEvseNextChargeTargetSocCommandParams
+        );
+        result.put("readNextChargeTargetSocAttribute", readEnergyEvseNextChargeTargetSocAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseApproxEvEfficiencyCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseApproxEvEfficiencyAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readApproxEvEfficiencyAttribute(
+              (ChipClusters.EnergyEvseCluster.ApproxEvEfficiencyAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterApproxEvEfficiencyAttributeCallback(),
+          readEnergyEvseApproxEvEfficiencyCommandParams
+        );
+        result.put("readApproxEvEfficiencyAttribute", readEnergyEvseApproxEvEfficiencyAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseStateOfChargeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseStateOfChargeAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readStateOfChargeAttribute(
+              (ChipClusters.EnergyEvseCluster.StateOfChargeAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterStateOfChargeAttributeCallback(),
+          readEnergyEvseStateOfChargeCommandParams
+        );
+        result.put("readStateOfChargeAttribute", readEnergyEvseStateOfChargeAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseBatteryCapacityCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseBatteryCapacityAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readBatteryCapacityAttribute(
+              (ChipClusters.EnergyEvseCluster.BatteryCapacityAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterBatteryCapacityAttributeCallback(),
+          readEnergyEvseBatteryCapacityCommandParams
+        );
+        result.put("readBatteryCapacityAttribute", readEnergyEvseBatteryCapacityAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseVehicleIdCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseVehicleIdAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readVehicleIdAttribute(
+              (ChipClusters.EnergyEvseCluster.VehicleIdAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterVehicleIdAttributeCallback(),
+          readEnergyEvseVehicleIdCommandParams
+        );
+        result.put("readVehicleIdAttribute", readEnergyEvseVehicleIdAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseSessionIdCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseSessionIdAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readSessionIdAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseSessionIdCommandParams
+        );
+        result.put("readSessionIdAttribute", readEnergyEvseSessionIdAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseEventSequenceNumberCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseEventSequenceNumberAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readEventSequenceNumberAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseEventSequenceNumberCommandParams
+        );
+        result.put("readEventSequenceNumberAttribute", readEnergyEvseEventSequenceNumberAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseSessionDurationCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseSessionDurationAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readSessionDurationAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseSessionDurationCommandParams
+        );
+        result.put("readSessionDurationAttribute", readEnergyEvseSessionDurationAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseSessionEnergyChargedCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseSessionEnergyChargedAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readSessionEnergyChargedAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseSessionEnergyChargedCommandParams
+        );
+        result.put("readSessionEnergyChargedAttribute", readEnergyEvseSessionEnergyChargedAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseSessionEnergyDischargedCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseSessionEnergyDischargedAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readSessionEnergyDischargedAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseSessionEnergyDischargedCommandParams
+        );
+        result.put("readSessionEnergyDischargedAttribute", readEnergyEvseSessionEnergyDischargedAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseGeneratedCommandListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseGeneratedCommandListAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readGeneratedCommandListAttribute(
+              (ChipClusters.EnergyEvseCluster.GeneratedCommandListAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterGeneratedCommandListAttributeCallback(),
+          readEnergyEvseGeneratedCommandListCommandParams
+        );
+        result.put("readGeneratedCommandListAttribute", readEnergyEvseGeneratedCommandListAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseAcceptedCommandListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseAcceptedCommandListAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readAcceptedCommandListAttribute(
+              (ChipClusters.EnergyEvseCluster.AcceptedCommandListAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterAcceptedCommandListAttributeCallback(),
+          readEnergyEvseAcceptedCommandListCommandParams
+        );
+        result.put("readAcceptedCommandListAttribute", readEnergyEvseAcceptedCommandListAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseEventListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseEventListAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readEventListAttribute(
+              (ChipClusters.EnergyEvseCluster.EventListAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterEventListAttributeCallback(),
+          readEnergyEvseEventListCommandParams
+        );
+        result.put("readEventListAttribute", readEnergyEvseEventListAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseAttributeListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseAttributeListAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readAttributeListAttribute(
+              (ChipClusters.EnergyEvseCluster.AttributeListAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedEnergyEvseClusterAttributeListAttributeCallback(),
+          readEnergyEvseAttributeListCommandParams
+        );
+        result.put("readAttributeListAttribute", readEnergyEvseAttributeListAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseFeatureMapCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseFeatureMapAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readFeatureMapAttribute(
+              (ChipClusters.LongAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
+          readEnergyEvseFeatureMapCommandParams
+        );
+        result.put("readFeatureMapAttribute", readEnergyEvseFeatureMapAttributeInteractionInfo);
+     Map<String, CommandParameterInfo> readEnergyEvseClusterRevisionCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+        InteractionInfo readEnergyEvseClusterRevisionAttributeInteractionInfo = new InteractionInfo(
+          (cluster, callback, commandArguments) -> {
+            ((ChipClusters.EnergyEvseCluster) cluster).readClusterRevisionAttribute(
+              (ChipClusters.IntegerAttributeCallback) callback
+            );
+          },
+          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
+          readEnergyEvseClusterRevisionCommandParams
+        );
+        result.put("readClusterRevisionAttribute", readEnergyEvseClusterRevisionAttributeInteractionInfo);
+     
+       return result;
+    }
     private static Map<String, InteractionInfo> readDoorLockInteractionInfo() {
        Map<String, InteractionInfo> result = new LinkedHashMap<>();Map<String, CommandParameterInfo> readDoorLockLockStateCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
         InteractionInfo readDoorLockLockStateAttributeInteractionInfo = new InteractionInfo(
@@ -14980,384 +15347,6 @@ public class ClusterReadMapping {
      
        return result;
     }
-    private static Map<String, InteractionInfo> readEvseManagementInteractionInfo() {
-       Map<String, InteractionInfo> result = new LinkedHashMap<>();Map<String, CommandParameterInfo> readEvseManagementEvseStateCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseStateAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseStateAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementEvseStateCommandParams
-        );
-        result.put("readEvseStateAttribute", readEvseManagementEvseStateAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementSupplyStateCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementSupplyStateAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readSupplyStateAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementSupplyStateCommandParams
-        );
-        result.put("readSupplyStateAttribute", readEvseManagementSupplyStateAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEvseFaultCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseFaultAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseFaultAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementEvseFaultCommandParams
-        );
-        result.put("readEvseFaultAttribute", readEvseManagementEvseFaultAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEnableChargeTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEnableChargeTimeAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEnableChargeTimeAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementEnableChargeTimeCommandParams
-        );
-        result.put("readEnableChargeTimeAttribute", readEvseManagementEnableChargeTimeAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEnableDischargeTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEnableDischargeTimeAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEnableDischargeTimeAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementEnableDischargeTimeCommandParams
-        );
-        result.put("readEnableDischargeTimeAttribute", readEvseManagementEnableDischargeTimeAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementCircuitCapacityCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementCircuitCapacityAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readCircuitCapacityAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementCircuitCapacityCommandParams
-        );
-        result.put("readCircuitCapacityAttribute", readEvseManagementCircuitCapacityAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementMinimumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementMinimumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readMinimumChargeCurrentAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementMinimumChargeCurrentCommandParams
-        );
-        result.put("readMinimumChargeCurrentAttribute", readEvseManagementMinimumChargeCurrentAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementMaximumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementMaximumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readMaximumChargeCurrentAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementMaximumChargeCurrentCommandParams
-        );
-        result.put("readMaximumChargeCurrentAttribute", readEvseManagementMaximumChargeCurrentAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementMaximumdDischargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementMaximumdDischargeCurrentAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readMaximumdDischargeCurrentAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementMaximumdDischargeCurrentCommandParams
-        );
-        result.put("readMaximumdDischargeCurrentAttribute", readEvseManagementMaximumdDischargeCurrentAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementUserMaximumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementUserMaximumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readUserMaximumChargeCurrentAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementUserMaximumChargeCurrentCommandParams
-        );
-        result.put("readUserMaximumChargeCurrentAttribute", readEvseManagementUserMaximumChargeCurrentAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementRandomisationDelayWindowCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementRandomisationDelayWindowAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readRandomisationDelayWindowAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementRandomisationDelayWindowCommandParams
-        );
-        result.put("readRandomisationDelayWindowAttribute", readEvseManagementRandomisationDelayWindowAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementStartOfWeekCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementStartOfWeekAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readStartOfWeekAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementStartOfWeekCommandParams
-        );
-        result.put("readStartOfWeekAttribute", readEvseManagementStartOfWeekAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementNumberOfWeeklyTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementNumberOfWeeklyTargetsAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readNumberOfWeeklyTargetsAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementNumberOfWeeklyTargetsCommandParams
-        );
-        result.put("readNumberOfWeeklyTargetsAttribute", readEvseManagementNumberOfWeeklyTargetsAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementNumberOfDailyTargetsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementNumberOfDailyTargetsAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readNumberOfDailyTargetsAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementNumberOfDailyTargetsCommandParams
-        );
-        result.put("readNumberOfDailyTargetsAttribute", readEvseManagementNumberOfDailyTargetsAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementNextChargeStartTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementNextChargeStartTimeAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readNextChargeStartTimeAttribute(
-              (ChipClusters.EvseManagementCluster.NextChargeStartTimeAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterNextChargeStartTimeAttributeCallback(),
-          readEvseManagementNextChargeStartTimeCommandParams
-        );
-        result.put("readNextChargeStartTimeAttribute", readEvseManagementNextChargeStartTimeAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementNextChargeTargetTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementNextChargeTargetTimeAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readNextChargeTargetTimeAttribute(
-              (ChipClusters.EvseManagementCluster.NextChargeTargetTimeAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterNextChargeTargetTimeAttributeCallback(),
-          readEvseManagementNextChargeTargetTimeCommandParams
-        );
-        result.put("readNextChargeTargetTimeAttribute", readEvseManagementNextChargeTargetTimeAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementNextChargeRequiredEnergyCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementNextChargeRequiredEnergyAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readNextChargeRequiredEnergyAttribute(
-              (ChipClusters.EvseManagementCluster.NextChargeRequiredEnergyAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterNextChargeRequiredEnergyAttributeCallback(),
-          readEvseManagementNextChargeRequiredEnergyCommandParams
-        );
-        result.put("readNextChargeRequiredEnergyAttribute", readEvseManagementNextChargeRequiredEnergyAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementNextChargeTargetSocCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementNextChargeTargetSocAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readNextChargeTargetSocAttribute(
-              (ChipClusters.EvseManagementCluster.NextChargeTargetSocAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterNextChargeTargetSocAttributeCallback(),
-          readEvseManagementNextChargeTargetSocCommandParams
-        );
-        result.put("readNextChargeTargetSocAttribute", readEvseManagementNextChargeTargetSocAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementApproxEvEfficiencyCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementApproxEvEfficiencyAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readApproxEvEfficiencyAttribute(
-              (ChipClusters.EvseManagementCluster.ApproxEvEfficiencyAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterApproxEvEfficiencyAttributeCallback(),
-          readEvseManagementApproxEvEfficiencyCommandParams
-        );
-        result.put("readApproxEvEfficiencyAttribute", readEvseManagementApproxEvEfficiencyAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementStateOfChargeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementStateOfChargeAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readStateOfChargeAttribute(
-              (ChipClusters.EvseManagementCluster.StateOfChargeAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterStateOfChargeAttributeCallback(),
-          readEvseManagementStateOfChargeCommandParams
-        );
-        result.put("readStateOfChargeAttribute", readEvseManagementStateOfChargeAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementBatteryCapacityCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementBatteryCapacityAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readBatteryCapacityAttribute(
-              (ChipClusters.EvseManagementCluster.BatteryCapacityAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterBatteryCapacityAttributeCallback(),
-          readEvseManagementBatteryCapacityCommandParams
-        );
-        result.put("readBatteryCapacityAttribute", readEvseManagementBatteryCapacityAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementVehicleIdCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementVehicleIdAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readVehicleIdAttribute(
-              (ChipClusters.EvseManagementCluster.VehicleIdAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterVehicleIdAttributeCallback(),
-          readEvseManagementVehicleIdCommandParams
-        );
-        result.put("readVehicleIdAttribute", readEvseManagementVehicleIdAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEvseSessionIdCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseSessionIdAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseSessionIdAttribute(
-              (ChipClusters.LongAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
-          readEvseManagementEvseSessionIdCommandParams
-        );
-        result.put("readEvseSessionIdAttribute", readEvseManagementEvseSessionIdAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEventSequenceNumberCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEventSequenceNumberAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEventSequenceNumberAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementEventSequenceNumberCommandParams
-        );
-        result.put("readEventSequenceNumberAttribute", readEvseManagementEventSequenceNumberAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEvseSessionDurationCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseSessionDurationAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseSessionDurationAttribute(
-              (ChipClusters.LongAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
-          readEvseManagementEvseSessionDurationCommandParams
-        );
-        result.put("readEvseSessionDurationAttribute", readEvseManagementEvseSessionDurationAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEvseSessionEnergyChargedCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseSessionEnergyChargedAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseSessionEnergyChargedAttribute(
-              (ChipClusters.LongAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
-          readEvseManagementEvseSessionEnergyChargedCommandParams
-        );
-        result.put("readEvseSessionEnergyChargedAttribute", readEvseManagementEvseSessionEnergyChargedAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEvseSessionEnergyDischargedCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseSessionEnergyDischargedAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseSessionEnergyDischargedAttribute(
-              (ChipClusters.LongAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
-          readEvseManagementEvseSessionEnergyDischargedCommandParams
-        );
-        result.put("readEvseSessionEnergyDischargedAttribute", readEvseManagementEvseSessionEnergyDischargedAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEvseSessionMaximumCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEvseSessionMaximumCurrentAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEvseSessionMaximumCurrentAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementEvseSessionMaximumCurrentCommandParams
-        );
-        result.put("readEvseSessionMaximumCurrentAttribute", readEvseManagementEvseSessionMaximumCurrentAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementGeneratedCommandListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementGeneratedCommandListAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readGeneratedCommandListAttribute(
-              (ChipClusters.EvseManagementCluster.GeneratedCommandListAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterGeneratedCommandListAttributeCallback(),
-          readEvseManagementGeneratedCommandListCommandParams
-        );
-        result.put("readGeneratedCommandListAttribute", readEvseManagementGeneratedCommandListAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementAcceptedCommandListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementAcceptedCommandListAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readAcceptedCommandListAttribute(
-              (ChipClusters.EvseManagementCluster.AcceptedCommandListAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterAcceptedCommandListAttributeCallback(),
-          readEvseManagementAcceptedCommandListCommandParams
-        );
-        result.put("readAcceptedCommandListAttribute", readEvseManagementAcceptedCommandListAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementEventListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementEventListAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readEventListAttribute(
-              (ChipClusters.EvseManagementCluster.EventListAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterEventListAttributeCallback(),
-          readEvseManagementEventListCommandParams
-        );
-        result.put("readEventListAttribute", readEvseManagementEventListAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementAttributeListCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementAttributeListAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readAttributeListAttribute(
-              (ChipClusters.EvseManagementCluster.AttributeListAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedEvseManagementClusterAttributeListAttributeCallback(),
-          readEvseManagementAttributeListCommandParams
-        );
-        result.put("readAttributeListAttribute", readEvseManagementAttributeListAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementFeatureMapCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementFeatureMapAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readFeatureMapAttribute(
-              (ChipClusters.LongAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedLongAttributeCallback(),
-          readEvseManagementFeatureMapCommandParams
-        );
-        result.put("readFeatureMapAttribute", readEvseManagementFeatureMapAttributeInteractionInfo);
-     Map<String, CommandParameterInfo> readEvseManagementClusterRevisionCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-        InteractionInfo readEvseManagementClusterRevisionAttributeInteractionInfo = new InteractionInfo(
-          (cluster, callback, commandArguments) -> {
-            ((ChipClusters.EvseManagementCluster) cluster).readClusterRevisionAttribute(
-              (ChipClusters.IntegerAttributeCallback) callback
-            );
-          },
-          () -> new ClusterInfoMapping.DelegatedIntegerAttributeCallback(),
-          readEvseManagementClusterRevisionCommandParams
-        );
-        result.put("readClusterRevisionAttribute", readEvseManagementClusterRevisionAttributeInteractionInfo);
-     
-       return result;
-    }
     private static Map<String, InteractionInfo> readElectricalMeasurementInteractionInfo() {
        Map<String, InteractionInfo> result = new LinkedHashMap<>();Map<String, CommandParameterInfo> readElectricalMeasurementMeasurementTypeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
         InteractionInfo readElectricalMeasurementMeasurementTypeAttributeInteractionInfo = new InteractionInfo(
@@ -18501,6 +18490,7 @@ public class ClusterReadMapping {
             put("rvcOperationalState", readRvcOperationalStateInteractionInfo());
             put("hepaFilterMonitoring", readHepaFilterMonitoringInteractionInfo());
             put("activatedCarbonFilterMonitoring", readActivatedCarbonFilterMonitoringInteractionInfo());
+            put("energyEvse", readEnergyEvseInteractionInfo());
             put("doorLock", readDoorLockInteractionInfo());
             put("windowCovering", readWindowCoveringInteractionInfo());
             put("barrierControl", readBarrierControlInteractionInfo());
@@ -18539,7 +18529,6 @@ public class ClusterReadMapping {
             put("applicationBasic", readApplicationBasicInteractionInfo());
             put("accountLogin", readAccountLoginInteractionInfo());
             put("energyManagement", readEnergyManagementInteractionInfo());
-            put("evseManagement", readEvseManagementInteractionInfo());
             put("electricalMeasurement", readElectricalMeasurementInteractionInfo());
             put("waterHeater", readWaterHeaterInteractionInfo());
             put("electricalPowerMeasurement", readElectricalPowerMeasurementInteractionInfo());

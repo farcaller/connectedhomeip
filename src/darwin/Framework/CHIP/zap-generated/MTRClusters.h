@@ -3887,6 +3887,147 @@ MTR_PROVISIONALLY_AVAILABLE
 @end
 
 /**
+ * Cluster Energy EVSE
+ *    This cluster provides an interface for the management of Electric Vehicle Supply Equipment (EVSE).
+ */
+MTR_NEWLY_AVAILABLE
+@interface MTRClusterEnergyEVSE : MTRCluster
+
+- (instancetype _Nullable)initWithDevice:(MTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER MTR_NEWLY_AVAILABLE;
+
+- (void)disableWithParams:(MTREnergyEVSEClusterDisableParams * _Nullable)params
+           expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+    expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+               completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)disableWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+            expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                       completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)enableChargingWithParams:(MTREnergyEVSEClusterEnableChargingParams *)params
+                  expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+           expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                      completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)enableDischargingWithParams:(MTREnergyEVSEClusterEnableDischargingParams *)params
+                     expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+              expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                         completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)startDiagnosticsWithParams:(MTREnergyEVSEClusterStartDiagnosticsParams * _Nullable)params
+                    expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+             expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                        completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)startDiagnosticsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                     expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)setTargetsWithParams:(MTREnergyEVSEClusterSetTargetsParams *)params
+              expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+       expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                  completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)getTargetsWithParams:(MTREnergyEVSEClusterGetTargetsParams *)params
+              expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+       expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                  completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)clearTargetsWithParams:(MTREnergyEVSEClusterClearTargetsParams * _Nullable)params
+                expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
+         expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
+                    completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+- (void)clearTargetsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
+                 expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                            completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeSupplyStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeFaultWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEnableChargeTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEnableDischargeTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeCircuitCapacityWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeMinimumChargeCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeMaximumChargeCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeMaximumdDischargeCurrentWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeUserMaximumChargeCurrentWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
+                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
+- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
+                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                                 params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeRandomisationDelayWindowWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+- (void)writeAttributeRandomisationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
+                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
+- (void)writeAttributeRandomisationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
+                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                                 params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeStartOfWeekWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNumberOfWeeklyTargetsWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNumberOfDailyTargetsWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNextChargeStartTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNextChargeTargetTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNextChargeRequiredEnergyWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeNextChargeTargetSocWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeApproxEvEfficiencyWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+- (void)writeAttributeApproxEvEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
+                            expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
+- (void)writeAttributeApproxEvEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
+                            expectedValueInterval:(NSNumber *)expectedValueIntervalMs
+                                           params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeStateOfChargeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeBatteryCapacityWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeVehicleIdWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeSessionIdWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEventSequenceNumberWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeSessionDurationWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeSessionEnergyChargedWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeSessionEnergyDischargedWithParams:(MTRReadParams * _Nullable)params
+    MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+/**
  * Cluster Door Lock
  *    An interface to a generic way to secure a door
  */
@@ -7547,161 +7688,6 @@ MTR_NEWLY_AVAILABLE
     MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributePowerForecastWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeAcceptedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEventListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeAttributeListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeFeatureMapWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeClusterRevisionWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
-
-@end
-
-/**
- * Cluster EVSE Management
- *    This cluster provides an interface for the management of Electric Vehicle Supply Equipment (EVSE).
- */
-MTR_NEWLY_AVAILABLE
-@interface MTRClusterEVSEManagement : MTRCluster
-
-- (instancetype _Nullable)initWithDevice:(MTRDevice *)device
-                              endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER MTR_NEWLY_AVAILABLE;
-
-- (void)disableEvseWithParams:(MTREVSEManagementClusterDisableEvseParams * _Nullable)params
-               expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-        expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                   completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)disableEvseWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
-                expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                           completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)enableEvseChargingWithParams:(MTREVSEManagementClusterEnableEvseChargingParams *)params
-                      expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-               expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                          completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)enableEvseDischargingWithParams:(MTREVSEManagementClusterEnableEvseDischargingParams *)params
-                         expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-                  expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                             completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)startDiagnosticsWithParams:(MTREVSEManagementClusterStartDiagnosticsParams * _Nullable)params
-                    expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-             expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                        completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)startDiagnosticsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
-                     expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                                completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)setTargetsWithParams:(MTREVSEManagementClusterSetTargetsParams *)params
-              expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-       expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                  completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)getTargetsWithParams:(MTREVSEManagementClusterGetTargetsParams *)params
-              expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-       expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                  completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)clearTargetsWithParams:(MTREVSEManagementClusterClearTargetsParams * _Nullable)params
-                expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries
-         expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs
-                    completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)clearTargetsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> *)expectedValues
-                 expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                            completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeSupplyStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseFaultWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEnableChargeTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeEnableChargeTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                          expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeEnableChargeTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                          expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                                         params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEnableDischargeTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeEnableDischargeTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                             expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeEnableDischargeTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                             expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                                            params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeCircuitCapacityWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeMinimumChargeCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeMaximumChargeCurrentWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeMaximumdDischargeCurrentWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeUserMaximumChargeCurrentWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                                                 params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeRandomisationDelayWindowWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeRandomisationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeRandomisationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                                  expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                                                 params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeStartOfWeekWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeNumberOfWeeklyTargetsWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeNumberOfDailyTargetsWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeNextChargeStartTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeNextChargeTargetTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeNextChargeRequiredEnergyWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeNextChargeTargetSocWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeApproxEvEfficiencyWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeApproxEvEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                            expectedValueInterval:(NSNumber *)expectedValueIntervalMs MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeApproxEvEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
-                            expectedValueInterval:(NSNumber *)expectedValueIntervalMs
-                                           params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeStateOfChargeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeBatteryCapacityWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeVehicleIdWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseSessionIdWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEventSequenceNumberWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseSessionDurationWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseSessionEnergyChargedWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseSessionEnergyDischargedWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeEvseSessionMaximumCurrentWithParams:(MTRReadParams * _Nullable)params
-    MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributeGeneratedCommandListWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 

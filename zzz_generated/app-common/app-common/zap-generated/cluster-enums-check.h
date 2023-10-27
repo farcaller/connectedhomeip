@@ -1595,6 +1595,96 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(ActivatedCarbonFilterMo
     }
 }
 
+static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::EnergyTransferStoppedReasonEnum val)
+{
+    using EnumType = EnergyEvse::EnergyTransferStoppedReasonEnum;
+    switch (val)
+    {
+    case EnumType::kEvStopped:
+    case EnumType::kEvseStopped:
+    case EnumType::kOther:
+        return val;
+    default:
+        return static_cast<EnumType>(2);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::EvseStateEnum val)
+{
+    using EnumType = EnergyEvse::EvseStateEnum;
+    switch (val)
+    {
+    case EnumType::kNotPluggedIn:
+    case EnumType::kPluggedInNoDemand:
+    case EnumType::kPluggedInDemand:
+    case EnumType::kPluggedInCharging:
+    case EnumType::kPluggedInDischarging:
+    case EnumType::kSessionEnding:
+    case EnumType::kFault:
+        return val;
+    default:
+        return static_cast<EnumType>(7);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::FaultStateEnum val)
+{
+    using EnumType = EnergyEvse::FaultStateEnum;
+    switch (val)
+    {
+    case EnumType::kNoError:
+    case EnumType::kEvseMeterFailure:
+    case EnumType::kOverVoltage:
+    case EnumType::kUnderVoltage:
+    case EnumType::kOverCurrent:
+    case EnumType::kContactWetFailure:
+    case EnumType::kContactDryFailure:
+    case EnumType::kGroundFault:
+    case EnumType::kPowerLoss:
+    case EnumType::kPowerQuality:
+    case EnumType::kPilotShortCircuit:
+    case EnumType::kEmergencyStop:
+    case EnumType::kEvDisconnected:
+    case EnumType::kWrongPowerSupply:
+    case EnumType::kLiveNeutralSwap:
+    case EnumType::kOverTemperature:
+    case EnumType::kOther:
+        return val;
+    default:
+        return static_cast<EnumType>(16);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::StartOfWeekEnum val)
+{
+    using EnumType = EnergyEvse::StartOfWeekEnum;
+    switch (val)
+    {
+    case EnumType::kSunday:
+    case EnumType::kMonday:
+    case EnumType::kTuesday:
+    case EnumType::kWednesday:
+    case EnumType::kThursday:
+    case EnumType::kFriday:
+    case EnumType::kSaturday:
+        return val;
+    default:
+        return static_cast<EnumType>(7);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::SupplyStateEnum val)
+{
+    using EnumType = EnergyEvse::SupplyStateEnum;
+    switch (val)
+    {
+    case EnumType::kDisabled:
+    case EnumType::kChargingEnabled:
+    case EnumType::kDischargingEnabled:
+    case EnumType::kDisabledError:
+    case EnumType::kDisabledDiagnostics:
+        return val;
+    default:
+        return static_cast<EnumType>(5);
+    }
+}
+
 static auto __attribute__((unused)) EnsureKnownEnumValue(DoorLock::AlarmCodeEnum val)
 {
     using EnumType = DoorLock::AlarmCodeEnum;
@@ -3112,95 +3202,6 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyManagement::EsaTy
         return val;
     default:
         return static_cast<EnumType>(11);
-    }
-}
-
-static auto __attribute__((unused)) EnsureKnownEnumValue(EvseManagement::EvseFaultEnum val)
-{
-    using EnumType = EvseManagement::EvseFaultEnum;
-    switch (val)
-    {
-    case EnumType::kNoError:
-    case EnumType::kEvseMeterFailure:
-    case EnumType::kOverVoltage:
-    case EnumType::kUnderVoltage:
-    case EnumType::kOverCurrent:
-    case EnumType::kContactWetFailure:
-    case EnumType::kContactDryFailure:
-    case EnumType::kGroundFault:
-    case EnumType::kPowerLoss:
-    case EnumType::kPowerQuality:
-    case EnumType::kPilotShortCircuit:
-    case EnumType::kEmergencyStop:
-    case EnumType::kEvDisconnected:
-    case EnumType::kWrongPowerSupply:
-    case EnumType::kLiveNeutralSwap:
-    case EnumType::kOverTemperature:
-    case EnumType::kOther:
-        return val;
-    default:
-        return static_cast<EnumType>(16);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EvseManagement::EvseStateEnum val)
-{
-    using EnumType = EvseManagement::EvseStateEnum;
-    switch (val)
-    {
-    case EnumType::kNotPluggedIn:
-    case EnumType::kPluggedInIdle:
-    case EnumType::kPluggedInCharging:
-    case EnumType::kPluggedInDischarging:
-    case EnumType::kSessionEnding:
-    case EnumType::kFault:
-        return val;
-    default:
-        return static_cast<EnumType>(5);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EvseManagement::ReasonEnum val)
-{
-    using EnumType = EvseManagement::ReasonEnum;
-    switch (val)
-    {
-    case EnumType::kEvStopped:
-    case EnumType::kEvseStopped:
-    case EnumType::kOther:
-        return val;
-    default:
-        return static_cast<EnumType>(2);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EvseManagement::StartOfWeekEnum val)
-{
-    using EnumType = EvseManagement::StartOfWeekEnum;
-    switch (val)
-    {
-    case EnumType::kSunday:
-    case EnumType::kMonday:
-    case EnumType::kTuesday:
-    case EnumType::kWednesday:
-    case EnumType::kThursday:
-    case EnumType::kFriday:
-    case EnumType::kSaturday:
-        return val;
-    default:
-        return static_cast<EnumType>(7);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EvseManagement::SupplyStateEnum val)
-{
-    using EnumType = EvseManagement::SupplyStateEnum;
-    switch (val)
-    {
-    case EnumType::kDisabled:
-    case EnumType::kChargingEnabled:
-    case EnumType::kDischargingEnabled:
-    case EnumType::kDisabledError:
-    case EnumType::kDisabledDiagnostics:
-        return val;
-    default:
-        return static_cast<EnumType>(5);
     }
 }
 

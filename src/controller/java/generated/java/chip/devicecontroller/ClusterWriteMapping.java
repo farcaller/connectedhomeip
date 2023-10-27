@@ -1130,6 +1130,74 @@ public class ClusterWriteMapping {
     );
     writeActivatedCarbonFilterMonitoringInteractionInfo.put("writeLastChangedTimeAttribute", writeActivatedCarbonFilterMonitoringLastChangedTimeAttributeInteractionInfo);
     writeAttributeMap.put("activatedCarbonFilterMonitoring", writeActivatedCarbonFilterMonitoringInteractionInfo);
+    Map<String, InteractionInfo> writeEnergyEvseInteractionInfo = new LinkedHashMap<>();
+    Map<String, CommandParameterInfo> writeEnergyEvseUserMaximumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+    CommandParameterInfo energyEvseuserMaximumChargeCurrentCommandParameterInfo =
+        new CommandParameterInfo(
+            "value", 
+            Long.class, 
+            Long.class 
+        );
+    writeEnergyEvseUserMaximumChargeCurrentCommandParams.put(
+        "value",
+        energyEvseuserMaximumChargeCurrentCommandParameterInfo
+    );
+    InteractionInfo writeEnergyEvseUserMaximumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
+      (cluster, callback, commandArguments) -> {
+        ((ChipClusters.EnergyEvseCluster) cluster).writeUserMaximumChargeCurrentAttribute(
+          (DefaultClusterCallback) callback,
+          (Long) commandArguments.get("value")
+        );
+      },
+      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
+      writeEnergyEvseUserMaximumChargeCurrentCommandParams
+    );
+    writeEnergyEvseInteractionInfo.put("writeUserMaximumChargeCurrentAttribute", writeEnergyEvseUserMaximumChargeCurrentAttributeInteractionInfo);
+    Map<String, CommandParameterInfo> writeEnergyEvseRandomisationDelayWindowCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+    CommandParameterInfo energyEvserandomisationDelayWindowCommandParameterInfo =
+        new CommandParameterInfo(
+            "value", 
+            Long.class, 
+            Long.class 
+        );
+    writeEnergyEvseRandomisationDelayWindowCommandParams.put(
+        "value",
+        energyEvserandomisationDelayWindowCommandParameterInfo
+    );
+    InteractionInfo writeEnergyEvseRandomisationDelayWindowAttributeInteractionInfo = new InteractionInfo(
+      (cluster, callback, commandArguments) -> {
+        ((ChipClusters.EnergyEvseCluster) cluster).writeRandomisationDelayWindowAttribute(
+          (DefaultClusterCallback) callback,
+          (Long) commandArguments.get("value")
+        );
+      },
+      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
+      writeEnergyEvseRandomisationDelayWindowCommandParams
+    );
+    writeEnergyEvseInteractionInfo.put("writeRandomisationDelayWindowAttribute", writeEnergyEvseRandomisationDelayWindowAttributeInteractionInfo);
+    Map<String, CommandParameterInfo> writeEnergyEvseApproxEvEfficiencyCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+    CommandParameterInfo energyEvseapproxEvEfficiencyCommandParameterInfo =
+        new CommandParameterInfo(
+            "value", 
+            Integer.class, 
+            Integer.class 
+        );
+    writeEnergyEvseApproxEvEfficiencyCommandParams.put(
+        "value",
+        energyEvseapproxEvEfficiencyCommandParameterInfo
+    );
+    InteractionInfo writeEnergyEvseApproxEvEfficiencyAttributeInteractionInfo = new InteractionInfo(
+      (cluster, callback, commandArguments) -> {
+        ((ChipClusters.EnergyEvseCluster) cluster).writeApproxEvEfficiencyAttribute(
+          (DefaultClusterCallback) callback,
+          (Integer) commandArguments.get("value")
+        );
+      },
+      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
+      writeEnergyEvseApproxEvEfficiencyCommandParams
+    );
+    writeEnergyEvseInteractionInfo.put("writeApproxEvEfficiencyAttribute", writeEnergyEvseApproxEvEfficiencyAttributeInteractionInfo);
+    writeAttributeMap.put("energyEvse", writeEnergyEvseInteractionInfo);
     Map<String, InteractionInfo> writeDoorLockInteractionInfo = new LinkedHashMap<>();
     Map<String, CommandParameterInfo> writeDoorLockDoorOpenEventsCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
     CommandParameterInfo doorLockdoorOpenEventsCommandParameterInfo =
@@ -3384,118 +3452,6 @@ public class ClusterWriteMapping {
     writeAttributeMap.put("accountLogin", writeAccountLoginInteractionInfo);
     Map<String, InteractionInfo> writeEnergyManagementInteractionInfo = new LinkedHashMap<>();
     writeAttributeMap.put("energyManagement", writeEnergyManagementInteractionInfo);
-    Map<String, InteractionInfo> writeEvseManagementInteractionInfo = new LinkedHashMap<>();
-    Map<String, CommandParameterInfo> writeEvseManagementEnableChargeTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-    CommandParameterInfo evseManagementenableChargeTimeCommandParameterInfo =
-        new CommandParameterInfo(
-            "value", 
-            Integer.class, 
-            Integer.class 
-        );
-    writeEvseManagementEnableChargeTimeCommandParams.put(
-        "value",
-        evseManagementenableChargeTimeCommandParameterInfo
-    );
-    InteractionInfo writeEvseManagementEnableChargeTimeAttributeInteractionInfo = new InteractionInfo(
-      (cluster, callback, commandArguments) -> {
-        ((ChipClusters.EvseManagementCluster) cluster).writeEnableChargeTimeAttribute(
-          (DefaultClusterCallback) callback,
-          (Integer) commandArguments.get("value")
-        );
-      },
-      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
-      writeEvseManagementEnableChargeTimeCommandParams
-    );
-    writeEvseManagementInteractionInfo.put("writeEnableChargeTimeAttribute", writeEvseManagementEnableChargeTimeAttributeInteractionInfo);
-    Map<String, CommandParameterInfo> writeEvseManagementEnableDischargeTimeCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-    CommandParameterInfo evseManagementenableDischargeTimeCommandParameterInfo =
-        new CommandParameterInfo(
-            "value", 
-            Integer.class, 
-            Integer.class 
-        );
-    writeEvseManagementEnableDischargeTimeCommandParams.put(
-        "value",
-        evseManagementenableDischargeTimeCommandParameterInfo
-    );
-    InteractionInfo writeEvseManagementEnableDischargeTimeAttributeInteractionInfo = new InteractionInfo(
-      (cluster, callback, commandArguments) -> {
-        ((ChipClusters.EvseManagementCluster) cluster).writeEnableDischargeTimeAttribute(
-          (DefaultClusterCallback) callback,
-          (Integer) commandArguments.get("value")
-        );
-      },
-      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
-      writeEvseManagementEnableDischargeTimeCommandParams
-    );
-    writeEvseManagementInteractionInfo.put("writeEnableDischargeTimeAttribute", writeEvseManagementEnableDischargeTimeAttributeInteractionInfo);
-    Map<String, CommandParameterInfo> writeEvseManagementUserMaximumChargeCurrentCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-    CommandParameterInfo evseManagementuserMaximumChargeCurrentCommandParameterInfo =
-        new CommandParameterInfo(
-            "value", 
-            Integer.class, 
-            Integer.class 
-        );
-    writeEvseManagementUserMaximumChargeCurrentCommandParams.put(
-        "value",
-        evseManagementuserMaximumChargeCurrentCommandParameterInfo
-    );
-    InteractionInfo writeEvseManagementUserMaximumChargeCurrentAttributeInteractionInfo = new InteractionInfo(
-      (cluster, callback, commandArguments) -> {
-        ((ChipClusters.EvseManagementCluster) cluster).writeUserMaximumChargeCurrentAttribute(
-          (DefaultClusterCallback) callback,
-          (Integer) commandArguments.get("value")
-        );
-      },
-      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
-      writeEvseManagementUserMaximumChargeCurrentCommandParams
-    );
-    writeEvseManagementInteractionInfo.put("writeUserMaximumChargeCurrentAttribute", writeEvseManagementUserMaximumChargeCurrentAttributeInteractionInfo);
-    Map<String, CommandParameterInfo> writeEvseManagementRandomisationDelayWindowCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-    CommandParameterInfo evseManagementrandomisationDelayWindowCommandParameterInfo =
-        new CommandParameterInfo(
-            "value", 
-            Integer.class, 
-            Integer.class 
-        );
-    writeEvseManagementRandomisationDelayWindowCommandParams.put(
-        "value",
-        evseManagementrandomisationDelayWindowCommandParameterInfo
-    );
-    InteractionInfo writeEvseManagementRandomisationDelayWindowAttributeInteractionInfo = new InteractionInfo(
-      (cluster, callback, commandArguments) -> {
-        ((ChipClusters.EvseManagementCluster) cluster).writeRandomisationDelayWindowAttribute(
-          (DefaultClusterCallback) callback,
-          (Integer) commandArguments.get("value")
-        );
-      },
-      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
-      writeEvseManagementRandomisationDelayWindowCommandParams
-    );
-    writeEvseManagementInteractionInfo.put("writeRandomisationDelayWindowAttribute", writeEvseManagementRandomisationDelayWindowAttributeInteractionInfo);
-    Map<String, CommandParameterInfo> writeEvseManagementApproxEvEfficiencyCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-    CommandParameterInfo evseManagementapproxEvEfficiencyCommandParameterInfo =
-        new CommandParameterInfo(
-            "value", 
-            Integer.class, 
-            Integer.class 
-        );
-    writeEvseManagementApproxEvEfficiencyCommandParams.put(
-        "value",
-        evseManagementapproxEvEfficiencyCommandParameterInfo
-    );
-    InteractionInfo writeEvseManagementApproxEvEfficiencyAttributeInteractionInfo = new InteractionInfo(
-      (cluster, callback, commandArguments) -> {
-        ((ChipClusters.EvseManagementCluster) cluster).writeApproxEvEfficiencyAttribute(
-          (DefaultClusterCallback) callback,
-          (Integer) commandArguments.get("value")
-        );
-      },
-      () -> new ClusterInfoMapping.DelegatedDefaultClusterCallback(),
-      writeEvseManagementApproxEvEfficiencyCommandParams
-    );
-    writeEvseManagementInteractionInfo.put("writeApproxEvEfficiencyAttribute", writeEvseManagementApproxEvEfficiencyAttributeInteractionInfo);
-    writeAttributeMap.put("evseManagement", writeEvseManagementInteractionInfo);
     Map<String, InteractionInfo> writeElectricalMeasurementInteractionInfo = new LinkedHashMap<>();
     Map<String, CommandParameterInfo> writeElectricalMeasurementAverageRmsVoltageMeasurementPeriodCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
     CommandParameterInfo electricalMeasurementaverageRmsVoltageMeasurementPeriodCommandParameterInfo =

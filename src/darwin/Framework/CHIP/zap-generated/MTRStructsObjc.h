@@ -1226,6 +1226,55 @@ MTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy) NSString * _Nonnull productIdentifierValue MTR_PROVISIONALLY_AVAILABLE;
 @end
 
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterChargingTargetStruct : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull targetTime MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable targetSoC MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable addedEnergy MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterEVConnectedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull sessionId MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterEVNotDetectedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull sessionId MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull state MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull sessionDuration MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull sessionEnergyCharged MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull sessionEnergyDischarged MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterEnergyTransferStartedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull sessionId MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull state MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull maximumCurrent MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterEnergyTransferStoppedEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull sessionId MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull state MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull reason MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull energyTransferred MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterFaultEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSNumber * _Nonnull sessionId MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull state MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull faultStatePreviousState MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull faultStateCurrentState MTR_NEWLY_AVAILABLE;
+@end
+
+MTR_NEWLY_AVAILABLE
+@interface MTREnergyEVSEClusterRFIDEvent : NSObject <NSCopying>
+@property (nonatomic, copy) NSData * _Nullable uid MTR_NEWLY_AVAILABLE;
+@end
+
 API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @interface MTRDoorLockClusterCredentialStruct : NSObject <NSCopying>
 @property (nonatomic, copy) NSNumber * _Nonnull credentialType API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -1721,56 +1770,6 @@ MTR_NEWLY_AVAILABLE
 
 MTR_NEWLY_AVAILABLE
 @interface MTREnergyManagementClusterResumedEvent : NSObject <NSCopying>
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterChargingTargetStruct : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull targetTime MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable targetSoC MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nullable addedEnergy MTR_NEWLY_AVAILABLE;
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterEvConnectedEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionId MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseState MTR_NEWLY_AVAILABLE;
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterEvNotDetectedEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionId MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseState MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionDuration MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionEnergyCharged MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionEnergyDischarged MTR_NEWLY_AVAILABLE;
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterEnergyTransferStartedEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionId MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseState MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionDuration MTR_NEWLY_AVAILABLE;
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterEnergyTransferStoppedEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionId MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseState MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull reason MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull energyTransferred MTR_NEWLY_AVAILABLE;
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterFaultEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSNumber * _Nonnull evseSessionId MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseState MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseFaultPreviousState MTR_NEWLY_AVAILABLE;
-@property (nonatomic, copy) NSNumber * _Nonnull evseFaultCurrentState MTR_NEWLY_AVAILABLE;
-@end
-
-MTR_NEWLY_AVAILABLE
-@interface MTREVSEManagementClusterRfidEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSData * _Nullable uid MTR_NEWLY_AVAILABLE;
 @end
 
 MTR_NEWLY_AVAILABLE

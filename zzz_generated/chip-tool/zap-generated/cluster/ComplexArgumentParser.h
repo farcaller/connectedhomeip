@@ -271,6 +271,11 @@ static CHIP_ERROR Setup(const char * label,
 
 static void Finalize(chip::app::Clusters::ActivatedCarbonFilterMonitoring::Structs::ReplacementProductStruct::Type & request);
 
+static CHIP_ERROR Setup(const char * label, chip::app::Clusters::EnergyEvse::Structs::ChargingTargetStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::EnergyEvse::Structs::ChargingTargetStruct::Type & request);
+
 static CHIP_ERROR Setup(const char * label, chip::app::Clusters::DoorLock::Structs::CredentialStruct::Type & request,
                         Json::Value & value);
 
@@ -376,11 +381,6 @@ static CHIP_ERROR Setup(const char * label, chip::app::Clusters::EnergyManagemen
                         Json::Value & value);
 
 static void Finalize(chip::app::Clusters::EnergyManagement::Structs::SlotAdjustmentStruct::Type & request);
-
-static CHIP_ERROR Setup(const char * label, chip::app::Clusters::EvseManagement::Structs::ChargingTargetStruct::Type & request,
-                        Json::Value & value);
-
-static void Finalize(chip::app::Clusters::EvseManagement::Structs::ChargingTargetStruct::Type & request);
 
 static CHIP_ERROR Setup(const char * label,
                         chip::app::Clusters::ElectricalPowerMeasurement::Structs::HarmonicMeasurementStruct::Type & request,

@@ -365,6 +365,36 @@ static constexpr EventId Id = 0x00000001;
 } // namespace Events
 } // namespace RvcOperationalState
 
+namespace EnergyEvse {
+namespace Events {
+
+namespace EVConnected {
+static constexpr EventId Id = 0x00000000;
+} // namespace EVConnected
+
+namespace EVNotDetected {
+static constexpr EventId Id = 0x00000001;
+} // namespace EVNotDetected
+
+namespace EnergyTransferStarted {
+static constexpr EventId Id = 0x00000002;
+} // namespace EnergyTransferStarted
+
+namespace EnergyTransferStopped {
+static constexpr EventId Id = 0x00000003;
+} // namespace EnergyTransferStopped
+
+namespace Fault {
+static constexpr EventId Id = 0x00000004;
+} // namespace Fault
+
+namespace Rfid {
+static constexpr EventId Id = 0x00000005;
+} // namespace Rfid
+
+} // namespace Events
+} // namespace EnergyEvse
+
 namespace DoorLock {
 namespace Events {
 
@@ -486,36 +516,6 @@ static constexpr EventId Id = 0x00000003;
 
 } // namespace Events
 } // namespace EnergyManagement
-
-namespace EvseManagement {
-namespace Events {
-
-namespace EvConnected {
-static constexpr EventId Id = 0x00000000;
-} // namespace EvConnected
-
-namespace EvNotDetected {
-static constexpr EventId Id = 0x00000001;
-} // namespace EvNotDetected
-
-namespace EnergyTransferStarted {
-static constexpr EventId Id = 0x00000002;
-} // namespace EnergyTransferStarted
-
-namespace EnergyTransferStopped {
-static constexpr EventId Id = 0x00000003;
-} // namespace EnergyTransferStopped
-
-namespace Fault {
-static constexpr EventId Id = 0x00000004;
-} // namespace Fault
-
-namespace Rfid {
-static constexpr EventId Id = 0x00000005;
-} // namespace Rfid
-
-} // namespace Events
-} // namespace EvseManagement
 
 namespace ElectricalPowerMeasurement {
 namespace Events {
