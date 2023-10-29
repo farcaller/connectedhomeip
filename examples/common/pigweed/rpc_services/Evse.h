@@ -116,7 +116,7 @@ public:
         uint32_t value = request.state;
         fault          = (EnergyEvse::FaultStateEnum) value;
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::Fault::Set(kEndpoint, fault));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::FaultState::Set(kEndpoint, fault));
 
         return pw::OkStatus();
     }
