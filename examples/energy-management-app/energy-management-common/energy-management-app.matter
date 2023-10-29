@@ -2173,7 +2173,7 @@ server cluster EnergyEvse = 153 {
   enum EnergyTransferStoppedReasonEnum : ENUM8 {
     kEvStopped = 0;
     kEvseStopped = 1;
-    kOther = 3;
+    kOther = 2;
   }
 
   enum EvseStateEnum : ENUM8 {

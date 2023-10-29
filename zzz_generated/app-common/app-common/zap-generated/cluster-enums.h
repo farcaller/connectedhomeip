@@ -1996,12 +1996,12 @@ enum class EnergyTransferStoppedReasonEnum : uint8_t
 {
     kEvStopped   = 0x00,
     kEvseStopped = 0x01,
-    kOther       = 0x03,
+    kOther       = 0x02,
     // All received enum values that are not listed above will be mapped
     // to kUnknownEnumValue. This is a helper enum value that should only
     // be used by code to process how it handles receiving and unknown
     // enum value. This specific should never be transmitted.
-    kUnknownEnumValue = 2,
+    kUnknownEnumValue = 3,
 };
 
 // Enum for EvseStateEnum

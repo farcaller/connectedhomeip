@@ -1605,7 +1605,7 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::EnergyTrans
     case EnumType::kOther:
         return val;
     default:
-        return static_cast<EnumType>(2);
+        return static_cast<EnumType>(3);
     }
 }
 static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::EvseStateEnum val)
