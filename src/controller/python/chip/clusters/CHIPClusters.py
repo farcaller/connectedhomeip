@@ -5686,7 +5686,7 @@ class ChipClusters:
                 "reportable": True,
             },
             0x00000002: {
-                "attributeName": "Fault",
+                "attributeName": "FaultState",
                 "attributeId": 0x00000002,
                 "type": "int",
                 "reportable": True,
@@ -5740,12 +5740,6 @@ class ChipClusters:
                 "type": "int",
                 "reportable": True,
                 "writable": True,
-            },
-            0x00000020: {
-                "attributeName": "StartOfWeek",
-                "attributeId": 0x00000020,
-                "type": "int",
-                "reportable": True,
             },
             0x00000021: {
                 "attributeName": "NumberOfWeeklyTargets",

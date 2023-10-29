@@ -13934,11 +13934,11 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
                                              params:params];
 }
 
-- (NSDictionary<NSString *, id> *)readAttributeFaultWithParams:(MTRReadParams * _Nullable)params
+- (NSDictionary<NSString *, id> *)readAttributeFaultStateWithParams:(MTRReadParams * _Nullable)params
 {
     return [self.device readAttributeWithEndpointID:@(self.endpoint)
                                           clusterID:@(MTRClusterIDTypeEnergyEVSEID)
-                                        attributeID:@(MTRAttributeIDTypeClusterEnergyEVSEAttributeFaultID)
+                                        attributeID:@(MTRAttributeIDTypeClusterEnergyEVSEAttributeFaultStateID)
                                              params:params];
 }
 
@@ -14046,14 +14046,6 @@ static void MTRClustersLogCompletion(NSString * logPrefix, id value, NSError * e
                                         value:dataValueDictionary
                         expectedValueInterval:expectedValueIntervalMs
                             timedWriteTimeout:timedWriteTimeout];
-}
-
-- (NSDictionary<NSString *, id> *)readAttributeStartOfWeekWithParams:(MTRReadParams * _Nullable)params
-{
-    return [self.device readAttributeWithEndpointID:@(self.endpoint)
-                                          clusterID:@(MTRClusterIDTypeEnergyEVSEID)
-                                        attributeID:@(MTRAttributeIDTypeClusterEnergyEVSEAttributeStartOfWeekID)
-                                             params:params];
 }
 
 - (NSDictionary<NSString *, id> *)readAttributeNumberOfWeeklyTargetsWithParams:(MTRReadParams * _Nullable)params

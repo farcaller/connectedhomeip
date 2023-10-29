@@ -7986,7 +7986,7 @@ public class ClusterIDMapping {
         public enum Attribute {
             State(0L),
             SupplyState(1L),
-            Fault(2L),
+            FaultState(2L),
             EnableChargeTime(3L),
             EnableDischargeTime(4L),
             CircuitCapacity(5L),
@@ -7995,7 +7995,6 @@ public class ClusterIDMapping {
             MaximumdDischargeCurrent(8L),
             UserMaximumChargeCurrent(9L),
             RandomisationDelayWindow(10L),
-            StartOfWeek(32L),
             NumberOfWeeklyTargets(33L),
             NumberOfDailyTargets(34L),
             NextChargeStartTime(35L),

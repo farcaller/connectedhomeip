@@ -8125,7 +8125,7 @@ NS_ASSUME_NONNULL_BEGIN
                     newElement_0.targetSoC = nil;
                 }
                 if (entry_0.addedEnergy.HasValue()) {
-                    newElement_0.addedEnergy = [NSNumber numberWithUnsignedInt:entry_0.addedEnergy.Value()];
+                    newElement_0.addedEnergy = [NSNumber numberWithInt:entry_0.addedEnergy.Value()];
                 } else {
                     newElement_0.addedEnergy = nil;
                 }

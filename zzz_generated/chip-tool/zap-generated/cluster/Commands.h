@@ -5752,7 +5752,7 @@ private:
 | Attributes:                                                         |        |
 | * State                                                             | 0x0000 |
 | * SupplyState                                                       | 0x0001 |
-| * Fault                                                             | 0x0002 |
+| * FaultState                                                        | 0x0002 |
 | * EnableChargeTime                                                  | 0x0003 |
 | * EnableDischargeTime                                               | 0x0004 |
 | * CircuitCapacity                                                   | 0x0005 |
@@ -5761,7 +5761,6 @@ private:
 | * MaximumdDischargeCurrent                                          | 0x0008 |
 | * UserMaximumChargeCurrent                                          | 0x0009 |
 | * RandomisationDelayWindow                                          | 0x000A |
-| * StartOfWeek                                                       | 0x0020 |
 | * NumberOfWeeklyTargets                                             | 0x0021 |
 | * NumberOfDailyTargets                                              | 0x0022 |
 | * NextChargeStartTime                                               | 0x0023 |
@@ -16986,7 +16985,7 @@ void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * c
         make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                                 //
         make_unique<ReadAttribute>(Id, "state", Attributes::State::Id, credsIssuerConfig),                                 //
         make_unique<ReadAttribute>(Id, "supply-state", Attributes::SupplyState::Id, credsIssuerConfig),                    //
-        make_unique<ReadAttribute>(Id, "fault", Attributes::Fault::Id, credsIssuerConfig),                                 //
+        make_unique<ReadAttribute>(Id, "fault-state", Attributes::FaultState::Id, credsIssuerConfig),                      //
         make_unique<ReadAttribute>(Id, "enable-charge-time", Attributes::EnableChargeTime::Id, credsIssuerConfig),         //
         make_unique<ReadAttribute>(Id, "enable-discharge-time", Attributes::EnableDischargeTime::Id, credsIssuerConfig),   //
         make_unique<ReadAttribute>(Id, "circuit-capacity", Attributes::CircuitCapacity::Id, credsIssuerConfig),            //
@@ -16998,7 +16997,6 @@ void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * c
                                    credsIssuerConfig), //
         make_unique<ReadAttribute>(Id, "randomisation-delay-window", Attributes::RandomisationDelayWindow::Id,
                                    credsIssuerConfig),                                                                        //
-        make_unique<ReadAttribute>(Id, "start-of-week", Attributes::StartOfWeek::Id, credsIssuerConfig),                      //
         make_unique<ReadAttribute>(Id, "number-of-weekly-targets", Attributes::NumberOfWeeklyTargets::Id, credsIssuerConfig), //
         make_unique<ReadAttribute>(Id, "number-of-daily-targets", Attributes::NumberOfDailyTargets::Id, credsIssuerConfig),   //
         make_unique<ReadAttribute>(Id, "next-charge-start-time", Attributes::NextChargeStartTime::Id, credsIssuerConfig),     //
@@ -17027,7 +17025,7 @@ void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * c
         make_unique<WriteAttribute<chip::app::Clusters::EnergyEvse::SupplyStateEnum>>(
             Id, "supply-state", 0, UINT8_MAX, Attributes::SupplyState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<chip::app::Clusters::EnergyEvse::FaultStateEnum>>(
-            Id, "fault", 0, UINT8_MAX, Attributes::Fault::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+            Id, "fault-state", 0, UINT8_MAX, Attributes::FaultState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "enable-charge-time", 0, UINT32_MAX,
                                                                               Attributes::EnableChargeTime::Id,
                                                                               WriteCommandType::kForceWrite, credsIssuerConfig), //
@@ -17049,8 +17047,6 @@ void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * c
         make_unique<WriteAttribute<uint32_t>>(Id, "randomisation-delay-window", 0, UINT32_MAX,
                                               Attributes::RandomisationDelayWindow::Id, WriteCommandType::kWrite,
                                               credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::Clusters::EnergyEvse::StartOfWeekEnum>>(
-            Id, "start-of-week", 0, UINT8_MAX, Attributes::StartOfWeek::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<uint8_t>>(Id, "number-of-weekly-targets", 0, UINT8_MAX, Attributes::NumberOfWeeklyTargets::Id,
                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
         make_unique<WriteAttribute<uint8_t>>(Id, "number-of-daily-targets", 0, UINT8_MAX, Attributes::NumberOfDailyTargets::Id,
@@ -17106,7 +17102,7 @@ void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * c
         make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                                 //
         make_unique<SubscribeAttribute>(Id, "state", Attributes::State::Id, credsIssuerConfig),                                 //
         make_unique<SubscribeAttribute>(Id, "supply-state", Attributes::SupplyState::Id, credsIssuerConfig),                    //
-        make_unique<SubscribeAttribute>(Id, "fault", Attributes::Fault::Id, credsIssuerConfig),                                 //
+        make_unique<SubscribeAttribute>(Id, "fault-state", Attributes::FaultState::Id, credsIssuerConfig),                      //
         make_unique<SubscribeAttribute>(Id, "enable-charge-time", Attributes::EnableChargeTime::Id, credsIssuerConfig),         //
         make_unique<SubscribeAttribute>(Id, "enable-discharge-time", Attributes::EnableDischargeTime::Id, credsIssuerConfig),   //
         make_unique<SubscribeAttribute>(Id, "circuit-capacity", Attributes::CircuitCapacity::Id, credsIssuerConfig),            //
@@ -17117,8 +17113,7 @@ void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * c
         make_unique<SubscribeAttribute>(Id, "user-maximum-charge-current", Attributes::UserMaximumChargeCurrent::Id,
                                         credsIssuerConfig), //
         make_unique<SubscribeAttribute>(Id, "randomisation-delay-window", Attributes::RandomisationDelayWindow::Id,
-                                        credsIssuerConfig),                                                   //
-        make_unique<SubscribeAttribute>(Id, "start-of-week", Attributes::StartOfWeek::Id, credsIssuerConfig), //
+                                        credsIssuerConfig), //
         make_unique<SubscribeAttribute>(Id, "number-of-weekly-targets", Attributes::NumberOfWeeklyTargets::Id,
                                         credsIssuerConfig),                                                                      //
         make_unique<SubscribeAttribute>(Id, "number-of-daily-targets", Attributes::NumberOfDailyTargets::Id, credsIssuerConfig), //

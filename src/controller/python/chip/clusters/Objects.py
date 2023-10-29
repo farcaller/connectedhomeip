@@ -19705,7 +19705,7 @@ class EnergyEvse(Cluster):
             Fields=[
                 ClusterObjectFieldDescriptor(Label="state", Tag=0x00000000, Type=typing.Union[Nullable, EnergyEvse.Enums.EvseStateEnum]),
                 ClusterObjectFieldDescriptor(Label="supplyState", Tag=0x00000001, Type=EnergyEvse.Enums.SupplyStateEnum),
-                ClusterObjectFieldDescriptor(Label="fault", Tag=0x00000002, Type=EnergyEvse.Enums.FaultStateEnum),
+                ClusterObjectFieldDescriptor(Label="faultState", Tag=0x00000002, Type=EnergyEvse.Enums.FaultStateEnum),
                 ClusterObjectFieldDescriptor(Label="enableChargeTime", Tag=0x00000003, Type=typing.Union[Nullable, uint]),
                 ClusterObjectFieldDescriptor(Label="enableDischargeTime", Tag=0x00000004, Type=typing.Union[Nullable, uint]),
                 ClusterObjectFieldDescriptor(Label="circuitCapacity", Tag=0x00000005, Type=uint),
@@ -19714,7 +19714,6 @@ class EnergyEvse(Cluster):
                 ClusterObjectFieldDescriptor(Label="maximumdDischargeCurrent", Tag=0x00000008, Type=uint),
                 ClusterObjectFieldDescriptor(Label="userMaximumChargeCurrent", Tag=0x00000009, Type=typing.Optional[uint]),
                 ClusterObjectFieldDescriptor(Label="randomisationDelayWindow", Tag=0x0000000A, Type=typing.Optional[uint]),
-                ClusterObjectFieldDescriptor(Label="startOfWeek", Tag=0x00000020, Type=EnergyEvse.Enums.StartOfWeekEnum),
                 ClusterObjectFieldDescriptor(Label="numberOfWeeklyTargets", Tag=0x00000021, Type=uint),
                 ClusterObjectFieldDescriptor(Label="numberOfDailyTargets", Tag=0x00000022, Type=uint),
                 ClusterObjectFieldDescriptor(Label="nextChargeStartTime", Tag=0x00000023, Type=typing.Union[None, Nullable, uint]),
@@ -19740,7 +19739,7 @@ class EnergyEvse(Cluster):
 
     state: 'typing.Union[Nullable, EnergyEvse.Enums.EvseStateEnum]' = None
     supplyState: 'EnergyEvse.Enums.SupplyStateEnum' = None
-    fault: 'EnergyEvse.Enums.FaultStateEnum' = None
+    faultState: 'EnergyEvse.Enums.FaultStateEnum' = None
     enableChargeTime: 'typing.Union[Nullable, uint]' = None
     enableDischargeTime: 'typing.Union[Nullable, uint]' = None
     circuitCapacity: 'uint' = None
@@ -19749,7 +19748,6 @@ class EnergyEvse(Cluster):
     maximumdDischargeCurrent: 'uint' = None
     userMaximumChargeCurrent: 'typing.Optional[uint]' = None
     randomisationDelayWindow: 'typing.Optional[uint]' = None
-    startOfWeek: 'EnergyEvse.Enums.StartOfWeekEnum' = None
     numberOfWeeklyTargets: 'uint' = None
     numberOfDailyTargets: 'uint' = None
     nextChargeStartTime: 'typing.Union[None, Nullable, uint]' = None
@@ -19821,20 +19819,6 @@ class EnergyEvse(Cluster):
             # enum value. This specific should never be transmitted.
             kUnknownEnumValue = 16,
 
-        class StartOfWeekEnum(MatterIntEnum):
-            kSunday = 0x00
-            kMonday = 0x01
-            kTuesday = 0x02
-            kWednesday = 0x03
-            kThursday = 0x04
-            kFriday = 0x05
-            kSaturday = 0x06
-            # All received enum values that are not listed above will be mapped
-            # to kUnknownEnumValue. This is a helper enum value that should only
-            # be used by code to process how it handles receiving and unknown
-            # enum value. This specific should never be transmitted.
-            kUnknownEnumValue = 7,
-
         class SupplyStateEnum(MatterIntEnum):
             kDisabled = 0x00
             kChargingEnabled = 0x01
@@ -19851,7 +19835,7 @@ class EnergyEvse(Cluster):
         class Feature(IntFlag):
             kChargingPreferences = 0x1
             kSessions = 0x2
-            kSocReporting = 0x4
+            kSoCReporting = 0x4
             kPlugAndCharge = 0x8
             kRfid = 0x10
             kV2x = 0x20
@@ -19864,7 +19848,6 @@ class EnergyEvse(Cluster):
             kThursday = 0x10
             kFriday = 0x20
             kSaturday = 0x40
-            kAway = 0x80
 
     class Structs:
         @dataclass
@@ -19875,12 +19858,12 @@ class EnergyEvse(Cluster):
                     Fields=[
                         ClusterObjectFieldDescriptor(Label="targetTime", Tag=0, Type=uint),
                         ClusterObjectFieldDescriptor(Label="targetSoC", Tag=1, Type=typing.Optional[uint]),
-                        ClusterObjectFieldDescriptor(Label="addedEnergy", Tag=2, Type=typing.Optional[uint]),
+                        ClusterObjectFieldDescriptor(Label="addedEnergy", Tag=2, Type=typing.Optional[int]),
                     ])
 
             targetTime: 'uint' = 0
             targetSoC: 'typing.Optional[uint]' = None
-            addedEnergy: 'typing.Optional[uint]' = None
+            addedEnergy: 'typing.Optional[int]' = None
 
     class Commands:
         @dataclass
@@ -20046,7 +20029,7 @@ class EnergyEvse(Cluster):
             value: 'EnergyEvse.Enums.SupplyStateEnum' = 0
 
         @dataclass
-        class Fault(ClusterAttributeDescriptor):
+        class FaultState(ClusterAttributeDescriptor):
             @ChipUtility.classproperty
             def cluster_id(cls) -> int:
                 return 0x00000099
@@ -20188,22 +20171,6 @@ class EnergyEvse(Cluster):
                 return ClusterObjectFieldDescriptor(Type=typing.Optional[uint])
 
             value: 'typing.Optional[uint]' = None
-
-        @dataclass
-        class StartOfWeek(ClusterAttributeDescriptor):
-            @ChipUtility.classproperty
-            def cluster_id(cls) -> int:
-                return 0x00000099
-
-            @ChipUtility.classproperty
-            def attribute_id(cls) -> int:
-                return 0x00000020
-
-            @ChipUtility.classproperty
-            def attribute_type(cls) -> ClusterObjectFieldDescriptor:
-                return ClusterObjectFieldDescriptor(Type=EnergyEvse.Enums.StartOfWeekEnum)
-
-            value: 'EnergyEvse.Enums.StartOfWeekEnum' = 0
 
         @dataclass
         class NumberOfWeeklyTargets(ClusterAttributeDescriptor):
@@ -20675,10 +20642,10 @@ class EnergyEvse(Cluster):
             def descriptor(cls) -> ClusterObjectDescriptor:
                 return ClusterObjectDescriptor(
                     Fields=[
-                        ClusterObjectFieldDescriptor(Label="uid", Tag=0, Type=typing.Union[Nullable, bytes]),
+                        ClusterObjectFieldDescriptor(Label="uid", Tag=0, Type=bytes),
                     ])
 
-            uid: 'typing.Union[Nullable, bytes]' = NullValue
+            uid: 'bytes' = b""
 
 
 @dataclass

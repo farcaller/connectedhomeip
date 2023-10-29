@@ -3939,7 +3939,7 @@ MTR_NEWLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> *)readAttributeSupplyStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> *)readAttributeFaultWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
+- (NSDictionary<NSString *, id> *)readAttributeFaultStateWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributeEnableChargeTimeWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 
@@ -3969,8 +3969,6 @@ MTR_NEWLY_AVAILABLE
 - (void)writeAttributeRandomisationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary
                                   expectedValueInterval:(NSNumber *)expectedValueIntervalMs
                                                  params:(MTRWriteParams * _Nullable)params MTR_NEWLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> *)readAttributeStartOfWeekWithParams:(MTRReadParams * _Nullable)params MTR_NEWLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> *)readAttributeNumberOfWeeklyTargetsWithParams:(MTRReadParams * _Nullable)params
     MTR_NEWLY_AVAILABLE;

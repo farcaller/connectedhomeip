@@ -4260,7 +4260,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     if (self = [super init]) {
 
-        _uid = nil;
+        _uid = [NSData data];
     }
     return self;
 }

@@ -18309,16 +18309,16 @@ public class ChipClusters {
       subscribeSupplyStateAttribute(chipClusterPtr, callback, minInterval, maxInterval);
     }
 
-    public void readFaultAttribute(
+    public void readFaultStateAttribute(
       IntegerAttributeCallback callback
     ) {
-      readFaultAttribute(chipClusterPtr, callback);
+      readFaultStateAttribute(chipClusterPtr, callback);
     }
-    public void subscribeFaultAttribute(
+    public void subscribeFaultStateAttribute(
         IntegerAttributeCallback callback
 ,
       int minInterval, int maxInterval) {
-      subscribeFaultAttribute(chipClusterPtr, callback, minInterval, maxInterval);
+      subscribeFaultStateAttribute(chipClusterPtr, callback, minInterval, maxInterval);
     }
 
     public void readEnableChargeTimeAttribute(
@@ -18429,18 +18429,6 @@ public class ChipClusters {
 ,
       int minInterval, int maxInterval) {
       subscribeRandomisationDelayWindowAttribute(chipClusterPtr, callback, minInterval, maxInterval);
-    }
-
-    public void readStartOfWeekAttribute(
-      IntegerAttributeCallback callback
-    ) {
-      readStartOfWeekAttribute(chipClusterPtr, callback);
-    }
-    public void subscribeStartOfWeekAttribute(
-        IntegerAttributeCallback callback
-,
-      int minInterval, int maxInterval) {
-      subscribeStartOfWeekAttribute(chipClusterPtr, callback, minInterval, maxInterval);
     }
 
     public void readNumberOfWeeklyTargetsAttribute(
@@ -18716,10 +18704,10 @@ public class ChipClusters {
         IntegerAttributeCallback callback
 , int minInterval, int maxInterval);
 
-    private native void readFaultAttribute(long chipClusterPtr,
+    private native void readFaultStateAttribute(long chipClusterPtr,
         IntegerAttributeCallback callback
     );
-    private native void subscribeFaultAttribute(long chipClusterPtr,
+    private native void subscribeFaultStateAttribute(long chipClusterPtr,
         IntegerAttributeCallback callback
 , int minInterval, int maxInterval);
 
@@ -18781,13 +18769,6 @@ public class ChipClusters {
     private native void writeRandomisationDelayWindowAttribute(long chipClusterPtr, DefaultClusterCallback callback, Long value, @Nullable Integer timedWriteTimeoutMs);
     private native void subscribeRandomisationDelayWindowAttribute(long chipClusterPtr,
         LongAttributeCallback callback
-, int minInterval, int maxInterval);
-
-    private native void readStartOfWeekAttribute(long chipClusterPtr,
-        IntegerAttributeCallback callback
-    );
-    private native void subscribeStartOfWeekAttribute(long chipClusterPtr,
-        IntegerAttributeCallback callback
 , int minInterval, int maxInterval);
 
     private native void readNumberOfWeeklyTargetsAttribute(long chipClusterPtr,

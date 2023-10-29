@@ -7047,8 +7047,8 @@ static id _Nullable DecodeAttributeValueForEnergyEVSECluster(
         value = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue)];
         return value;
     }
-    case Attributes::Fault::Id: {
-        using TypeInfo = Attributes::Fault::TypeInfo;
+    case Attributes::FaultState::Id: {
+        using TypeInfo = Attributes::FaultState::TypeInfo;
         TypeInfo::DecodableType cppValue;
         *aError = DataModel::Decode(aReader, cppValue);
         if (*aError != CHIP_NO_ERROR) {
@@ -7152,17 +7152,6 @@ static id _Nullable DecodeAttributeValueForEnergyEVSECluster(
         }
         NSNumber * _Nonnull value;
         value = [NSNumber numberWithUnsignedInt:cppValue];
-        return value;
-    }
-    case Attributes::StartOfWeek::Id: {
-        using TypeInfo = Attributes::StartOfWeek::TypeInfo;
-        TypeInfo::DecodableType cppValue;
-        *aError = DataModel::Decode(aReader, cppValue);
-        if (*aError != CHIP_NO_ERROR) {
-            return nil;
-        }
-        NSNumber * _Nonnull value;
-        value = [NSNumber numberWithUnsignedChar:chip::to_underlying(cppValue)];
         return value;
     }
     case Attributes::NumberOfWeeklyTargets::Id: {

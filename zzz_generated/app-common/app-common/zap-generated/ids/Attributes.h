@@ -3236,9 +3236,9 @@ namespace SupplyState {
 static constexpr AttributeId Id = 0x00000001;
 } // namespace SupplyState
 
-namespace Fault {
+namespace FaultState {
 static constexpr AttributeId Id = 0x00000002;
-} // namespace Fault
+} // namespace FaultState
 
 namespace EnableChargeTime {
 static constexpr AttributeId Id = 0x00000003;
@@ -3271,10 +3271,6 @@ static constexpr AttributeId Id = 0x00000009;
 namespace RandomisationDelayWindow {
 static constexpr AttributeId Id = 0x0000000A;
 } // namespace RandomisationDelayWindow
-
-namespace StartOfWeek {
-static constexpr AttributeId Id = 0x00000020;
-} // namespace StartOfWeek
 
 namespace NumberOfWeeklyTargets {
 static constexpr AttributeId Id = 0x00000021;

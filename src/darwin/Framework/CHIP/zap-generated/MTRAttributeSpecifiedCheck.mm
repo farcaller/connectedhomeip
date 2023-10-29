@@ -2586,7 +2586,7 @@ static BOOL AttributeIsSpecifiedInEnergyEVSECluster(AttributeId aAttributeId)
     case Attributes::SupplyState::Id: {
         return YES;
     }
-    case Attributes::Fault::Id: {
+    case Attributes::FaultState::Id: {
         return YES;
     }
     case Attributes::EnableChargeTime::Id: {
@@ -2611,9 +2611,6 @@ static BOOL AttributeIsSpecifiedInEnergyEVSECluster(AttributeId aAttributeId)
         return YES;
     }
     case Attributes::RandomisationDelayWindow::Id: {
-        return YES;
-    }
-    case Attributes::StartOfWeek::Id: {
         return YES;
     }
     case Attributes::NumberOfWeeklyTargets::Id: {

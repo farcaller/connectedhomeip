@@ -1606,10 +1606,10 @@ public Integer faultStateCurrentState;
 }
 
 public static class EnergyEvseClusterRfidEvent {
-public @Nullable byte[] uid;
+public byte[] uid;
 
   public EnergyEvseClusterRfidEvent(
-    @Nullable byte[] uid
+    byte[] uid
   ) {
     this.uid = uid;
   }

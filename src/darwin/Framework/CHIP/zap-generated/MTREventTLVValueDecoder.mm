@@ -2436,12 +2436,8 @@ static id _Nullable DecodeEventPayloadForEnergyEVSECluster(EventId aEventId, TLV
         __auto_type * value = [MTREnergyEVSEClusterRFIDEvent new];
 
         do {
-            NSData * _Nullable memberValue;
-            if (cppValue.uid.IsNull()) {
-                memberValue = nil;
-            } else {
-                memberValue = AsData(cppValue.uid.Value());
-            }
+            NSData * _Nonnull memberValue;
+            memberValue = AsData(cppValue.uid);
             value.uid = memberValue;
         } while (0);
 

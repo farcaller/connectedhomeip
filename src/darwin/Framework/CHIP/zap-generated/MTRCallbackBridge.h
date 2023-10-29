@@ -508,9 +508,6 @@ typedef void (*NullableEnergyEVSEClusterEvseStateEnumAttributeCallback)(
 typedef void (*EnergyEVSEClusterFaultStateEnumAttributeCallback)(void *, chip::app::Clusters::EnergyEvse::FaultStateEnum);
 typedef void (*NullableEnergyEVSEClusterFaultStateEnumAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::FaultStateEnum> &);
-typedef void (*EnergyEVSEClusterStartOfWeekEnumAttributeCallback)(void *, chip::app::Clusters::EnergyEvse::StartOfWeekEnum);
-typedef void (*NullableEnergyEVSEClusterStartOfWeekEnumAttributeCallback)(
-    void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::StartOfWeekEnum> &);
 typedef void (*EnergyEVSEClusterSupplyStateEnumAttributeCallback)(void *, chip::app::Clusters::EnergyEvse::SupplyStateEnum);
 typedef void (*NullableEnergyEVSEClusterSupplyStateEnumAttributeCallback)(
     void *, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::SupplyStateEnum> &);
@@ -27431,73 +27428,6 @@ public:
     void OnSubscriptionEstablished();
     using MTRNullableEnergyEVSEClusterFaultStateEnumAttributeCallbackBridge::KeepAliveOnCallback;
     using MTRNullableEnergyEVSEClusterFaultStateEnumAttributeCallbackBridge::OnDone;
-
-private:
-    MTRSubscriptionEstablishedHandler mEstablishedHandler;
-};
-
-class MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge
-    : public MTRCallbackBridge<EnergyEVSEClusterStartOfWeekEnumAttributeCallback>
-{
-public:
-    MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
-        MTRCallbackBridge<EnergyEVSEClusterStartOfWeekEnumAttributeCallback>(queue, handler, OnSuccessFn){};
-
-    MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
-                                                               MTRActionBlock action) :
-        MTRCallbackBridge<EnergyEVSEClusterStartOfWeekEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
-
-    static void OnSuccessFn(void * context, chip::app::Clusters::EnergyEvse::StartOfWeekEnum value);
-};
-
-class MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackSubscriptionBridge
-    : public MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge
-{
-public:
-    MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackSubscriptionBridge(dispatch_queue_t queue, ResponseHandler handler,
-                                                                           MTRActionBlock action,
-                                                                           MTRSubscriptionEstablishedHandler establishedHandler) :
-        MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge(queue, handler, action),
-        mEstablishedHandler(establishedHandler)
-    {}
-
-    void OnSubscriptionEstablished();
-    using MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge::KeepAliveOnCallback;
-    using MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge::OnDone;
-
-private:
-    MTRSubscriptionEstablishedHandler mEstablishedHandler;
-};
-
-class MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge
-    : public MTRCallbackBridge<NullableEnergyEVSEClusterStartOfWeekEnumAttributeCallback>
-{
-public:
-    MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler) :
-        MTRCallbackBridge<NullableEnergyEVSEClusterStartOfWeekEnumAttributeCallback>(queue, handler, OnSuccessFn){};
-
-    MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge(dispatch_queue_t queue, ResponseHandler handler,
-                                                                       MTRActionBlock action) :
-        MTRCallbackBridge<NullableEnergyEVSEClusterStartOfWeekEnumAttributeCallback>(queue, handler, action, OnSuccessFn){};
-
-    static void OnSuccessFn(void * context,
-                            const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::StartOfWeekEnum> & value);
-};
-
-class MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackSubscriptionBridge
-    : public MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge
-{
-public:
-    MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackSubscriptionBridge(
-        dispatch_queue_t queue, ResponseHandler handler, MTRActionBlock action,
-        MTRSubscriptionEstablishedHandler establishedHandler) :
-        MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge(queue, handler, action),
-        mEstablishedHandler(establishedHandler)
-    {}
-
-    void OnSubscriptionEstablished();
-    using MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge::KeepAliveOnCallback;
-    using MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge::OnDone;
 
 private:
     MTRSubscriptionEstablishedHandler mEstablishedHandler;

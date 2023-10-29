@@ -3707,17 +3707,10 @@ jobject DecodeEventValue(const app::ConcreteEventPath & aPath, TLV::TLVReader & 
                 return nullptr;
             }
             jobject value_uid;
-            if (cppValue.uid.IsNull())
-            {
-                value_uid = nullptr;
-            }
-            else
-            {
-                jbyteArray value_uidByteArray = env->NewByteArray(static_cast<jsize>(cppValue.uid.Value().size()));
-                env->SetByteArrayRegion(value_uidByteArray, 0, static_cast<jsize>(cppValue.uid.Value().size()),
-                                        reinterpret_cast<const jbyte *>(cppValue.uid.Value().data()));
-                value_uid = value_uidByteArray;
-            }
+            jbyteArray value_uidByteArray = env->NewByteArray(static_cast<jsize>(cppValue.uid.size()));
+            env->SetByteArrayRegion(value_uidByteArray, 0, static_cast<jsize>(cppValue.uid.size()),
+                                    reinterpret_cast<const jbyte *>(cppValue.uid.data()));
+            value_uid = value_uidByteArray;
 
             jclass rfidStructClass;
             err = chip::JniReferences::GetInstance().GetClassRef(

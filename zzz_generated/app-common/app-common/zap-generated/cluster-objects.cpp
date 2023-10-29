@@ -14536,8 +14536,8 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
     case Attributes::SupplyState::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, supplyState));
         break;
-    case Attributes::Fault::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, fault));
+    case Attributes::FaultState::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, faultState));
         break;
     case Attributes::EnableChargeTime::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, enableChargeTime));
@@ -14562,9 +14562,6 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
         break;
     case Attributes::RandomisationDelayWindow::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, randomisationDelayWindow));
-        break;
-    case Attributes::StartOfWeek::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, startOfWeek));
         break;
     case Attributes::NumberOfWeeklyTargets::TypeInfo::GetAttributeId():
         ReturnErrorOnFailure(DataModel::Decode(reader, numberOfWeeklyTargets));

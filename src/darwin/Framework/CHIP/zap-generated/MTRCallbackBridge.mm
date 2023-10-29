@@ -26435,56 +26435,6 @@ void MTRNullableEnergyEVSEClusterFaultStateEnumAttributeCallbackSubscriptionBrid
     }
 }
 
-void MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge::OnSuccessFn(
-    void * context, chip::app::Clusters::EnergyEvse::StartOfWeekEnum value)
-{
-    NSNumber * _Nonnull objCValue;
-    objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value)];
-    DispatchSuccess(context, objCValue);
-};
-
-void MTREnergyEVSEClusterStartOfWeekEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
-{
-    if (!mQueue) {
-        return;
-    }
-
-    if (mEstablishedHandler != nil) {
-        dispatch_async(mQueue, mEstablishedHandler);
-        // On failure, mEstablishedHandler will be cleaned up by our destructor,
-        // but we can clean it up earlier on successful subscription
-        // establishment.
-        mEstablishedHandler = nil;
-    }
-}
-
-void MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackBridge::OnSuccessFn(
-    void * context, const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::StartOfWeekEnum> & value)
-{
-    NSNumber * _Nullable objCValue;
-    if (value.IsNull()) {
-        objCValue = nil;
-    } else {
-        objCValue = [NSNumber numberWithUnsignedChar:chip::to_underlying(value.Value())];
-    }
-    DispatchSuccess(context, objCValue);
-};
-
-void MTRNullableEnergyEVSEClusterStartOfWeekEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished()
-{
-    if (!mQueue) {
-        return;
-    }
-
-    if (mEstablishedHandler != nil) {
-        dispatch_async(mQueue, mEstablishedHandler);
-        // On failure, mEstablishedHandler will be cleaned up by our destructor,
-        // but we can clean it up earlier on successful subscription
-        // establishment.
-        mEstablishedHandler = nil;
-    }
-}
-
 void MTREnergyEVSEClusterSupplyStateEnumAttributeCallbackBridge::OnSuccessFn(
     void * context, chip::app::Clusters::EnergyEvse::SupplyStateEnum value)
 {

@@ -22,7 +22,7 @@ import chip.tlv.Tag
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EnergyEvseClusterRFIDEvent(val uid: ByteArray?) {
+class EnergyEvseClusterRFIDEvent(val uid: ByteArray) {
   override fun toString(): String = buildString {
     append("EnergyEvseClusterRFIDEvent {\n")
     append("\tuid : $uid\n")
@@ -32,11 +32,7 @@ class EnergyEvseClusterRFIDEvent(val uid: ByteArray?) {
   fun toTlv(tag: Tag, tlvWriter: TlvWriter) {
     tlvWriter.apply {
       startStructure(tag)
-      if (uid != null) {
-        put(ContextSpecificTag(TAG_UID), uid)
-      } else {
-        putNull(ContextSpecificTag(TAG_UID))
-      }
+      put(ContextSpecificTag(TAG_UID), uid)
       endStructure()
     }
   }
@@ -46,13 +42,7 @@ class EnergyEvseClusterRFIDEvent(val uid: ByteArray?) {
 
     fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyEvseClusterRFIDEvent {
       tlvReader.enterStructure(tag)
-      val uid =
-        if (!tlvReader.isNull()) {
-          tlvReader.getByteArray(ContextSpecificTag(TAG_UID))
-        } else {
-          tlvReader.getNull(ContextSpecificTag(TAG_UID))
-          null
-        }
+      val uid = tlvReader.getByteArray(ContextSpecificTag(TAG_UID))
 
       tlvReader.exitContainer()
 

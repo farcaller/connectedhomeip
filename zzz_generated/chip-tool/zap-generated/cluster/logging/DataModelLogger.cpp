@@ -10039,10 +10039,10 @@ CHIP_ERROR DataModelLogger::LogAttribute(const chip::app::ConcreteDataAttributeP
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
             return DataModelLogger::LogValue("SupplyState", 1, value);
         }
-        case EnergyEvse::Attributes::Fault::Id: {
+        case EnergyEvse::Attributes::FaultState::Id: {
             chip::app::Clusters::EnergyEvse::FaultStateEnum value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("Fault", 1, value);
+            return DataModelLogger::LogValue("FaultState", 1, value);
         }
         case EnergyEvse::Attributes::EnableChargeTime::Id: {
             chip::app::DataModel::Nullable<uint32_t> value;
@@ -10083,11 +10083,6 @@ CHIP_ERROR DataModelLogger::LogAttribute(const chip::app::ConcreteDataAttributeP
             uint32_t value;
             ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
             return DataModelLogger::LogValue("RandomisationDelayWindow", 1, value);
-        }
-        case EnergyEvse::Attributes::StartOfWeek::Id: {
-            chip::app::Clusters::EnergyEvse::StartOfWeekEnum value;
-            ReturnErrorOnFailure(chip::app::DataModel::Decode(*data, value));
-            return DataModelLogger::LogValue("StartOfWeek", 1, value);
         }
         case EnergyEvse::Attributes::NumberOfWeeklyTargets::Id: {
             uint8_t value;

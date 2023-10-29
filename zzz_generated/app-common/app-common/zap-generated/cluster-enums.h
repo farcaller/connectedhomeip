@@ -2048,23 +2048,6 @@ enum class FaultStateEnum : uint8_t
     kUnknownEnumValue = 16,
 };
 
-// Enum for StartOfWeekEnum
-enum class StartOfWeekEnum : uint8_t
-{
-    kSunday    = 0x00,
-    kMonday    = 0x01,
-    kTuesday   = 0x02,
-    kWednesday = 0x03,
-    kThursday  = 0x04,
-    kFriday    = 0x05,
-    kSaturday  = 0x06,
-    // All received enum values that are not listed above will be mapped
-    // to kUnknownEnumValue. This is a helper enum value that should only
-    // be used by code to process how it handles receiving and unknown
-    // enum value. This specific should never be transmitted.
-    kUnknownEnumValue = 7,
-};
-
 // Enum for SupplyStateEnum
 enum class SupplyStateEnum : uint8_t
 {
@@ -2085,7 +2068,7 @@ enum class Feature : uint32_t
 {
     kChargingPreferences = 0x1,
     kSessions            = 0x2,
-    kSocReporting        = 0x4,
+    kSoCReporting        = 0x4,
     kPlugAndCharge       = 0x8,
     kRfid                = 0x10,
     kV2x                 = 0x20,
@@ -2101,7 +2084,6 @@ enum class TargetDayOfWeekBitmap : uint8_t
     kThursday  = 0x10,
     kFriday    = 0x20,
     kSaturday  = 0x40,
-    kAway      = 0x80,
 };
 } // namespace EnergyEvse
 

@@ -3957,7 +3957,7 @@ typedef NS_ENUM(uint32_t, MTRAttributeIDType) {
     // Cluster EnergyEVSE attributes
     MTRAttributeIDTypeClusterEnergyEVSEAttributeStateID MTR_NEWLY_AVAILABLE = 0x00000000,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeSupplyStateID MTR_NEWLY_AVAILABLE = 0x00000001,
-    MTRAttributeIDTypeClusterEnergyEVSEAttributeFaultID MTR_NEWLY_AVAILABLE = 0x00000002,
+    MTRAttributeIDTypeClusterEnergyEVSEAttributeFaultStateID MTR_NEWLY_AVAILABLE = 0x00000002,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeEnableChargeTimeID MTR_NEWLY_AVAILABLE = 0x00000003,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeEnableDischargeTimeID MTR_NEWLY_AVAILABLE = 0x00000004,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeCircuitCapacityID MTR_NEWLY_AVAILABLE = 0x00000005,
@@ -3966,7 +3966,6 @@ typedef NS_ENUM(uint32_t, MTRAttributeIDType) {
     MTRAttributeIDTypeClusterEnergyEVSEAttributeMaximumdDischargeCurrentID MTR_NEWLY_AVAILABLE = 0x00000008,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeUserMaximumChargeCurrentID MTR_NEWLY_AVAILABLE = 0x00000009,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeRandomisationDelayWindowID MTR_NEWLY_AVAILABLE = 0x0000000A,
-    MTRAttributeIDTypeClusterEnergyEVSEAttributeStartOfWeekID MTR_NEWLY_AVAILABLE = 0x00000020,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeNumberOfWeeklyTargetsID MTR_NEWLY_AVAILABLE = 0x00000021,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeNumberOfDailyTargetsID MTR_NEWLY_AVAILABLE = 0x00000022,
     MTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeStartTimeID MTR_NEWLY_AVAILABLE = 0x00000023,

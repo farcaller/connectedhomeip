@@ -1272,7 +1272,7 @@ MTR_NEWLY_AVAILABLE
 
 MTR_NEWLY_AVAILABLE
 @interface MTREnergyEVSEClusterRFIDEvent : NSObject <NSCopying>
-@property (nonatomic, copy) NSData * _Nullable uid MTR_NEWLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull uid MTR_NEWLY_AVAILABLE;
 @end
 
 API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))

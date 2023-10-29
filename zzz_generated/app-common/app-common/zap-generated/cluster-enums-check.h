@@ -1652,23 +1652,6 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::FaultStateE
         return static_cast<EnumType>(16);
     }
 }
-static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::StartOfWeekEnum val)
-{
-    using EnumType = EnergyEvse::StartOfWeekEnum;
-    switch (val)
-    {
-    case EnumType::kSunday:
-    case EnumType::kMonday:
-    case EnumType::kTuesday:
-    case EnumType::kWednesday:
-    case EnumType::kThursday:
-    case EnumType::kFriday:
-    case EnumType::kSaturday:
-        return val;
-    default:
-        return static_cast<EnumType>(7);
-    }
-}
 static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::SupplyStateEnum val)
 {
     using EnumType = EnergyEvse::SupplyStateEnum;

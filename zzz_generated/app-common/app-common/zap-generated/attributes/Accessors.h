@@ -1738,10 +1738,10 @@ EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::Su
 EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::SupplyStateEnum value);
 } // namespace SupplyState
 
-namespace Fault {
+namespace FaultState {
 EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::FaultStateEnum * value); // FaultStateEnum
 EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::FaultStateEnum value);
-} // namespace Fault
+} // namespace FaultState
 
 namespace EnableChargeTime {
 EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // elapsed_s
@@ -1786,11 +1786,6 @@ namespace RandomisationDelayWindow {
 EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // elapsed_s
 EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
 } // namespace RandomisationDelayWindow
-
-namespace StartOfWeek {
-EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::StartOfWeekEnum * value); // StartOfWeekEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::StartOfWeekEnum value);
-} // namespace StartOfWeek
 
 namespace NumberOfWeeklyTargets {
 EmberAfStatus Get(chip::EndpointId endpoint, uint8_t * value); // int8u

@@ -17969,8 +17969,8 @@ struct Type
 {
 public:
     uint16_t targetTime = static_cast<uint16_t>(0);
-    Optional<uint8_t> targetSoC;
-    Optional<uint32_t> addedEnergy;
+    Optional<chip::Percent> targetSoC;
+    Optional<int32_t> addedEnergy;
 
     CHIP_ERROR Decode(TLV::TLVReader & reader);
 
@@ -18317,7 +18317,7 @@ struct TypeInfo
     static constexpr bool MustUseTimedWrite() { return false; }
 };
 } // namespace SupplyState
-namespace Fault {
+namespace FaultState {
 struct TypeInfo
 {
     using Type             = chip::app::Clusters::EnergyEvse::FaultStateEnum;
@@ -18325,10 +18325,10 @@ struct TypeInfo
     using DecodableArgType = chip::app::Clusters::EnergyEvse::FaultStateEnum;
 
     static constexpr ClusterId GetClusterId() { return Clusters::EnergyEvse::Id; }
-    static constexpr AttributeId GetAttributeId() { return Attributes::Fault::Id; }
+    static constexpr AttributeId GetAttributeId() { return Attributes::FaultState::Id; }
     static constexpr bool MustUseTimedWrite() { return false; }
 };
-} // namespace Fault
+} // namespace FaultState
 namespace EnableChargeTime {
 struct TypeInfo
 {
@@ -18425,18 +18425,6 @@ struct TypeInfo
     static constexpr bool MustUseTimedWrite() { return false; }
 };
 } // namespace RandomisationDelayWindow
-namespace StartOfWeek {
-struct TypeInfo
-{
-    using Type             = chip::app::Clusters::EnergyEvse::StartOfWeekEnum;
-    using DecodableType    = chip::app::Clusters::EnergyEvse::StartOfWeekEnum;
-    using DecodableArgType = chip::app::Clusters::EnergyEvse::StartOfWeekEnum;
-
-    static constexpr ClusterId GetClusterId() { return Clusters::EnergyEvse::Id; }
-    static constexpr AttributeId GetAttributeId() { return Attributes::StartOfWeek::Id; }
-    static constexpr bool MustUseTimedWrite() { return false; }
-};
-} // namespace StartOfWeek
 namespace NumberOfWeeklyTargets {
 struct TypeInfo
 {
@@ -18666,7 +18654,8 @@ struct TypeInfo
         Attributes::State::TypeInfo::DecodableType state;
         Attributes::SupplyState::TypeInfo::DecodableType supplyState =
             static_cast<chip::app::Clusters::EnergyEvse::SupplyStateEnum>(0);
-        Attributes::Fault::TypeInfo::DecodableType fault = static_cast<chip::app::Clusters::EnergyEvse::FaultStateEnum>(0);
+        Attributes::FaultState::TypeInfo::DecodableType faultState =
+            static_cast<chip::app::Clusters::EnergyEvse::FaultStateEnum>(0);
         Attributes::EnableChargeTime::TypeInfo::DecodableType enableChargeTime;
         Attributes::EnableDischargeTime::TypeInfo::DecodableType enableDischargeTime;
         Attributes::CircuitCapacity::TypeInfo::DecodableType circuitCapacity                   = static_cast<uint32_t>(0);
@@ -18675,10 +18664,8 @@ struct TypeInfo
         Attributes::MaximumdDischargeCurrent::TypeInfo::DecodableType maximumdDischargeCurrent = static_cast<uint32_t>(0);
         Attributes::UserMaximumChargeCurrent::TypeInfo::DecodableType userMaximumChargeCurrent = static_cast<uint32_t>(0);
         Attributes::RandomisationDelayWindow::TypeInfo::DecodableType randomisationDelayWindow = static_cast<uint32_t>(0);
-        Attributes::StartOfWeek::TypeInfo::DecodableType startOfWeek =
-            static_cast<chip::app::Clusters::EnergyEvse::StartOfWeekEnum>(0);
-        Attributes::NumberOfWeeklyTargets::TypeInfo::DecodableType numberOfWeeklyTargets = static_cast<uint8_t>(0);
-        Attributes::NumberOfDailyTargets::TypeInfo::DecodableType numberOfDailyTargets   = static_cast<uint8_t>(0);
+        Attributes::NumberOfWeeklyTargets::TypeInfo::DecodableType numberOfWeeklyTargets       = static_cast<uint8_t>(0);
+        Attributes::NumberOfDailyTargets::TypeInfo::DecodableType numberOfDailyTargets         = static_cast<uint8_t>(0);
         Attributes::NextChargeStartTime::TypeInfo::DecodableType nextChargeStartTime;
         Attributes::NextChargeTargetTime::TypeInfo::DecodableType nextChargeTargetTime;
         Attributes::NextChargeRequiredEnergy::TypeInfo::DecodableType nextChargeRequiredEnergy;
@@ -18862,7 +18849,7 @@ public:
 };
 } // namespace EnergyTransferStopped
 namespace Fault {
-static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Info;
+static constexpr PriorityLevel kPriorityLevel = PriorityLevel::Critical;
 
 enum class Fields : uint8_t
 {
@@ -18919,7 +18906,7 @@ public:
     static constexpr ClusterId GetClusterId() { return Clusters::EnergyEvse::Id; }
     static constexpr bool kIsFabricScoped = false;
 
-    DataModel::Nullable<chip::ByteSpan> uid;
+    chip::ByteSpan uid;
 
     CHIP_ERROR Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const;
 };
@@ -18931,7 +18918,7 @@ public:
     static constexpr EventId GetEventId() { return Events::Rfid::Id; }
     static constexpr ClusterId GetClusterId() { return Clusters::EnergyEvse::Id; }
 
-    DataModel::Nullable<chip::ByteSpan> uid;
+    chip::ByteSpan uid;
 
     CHIP_ERROR Decode(TLV::TLVReader & reader);
 };
