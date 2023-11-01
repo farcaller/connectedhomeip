@@ -164,7 +164,7 @@
         ],
         "Bridged Device Basic Information": ["ProductAppearance"],
         "Descriptor": ["ClusterRevision"],
-        "Device Energy Management": ["PowerForecast"],
+        "Device Energy Management": ["Forecast"],
         "Ethernet Network Diagnostics": [
             "PHYRate",
             "FullDuplex",

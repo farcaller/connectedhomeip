@@ -33222,7 +33222,7 @@
               "outgoing": 0
             },
             {
-              "name": "ModifyPowerForecastRequest",
+              "name": "ModifyForecastRequest",
               "code": 5,
               "mfgCode": null,
               "source": "client",
@@ -33230,7 +33230,7 @@
               "outgoing": 0
             },
             {
-              "name": "RequestLimitBasedPowerForecast",
+              "name": "RequestConstraintBasedForecast",
               "code": 6,
               "mfgCode": null,
               "source": "client",
@@ -33291,7 +33291,7 @@
               "storageOption": "RAM",
               "singleton": 0,
               "bounded": 0,
-              "defaultValue": "Other",
+              "defaultValue": "255",
               "reportable": 1,
               "minInterval": 1,
               "maxInterval": 65534,
@@ -33378,11 +33378,11 @@
               "reportableChange": 0
             },
             {
-              "name": "PowerForecast",
+              "name": "Forecast",
               "code": 6,
               "mfgCode": null,
               "side": "server",
-              "type": "PowerForecastStruct",
+              "type": "ForecastStruct",
               "included": 1,
               "storageOption": "RAM",
               "singleton": 0,

@@ -79,7 +79,7 @@ limitations under the License.
   </struct>
 
 
-  <struct name="PowerForecastStruct">
+  <struct name="ForecastStruct">
     <cluster code="0x0098"/>
     <item name="ForecastId"         type="INT16U"   optional="false"/>
     <item name="ActiveSlotNumber"   type="INT16U"   optional="false" isNullable="true"/>
@@ -99,7 +99,7 @@ limitations under the License.
     <item name="ElapsedSlotTime"    type="elapsed_s"  optional="false"/>
     <item name="RemainingSlotTime"  type="elapsed_s"  optional="false"/>
     <item name="SlotIsPauseable"    type="BOOLEAN"    optional="true"/>
-    <item name="ManufacturerESAState" type="INT8S"    optional="true"/>
+    <item name="ManufacturerESAState" type="INT16U"    optional="true"/>
     <!-- Consider if this should be power-mW standard type? -->
     <item name="NominalPower"       type="INT32S"     optional="true"/>
     <!-- Consider if this should be power-mW standard type? -->
@@ -119,44 +119,42 @@ limitations under the License.
 
   <struct name="SlotAdjustmentStruct">
     <cluster code="0x0098"/>
-    <item name="SlotIndex"    type="INT8U"   optional="false"/>
+    <item name="SlotIndex"    type="INT8U"     optional="false"/>
     <!-- Consider if this should be power-mW standard type? -->    
-    <item name="NominalPower" type="INT16S"  optional="false"/>
+    <item name="NominalPower" type="INT32S"    optional="false"/>
     <item name="Duration"     type="elapsed_s" optional="false"/>
   </struct>
 
-  <struct name="PowerLimitsStruct">
+  <struct name="ConstraintsStruct">
     <cluster code="0x0098"/>
-    <item name="StartTime"     type="epoch_s" optional="false"/>
-    <item name="Duration"      type="elapsed_s"  optional="false"/>
+    <item name="StartTime"     type="epoch_s"   optional="false"/>
+    <item name="Duration"      type="elapsed_s" optional="false"/>
     <!-- Consider if this should be power-mW standard type? -->
-    <item name="NominalPower"  type="INT32S"  optional="false"/>
+    <item name="NominalPower"  type="INT32S"    optional="true"/>
     <!-- Consider if this should be energy-Wh standard type? -->   
-    <item name="MaximumEnergy" type="INT32S"  optional="false"/>
+    <item name="MaximumEnergy" type="INT32S"    optional="true"/>
+    <item name="LoadControl"   type="INT8S"     optional="true"/>
   </struct>
-
-
 
   <cluster>
     <name>Device Energy Management</name>
     <domain>Energy Management</domain>
-    <description>This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).</description>
+    <description>This cluster allows a client to manage the energy usage of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).</description>
     <code>0x0098</code>
     <define>DEVICE_ENERGY_MANAGEMENT_CLUSTER</define>
     <client init="false" tick="false">true</client>
     <server init="false" tick="false">true</server> 
-    <attribute side="server" code="0x0000" define="ESA_TYPE"         type="EsaTypeEnum"   writable="false" optional="false"  isNullable="false" default="255">EsaType</attribute>
-    <attribute side="server" code="0x0001" define="ESA_IS_GENERATOR" type="BOOLEAN"       writable="false" optional="false"  isNullable="false" default="false">EsaIsGenerator</attribute>
-    <attribute side="server" code="0x0002" define="ESA_STATE"        type="EsaStateEnum"  writable="false" optional="false"  isNullable="false" default="0">EsaState</attribute>
+    <attribute side="server" code="0x0000" define="ESA_TYPE"                    type="EsaTypeEnum"    writable="false" optional="false"  isNullable="false" default="255">EsaType</attribute>
+    <attribute side="server" code="0x0001" define="ESA_IS_GENERATOR"            type="BOOLEAN"        writable="false" optional="false"  isNullable="false" default="false">EsaIsGenerator</attribute>
+    <attribute side="server" code="0x0002" define="ESA_STATE"                   type="EsaStateEnum"   writable="false" optional="false"  isNullable="false" default="0">EsaState</attribute>
     <!-- Consider if this should be power-mW standard type? -->
-    <attribute side="server" code="0x0003" define="ABS_MIN_POWER"    type="INT32S"        writable="false" optional="false"  isNullable="false" default="0">AbsMinPower</attribute>
+    <attribute side="server" code="0x0003" define="ABS_MIN_POWER"               type="INT32S"         writable="false" optional="false"  isNullable="false" default="0">AbsMinPower</attribute>
     <!-- Consider if this should be power-mW standard type? -->
-    <attribute side="server" code="0x0004" define="ABS_MAX_POWER"    type="INT32S"        writable="false" optional="false"  isNullable="false" default="0">AbsMaxPower</attribute>
-    <attribute side="server" code="0x0005" define="POWER_ADJUSTMENT_CAPABILITY" type="ARRAY"    writable="false" optional="true"  isNullable="true" default="" entryType="PowerAdjustStruct" length="16">PowerAdjustmentCapability</attribute>
-    <attribute side="server" code="0x0006" define="POWER_FORECAST"   type="PowerForecastStruct" writable="false" optional="true"  isNullable="true" default="">PowerForecast</attribute >
+    <attribute side="server" code="0x0004" define="ABS_MAX_POWER"               type="INT32S"         writable="false" optional="false"  isNullable="false" default="0">AbsMaxPower</attribute>
+    <attribute side="server" code="0x0005" define="POWER_ADJUSTMENT_CAPABILITY" type="ARRAY"          writable="false" optional="true"   isNullable="true"  default="" entryType="PowerAdjustStruct" length="16">PowerAdjustmentCapability</attribute>
+    <attribute side="server" code="0x0006" define="FORECAST"                    type="ForecastStruct" writable="false" optional="true"   isNullable="true"  default="">Forecast</attribute >
 
-    <!-- Consider if this PA should be optional -->
-    <command source="client" code="0x00" name="PowerAdjustRequest" optional="false">
+    <command source="client" code="0x00" name="PowerAdjustRequest" optional="true">
       <description>Given valid args, the ESA begins to adjust its power consumption or generation to the level requested.</description>
     <!-- Consider if this should be power-mW standard type? -->
       <arg name="Power"    type="INT32S" optional="false"/>
@@ -164,12 +162,12 @@ limitations under the License.
     </command>
 
     <!-- Consider if this PA should be optional -->
-    <command source="client" code="0x01" name="CancelPowerAdjustRequest" optional="false">
+    <command source="client" code="0x01" name="CancelPowerAdjustRequest" optional="true">
       <description>The ESA SHALL end the active Power adjustment session and return to normal (or idle) power levels.</description>
     </command>
 
     <command source="client" code="0x02" name="StartTimeAdjustRequest" optional="true">
-      <description>If the ESA supports Power Forecast Adjustment and the EsaState is not UserOptOut, it may have its start time shifted after the EarliestStartTime.</description>
+      <description>If the ESA supports Forecast Adjustment and the EsaState is not UserOptOut, it may have its start time shifted after the EarliestStartTime.</description>
       <arg name="RequestedStartTime" type="epoch_s"   optional="false"/>
     </command>
 
@@ -181,15 +179,15 @@ limitations under the License.
       <description>The ESA may resume its current operation, given various conditions.</description>
     </command>
 
-    <command source="client" code="0x05" name="ModifyPowerForecastRequest" optional="true">
-      <description>If the ESA supports PFA, and the EsaState is not UserOptout it may have its power forecast adjusted by a client.</description>
+    <command source="client" code="0x05" name="ModifyForecastRequest" optional="true">
+      <description>If the ESA supports FA, and the EsaState is not UserOptout it may have its forecast adjusted by a client.</description>
       <arg name="ForecastId"      type="INT32U"               optional="false"/>
       <arg name="SlotAdjustments" type="SlotAdjustmentStruct" optional="false" array="true" length="16"/>
     </command>
 
-    <command source="client" code="0x06" name="RequestLimitBasedPowerForecast" optional="true">
-      <description>If the ESA supports PFA, and the EsaState is not UserOptout it may be requested to generate a new power forecast by a client.</description>
-      <arg name="PowerLimits"     type="PowerLimitsStruct"    optional="false" array="true" length="10"/>
+    <command source="client" code="0x06" name="RequestConstraintBasedForecast" optional="true">
+      <description>If the ESA supports FA, and the EsaState is not UserOptout it may be requested to generate a new forecast by a client.</description>
+      <arg name="Constraints"     type="ConstraintsStruct"    optional="false" array="true" length="10"/>
     </command>
 
     <event code="0x00" name="PowerAdjustStart" priority="info" side="server" optional="true">
@@ -216,8 +214,9 @@ limitations under the License.
 
   <bitmap name="Feature" type="BITMAP32">
     <cluster code="0x0098"/>
-    <field mask="0x1" name="PowerAdjustment" />
-    <field mask="0x2" name="PowerForecastReporting" />
-    <field mask="0x4" name="PowerForecastAdjustment" />
+    <field mask="0x1" name="PowerAdjustment"/>
+    <field mask="0x2" name="PowerForecastReporting"/>
+    <field mask="0x4" name="StateForecastReporting"/>
+    <field mask="0x8" name="ForecastAdjustment"/>
   </bitmap>
 </configurator>
