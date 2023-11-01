@@ -237,6 +237,10 @@
 @property (nonatomic, readonly) MTRDevice * device;
 @end
 
+@interface MTRClusterDeviceEnergyManagement ()
+@property (nonatomic, readonly) MTRDevice * device;
+@end
+
 @interface MTRClusterEnergyEVSE ()
 @property (nonatomic, readonly) MTRDevice * device;
 @end
@@ -386,10 +390,6 @@
 @end
 
 @interface MTRClusterAccountLogin ()
-@property (nonatomic, readonly) MTRDevice * device;
-@end
-
-@interface MTRClusterEnergyManagement ()
 @property (nonatomic, readonly) MTRDevice * device;
 @end
 

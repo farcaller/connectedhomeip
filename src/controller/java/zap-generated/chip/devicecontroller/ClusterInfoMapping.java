@@ -7930,6 +7930,102 @@ public class ClusterInfoMapping {
         }
       }
 
+      public static class DelegatedDeviceEnergyManagementClusterPowerAdjustmentCapabilityAttributeCallback implements ChipClusters.DeviceEnergyManagementCluster.PowerAdjustmentCapabilityAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess(@Nullable List<ChipStructs.DeviceEnergyManagementClusterPowerAdjustStruct> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<ChipStructs.DeviceEnergyManagementClusterPowerAdjustStruct>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedDeviceEnergyManagementClusterGeneratedCommandListAttributeCallback implements ChipClusters.DeviceEnergyManagementCluster.GeneratedCommandListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedDeviceEnergyManagementClusterAcceptedCommandListAttributeCallback implements ChipClusters.DeviceEnergyManagementCluster.AcceptedCommandListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedDeviceEnergyManagementClusterEventListAttributeCallback implements ChipClusters.DeviceEnergyManagementCluster.EventListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+      public static class DelegatedDeviceEnergyManagementClusterAttributeListAttributeCallback implements ChipClusters.DeviceEnergyManagementCluster.AttributeListAttributeCallback, DelegatedClusterCallback {
+        private ClusterCommandCallback callback;
+        @Override
+        public void setCallbackDelegate(ClusterCommandCallback callback) {
+          this.callback = callback;
+        }
+
+@Override
+        public void onSuccess( List<Long> valueList) {
+          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
+          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
+          responseValues.put(commandResponseInfo, valueList);
+          callback.onSuccess(responseValues);
+        }
+        @Override
+        public void onError(Exception ex) {
+          callback.onFailure(ex);
+        }
+      }
+
       public static class DelegatedEnergyEvseClusterGetTargetsResponseCallback implements ChipClusters.EnergyEvseCluster.GetTargetsResponseCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
@@ -14061,140 +14157,6 @@ public class ClusterInfoMapping {
         }
       }
 
-      public static class DelegatedEnergyManagementClusterEsaTypeAttributeCallback implements ChipClusters.EnergyManagementCluster.EsaTypeAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess(@Nullable Integer value) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
-          responseValues.put(commandResponseInfo, value);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedEnergyManagementClusterEsaStateAttributeCallback implements ChipClusters.EnergyManagementCluster.EsaStateAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess(@Nullable Integer value) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("value", "Integer");
-          responseValues.put(commandResponseInfo, value);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedEnergyManagementClusterPowerAdjustmentCapabilityAttributeCallback implements ChipClusters.EnergyManagementCluster.PowerAdjustmentCapabilityAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess(@Nullable List<ChipStructs.EnergyManagementClusterPowerAdjustStruct> valueList) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<ChipStructs.EnergyManagementClusterPowerAdjustStruct>");
-          responseValues.put(commandResponseInfo, valueList);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedEnergyManagementClusterGeneratedCommandListAttributeCallback implements ChipClusters.EnergyManagementCluster.GeneratedCommandListAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess( List<Long> valueList) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
-          responseValues.put(commandResponseInfo, valueList);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedEnergyManagementClusterAcceptedCommandListAttributeCallback implements ChipClusters.EnergyManagementCluster.AcceptedCommandListAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess( List<Long> valueList) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
-          responseValues.put(commandResponseInfo, valueList);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedEnergyManagementClusterEventListAttributeCallback implements ChipClusters.EnergyManagementCluster.EventListAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess( List<Long> valueList) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
-          responseValues.put(commandResponseInfo, valueList);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-      public static class DelegatedEnergyManagementClusterAttributeListAttributeCallback implements ChipClusters.EnergyManagementCluster.AttributeListAttributeCallback, DelegatedClusterCallback {
-        private ClusterCommandCallback callback;
-        @Override
-        public void setCallbackDelegate(ClusterCommandCallback callback) {
-          this.callback = callback;
-        }
-
-@Override
-        public void onSuccess( List<Long> valueList) {
-          Map<CommandResponseInfo, Object> responseValues = new LinkedHashMap<>();
-          CommandResponseInfo commandResponseInfo = new CommandResponseInfo("valueList", "List<Long>");
-          responseValues.put(commandResponseInfo, valueList);
-          callback.onSuccess(responseValues);
-        }
-        @Override
-        public void onError(Exception ex) {
-          callback.onFailure(ex);
-        }
-      }
-
       public static class DelegatedElectricalMeasurementClusterGetProfileInfoResponseCommandCallback implements ChipClusters.ElectricalMeasurementCluster.GetProfileInfoResponseCommandCallback, DelegatedClusterCallback {
         private ClusterCommandCallback callback;
         @Override
@@ -16554,6 +16516,9 @@ public class ClusterInfoMapping {
       ClusterInfo activatedCarbonFilterMonitoringClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.ActivatedCarbonFilterMonitoringCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("activatedCarbonFilterMonitoring", activatedCarbonFilterMonitoringClusterInfo);
+      ClusterInfo deviceEnergyManagementClusterInfo = new ClusterInfo(
+        (ptr, endpointId) -> new ChipClusters.DeviceEnergyManagementCluster(ptr, endpointId), new HashMap<>());
+      clusterMap.put("deviceEnergyManagement", deviceEnergyManagementClusterInfo);
       ClusterInfo energyEvseClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.EnergyEvseCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("energyEvse", energyEvseClusterInfo);
@@ -16668,9 +16633,6 @@ public class ClusterInfoMapping {
       ClusterInfo accountLoginClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.AccountLoginCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("accountLogin", accountLoginClusterInfo);
-      ClusterInfo energyManagementClusterInfo = new ClusterInfo(
-        (ptr, endpointId) -> new ChipClusters.EnergyManagementCluster(ptr, endpointId), new HashMap<>());
-      clusterMap.put("energyManagement", energyManagementClusterInfo);
       ClusterInfo electricalMeasurementClusterInfo = new ClusterInfo(
         (ptr, endpointId) -> new ChipClusters.ElectricalMeasurementCluster(ptr, endpointId), new HashMap<>());
       clusterMap.put("electricalMeasurement", electricalMeasurementClusterInfo);
@@ -16750,6 +16712,7 @@ public class ClusterInfoMapping {
       destination.get("rvcOperationalState").combineCommands(source.get("rvcOperationalState"));
       destination.get("hepaFilterMonitoring").combineCommands(source.get("hepaFilterMonitoring"));
       destination.get("activatedCarbonFilterMonitoring").combineCommands(source.get("activatedCarbonFilterMonitoring"));
+      destination.get("deviceEnergyManagement").combineCommands(source.get("deviceEnergyManagement"));
       destination.get("energyEvse").combineCommands(source.get("energyEvse"));
       destination.get("doorLock").combineCommands(source.get("doorLock"));
       destination.get("windowCovering").combineCommands(source.get("windowCovering"));
@@ -16788,7 +16751,6 @@ public class ClusterInfoMapping {
       destination.get("applicationLauncher").combineCommands(source.get("applicationLauncher"));
       destination.get("applicationBasic").combineCommands(source.get("applicationBasic"));
       destination.get("accountLogin").combineCommands(source.get("accountLogin"));
-      destination.get("energyManagement").combineCommands(source.get("energyManagement"));
       destination.get("electricalMeasurement").combineCommands(source.get("electricalMeasurement"));
       destination.get("waterHeater").combineCommands(source.get("waterHeater"));
       destination.get("electricalPowerMeasurement").combineCommands(source.get("electricalPowerMeasurement"));
@@ -19142,6 +19104,116 @@ public class ClusterInfoMapping {
        );
        activatedCarbonFilterMonitoringClusterInteractionInfoMap.put("resetCondition", activatedCarbonFilterMonitoringresetConditionInteractionInfo);
      commandMap.put("activatedCarbonFilterMonitoring", activatedCarbonFilterMonitoringClusterInteractionInfoMap);
+     Map<String, InteractionInfo> deviceEnergyManagementClusterInteractionInfoMap = new LinkedHashMap<>();
+     Map<String, CommandParameterInfo> deviceEnergyManagementpowerAdjustRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo deviceEnergyManagementpowerAdjustRequestpowerCommandParameterInfo = new CommandParameterInfo("power", Long.class, Long.class);
+       deviceEnergyManagementpowerAdjustRequestCommandParams.put("power",deviceEnergyManagementpowerAdjustRequestpowerCommandParameterInfo);
+      
+       CommandParameterInfo deviceEnergyManagementpowerAdjustRequestdurationCommandParameterInfo = new CommandParameterInfo("duration", Long.class, Long.class);
+       deviceEnergyManagementpowerAdjustRequestCommandParams.put("duration",deviceEnergyManagementpowerAdjustRequestdurationCommandParameterInfo);
+     
+       InteractionInfo deviceEnergyManagementpowerAdjustRequestInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .powerAdjustRequest((DefaultClusterCallback) callback
+           , (Long)
+           commandArguments.get("power")
+           , (Long)
+           commandArguments.get("duration")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementpowerAdjustRequestCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("powerAdjustRequest", deviceEnergyManagementpowerAdjustRequestInteractionInfo);
+     Map<String, CommandParameterInfo> deviceEnergyManagementcancelPowerAdjustRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo deviceEnergyManagementcancelPowerAdjustRequestInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .cancelPowerAdjustRequest((DefaultClusterCallback) callback
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementcancelPowerAdjustRequestCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("cancelPowerAdjustRequest", deviceEnergyManagementcancelPowerAdjustRequestInteractionInfo);
+     Map<String, CommandParameterInfo> deviceEnergyManagementstartTimeAdjustRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo deviceEnergyManagementstartTimeAdjustRequestrequestedStartTimeCommandParameterInfo = new CommandParameterInfo("requestedStartTime", Long.class, Long.class);
+       deviceEnergyManagementstartTimeAdjustRequestCommandParams.put("requestedStartTime",deviceEnergyManagementstartTimeAdjustRequestrequestedStartTimeCommandParameterInfo);
+     
+       InteractionInfo deviceEnergyManagementstartTimeAdjustRequestInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .startTimeAdjustRequest((DefaultClusterCallback) callback
+           , (Long)
+           commandArguments.get("requestedStartTime")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementstartTimeAdjustRequestCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("startTimeAdjustRequest", deviceEnergyManagementstartTimeAdjustRequestInteractionInfo);
+     Map<String, CommandParameterInfo> deviceEnergyManagementpauseRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo deviceEnergyManagementpauseRequestInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .pauseRequest((DefaultClusterCallback) callback
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementpauseRequestCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("pauseRequest", deviceEnergyManagementpauseRequestInteractionInfo);
+     Map<String, CommandParameterInfo> deviceEnergyManagementresumeRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo deviceEnergyManagementresumeRequestInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .resumeRequest((DefaultClusterCallback) callback
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementresumeRequestCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("resumeRequest", deviceEnergyManagementresumeRequestInteractionInfo);
+     Map<String, CommandParameterInfo> deviceEnergyManagementmodifyForecastRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       CommandParameterInfo deviceEnergyManagementmodifyForecastRequestforecastIdCommandParameterInfo = new CommandParameterInfo("forecastId", Long.class, Long.class);
+       deviceEnergyManagementmodifyForecastRequestCommandParams.put("forecastId",deviceEnergyManagementmodifyForecastRequestforecastIdCommandParameterInfo);
+      
+       InteractionInfo deviceEnergyManagementmodifyForecastRequestInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .modifyForecastRequest((DefaultClusterCallback) callback
+           , (Long)
+           commandArguments.get("forecastId")
+           , (ArrayList<ChipStructs.DeviceEnergyManagementClusterSlotAdjustmentStruct>)
+           commandArguments.get("slotAdjustments")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementmodifyForecastRequestCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("modifyForecastRequest", deviceEnergyManagementmodifyForecastRequestInteractionInfo);
+     Map<String, CommandParameterInfo> deviceEnergyManagementrequestConstraintBasedForecastCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
+       InteractionInfo deviceEnergyManagementrequestConstraintBasedForecastInteractionInfo = new InteractionInfo(
+         (cluster, callback, commandArguments) -> {
+           ((ChipClusters.DeviceEnergyManagementCluster) cluster)
+           .requestConstraintBasedForecast((DefaultClusterCallback) callback
+           , (ArrayList<ChipStructs.DeviceEnergyManagementClusterConstraintsStruct>)
+           commandArguments.get("constraints")
+           
+           );
+         },
+         () -> new DelegatedDefaultClusterCallback(),
+           deviceEnergyManagementrequestConstraintBasedForecastCommandParams
+       );
+       deviceEnergyManagementClusterInteractionInfoMap.put("requestConstraintBasedForecast", deviceEnergyManagementrequestConstraintBasedForecastInteractionInfo);
+     commandMap.put("deviceEnergyManagement", deviceEnergyManagementClusterInteractionInfoMap);
      Map<String, InteractionInfo> energyEvseClusterInteractionInfoMap = new LinkedHashMap<>();
      Map<String, CommandParameterInfo> energyEvsedisableCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
        InteractionInfo energyEvsedisableInteractionInfo = new InteractionInfo(
@@ -21223,116 +21295,6 @@ public class ClusterInfoMapping {
        );
        accountLoginClusterInteractionInfoMap.put("logout", accountLoginlogoutInteractionInfo);
      commandMap.put("accountLogin", accountLoginClusterInteractionInfoMap);
-     Map<String, InteractionInfo> energyManagementClusterInteractionInfoMap = new LinkedHashMap<>();
-     Map<String, CommandParameterInfo> energyManagementpowerAdjustRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       CommandParameterInfo energyManagementpowerAdjustRequestpowerCommandParameterInfo = new CommandParameterInfo("power", Integer.class, Integer.class);
-       energyManagementpowerAdjustRequestCommandParams.put("power",energyManagementpowerAdjustRequestpowerCommandParameterInfo);
-      
-       CommandParameterInfo energyManagementpowerAdjustRequestdurationCommandParameterInfo = new CommandParameterInfo("duration", Long.class, Long.class);
-       energyManagementpowerAdjustRequestCommandParams.put("duration",energyManagementpowerAdjustRequestdurationCommandParameterInfo);
-     
-       InteractionInfo energyManagementpowerAdjustRequestInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .powerAdjustRequest((DefaultClusterCallback) callback
-           , (Integer)
-           commandArguments.get("power")
-           , (Long)
-           commandArguments.get("duration")
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementpowerAdjustRequestCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("powerAdjustRequest", energyManagementpowerAdjustRequestInteractionInfo);
-     Map<String, CommandParameterInfo> energyManagementcancelPowerAdjustRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       InteractionInfo energyManagementcancelPowerAdjustRequestInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .cancelPowerAdjustRequest((DefaultClusterCallback) callback
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementcancelPowerAdjustRequestCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("cancelPowerAdjustRequest", energyManagementcancelPowerAdjustRequestInteractionInfo);
-     Map<String, CommandParameterInfo> energyManagementstartTimeAdjustRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       CommandParameterInfo energyManagementstartTimeAdjustRequestrequestedStartTimeCommandParameterInfo = new CommandParameterInfo("requestedStartTime", Long.class, Long.class);
-       energyManagementstartTimeAdjustRequestCommandParams.put("requestedStartTime",energyManagementstartTimeAdjustRequestrequestedStartTimeCommandParameterInfo);
-     
-       InteractionInfo energyManagementstartTimeAdjustRequestInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .startTimeAdjustRequest((DefaultClusterCallback) callback
-           , (Long)
-           commandArguments.get("requestedStartTime")
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementstartTimeAdjustRequestCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("startTimeAdjustRequest", energyManagementstartTimeAdjustRequestInteractionInfo);
-     Map<String, CommandParameterInfo> energyManagementpauseRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       InteractionInfo energyManagementpauseRequestInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .pauseRequest((DefaultClusterCallback) callback
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementpauseRequestCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("pauseRequest", energyManagementpauseRequestInteractionInfo);
-     Map<String, CommandParameterInfo> energyManagementresumeRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       InteractionInfo energyManagementresumeRequestInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .resumeRequest((DefaultClusterCallback) callback
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementresumeRequestCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("resumeRequest", energyManagementresumeRequestInteractionInfo);
-     Map<String, CommandParameterInfo> energyManagementmodifyPowerForecastRequestCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       CommandParameterInfo energyManagementmodifyPowerForecastRequestforecastIdCommandParameterInfo = new CommandParameterInfo("forecastId", Long.class, Long.class);
-       energyManagementmodifyPowerForecastRequestCommandParams.put("forecastId",energyManagementmodifyPowerForecastRequestforecastIdCommandParameterInfo);
-      
-       InteractionInfo energyManagementmodifyPowerForecastRequestInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .modifyPowerForecastRequest((DefaultClusterCallback) callback
-           , (Long)
-           commandArguments.get("forecastId")
-           , (ArrayList<ChipStructs.EnergyManagementClusterSlotAdjustmentStruct>)
-           commandArguments.get("slotAdjustments")
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementmodifyPowerForecastRequestCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("modifyPowerForecastRequest", energyManagementmodifyPowerForecastRequestInteractionInfo);
-     Map<String, CommandParameterInfo> energyManagementrequestLimitBasedPowerForecastCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
-       InteractionInfo energyManagementrequestLimitBasedPowerForecastInteractionInfo = new InteractionInfo(
-         (cluster, callback, commandArguments) -> {
-           ((ChipClusters.EnergyManagementCluster) cluster)
-           .requestLimitBasedPowerForecast((DefaultClusterCallback) callback
-           , (ArrayList<ChipStructs.EnergyManagementClusterPowerLimitsStruct>)
-           commandArguments.get("powerLimits")
-           
-           );
-         },
-         () -> new DelegatedDefaultClusterCallback(),
-           energyManagementrequestLimitBasedPowerForecastCommandParams
-       );
-       energyManagementClusterInteractionInfoMap.put("requestLimitBasedPowerForecast", energyManagementrequestLimitBasedPowerForecastInteractionInfo);
-     commandMap.put("energyManagement", energyManagementClusterInteractionInfoMap);
      Map<String, InteractionInfo> electricalMeasurementClusterInteractionInfoMap = new LinkedHashMap<>();
      Map<String, CommandParameterInfo> electricalMeasurementgetProfileInfoCommandCommandParams = new LinkedHashMap<String, CommandParameterInfo>();
        InteractionInfo electricalMeasurementgetProfileInfoCommandInteractionInfo = new InteractionInfo(

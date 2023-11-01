@@ -3225,6 +3225,64 @@ static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
 } // namespace Attributes
 } // namespace ActivatedCarbonFilterMonitoring
 
+namespace DeviceEnergyManagement {
+namespace Attributes {
+
+namespace EsaType {
+static constexpr AttributeId Id = 0x00000000;
+} // namespace EsaType
+
+namespace EsaIsGenerator {
+static constexpr AttributeId Id = 0x00000001;
+} // namespace EsaIsGenerator
+
+namespace EsaState {
+static constexpr AttributeId Id = 0x00000002;
+} // namespace EsaState
+
+namespace AbsMinPower {
+static constexpr AttributeId Id = 0x00000003;
+} // namespace AbsMinPower
+
+namespace AbsMaxPower {
+static constexpr AttributeId Id = 0x00000004;
+} // namespace AbsMaxPower
+
+namespace PowerAdjustmentCapability {
+static constexpr AttributeId Id = 0x00000005;
+} // namespace PowerAdjustmentCapability
+
+namespace Forecast {
+static constexpr AttributeId Id = 0x00000006;
+} // namespace Forecast
+
+namespace GeneratedCommandList {
+static constexpr AttributeId Id = Globals::Attributes::GeneratedCommandList::Id;
+} // namespace GeneratedCommandList
+
+namespace AcceptedCommandList {
+static constexpr AttributeId Id = Globals::Attributes::AcceptedCommandList::Id;
+} // namespace AcceptedCommandList
+
+namespace EventList {
+static constexpr AttributeId Id = Globals::Attributes::EventList::Id;
+} // namespace EventList
+
+namespace AttributeList {
+static constexpr AttributeId Id = Globals::Attributes::AttributeList::Id;
+} // namespace AttributeList
+
+namespace FeatureMap {
+static constexpr AttributeId Id = Globals::Attributes::FeatureMap::Id;
+} // namespace FeatureMap
+
+namespace ClusterRevision {
+static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
+} // namespace ClusterRevision
+
+} // namespace Attributes
+} // namespace DeviceEnergyManagement
+
 namespace EnergyEvse {
 namespace Attributes {
 
@@ -6060,64 +6118,6 @@ static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
 
 } // namespace Attributes
 } // namespace AccountLogin
-
-namespace EnergyManagement {
-namespace Attributes {
-
-namespace EsaType {
-static constexpr AttributeId Id = 0x00000000;
-} // namespace EsaType
-
-namespace EsaIsGenerator {
-static constexpr AttributeId Id = 0x00000001;
-} // namespace EsaIsGenerator
-
-namespace EsaState {
-static constexpr AttributeId Id = 0x00000002;
-} // namespace EsaState
-
-namespace AbsMinPower {
-static constexpr AttributeId Id = 0x00000003;
-} // namespace AbsMinPower
-
-namespace AbsMaxPower {
-static constexpr AttributeId Id = 0x00000004;
-} // namespace AbsMaxPower
-
-namespace PowerAdjustmentCapability {
-static constexpr AttributeId Id = 0x00000005;
-} // namespace PowerAdjustmentCapability
-
-namespace PowerForecast {
-static constexpr AttributeId Id = 0x00000006;
-} // namespace PowerForecast
-
-namespace GeneratedCommandList {
-static constexpr AttributeId Id = Globals::Attributes::GeneratedCommandList::Id;
-} // namespace GeneratedCommandList
-
-namespace AcceptedCommandList {
-static constexpr AttributeId Id = Globals::Attributes::AcceptedCommandList::Id;
-} // namespace AcceptedCommandList
-
-namespace EventList {
-static constexpr AttributeId Id = Globals::Attributes::EventList::Id;
-} // namespace EventList
-
-namespace AttributeList {
-static constexpr AttributeId Id = Globals::Attributes::AttributeList::Id;
-} // namespace AttributeList
-
-namespace FeatureMap {
-static constexpr AttributeId Id = Globals::Attributes::FeatureMap::Id;
-} // namespace FeatureMap
-
-namespace ClusterRevision {
-static constexpr AttributeId Id = Globals::Attributes::ClusterRevision::Id;
-} // namespace ClusterRevision
-
-} // namespace Attributes
-} // namespace EnergyManagement
 
 namespace ElectricalMeasurement {
 namespace Attributes {

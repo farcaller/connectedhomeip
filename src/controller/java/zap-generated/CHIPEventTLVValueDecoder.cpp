@@ -3427,6 +3427,145 @@ jobject DecodeEventValue(const app::ConcreteEventPath & aPath, TLV::TLVReader & 
         }
         break;
     }
+    case app::Clusters::DeviceEnergyManagement::Id: {
+        using namespace app::Clusters::DeviceEnergyManagement;
+        switch (aPath.mEventId)
+        {
+        case Events::PowerAdjustStart::Id: {
+            Events::PowerAdjustStart::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jclass powerAdjustStartStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$DeviceEnergyManagementClusterPowerAdjustStartEvent",
+                powerAdjustStartStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl, "Could not find class ChipEventStructs$DeviceEnergyManagementClusterPowerAdjustStartEvent");
+                return nullptr;
+            }
+            jmethodID powerAdjustStartStructCtor = env->GetMethodID(powerAdjustStartStructClass, "<init>", "()V");
+            if (powerAdjustStartStructCtor == nullptr)
+            {
+                ChipLogError(Zcl, "Could not find ChipEventStructs$DeviceEnergyManagementClusterPowerAdjustStartEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(powerAdjustStartStructClass, powerAdjustStartStructCtor);
+
+            return value;
+        }
+        case Events::PowerAdjustEnd::Id: {
+            Events::PowerAdjustEnd::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jobject value_cause;
+            std::string value_causeClassName     = "java/lang/Integer";
+            std::string value_causeCtorSignature = "(I)V";
+            jint jnivalue_cause                  = static_cast<jint>(cppValue.cause);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jint>(
+                value_causeClassName.c_str(), value_causeCtorSignature.c_str(), jnivalue_cause, value_cause);
+
+            jobject value_duration;
+            std::string value_durationClassName     = "java/lang/Long";
+            std::string value_durationCtorSignature = "(J)V";
+            jlong jnivalue_duration                 = static_cast<jlong>(cppValue.duration);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
+                value_durationClassName.c_str(), value_durationCtorSignature.c_str(), jnivalue_duration, value_duration);
+
+            jobject value_energyUse;
+            std::string value_energyUseClassName     = "java/lang/Long";
+            std::string value_energyUseCtorSignature = "(J)V";
+            jlong jnivalue_energyUse                 = static_cast<jlong>(cppValue.energyUse);
+            chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
+                value_energyUseClassName.c_str(), value_energyUseCtorSignature.c_str(), jnivalue_energyUse, value_energyUse);
+
+            jclass powerAdjustEndStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$DeviceEnergyManagementClusterPowerAdjustEndEvent",
+                powerAdjustEndStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl, "Could not find class ChipEventStructs$DeviceEnergyManagementClusterPowerAdjustEndEvent");
+                return nullptr;
+            }
+            jmethodID powerAdjustEndStructCtor =
+                env->GetMethodID(powerAdjustEndStructClass, "<init>", "(Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Long;)V");
+            if (powerAdjustEndStructCtor == nullptr)
+            {
+                ChipLogError(Zcl, "Could not find ChipEventStructs$DeviceEnergyManagementClusterPowerAdjustEndEvent constructor");
+                return nullptr;
+            }
+
+            jobject value =
+                env->NewObject(powerAdjustEndStructClass, powerAdjustEndStructCtor, value_cause, value_duration, value_energyUse);
+
+            return value;
+        }
+        case Events::Paused::Id: {
+            Events::Paused::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jclass pausedStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$DeviceEnergyManagementClusterPausedEvent", pausedStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl, "Could not find class ChipEventStructs$DeviceEnergyManagementClusterPausedEvent");
+                return nullptr;
+            }
+            jmethodID pausedStructCtor = env->GetMethodID(pausedStructClass, "<init>", "()V");
+            if (pausedStructCtor == nullptr)
+            {
+                ChipLogError(Zcl, "Could not find ChipEventStructs$DeviceEnergyManagementClusterPausedEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(pausedStructClass, pausedStructCtor);
+
+            return value;
+        }
+        case Events::Resumed::Id: {
+            Events::Resumed::DecodableType cppValue;
+            *aError = app::DataModel::Decode(aReader, cppValue);
+            if (*aError != CHIP_NO_ERROR)
+            {
+                return nullptr;
+            }
+            jclass resumedStructClass;
+            err = chip::JniReferences::GetInstance().GetClassRef(
+                env, "chip/devicecontroller/ChipEventStructs$DeviceEnergyManagementClusterResumedEvent", resumedStructClass);
+            if (err != CHIP_NO_ERROR)
+            {
+                ChipLogError(Zcl, "Could not find class ChipEventStructs$DeviceEnergyManagementClusterResumedEvent");
+                return nullptr;
+            }
+            jmethodID resumedStructCtor = env->GetMethodID(resumedStructClass, "<init>", "()V");
+            if (resumedStructCtor == nullptr)
+            {
+                ChipLogError(Zcl, "Could not find ChipEventStructs$DeviceEnergyManagementClusterResumedEvent constructor");
+                return nullptr;
+            }
+
+            jobject value = env->NewObject(resumedStructClass, resumedStructCtor);
+
+            return value;
+        }
+        default:
+            *aError = CHIP_ERROR_IM_MALFORMED_EVENT_PATH_IB;
+            break;
+        }
+        break;
+    }
     case app::Clusters::EnergyEvse::Id: {
         using namespace app::Clusters::EnergyEvse;
         switch (aPath.mEventId)
@@ -5074,175 +5213,6 @@ jobject DecodeEventValue(const app::ConcreteEventPath & aPath, TLV::TLVReader & 
         using namespace app::Clusters::AccountLogin;
         switch (aPath.mEventId)
         {
-        default:
-            *aError = CHIP_ERROR_IM_MALFORMED_EVENT_PATH_IB;
-            break;
-        }
-        break;
-    }
-    case app::Clusters::EnergyManagement::Id: {
-        using namespace app::Clusters::EnergyManagement;
-        switch (aPath.mEventId)
-        {
-        case Events::PowerAdjustStart::Id: {
-            Events::PowerAdjustStart::DecodableType cppValue;
-            *aError = app::DataModel::Decode(aReader, cppValue);
-            if (*aError != CHIP_NO_ERROR)
-            {
-                return nullptr;
-            }
-            jclass powerAdjustStartStructClass;
-            err = chip::JniReferences::GetInstance().GetClassRef(
-                env, "chip/devicecontroller/ChipEventStructs$EnergyManagementClusterPowerAdjustStartEvent",
-                powerAdjustStartStructClass);
-            if (err != CHIP_NO_ERROR)
-            {
-                ChipLogError(Zcl, "Could not find class ChipEventStructs$EnergyManagementClusterPowerAdjustStartEvent");
-                return nullptr;
-            }
-            jmethodID powerAdjustStartStructCtor = env->GetMethodID(powerAdjustStartStructClass, "<init>", "()V");
-            if (powerAdjustStartStructCtor == nullptr)
-            {
-                ChipLogError(Zcl, "Could not find ChipEventStructs$EnergyManagementClusterPowerAdjustStartEvent constructor");
-                return nullptr;
-            }
-
-            jobject value = env->NewObject(powerAdjustStartStructClass, powerAdjustStartStructCtor);
-
-            return value;
-        }
-        case Events::PowerAdjustEnd::Id: {
-            Events::PowerAdjustEnd::DecodableType cppValue;
-            *aError = app::DataModel::Decode(aReader, cppValue);
-            if (*aError != CHIP_NO_ERROR)
-            {
-                return nullptr;
-            }
-            jobject value_cause;
-            if (!cppValue.cause.HasValue())
-            {
-                chip::JniReferences::GetInstance().CreateOptional(nullptr, value_cause);
-            }
-            else
-            {
-                jobject value_causeInsideOptional;
-                std::string value_causeInsideOptionalClassName     = "java/lang/Integer";
-                std::string value_causeInsideOptionalCtorSignature = "(I)V";
-                jint jnivalue_causeInsideOptional                  = static_cast<jint>(cppValue.cause.Value());
-                chip::JniReferences::GetInstance().CreateBoxedObject<jint>(value_causeInsideOptionalClassName.c_str(),
-                                                                           value_causeInsideOptionalCtorSignature.c_str(),
-                                                                           jnivalue_causeInsideOptional, value_causeInsideOptional);
-                chip::JniReferences::GetInstance().CreateOptional(value_causeInsideOptional, value_cause);
-            }
-
-            jobject value_duration;
-            if (!cppValue.duration.HasValue())
-            {
-                chip::JniReferences::GetInstance().CreateOptional(nullptr, value_duration);
-            }
-            else
-            {
-                jobject value_durationInsideOptional;
-                std::string value_durationInsideOptionalClassName     = "java/lang/Long";
-                std::string value_durationInsideOptionalCtorSignature = "(J)V";
-                jlong jnivalue_durationInsideOptional                 = static_cast<jlong>(cppValue.duration.Value());
-                chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
-                    value_durationInsideOptionalClassName.c_str(), value_durationInsideOptionalCtorSignature.c_str(),
-                    jnivalue_durationInsideOptional, value_durationInsideOptional);
-                chip::JniReferences::GetInstance().CreateOptional(value_durationInsideOptional, value_duration);
-            }
-
-            jobject value_energyUse;
-            if (!cppValue.energyUse.HasValue())
-            {
-                chip::JniReferences::GetInstance().CreateOptional(nullptr, value_energyUse);
-            }
-            else
-            {
-                jobject value_energyUseInsideOptional;
-                std::string value_energyUseInsideOptionalClassName     = "java/lang/Long";
-                std::string value_energyUseInsideOptionalCtorSignature = "(J)V";
-                jlong jnivalue_energyUseInsideOptional                 = static_cast<jlong>(cppValue.energyUse.Value());
-                chip::JniReferences::GetInstance().CreateBoxedObject<jlong>(
-                    value_energyUseInsideOptionalClassName.c_str(), value_energyUseInsideOptionalCtorSignature.c_str(),
-                    jnivalue_energyUseInsideOptional, value_energyUseInsideOptional);
-                chip::JniReferences::GetInstance().CreateOptional(value_energyUseInsideOptional, value_energyUse);
-            }
-
-            jclass powerAdjustEndStructClass;
-            err = chip::JniReferences::GetInstance().GetClassRef(
-                env, "chip/devicecontroller/ChipEventStructs$EnergyManagementClusterPowerAdjustEndEvent",
-                powerAdjustEndStructClass);
-            if (err != CHIP_NO_ERROR)
-            {
-                ChipLogError(Zcl, "Could not find class ChipEventStructs$EnergyManagementClusterPowerAdjustEndEvent");
-                return nullptr;
-            }
-            jmethodID powerAdjustEndStructCtor = env->GetMethodID(
-                powerAdjustEndStructClass, "<init>", "(Ljava/util/Optional;Ljava/util/Optional;Ljava/util/Optional;)V");
-            if (powerAdjustEndStructCtor == nullptr)
-            {
-                ChipLogError(Zcl, "Could not find ChipEventStructs$EnergyManagementClusterPowerAdjustEndEvent constructor");
-                return nullptr;
-            }
-
-            jobject value =
-                env->NewObject(powerAdjustEndStructClass, powerAdjustEndStructCtor, value_cause, value_duration, value_energyUse);
-
-            return value;
-        }
-        case Events::Paused::Id: {
-            Events::Paused::DecodableType cppValue;
-            *aError = app::DataModel::Decode(aReader, cppValue);
-            if (*aError != CHIP_NO_ERROR)
-            {
-                return nullptr;
-            }
-            jclass pausedStructClass;
-            err = chip::JniReferences::GetInstance().GetClassRef(
-                env, "chip/devicecontroller/ChipEventStructs$EnergyManagementClusterPausedEvent", pausedStructClass);
-            if (err != CHIP_NO_ERROR)
-            {
-                ChipLogError(Zcl, "Could not find class ChipEventStructs$EnergyManagementClusterPausedEvent");
-                return nullptr;
-            }
-            jmethodID pausedStructCtor = env->GetMethodID(pausedStructClass, "<init>", "()V");
-            if (pausedStructCtor == nullptr)
-            {
-                ChipLogError(Zcl, "Could not find ChipEventStructs$EnergyManagementClusterPausedEvent constructor");
-                return nullptr;
-            }
-
-            jobject value = env->NewObject(pausedStructClass, pausedStructCtor);
-
-            return value;
-        }
-        case Events::Resumed::Id: {
-            Events::Resumed::DecodableType cppValue;
-            *aError = app::DataModel::Decode(aReader, cppValue);
-            if (*aError != CHIP_NO_ERROR)
-            {
-                return nullptr;
-            }
-            jclass resumedStructClass;
-            err = chip::JniReferences::GetInstance().GetClassRef(
-                env, "chip/devicecontroller/ChipEventStructs$EnergyManagementClusterResumedEvent", resumedStructClass);
-            if (err != CHIP_NO_ERROR)
-            {
-                ChipLogError(Zcl, "Could not find class ChipEventStructs$EnergyManagementClusterResumedEvent");
-                return nullptr;
-            }
-            jmethodID resumedStructCtor = env->GetMethodID(resumedStructClass, "<init>", "()V");
-            if (resumedStructCtor == nullptr)
-            {
-                ChipLogError(Zcl, "Could not find ChipEventStructs$EnergyManagementClusterResumedEvent constructor");
-                return nullptr;
-            }
-
-            jobject value = env->NewObject(resumedStructClass, resumedStructCtor);
-
-            return value;
-        }
         default:
             *aError = CHIP_ERROR_IM_MALFORMED_EVENT_PATH_IB;
             break;

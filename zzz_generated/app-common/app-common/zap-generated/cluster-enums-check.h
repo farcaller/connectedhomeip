@@ -1595,6 +1595,73 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(ActivatedCarbonFilterMo
     }
 }
 
+static auto __attribute__((unused)) EnsureKnownEnumValue(DeviceEnergyManagement::CauseEnum val)
+{
+    using EnumType = DeviceEnergyManagement::CauseEnum;
+    switch (val)
+    {
+    case EnumType::kNormalCompletion:
+    case EnumType::kOffline:
+    case EnumType::kFault:
+    case EnumType::kUserOptout:
+        return val;
+    default:
+        return static_cast<EnumType>(4);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(DeviceEnergyManagement::CostTypeEnum val)
+{
+    using EnumType = DeviceEnergyManagement::CostTypeEnum;
+    switch (val)
+    {
+    case EnumType::kFinancial:
+    case EnumType::kGHGEmissions:
+    case EnumType::kComfort:
+    case EnumType::kTemperature:
+        return val;
+    default:
+        return static_cast<EnumType>(4);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(DeviceEnergyManagement::EsaStateEnum val)
+{
+    using EnumType = DeviceEnergyManagement::EsaStateEnum;
+    switch (val)
+    {
+    case EnumType::kOffline:
+    case EnumType::kOnline:
+    case EnumType::kFault:
+    case EnumType::kUserOptOut:
+    case EnumType::kPowerAdjustActive:
+    case EnumType::kPaused:
+        return val;
+    default:
+        return static_cast<EnumType>(6);
+    }
+}
+static auto __attribute__((unused)) EnsureKnownEnumValue(DeviceEnergyManagement::EsaTypeEnum val)
+{
+    using EnumType = DeviceEnergyManagement::EsaTypeEnum;
+    switch (val)
+    {
+    case EnumType::kEvse:
+    case EnumType::kSpaceHeating:
+    case EnumType::kWaterHeating:
+    case EnumType::kSpaceCooling:
+    case EnumType::kSpaceHeatingCooling:
+    case EnumType::kBatteryStorage:
+    case EnumType::kSolarPV:
+    case EnumType::kFridgeFreezer:
+    case EnumType::kWashingMachine:
+    case EnumType::kDishwasher:
+    case EnumType::kCooking:
+    case EnumType::kOther:
+        return val;
+    default:
+        return static_cast<EnumType>(11);
+    }
+}
+
 static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyEvse::EnergyTransferStoppedReasonEnum val)
 {
     using EnumType = EnergyEvse::EnergyTransferStoppedReasonEnum;
@@ -3118,73 +3185,6 @@ static auto __attribute__((unused)) EnsureKnownEnumValue(ApplicationBasic::Appli
         return val;
     default:
         return static_cast<EnumType>(4);
-    }
-}
-
-static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyManagement::CauseEnum val)
-{
-    using EnumType = EnergyManagement::CauseEnum;
-    switch (val)
-    {
-    case EnumType::kNormalCompletion:
-    case EnumType::kOffline:
-    case EnumType::kFault:
-    case EnumType::kUserOptout:
-        return val;
-    default:
-        return static_cast<EnumType>(4);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyManagement::CostTypeEnum val)
-{
-    using EnumType = EnergyManagement::CostTypeEnum;
-    switch (val)
-    {
-    case EnumType::kFinancial:
-    case EnumType::kGHGEmissions:
-    case EnumType::kComfort:
-    case EnumType::kTemperature:
-        return val;
-    default:
-        return static_cast<EnumType>(4);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyManagement::EsaStateEnum val)
-{
-    using EnumType = EnergyManagement::EsaStateEnum;
-    switch (val)
-    {
-    case EnumType::kOffline:
-    case EnumType::kOnline:
-    case EnumType::kFault:
-    case EnumType::kUserOptout:
-    case EnumType::kPowerAdjustActive:
-    case EnumType::kPaused:
-        return val;
-    default:
-        return static_cast<EnumType>(6);
-    }
-}
-static auto __attribute__((unused)) EnsureKnownEnumValue(EnergyManagement::EsaTypeEnum val)
-{
-    using EnumType = EnergyManagement::EsaTypeEnum;
-    switch (val)
-    {
-    case EnumType::kEvse:
-    case EnumType::kSpaceHeating:
-    case EnumType::kWaterHeating:
-    case EnumType::kSpaceCooling:
-    case EnumType::kSpaceHeatingCooling:
-    case EnumType::kBatteryStorage:
-    case EnumType::kSolarPV:
-    case EnumType::kFridgeFreezer:
-    case EnumType::kWashingMachine:
-    case EnumType::kDishwasher:
-    case EnumType::kCooking:
-    case EnumType::kOther:
-        return val;
-    default:
-        return static_cast<EnumType>(11);
     }
 }
 

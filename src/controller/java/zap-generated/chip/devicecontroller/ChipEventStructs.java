@@ -1428,6 +1428,84 @@ public @Nullable Optional<Long> pausedTime;
   }
 }
 
+public static class DeviceEnergyManagementClusterPowerAdjustStartEvent {
+
+  public DeviceEnergyManagementClusterPowerAdjustStartEvent(
+) {
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("DeviceEnergyManagementClusterPowerAdjustStartEvent {\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class DeviceEnergyManagementClusterPowerAdjustEndEvent {
+public Integer cause;
+public Long duration;
+public Long energyUse;
+
+  public DeviceEnergyManagementClusterPowerAdjustEndEvent(
+    Integer cause
+      , Long duration
+      , Long energyUse
+  ) {
+    this.cause = cause;
+    this.duration = duration;
+    this.energyUse = energyUse;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("DeviceEnergyManagementClusterPowerAdjustEndEvent {\n");
+    output.append("\tcause: ");
+    output.append(cause);
+        output.append("\n");
+    output.append("\tduration: ");
+    output.append(duration);
+        output.append("\n");
+    output.append("\tenergyUse: ");
+    output.append(energyUse);
+        output.append("\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class DeviceEnergyManagementClusterPausedEvent {
+
+  public DeviceEnergyManagementClusterPausedEvent(
+) {
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("DeviceEnergyManagementClusterPausedEvent {\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
+public static class DeviceEnergyManagementClusterResumedEvent {
+
+  public DeviceEnergyManagementClusterResumedEvent(
+) {
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder output = new StringBuilder();
+    output.append("DeviceEnergyManagementClusterResumedEvent {\n");
+    output.append("}\n");
+    return output.toString();
+  }
+}
+
 public static class EnergyEvseClusterEVConnectedEvent {
 public Long sessionId;
 
@@ -2083,84 +2161,6 @@ public static class PumpConfigurationAndControlClusterTurbineOperationEvent {
   public String toString() {
     StringBuilder output = new StringBuilder();
     output.append("PumpConfigurationAndControlClusterTurbineOperationEvent {\n");
-    output.append("}\n");
-    return output.toString();
-  }
-}
-
-public static class EnergyManagementClusterPowerAdjustStartEvent {
-
-  public EnergyManagementClusterPowerAdjustStartEvent(
-) {
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder output = new StringBuilder();
-    output.append("EnergyManagementClusterPowerAdjustStartEvent {\n");
-    output.append("}\n");
-    return output.toString();
-  }
-}
-
-public static class EnergyManagementClusterPowerAdjustEndEvent {
-public Optional<Integer> cause;
-public Optional<Long> duration;
-public Optional<Long> energyUse;
-
-  public EnergyManagementClusterPowerAdjustEndEvent(
-    Optional<Integer> cause
-      , Optional<Long> duration
-      , Optional<Long> energyUse
-  ) {
-    this.cause = cause;
-    this.duration = duration;
-    this.energyUse = energyUse;
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder output = new StringBuilder();
-    output.append("EnergyManagementClusterPowerAdjustEndEvent {\n");
-    output.append("\tcause: ");
-    output.append(cause);
-        output.append("\n");
-    output.append("\tduration: ");
-    output.append(duration);
-        output.append("\n");
-    output.append("\tenergyUse: ");
-    output.append(energyUse);
-        output.append("\n");
-    output.append("}\n");
-    return output.toString();
-  }
-}
-
-public static class EnergyManagementClusterPausedEvent {
-
-  public EnergyManagementClusterPausedEvent(
-) {
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder output = new StringBuilder();
-    output.append("EnergyManagementClusterPausedEvent {\n");
-    output.append("}\n");
-    return output.toString();
-  }
-}
-
-public static class EnergyManagementClusterResumedEvent {
-
-  public EnergyManagementClusterResumedEvent(
-) {
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder output = new StringBuilder();
-    output.append("EnergyManagementClusterResumedEvent {\n");
     output.append("}\n");
     return output.toString();
   }

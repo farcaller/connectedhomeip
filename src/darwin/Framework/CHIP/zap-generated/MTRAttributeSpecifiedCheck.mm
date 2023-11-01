@@ -2576,6 +2576,54 @@ static BOOL AttributeIsSpecifiedInActivatedCarbonFilterMonitoringCluster(Attribu
     }
     }
 }
+static BOOL AttributeIsSpecifiedInDeviceEnergyManagementCluster(AttributeId aAttributeId)
+{
+    using namespace Clusters::DeviceEnergyManagement;
+    switch (aAttributeId) {
+    case Attributes::EsaType::Id: {
+        return YES;
+    }
+    case Attributes::EsaIsGenerator::Id: {
+        return YES;
+    }
+    case Attributes::EsaState::Id: {
+        return YES;
+    }
+    case Attributes::AbsMinPower::Id: {
+        return YES;
+    }
+    case Attributes::AbsMaxPower::Id: {
+        return YES;
+    }
+    case Attributes::PowerAdjustmentCapability::Id: {
+        return YES;
+    }
+    case Attributes::Forecast::Id: {
+        return YES;
+    }
+    case Attributes::GeneratedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::AcceptedCommandList::Id: {
+        return YES;
+    }
+    case Attributes::EventList::Id: {
+        return YES;
+    }
+    case Attributes::AttributeList::Id: {
+        return YES;
+    }
+    case Attributes::FeatureMap::Id: {
+        return YES;
+    }
+    case Attributes::ClusterRevision::Id: {
+        return YES;
+    }
+    default: {
+        return NO;
+    }
+    }
+}
 static BOOL AttributeIsSpecifiedInEnergyEVSECluster(AttributeId aAttributeId)
 {
     using namespace Clusters::EnergyEvse;
@@ -4874,54 +4922,6 @@ static BOOL AttributeIsSpecifiedInAccountLoginCluster(AttributeId aAttributeId)
     }
     }
 }
-static BOOL AttributeIsSpecifiedInEnergyManagementCluster(AttributeId aAttributeId)
-{
-    using namespace Clusters::EnergyManagement;
-    switch (aAttributeId) {
-    case Attributes::EsaType::Id: {
-        return YES;
-    }
-    case Attributes::EsaIsGenerator::Id: {
-        return YES;
-    }
-    case Attributes::EsaState::Id: {
-        return YES;
-    }
-    case Attributes::AbsMinPower::Id: {
-        return YES;
-    }
-    case Attributes::AbsMaxPower::Id: {
-        return YES;
-    }
-    case Attributes::PowerAdjustmentCapability::Id: {
-        return YES;
-    }
-    case Attributes::PowerForecast::Id: {
-        return YES;
-    }
-    case Attributes::GeneratedCommandList::Id: {
-        return YES;
-    }
-    case Attributes::AcceptedCommandList::Id: {
-        return YES;
-    }
-    case Attributes::EventList::Id: {
-        return YES;
-    }
-    case Attributes::AttributeList::Id: {
-        return YES;
-    }
-    case Attributes::FeatureMap::Id: {
-        return YES;
-    }
-    case Attributes::ClusterRevision::Id: {
-        return YES;
-    }
-    default: {
-        return NO;
-    }
-    }
-}
 static BOOL AttributeIsSpecifiedInElectricalMeasurementCluster(AttributeId aAttributeId)
 {
     using namespace Clusters::ElectricalMeasurement;
@@ -5955,6 +5955,9 @@ BOOL MTRAttributeIsSpecified(ClusterId aClusterId, AttributeId aAttributeId)
     case Clusters::ActivatedCarbonFilterMonitoring::Id: {
         return AttributeIsSpecifiedInActivatedCarbonFilterMonitoringCluster(aAttributeId);
     }
+    case Clusters::DeviceEnergyManagement::Id: {
+        return AttributeIsSpecifiedInDeviceEnergyManagementCluster(aAttributeId);
+    }
     case Clusters::EnergyEvse::Id: {
         return AttributeIsSpecifiedInEnergyEVSECluster(aAttributeId);
     }
@@ -6068,9 +6071,6 @@ BOOL MTRAttributeIsSpecified(ClusterId aClusterId, AttributeId aAttributeId)
     }
     case Clusters::AccountLogin::Id: {
         return AttributeIsSpecifiedInAccountLoginCluster(aAttributeId);
-    }
-    case Clusters::EnergyManagement::Id: {
-        return AttributeIsSpecifiedInEnergyManagementCluster(aAttributeId);
     }
     case Clusters::ElectricalMeasurement::Id: {
         return AttributeIsSpecifiedInElectricalMeasurementCluster(aAttributeId);
