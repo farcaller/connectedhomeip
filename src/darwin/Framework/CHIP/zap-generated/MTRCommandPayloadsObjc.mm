@@ -8031,6 +8031,545 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
+@implementation MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _power = @(0);
+
+        _duration = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterPowerAdjustRequestParams alloc] init];
+
+    other.power = self.power;
+    other.duration = self.duration;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: power:%@; duration:%@; >", NSStringFromClass([self class]), _power, _duration];
+    return descriptionString;
+}
+
+@end
+@implementation MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _requestedStartTime = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams alloc] init];
+
+    other.requestedStartTime = self.requestedStartTime;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: requestedStartTime:%@; >", NSStringFromClass([self class]), _requestedStartTime];
+    return descriptionString;
+}
+
+@end
+@implementation MTRDeviceEnergyManagementClusterPauseRequestParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterPauseRequestParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTRDeviceEnergyManagementClusterResumeRequestParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterResumeRequestParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _forecastId = @(0);
+
+        _slotAdjustments = [NSArray array];
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterModifyForecastRequestParams alloc] init];
+
+    other.forecastId = self.forecastId;
+    other.slotAdjustments = self.slotAdjustments;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: forecastId:%@; slotAdjustments:%@; >",
+                                             NSStringFromClass([self class]), _forecastId, _slotAdjustments];
+    return descriptionString;
+}
+
+@end
+@implementation MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _constraints = [NSArray array];
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams alloc] init];
+
+    other.constraints = self.constraints;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: constraints:%@; >", NSStringFromClass([self class]), _constraints];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterGetTargetsResponseParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _dayOfWeekForSequence = @(0);
+
+        _chargingTargets = [NSArray array];
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterGetTargetsResponseParams alloc] init];
+
+    other.dayOfWeekForSequence = self.dayOfWeekForSequence;
+    other.chargingTargets = self.chargingTargets;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: dayOfWeekForSequence:%@; chargingTargets:%@; >",
+                                             NSStringFromClass([self class]), _dayOfWeekForSequence, _chargingTargets];
+    return descriptionString;
+}
+
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error
+{
+    if (!(self = [super init])) {
+        return nil;
+    }
+
+    using DecodableType = chip::app::Clusters::EnergyEvse::Commands::GetTargetsResponse::DecodableType;
+    chip::System::PacketBufferHandle buffer = [MTRBaseDevice _responseDataForCommand:responseValue
+                                                                           clusterID:DecodableType::GetClusterId()
+                                                                           commandID:DecodableType::GetCommandId()
+                                                                               error:error];
+    if (buffer.IsNull()) {
+        return nil;
+    }
+
+    chip::TLV::TLVReader reader;
+    reader.Init(buffer->Start(), buffer->DataLength());
+
+    CHIP_ERROR err = reader.Next(chip::TLV::AnonymousTag());
+    if (err == CHIP_NO_ERROR) {
+        DecodableType decodedStruct;
+        err = chip::app::DataModel::Decode(reader, decodedStruct);
+        if (err == CHIP_NO_ERROR) {
+            err = [self _setFieldsFromDecodableStruct:decodedStruct];
+            if (err == CHIP_NO_ERROR) {
+                return self;
+            }
+        }
+    }
+
+    NSString * errorStr = [NSString stringWithFormat:@"Command payload decoding failed: %s", err.AsString()];
+    MTR_LOG_ERROR("%s", errorStr.UTF8String);
+    if (error != nil) {
+        NSDictionary * userInfo = @{ NSLocalizedFailureReasonErrorKey : NSLocalizedString(errorStr, nil) };
+        *error = [NSError errorWithDomain:MTRErrorDomain code:MTRErrorCodeSchemaMismatch userInfo:userInfo];
+    }
+    return nil;
+}
+
+@end
+
+@implementation MTREnergyEVSEClusterGetTargetsResponseParams (InternalMethods)
+
+- (CHIP_ERROR)_setFieldsFromDecodableStruct:
+    (const chip::app::Clusters::EnergyEvse::Commands::GetTargetsResponse::DecodableType &)decodableStruct
+{
+    {
+        self.dayOfWeekForSequence = [NSNumber numberWithUnsignedChar:decodableStruct.dayOfWeekForSequence.Raw()];
+    }
+    {
+        { // Scope for our temporary variables
+            auto * array_0 = [NSMutableArray new];
+            auto iter_0 = decodableStruct.chargingTargets.begin();
+            while (iter_0.Next()) {
+                auto & entry_0 = iter_0.GetValue();
+                MTREnergyEVSEClusterChargingTargetStruct * newElement_0;
+                newElement_0 = [MTREnergyEVSEClusterChargingTargetStruct new];
+                newElement_0.targetTime = [NSNumber numberWithUnsignedShort:entry_0.targetTime];
+                if (entry_0.targetSoC.HasValue()) {
+                    newElement_0.targetSoC = [NSNumber numberWithUnsignedChar:entry_0.targetSoC.Value()];
+                } else {
+                    newElement_0.targetSoC = nil;
+                }
+                if (entry_0.addedEnergy.HasValue()) {
+                    newElement_0.addedEnergy = [NSNumber numberWithInt:entry_0.addedEnergy.Value()];
+                } else {
+                    newElement_0.addedEnergy = nil;
+                }
+                [array_0 addObject:newElement_0];
+            }
+            CHIP_ERROR err = iter_0.GetStatus();
+            if (err != CHIP_NO_ERROR) {
+                return err;
+            }
+            self.chargingTargets = array_0;
+        }
+    }
+    return CHIP_NO_ERROR;
+}
+@end
+@implementation MTREnergyEVSEClusterDisableParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterDisableParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterEnableChargingParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _enableChargeTime = nil;
+
+        _minimumChargeCurrent = @(0);
+
+        _maximumChargeCurrent = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterEnableChargingParams alloc] init];
+
+    other.enableChargeTime = self.enableChargeTime;
+    other.minimumChargeCurrent = self.minimumChargeCurrent;
+    other.maximumChargeCurrent = self.maximumChargeCurrent;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: enableChargeTime:%@; minimumChargeCurrent:%@; maximumChargeCurrent:%@; >",
+                  NSStringFromClass([self class]), _enableChargeTime, _minimumChargeCurrent, _maximumChargeCurrent];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterEnableDischargingParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _enableDischargeTime = nil;
+
+        _maximumDischargeCurrent = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterEnableDischargingParams alloc] init];
+
+    other.enableDischargeTime = self.enableDischargeTime;
+    other.maximumDischargeCurrent = self.maximumDischargeCurrent;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: enableDischargeTime:%@; maximumDischargeCurrent:%@; >",
+                                             NSStringFromClass([self class]), _enableDischargeTime, _maximumDischargeCurrent];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterStartDiagnosticsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterStartDiagnosticsParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterSetTargetsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _dayOfWeekForSequence = @(0);
+
+        _chargingTargets = [NSArray array];
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterSetTargetsParams alloc] init];
+
+    other.dayOfWeekForSequence = self.dayOfWeekForSequence;
+    other.chargingTargets = self.chargingTargets;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: dayOfWeekForSequence:%@; chargingTargets:%@; >",
+                                             NSStringFromClass([self class]), _dayOfWeekForSequence, _chargingTargets];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterGetTargetsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+        _daysToReturn = @(0);
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterGetTargetsParams alloc] init];
+
+    other.daysToReturn = self.daysToReturn;
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString =
+        [NSString stringWithFormat:@"<%@: daysToReturn:%@; >", NSStringFromClass([self class]), _daysToReturn];
+    return descriptionString;
+}
+
+@end
+@implementation MTREnergyEVSEClusterClearTargetsParams
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _timedInvokeTimeoutMs = nil;
+        _serverSideProcessingTimeout = nil;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone * _Nullable)zone;
+{
+    auto other = [[MTREnergyEVSEClusterClearTargetsParams alloc] init];
+
+    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
+    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
+
+    return other;
+}
+
+- (NSString *)description
+{
+    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
+    return descriptionString;
+}
+
+@end
 @implementation MTRDoorLockClusterLockDoorParams
 - (instancetype)init
 {
@@ -12493,510 +13032,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)copyWithZone:(NSZone * _Nullable)zone;
 {
     auto other = [[MTRAccountLoginClusterLogoutParams alloc] init];
-
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterPowerAdjustRequestParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _power = @(0);
-
-        _duration = @(0);
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterPowerAdjustRequestParams alloc] init];
-
-    other.power = self.power;
-    other.duration = self.duration;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString =
-        [NSString stringWithFormat:@"<%@: power:%@; duration:%@; >", NSStringFromClass([self class]), _power, _duration];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterCancelPowerAdjustRequestParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterCancelPowerAdjustRequestParams alloc] init];
-
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterStartTimeAdjustRequestParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _requestedStartTime = @(0);
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterStartTimeAdjustRequestParams alloc] init];
-
-    other.requestedStartTime = self.requestedStartTime;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString =
-        [NSString stringWithFormat:@"<%@: requestedStartTime:%@; >", NSStringFromClass([self class]), _requestedStartTime];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterPauseRequestParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterPauseRequestParams alloc] init];
-
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterResumeRequestParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterResumeRequestParams alloc] init];
-
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterModifyPowerForecastRequestParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _forecastId = @(0);
-
-        _slotAdjustments = [NSArray array];
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterModifyPowerForecastRequestParams alloc] init];
-
-    other.forecastId = self.forecastId;
-    other.slotAdjustments = self.slotAdjustments;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: forecastId:%@; slotAdjustments:%@; >",
-                                             NSStringFromClass([self class]), _forecastId, _slotAdjustments];
-    return descriptionString;
-}
-
-@end
-@implementation MTREnergyManagementClusterRequestLimitBasedPowerForecastParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _powerLimits = [NSArray array];
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREnergyManagementClusterRequestLimitBasedPowerForecastParams alloc] init];
-
-    other.powerLimits = self.powerLimits;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString =
-        [NSString stringWithFormat:@"<%@: powerLimits:%@; >", NSStringFromClass([self class]), _powerLimits];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterGetTargetsResponseParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterGetTargetsResponseParams alloc] init];
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error
-{
-    if (!(self = [super init])) {
-        return nil;
-    }
-
-    using DecodableType = chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType;
-    chip::System::PacketBufferHandle buffer = [MTRBaseDevice _responseDataForCommand:responseValue
-                                                                           clusterID:DecodableType::GetClusterId()
-                                                                           commandID:DecodableType::GetCommandId()
-                                                                               error:error];
-    if (buffer.IsNull()) {
-        return nil;
-    }
-
-    chip::TLV::TLVReader reader;
-    reader.Init(buffer->Start(), buffer->DataLength());
-
-    CHIP_ERROR err = reader.Next(chip::TLV::AnonymousTag());
-    if (err == CHIP_NO_ERROR) {
-        DecodableType decodedStruct;
-        err = chip::app::DataModel::Decode(reader, decodedStruct);
-        if (err == CHIP_NO_ERROR) {
-            err = [self _setFieldsFromDecodableStruct:decodedStruct];
-            if (err == CHIP_NO_ERROR) {
-                return self;
-            }
-        }
-    }
-
-    NSString * errorStr = [NSString stringWithFormat:@"Command payload decoding failed: %s", err.AsString()];
-    MTR_LOG_ERROR("%s", errorStr.UTF8String);
-    if (error != nil) {
-        NSDictionary * userInfo = @{ NSLocalizedFailureReasonErrorKey : NSLocalizedString(errorStr, nil) };
-        *error = [NSError errorWithDomain:MTRErrorDomain code:MTRErrorCodeSchemaMismatch userInfo:userInfo];
-    }
-    return nil;
-}
-
-@end
-
-@implementation MTREVSEManagementClusterGetTargetsResponseParams (InternalMethods)
-
-- (CHIP_ERROR)_setFieldsFromDecodableStruct:
-    (const chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType &)decodableStruct
-{
-    return CHIP_NO_ERROR;
-}
-@end
-@implementation MTREVSEManagementClusterDisableEvseParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterDisableEvseParams alloc] init];
-
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterEnableEvseChargingParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _evseEnableTime = nil;
-
-        _minimumChargeCurrent = @(0);
-
-        _maximumChargeCurrent = @(0);
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterEnableEvseChargingParams alloc] init];
-
-    other.evseEnableTime = self.evseEnableTime;
-    other.minimumChargeCurrent = self.minimumChargeCurrent;
-    other.maximumChargeCurrent = self.maximumChargeCurrent;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString =
-        [NSString stringWithFormat:@"<%@: evseEnableTime:%@; minimumChargeCurrent:%@; maximumChargeCurrent:%@; >",
-                  NSStringFromClass([self class]), _evseEnableTime, _minimumChargeCurrent, _maximumChargeCurrent];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterEnableEvseDischargingParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _evseEnableTime = nil;
-
-        _maximumDischargeCurrent = @(0);
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterEnableEvseDischargingParams alloc] init];
-
-    other.evseEnableTime = self.evseEnableTime;
-    other.maximumDischargeCurrent = self.maximumDischargeCurrent;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: evseEnableTime:%@; maximumDischargeCurrent:%@; >",
-                                             NSStringFromClass([self class]), _evseEnableTime, _maximumDischargeCurrent];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterStartDiagnosticsParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterStartDiagnosticsParams alloc] init];
-
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString = [NSString stringWithFormat:@"<%@: >", NSStringFromClass([self class])];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterSetTargetsParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _numberOfTargetsForSequence = @(0);
-
-        _dayOfWeekForSequence = @(0);
-
-        _chargingTargets = [NSArray array];
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterSetTargetsParams alloc] init];
-
-    other.numberOfTargetsForSequence = self.numberOfTargetsForSequence;
-    other.dayOfWeekForSequence = self.dayOfWeekForSequence;
-    other.chargingTargets = self.chargingTargets;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString =
-        [NSString stringWithFormat:@"<%@: numberOfTargetsForSequence:%@; dayOfWeekForSequence:%@; chargingTargets:%@; >",
-                  NSStringFromClass([self class]), _numberOfTargetsForSequence, _dayOfWeekForSequence, _chargingTargets];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterGetTargetsParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-
-        _daysToReturn = @(0);
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterGetTargetsParams alloc] init];
-
-    other.daysToReturn = self.daysToReturn;
-    other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
-    other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;
-
-    return other;
-}
-
-- (NSString *)description
-{
-    NSString * descriptionString =
-        [NSString stringWithFormat:@"<%@: daysToReturn:%@; >", NSStringFromClass([self class]), _daysToReturn];
-    return descriptionString;
-}
-
-@end
-@implementation MTREVSEManagementClusterClearTargetsParams
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _timedInvokeTimeoutMs = nil;
-        _serverSideProcessingTimeout = nil;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone * _Nullable)zone;
-{
-    auto other = [[MTREVSEManagementClusterClearTargetsParams alloc] init];
 
     other.timedInvokeTimeoutMs = self.timedInvokeTimeoutMs;
     other.serverSideProcessingTimeout = self.serverSideProcessingTimeout;

@@ -16,8 +16,8 @@
  *    limitations under the License.
  */
 
+#include "EnergyEvseManager.h"
 #include "EnergyManagementManager.h"
-#include "EvseManagementManager.h"
 #include <AppMain.h>
 
 #include <app-common/zap-generated/ids/Attributes.h>
@@ -31,7 +31,6 @@
 using namespace chip;
 using namespace chip::app;
 using namespace chip::app::Clusters;
-
 
 /** @brief OnOff Cluster Init
  *
@@ -75,7 +74,6 @@ void ApplicationInit()
 }
 #endif
 
-
 void ApplicationShutdown()
 {
 #if 0
@@ -85,7 +83,7 @@ void ApplicationShutdown()
     }
 #endif
 
-    EvseManagementManager::Shutdown();
+    EnergyEvseManager::Shutdown();
 }
 
 int main(int argc, char * argv[])
@@ -103,10 +101,10 @@ int main(int argc, char * argv[])
         return -1;
     }
 
-    err = EvseManagementMgr().Init();
+    err = EnergyEvseMgr().Init();
     if (err != CHIP_NO_ERROR)
     {
-        ChipLogError(AppServer, "Failed to initialize evse-management manager: %" CHIP_ERROR_FORMAT, err.Format());
+        ChipLogError(AppServer, "Failed to initialize energy-evse manager: %" CHIP_ERROR_FORMAT, err.Format());
         chip::DeviceLayer::PlatformMgr().Shutdown();
         return -1;
     }
@@ -117,8 +115,8 @@ int main(int argc, char * argv[])
     ui.AddWindow(std::make_unique<example::Ui::Windows::QRCode>());
     ui.AddWindow(std::make_unique<example::Ui::Windows::OccupancySensing>(chip::EndpointId(1), "Occupancy"));
 
-//     TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
-//     Not sure what this is about but assume it won’t harm us to have this with occupancy sensing!?
+    //     TODO:  James Harrow @ https://bitbucket.org/geo-engineering/connectedhomeip/pull-requests/268
+    //     Not sure what this is about but assume it won’t harm us to have this with occupancy sensing!?
 
     ChipLinuxAppMainLoop(&ui);
 #else

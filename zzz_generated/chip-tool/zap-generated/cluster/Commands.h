@@ -91,6 +91,8 @@
 | RvcOperationalState                                                 | 0x0061 |
 | HepaFilterMonitoring                                                | 0x0071 |
 | ActivatedCarbonFilterMonitoring                                     | 0x0072 |
+| DeviceEnergyManagement                                              | 0x0098 |
+| EnergyEvse                                                          | 0x0099 |
 | DoorLock                                                            | 0x0101 |
 | WindowCovering                                                      | 0x0102 |
 | BarrierControl                                                      | 0x0103 |
@@ -128,8 +130,6 @@
 | ApplicationLauncher                                                 | 0x050C |
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
-| EnergyManagement                                                    | 0x0706 |
-| EvseManagement                                                      | 0x070C |
 | ElectricalMeasurement                                               | 0x0B04 |
 | WaterHeater                                                         | 0x6660 |
 | ElectricalPowerMeasurement                                          | 0x6661 |
@@ -5738,6 +5738,633 @@ private:
 };
 
 /*----------------------------------------------------------------------------*\
+| Cluster DeviceEnergyManagement                                      | 0x0098 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * PowerAdjustRequest                                                |   0x00 |
+| * CancelPowerAdjustRequest                                          |   0x01 |
+| * StartTimeAdjustRequest                                            |   0x02 |
+| * PauseRequest                                                      |   0x03 |
+| * ResumeRequest                                                     |   0x04 |
+| * ModifyForecastRequest                                             |   0x05 |
+| * RequestConstraintBasedForecast                                    |   0x06 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * EsaType                                                           | 0x0000 |
+| * EsaIsGenerator                                                    | 0x0001 |
+| * EsaState                                                          | 0x0002 |
+| * AbsMinPower                                                       | 0x0003 |
+| * AbsMaxPower                                                       | 0x0004 |
+| * PowerAdjustmentCapability                                         | 0x0005 |
+| * Forecast                                                          | 0x0006 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+| * PowerAdjustStart                                                  | 0x0000 |
+| * PowerAdjustEnd                                                    | 0x0001 |
+| * Paused                                                            | 0x0002 |
+| * Resumed                                                           | 0x0003 |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command PowerAdjustRequest
+ */
+class DeviceEnergyManagementPowerAdjustRequest : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementPowerAdjustRequest(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("power-adjust-request", credsIssuerConfig)
+    {
+        AddArgument("Power", INT32_MIN, INT32_MAX, &mRequest.power);
+        AddArgument("Duration", 0, UINT32_MAX, &mRequest.duration);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::PowerAdjustRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::PowerAdjustRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::PowerAdjustRequest::Type mRequest;
+};
+
+/*
+ * Command CancelPowerAdjustRequest
+ */
+class DeviceEnergyManagementCancelPowerAdjustRequest : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementCancelPowerAdjustRequest(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("cancel-power-adjust-request", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::CancelPowerAdjustRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::CancelPowerAdjustRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::CancelPowerAdjustRequest::Type mRequest;
+};
+
+/*
+ * Command StartTimeAdjustRequest
+ */
+class DeviceEnergyManagementStartTimeAdjustRequest : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementStartTimeAdjustRequest(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("start-time-adjust-request", credsIssuerConfig)
+    {
+        AddArgument("RequestedStartTime", 0, UINT32_MAX, &mRequest.requestedStartTime);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::StartTimeAdjustRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::StartTimeAdjustRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::StartTimeAdjustRequest::Type mRequest;
+};
+
+/*
+ * Command PauseRequest
+ */
+class DeviceEnergyManagementPauseRequest : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementPauseRequest(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("pause-request", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::PauseRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::PauseRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::PauseRequest::Type mRequest;
+};
+
+/*
+ * Command ResumeRequest
+ */
+class DeviceEnergyManagementResumeRequest : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementResumeRequest(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("resume-request", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::ResumeRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::ResumeRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::ResumeRequest::Type mRequest;
+};
+
+/*
+ * Command ModifyForecastRequest
+ */
+class DeviceEnergyManagementModifyForecastRequest : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementModifyForecastRequest(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("modify-forecast-request", credsIssuerConfig), mComplex_SlotAdjustments(&mRequest.slotAdjustments)
+    {
+        AddArgument("ForecastId", 0, UINT32_MAX, &mRequest.forecastId);
+        AddArgument("SlotAdjustments", &mComplex_SlotAdjustments);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::ModifyForecastRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::DeviceEnergyManagement::Commands::ModifyForecastRequest::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::ModifyForecastRequest::Type mRequest;
+    TypedComplexArgument<
+        chip::app::DataModel::List<const chip::app::Clusters::DeviceEnergyManagement::Structs::SlotAdjustmentStruct::Type>>
+        mComplex_SlotAdjustments;
+};
+
+/*
+ * Command RequestConstraintBasedForecast
+ */
+class DeviceEnergyManagementRequestConstraintBasedForecast : public ClusterCommand
+{
+public:
+    DeviceEnergyManagementRequestConstraintBasedForecast(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("request-constraint-based-forecast", credsIssuerConfig), mComplex_Constraints(&mRequest.constraints)
+    {
+        AddArgument("Constraints", &mComplex_Constraints);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId =
+            chip::app::Clusters::DeviceEnergyManagement::Commands::RequestConstraintBasedForecast::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::DeviceEnergyManagement::Id;
+        constexpr chip::CommandId commandId =
+            chip::app::Clusters::DeviceEnergyManagement::Commands::RequestConstraintBasedForecast::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::DeviceEnergyManagement::Commands::RequestConstraintBasedForecast::Type mRequest;
+    TypedComplexArgument<
+        chip::app::DataModel::List<const chip::app::Clusters::DeviceEnergyManagement::Structs::ConstraintsStruct::Type>>
+        mComplex_Constraints;
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster EnergyEvse                                                  | 0x0099 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * Disable                                                           |   0x01 |
+| * EnableCharging                                                    |   0x02 |
+| * EnableDischarging                                                 |   0x03 |
+| * StartDiagnostics                                                  |   0x04 |
+| * SetTargets                                                        |   0x05 |
+| * GetTargets                                                        |   0x06 |
+| * ClearTargets                                                      |   0x07 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * State                                                             | 0x0000 |
+| * SupplyState                                                       | 0x0001 |
+| * FaultState                                                        | 0x0002 |
+| * EnableChargeTime                                                  | 0x0003 |
+| * EnableDischargeTime                                               | 0x0004 |
+| * CircuitCapacity                                                   | 0x0005 |
+| * MinimumChargeCurrent                                              | 0x0006 |
+| * MaximumChargeCurrent                                              | 0x0007 |
+| * MaximumdDischargeCurrent                                          | 0x0008 |
+| * UserMaximumChargeCurrent                                          | 0x0009 |
+| * RandomisationDelayWindow                                          | 0x000A |
+| * NumberOfWeeklyTargets                                             | 0x0021 |
+| * NumberOfDailyTargets                                              | 0x0022 |
+| * NextChargeStartTime                                               | 0x0023 |
+| * NextChargeTargetTime                                              | 0x0024 |
+| * NextChargeRequiredEnergy                                          | 0x0025 |
+| * NextChargeTargetSoc                                               | 0x0026 |
+| * ApproxEvEfficiency                                                | 0x0027 |
+| * StateOfCharge                                                     | 0x0030 |
+| * BatteryCapacity                                                   | 0x0031 |
+| * VehicleId                                                         | 0x0032 |
+| * SessionId                                                         | 0x0040 |
+| * EventSequenceNumber                                               | 0x0041 |
+| * SessionDuration                                                   | 0x0042 |
+| * SessionEnergyCharged                                              | 0x0043 |
+| * SessionEnergyDischarged                                           | 0x0044 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+| * EVConnected                                                       | 0x0000 |
+| * EVNotDetected                                                     | 0x0001 |
+| * EnergyTransferStarted                                             | 0x0002 |
+| * EnergyTransferStopped                                             | 0x0003 |
+| * Fault                                                             | 0x0004 |
+| * Rfid                                                              | 0x0005 |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command Disable
+ */
+class EnergyEvseDisable : public ClusterCommand
+{
+public:
+    EnergyEvseDisable(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("disable", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::Disable::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::Disable::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::Disable::Type mRequest;
+};
+
+/*
+ * Command EnableCharging
+ */
+class EnergyEvseEnableCharging : public ClusterCommand
+{
+public:
+    EnergyEvseEnableCharging(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("enable-charging", credsIssuerConfig)
+    {
+        AddArgument("EnableChargeTime", 0, UINT32_MAX, &mRequest.enableChargeTime);
+        AddArgument("MinimumChargeCurrent", 0, UINT32_MAX, &mRequest.minimumChargeCurrent);
+        AddArgument("MaximumChargeCurrent", 0, UINT32_MAX, &mRequest.maximumChargeCurrent);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::EnableCharging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::EnableCharging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::EnableCharging::Type mRequest;
+};
+
+/*
+ * Command EnableDischarging
+ */
+class EnergyEvseEnableDischarging : public ClusterCommand
+{
+public:
+    EnergyEvseEnableDischarging(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("enable-discharging", credsIssuerConfig)
+    {
+        AddArgument("EnableDischargeTime", 0, UINT32_MAX, &mRequest.enableDischargeTime);
+        AddArgument("MaximumDischargeCurrent", 0, UINT32_MAX, &mRequest.maximumDischargeCurrent);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::EnableDischarging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::EnableDischarging::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::EnableDischarging::Type mRequest;
+};
+
+/*
+ * Command StartDiagnostics
+ */
+class EnergyEvseStartDiagnostics : public ClusterCommand
+{
+public:
+    EnergyEvseStartDiagnostics(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("start-diagnostics", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::StartDiagnostics::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::StartDiagnostics::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::StartDiagnostics::Type mRequest;
+};
+
+/*
+ * Command SetTargets
+ */
+class EnergyEvseSetTargets : public ClusterCommand
+{
+public:
+    EnergyEvseSetTargets(CredentialIssuerCommands * credsIssuerConfig) :
+        ClusterCommand("set-targets", credsIssuerConfig), mComplex_ChargingTargets(&mRequest.chargingTargets)
+    {
+        AddArgument("DayOfWeekForSequence", 0, UINT8_MAX, &mRequest.dayOfWeekForSequence);
+        AddArgument("ChargingTargets", &mComplex_ChargingTargets);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::SetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::SetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::SetTargets::Type mRequest;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::EnergyEvse::Structs::ChargingTargetStruct::Type>>
+        mComplex_ChargingTargets;
+};
+
+/*
+ * Command GetTargets
+ */
+class EnergyEvseGetTargets : public ClusterCommand
+{
+public:
+    EnergyEvseGetTargets(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("get-targets", credsIssuerConfig)
+    {
+        AddArgument("DaysToReturn", 0, UINT8_MAX, &mRequest.daysToReturn);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::GetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::GetTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::GetTargets::Type mRequest;
+};
+
+/*
+ * Command ClearTargets
+ */
+class EnergyEvseClearTargets : public ClusterCommand
+{
+public:
+    EnergyEvseClearTargets(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("clear-targets", credsIssuerConfig)
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::ClearTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
+                        commandId, endpointIds.at(0));
+        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
+    }
+
+    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyEvse::Id;
+        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyEvse::Commands::ClearTargets::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
+                        groupId);
+
+        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
+    }
+
+private:
+    chip::app::Clusters::EnergyEvse::Commands::ClearTargets::Type mRequest;
+};
+
+/*----------------------------------------------------------------------------*\
 | Cluster DoorLock                                                    | 0x0101 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
@@ -10056,633 +10683,6 @@ public:
 
 private:
     chip::app::Clusters::AccountLogin::Commands::Logout::Type mRequest;
-};
-
-/*----------------------------------------------------------------------------*\
-| Cluster EnergyManagement                                            | 0x0706 |
-|------------------------------------------------------------------------------|
-| Commands:                                                           |        |
-| * PowerAdjustRequest                                                |   0x00 |
-| * CancelPowerAdjustRequest                                          |   0x01 |
-| * StartTimeAdjustRequest                                            |   0x02 |
-| * PauseRequest                                                      |   0x03 |
-| * ResumeRequest                                                     |   0x04 |
-| * ModifyPowerForecastRequest                                        |   0x05 |
-| * RequestLimitBasedPowerForecast                                    |   0x06 |
-|------------------------------------------------------------------------------|
-| Attributes:                                                         |        |
-| * EsaType                                                           | 0x0000 |
-| * EsaIsGenerator                                                    | 0x0001 |
-| * EsaState                                                          | 0x0002 |
-| * AbsMinPower                                                       | 0x0003 |
-| * AbsMaxPower                                                       | 0x0004 |
-| * PowerAdjustmentCapability                                         | 0x0005 |
-| * PowerForecast                                                     | 0x0006 |
-| * GeneratedCommandList                                              | 0xFFF8 |
-| * AcceptedCommandList                                               | 0xFFF9 |
-| * EventList                                                         | 0xFFFA |
-| * AttributeList                                                     | 0xFFFB |
-| * FeatureMap                                                        | 0xFFFC |
-| * ClusterRevision                                                   | 0xFFFD |
-|------------------------------------------------------------------------------|
-| Events:                                                             |        |
-| * PowerAdjustStart                                                  | 0x0000 |
-| * PowerAdjustEnd                                                    | 0x0001 |
-| * Paused                                                            | 0x0002 |
-| * Resumed                                                           | 0x0003 |
-\*----------------------------------------------------------------------------*/
-
-/*
- * Command PowerAdjustRequest
- */
-class EnergyManagementPowerAdjustRequest : public ClusterCommand
-{
-public:
-    EnergyManagementPowerAdjustRequest(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("power-adjust-request", credsIssuerConfig)
-    {
-        AddArgument("Power", INT16_MIN, INT16_MAX, &mRequest.power);
-        AddArgument("Duration", 0, UINT32_MAX, &mRequest.duration);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::PowerAdjustRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::PowerAdjustRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::PowerAdjustRequest::Type mRequest;
-};
-
-/*
- * Command CancelPowerAdjustRequest
- */
-class EnergyManagementCancelPowerAdjustRequest : public ClusterCommand
-{
-public:
-    EnergyManagementCancelPowerAdjustRequest(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("cancel-power-adjust-request", credsIssuerConfig)
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::CancelPowerAdjustRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::CancelPowerAdjustRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::CancelPowerAdjustRequest::Type mRequest;
-};
-
-/*
- * Command StartTimeAdjustRequest
- */
-class EnergyManagementStartTimeAdjustRequest : public ClusterCommand
-{
-public:
-    EnergyManagementStartTimeAdjustRequest(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("start-time-adjust-request", credsIssuerConfig)
-    {
-        AddArgument("RequestedStartTime", 0, UINT32_MAX, &mRequest.requestedStartTime);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::StartTimeAdjustRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::StartTimeAdjustRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::StartTimeAdjustRequest::Type mRequest;
-};
-
-/*
- * Command PauseRequest
- */
-class EnergyManagementPauseRequest : public ClusterCommand
-{
-public:
-    EnergyManagementPauseRequest(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("pause-request", credsIssuerConfig)
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::PauseRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::PauseRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::PauseRequest::Type mRequest;
-};
-
-/*
- * Command ResumeRequest
- */
-class EnergyManagementResumeRequest : public ClusterCommand
-{
-public:
-    EnergyManagementResumeRequest(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("resume-request", credsIssuerConfig)
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::ResumeRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::ResumeRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::ResumeRequest::Type mRequest;
-};
-
-/*
- * Command ModifyPowerForecastRequest
- */
-class EnergyManagementModifyPowerForecastRequest : public ClusterCommand
-{
-public:
-    EnergyManagementModifyPowerForecastRequest(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("modify-power-forecast-request", credsIssuerConfig), mComplex_SlotAdjustments(&mRequest.slotAdjustments)
-    {
-        AddArgument("ForecastId", 0, UINT32_MAX, &mRequest.forecastId);
-        AddArgument("SlotAdjustments", &mComplex_SlotAdjustments);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::ModifyPowerForecastRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::ModifyPowerForecastRequest::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::ModifyPowerForecastRequest::Type mRequest;
-    TypedComplexArgument<
-        chip::app::DataModel::List<const chip::app::Clusters::EnergyManagement::Structs::SlotAdjustmentStruct::Type>>
-        mComplex_SlotAdjustments;
-};
-
-/*
- * Command RequestLimitBasedPowerForecast
- */
-class EnergyManagementRequestLimitBasedPowerForecast : public ClusterCommand
-{
-public:
-    EnergyManagementRequestLimitBasedPowerForecast(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("request-limit-based-power-forecast", credsIssuerConfig), mComplex_PowerLimits(&mRequest.powerLimits)
-    {
-        AddArgument("PowerLimits", &mComplex_PowerLimits);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::RequestLimitBasedPowerForecast::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EnergyManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EnergyManagement::Commands::RequestLimitBasedPowerForecast::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EnergyManagement::Commands::RequestLimitBasedPowerForecast::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::EnergyManagement::Structs::PowerLimitsStruct::Type>>
-        mComplex_PowerLimits;
-};
-
-/*----------------------------------------------------------------------------*\
-| Cluster EvseManagement                                              | 0x070C |
-|------------------------------------------------------------------------------|
-| Commands:                                                           |        |
-| * DisableEvse                                                       |   0x01 |
-| * EnableEvseCharging                                                |   0x02 |
-| * EnableEvseDischarging                                             |   0x03 |
-| * StartDiagnostics                                                  |   0x04 |
-| * SetTargets                                                        |   0x05 |
-| * GetTargets                                                        |   0x06 |
-| * ClearTargets                                                      |   0x07 |
-|------------------------------------------------------------------------------|
-| Attributes:                                                         |        |
-| * EvseState                                                         | 0x0000 |
-| * SupplyState                                                       | 0x0001 |
-| * EvseFault                                                         | 0x0002 |
-| * EnableChargeTime                                                  | 0x0003 |
-| * EnableDischargeTime                                               | 0x0004 |
-| * CircuitCapacity                                                   | 0x0005 |
-| * MinimumChargeCurrent                                              | 0x0006 |
-| * MaximumChargeCurrent                                              | 0x0007 |
-| * MaximumdDischargeCurrent                                          | 0x0008 |
-| * UserMaximumChargeCurrent                                          | 0x0009 |
-| * RandomisationDelayWindow                                          | 0x000A |
-| * StartOfWeek                                                       | 0x0020 |
-| * NumberOfWeeklyTargets                                             | 0x0021 |
-| * NumberOfDailyTargets                                              | 0x0022 |
-| * NextChargeStartTime                                               | 0x0023 |
-| * NextChargeTargetTime                                              | 0x0024 |
-| * NextChargeRequiredEnergy                                          | 0x0025 |
-| * NextChargeTargetSoc                                               | 0x0026 |
-| * ApproxEvEfficiency                                                | 0x0027 |
-| * StateOfCharge                                                     | 0x0030 |
-| * BatteryCapacity                                                   | 0x0031 |
-| * VehicleId                                                         | 0x0032 |
-| * EvseSessionId                                                     | 0x0040 |
-| * EventSequenceNumber                                               | 0x0041 |
-| * EvseSessionDuration                                               | 0x0042 |
-| * EvseSessionEnergyCharged                                          | 0x0043 |
-| * EvseSessionEnergyDischarged                                       | 0x0044 |
-| * EvseSessionMaximumCurrent                                         | 0x0045 |
-| * GeneratedCommandList                                              | 0xFFF8 |
-| * AcceptedCommandList                                               | 0xFFF9 |
-| * EventList                                                         | 0xFFFA |
-| * AttributeList                                                     | 0xFFFB |
-| * FeatureMap                                                        | 0xFFFC |
-| * ClusterRevision                                                   | 0xFFFD |
-|------------------------------------------------------------------------------|
-| Events:                                                             |        |
-| * EvConnected                                                       | 0x0000 |
-| * EvNotDetected                                                     | 0x0001 |
-| * EnergyTransferStarted                                             | 0x0002 |
-| * EnergyTransferStopped                                             | 0x0003 |
-| * Fault                                                             | 0x0004 |
-| * Rfid                                                              | 0x0005 |
-\*----------------------------------------------------------------------------*/
-
-/*
- * Command DisableEvse
- */
-class EvseManagementDisableEvse : public ClusterCommand
-{
-public:
-    EvseManagementDisableEvse(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("disable-evse", credsIssuerConfig)
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::DisableEvse::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::DisableEvse::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::DisableEvse::Type mRequest;
-};
-
-/*
- * Command EnableEvseCharging
- */
-class EvseManagementEnableEvseCharging : public ClusterCommand
-{
-public:
-    EvseManagementEnableEvseCharging(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("enable-evse-charging", credsIssuerConfig)
-    {
-        AddArgument("EvseEnableTime", 0, UINT16_MAX, &mRequest.evseEnableTime);
-        AddArgument("MinimumChargeCurrent", 0, UINT16_MAX, &mRequest.minimumChargeCurrent);
-        AddArgument("MaximumChargeCurrent", 0, UINT16_MAX, &mRequest.maximumChargeCurrent);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::EnableEvseCharging::Type mRequest;
-};
-
-/*
- * Command EnableEvseDischarging
- */
-class EvseManagementEnableEvseDischarging : public ClusterCommand
-{
-public:
-    EvseManagementEnableEvseDischarging(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("enable-evse-discharging", credsIssuerConfig)
-    {
-        AddArgument("EvseEnableTime", 0, UINT16_MAX, &mRequest.evseEnableTime);
-        AddArgument("MaximumDischargeCurrent", 0, UINT16_MAX, &mRequest.maximumDischargeCurrent);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::EnableEvseDischarging::Type mRequest;
-};
-
-/*
- * Command StartDiagnostics
- */
-class EvseManagementStartDiagnostics : public ClusterCommand
-{
-public:
-    EvseManagementStartDiagnostics(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("start-diagnostics", credsIssuerConfig)
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::StartDiagnostics::Type mRequest;
-};
-
-/*
- * Command SetTargets
- */
-class EvseManagementSetTargets : public ClusterCommand
-{
-public:
-    EvseManagementSetTargets(CredentialIssuerCommands * credsIssuerConfig) :
-        ClusterCommand("set-targets", credsIssuerConfig), mComplex_ChargingTargets(&mRequest.chargingTargets)
-    {
-        AddArgument("NumberOfTargetsForSequence", 0, UINT8_MAX, &mRequest.numberOfTargetsForSequence);
-        AddArgument("DayOfWeekForSequence", 0, UINT8_MAX, &mRequest.dayOfWeekForSequence);
-        AddArgument("ChargingTargets", &mComplex_ChargingTargets);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::SetTargets::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::SetTargets::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::SetTargets::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::EvseManagement::Structs::ChargingTargetStruct::Type>>
-        mComplex_ChargingTargets;
-};
-
-/*
- * Command GetTargets
- */
-class EvseManagementGetTargets : public ClusterCommand
-{
-public:
-    EvseManagementGetTargets(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("get-targets", credsIssuerConfig)
-    {
-        AddArgument("DaysToReturn", 0, UINT8_MAX, &mRequest.daysToReturn);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::GetTargets::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::GetTargets::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::GetTargets::Type mRequest;
-};
-
-/*
- * Command ClearTargets
- */
-class EvseManagementClearTargets : public ClusterCommand
-{
-public:
-    EvseManagementClearTargets(CredentialIssuerCommands * credsIssuerConfig) : ClusterCommand("clear-targets", credsIssuerConfig)
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(chip::DeviceProxy * device, std::vector<chip::EndpointId> endpointIds) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::ClearTargets::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on endpoint %u", clusterId,
-                        commandId, endpointIds.at(0));
-        return ClusterCommand::SendCommand(device, endpointIds.at(0), clusterId, commandId, mRequest);
-    }
-
-    CHIP_ERROR SendGroupCommand(chip::GroupId groupId, chip::FabricIndex fabricIndex) override
-    {
-        constexpr chip::ClusterId clusterId = chip::app::Clusters::EvseManagement::Id;
-        constexpr chip::CommandId commandId = chip::app::Clusters::EvseManagement::Commands::ClearTargets::Id;
-
-        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") command (0x%08" PRIX32 ") on Group %u", clusterId, commandId,
-                        groupId);
-
-        return ClusterCommand::SendGroupCommand(groupId, fabricIndex, clusterId, commandId, mRequest);
-    }
-
-private:
-    chip::app::Clusters::EvseManagement::Commands::ClearTargets::Type mRequest;
 };
 
 /*----------------------------------------------------------------------------*\
@@ -16965,6 +16965,303 @@ void registerClusterActivatedCarbonFilterMonitoring(Commands & commands, Credent
 
     commands.RegisterCluster(clusterName, clusterCommands);
 }
+void registerClusterDeviceEnergyManagement(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
+{
+    using namespace chip::app::Clusters::DeviceEnergyManagement;
+
+    const char * clusterName = "DeviceEnergyManagement";
+
+    commands_list clusterCommands = {
+        //
+        // Commands
+        //
+        make_unique<ClusterCommand>(Id, credsIssuerConfig),                                   //
+        make_unique<DeviceEnergyManagementPowerAdjustRequest>(credsIssuerConfig),             //
+        make_unique<DeviceEnergyManagementCancelPowerAdjustRequest>(credsIssuerConfig),       //
+        make_unique<DeviceEnergyManagementStartTimeAdjustRequest>(credsIssuerConfig),         //
+        make_unique<DeviceEnergyManagementPauseRequest>(credsIssuerConfig),                   //
+        make_unique<DeviceEnergyManagementResumeRequest>(credsIssuerConfig),                  //
+        make_unique<DeviceEnergyManagementModifyForecastRequest>(credsIssuerConfig),          //
+        make_unique<DeviceEnergyManagementRequestConstraintBasedForecast>(credsIssuerConfig), //
+        //
+        // Attributes
+        //
+        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                     //
+        make_unique<ReadAttribute>(Id, "esa-type", Attributes::EsaType::Id, credsIssuerConfig),                //
+        make_unique<ReadAttribute>(Id, "esa-is-generator", Attributes::EsaIsGenerator::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "esa-state", Attributes::EsaState::Id, credsIssuerConfig),              //
+        make_unique<ReadAttribute>(Id, "abs-min-power", Attributes::AbsMinPower::Id, credsIssuerConfig),       //
+        make_unique<ReadAttribute>(Id, "abs-max-power", Attributes::AbsMaxPower::Id, credsIssuerConfig),       //
+        make_unique<ReadAttribute>(Id, "power-adjustment-capability", Attributes::PowerAdjustmentCapability::Id,
+                                   credsIssuerConfig),                                                                     //
+        make_unique<ReadAttribute>(Id, "forecast", Attributes::Forecast::Id, credsIssuerConfig),                           //
+        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
+        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
+        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
+        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
+        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                              //
+        make_unique<WriteAttribute<chip::app::Clusters::DeviceEnergyManagement::EsaTypeEnum>>(
+            Id, "esa-type", 0, UINT8_MAX, Attributes::EsaType::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<bool>>(Id, "esa-is-generator", 0, 1, Attributes::EsaIsGenerator::Id,
+                                          WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::Clusters::DeviceEnergyManagement::EsaStateEnum>>(
+            Id, "esa-state", 0, UINT8_MAX, Attributes::EsaState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<int32_t>>(Id, "abs-min-power", INT32_MIN, INT32_MAX, Attributes::AbsMinPower::Id,
+                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<int32_t>>(Id, "abs-max-power", INT32_MIN, INT32_MAX, Attributes::AbsMaxPower::Id,
+                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::Nullable<
+            chip::app::DataModel::List<const chip::app::Clusters::DeviceEnergyManagement::Structs::PowerAdjustStruct::Type>>>>(
+            Id, "power-adjustment-capability", Attributes::PowerAdjustmentCapability::Id, WriteCommandType::kForceWrite,
+            credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<
+            chip::app::DataModel::Nullable<chip::app::Clusters::DeviceEnergyManagement::Structs::ForecastStruct::Type>>>(
+            Id, "forecast", Attributes::Forecast::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
+            Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
+            credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
+            Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::EventId>>>(
+            Id, "event-list", Attributes::EventList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::AttributeId>>>(
+            Id, "attribute-list", Attributes::AttributeList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "feature-map", 0, UINT32_MAX, Attributes::FeatureMap::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint16_t>>(Id, "cluster-revision", 0, UINT16_MAX, Attributes::ClusterRevision::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig),                    //
+        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                     //
+        make_unique<SubscribeAttribute>(Id, "esa-type", Attributes::EsaType::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "esa-is-generator", Attributes::EsaIsGenerator::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "esa-state", Attributes::EsaState::Id, credsIssuerConfig),              //
+        make_unique<SubscribeAttribute>(Id, "abs-min-power", Attributes::AbsMinPower::Id, credsIssuerConfig),       //
+        make_unique<SubscribeAttribute>(Id, "abs-max-power", Attributes::AbsMaxPower::Id, credsIssuerConfig),       //
+        make_unique<SubscribeAttribute>(Id, "power-adjustment-capability", Attributes::PowerAdjustmentCapability::Id,
+                                        credsIssuerConfig),                                                                     //
+        make_unique<SubscribeAttribute>(Id, "forecast", Attributes::Forecast::Id, credsIssuerConfig),                           //
+        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
+        //
+        // Events
+        //
+        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                          //
+        make_unique<ReadEvent>(Id, "power-adjust-start", Events::PowerAdjustStart::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "power-adjust-end", Events::PowerAdjustEnd::Id, credsIssuerConfig),          //
+        make_unique<ReadEvent>(Id, "paused", Events::Paused::Id, credsIssuerConfig),                            //
+        make_unique<ReadEvent>(Id, "resumed", Events::Resumed::Id, credsIssuerConfig),                          //
+        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                     //
+        make_unique<SubscribeEvent>(Id, "power-adjust-start", Events::PowerAdjustStart::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "power-adjust-end", Events::PowerAdjustEnd::Id, credsIssuerConfig),     //
+        make_unique<SubscribeEvent>(Id, "paused", Events::Paused::Id, credsIssuerConfig),                       //
+        make_unique<SubscribeEvent>(Id, "resumed", Events::Resumed::Id, credsIssuerConfig),                     //
+    };
+
+    commands.RegisterCluster(clusterName, clusterCommands);
+}
+void registerClusterEnergyEvse(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
+{
+    using namespace chip::app::Clusters::EnergyEvse;
+
+    const char * clusterName = "EnergyEvse";
+
+    commands_list clusterCommands = {
+        //
+        // Commands
+        //
+        make_unique<ClusterCommand>(Id, credsIssuerConfig),          //
+        make_unique<EnergyEvseDisable>(credsIssuerConfig),           //
+        make_unique<EnergyEvseEnableCharging>(credsIssuerConfig),    //
+        make_unique<EnergyEvseEnableDischarging>(credsIssuerConfig), //
+        make_unique<EnergyEvseStartDiagnostics>(credsIssuerConfig),  //
+        make_unique<EnergyEvseSetTargets>(credsIssuerConfig),        //
+        make_unique<EnergyEvseGetTargets>(credsIssuerConfig),        //
+        make_unique<EnergyEvseClearTargets>(credsIssuerConfig),      //
+        //
+        // Attributes
+        //
+        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                                 //
+        make_unique<ReadAttribute>(Id, "state", Attributes::State::Id, credsIssuerConfig),                                 //
+        make_unique<ReadAttribute>(Id, "supply-state", Attributes::SupplyState::Id, credsIssuerConfig),                    //
+        make_unique<ReadAttribute>(Id, "fault-state", Attributes::FaultState::Id, credsIssuerConfig),                      //
+        make_unique<ReadAttribute>(Id, "enable-charge-time", Attributes::EnableChargeTime::Id, credsIssuerConfig),         //
+        make_unique<ReadAttribute>(Id, "enable-discharge-time", Attributes::EnableDischargeTime::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "circuit-capacity", Attributes::CircuitCapacity::Id, credsIssuerConfig),            //
+        make_unique<ReadAttribute>(Id, "minimum-charge-current", Attributes::MinimumChargeCurrent::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "maximum-charge-current", Attributes::MaximumChargeCurrent::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "maximumd-discharge-current", Attributes::MaximumdDischargeCurrent::Id,
+                                   credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "user-maximum-charge-current", Attributes::UserMaximumChargeCurrent::Id,
+                                   credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "randomisation-delay-window", Attributes::RandomisationDelayWindow::Id,
+                                   credsIssuerConfig),                                                                        //
+        make_unique<ReadAttribute>(Id, "number-of-weekly-targets", Attributes::NumberOfWeeklyTargets::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "number-of-daily-targets", Attributes::NumberOfDailyTargets::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "next-charge-start-time", Attributes::NextChargeStartTime::Id, credsIssuerConfig),     //
+        make_unique<ReadAttribute>(Id, "next-charge-target-time", Attributes::NextChargeTargetTime::Id, credsIssuerConfig),   //
+        make_unique<ReadAttribute>(Id, "next-charge-required-energy", Attributes::NextChargeRequiredEnergy::Id,
+                                   credsIssuerConfig),                                                                           //
+        make_unique<ReadAttribute>(Id, "next-charge-target-soc", Attributes::NextChargeTargetSoc::Id, credsIssuerConfig),        //
+        make_unique<ReadAttribute>(Id, "approx-ev-efficiency", Attributes::ApproxEvEfficiency::Id, credsIssuerConfig),           //
+        make_unique<ReadAttribute>(Id, "state-of-charge", Attributes::StateOfCharge::Id, credsIssuerConfig),                     //
+        make_unique<ReadAttribute>(Id, "battery-capacity", Attributes::BatteryCapacity::Id, credsIssuerConfig),                  //
+        make_unique<ReadAttribute>(Id, "vehicle-id", Attributes::VehicleId::Id, credsIssuerConfig),                              //
+        make_unique<ReadAttribute>(Id, "session-id", Attributes::SessionId::Id, credsIssuerConfig),                              //
+        make_unique<ReadAttribute>(Id, "event-sequence-number", Attributes::EventSequenceNumber::Id, credsIssuerConfig),         //
+        make_unique<ReadAttribute>(Id, "session-duration", Attributes::SessionDuration::Id, credsIssuerConfig),                  //
+        make_unique<ReadAttribute>(Id, "session-energy-charged", Attributes::SessionEnergyCharged::Id, credsIssuerConfig),       //
+        make_unique<ReadAttribute>(Id, "session-energy-discharged", Attributes::SessionEnergyDischarged::Id, credsIssuerConfig), //
+        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig),       //
+        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),         //
+        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                              //
+        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                      //
+        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                            //
+        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),                  //
+        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                                    //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::EvseStateEnum>>>(
+            Id, "state", 0, UINT8_MAX, Attributes::State::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::Clusters::EnergyEvse::SupplyStateEnum>>(
+            Id, "supply-state", 0, UINT8_MAX, Attributes::SupplyState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::Clusters::EnergyEvse::FaultStateEnum>>(
+            Id, "fault-state", 0, UINT8_MAX, Attributes::FaultState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "enable-charge-time", 0, UINT32_MAX,
+                                                                              Attributes::EnableChargeTime::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "enable-discharge-time", 0, UINT32_MAX,
+                                                                              Attributes::EnableDischargeTime::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "circuit-capacity", 0, UINT32_MAX, Attributes::CircuitCapacity::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "minimum-charge-current", 0, UINT32_MAX, Attributes::MinimumChargeCurrent::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "maximum-charge-current", 0, UINT32_MAX, Attributes::MaximumChargeCurrent::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "maximumd-discharge-current", 0, UINT32_MAX,
+                                              Attributes::MaximumdDischargeCurrent::Id, WriteCommandType::kForceWrite,
+                                              credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "user-maximum-charge-current", 0, UINT32_MAX,
+                                              Attributes::UserMaximumChargeCurrent::Id, WriteCommandType::kWrite,
+                                              credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "randomisation-delay-window", 0, UINT32_MAX,
+                                              Attributes::RandomisationDelayWindow::Id, WriteCommandType::kWrite,
+                                              credsIssuerConfig), //
+        make_unique<WriteAttribute<uint8_t>>(Id, "number-of-weekly-targets", 0, UINT8_MAX, Attributes::NumberOfWeeklyTargets::Id,
+                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint8_t>>(Id, "number-of-daily-targets", 0, UINT8_MAX, Attributes::NumberOfDailyTargets::Id,
+                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "next-charge-start-time", 0, UINT32_MAX,
+                                                                              Attributes::NextChargeStartTime::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint32_t>>>(Id, "next-charge-target-time", 0, UINT32_MAX,
+                                                                              Attributes::NextChargeTargetTime::Id,
+                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int32_t>>>(Id, "next-charge-required-energy", INT32_MIN,
+                                                                             INT32_MAX, Attributes::NextChargeRequiredEnergy::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint8_t>>>(Id, "next-charge-target-soc", 0, UINT8_MAX,
+                                                                             Attributes::NextChargeTargetSoc::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(Id, "approx-ev-efficiency", 0, UINT16_MAX,
+                                                                              Attributes::ApproxEvEfficiency::Id,
+                                                                              WriteCommandType::kWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::Percent>>>(
+            Id, "state-of-charge", 0, UINT8_MAX, Attributes::StateOfCharge::Id, WriteCommandType::kForceWrite,
+            credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<int32_t>>>(Id, "battery-capacity", INT32_MIN, INT32_MAX,
+                                                                             Attributes::BatteryCapacity::Id,
+                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::CharSpan>>>(
+            Id, "vehicle-id", Attributes::VehicleId::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "session-id", 0, UINT32_MAX, Attributes::SessionId::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint16_t>>(Id, "event-sequence-number", 0, UINT16_MAX, Attributes::EventSequenceNumber::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "session-duration", 0, UINT32_MAX, Attributes::SessionDuration::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<int32_t>>(Id, "session-energy-charged", INT32_MIN, INT32_MAX,
+                                             Attributes::SessionEnergyCharged::Id, WriteCommandType::kForceWrite,
+                                             credsIssuerConfig), //
+        make_unique<WriteAttribute<int32_t>>(Id, "session-energy-discharged", INT32_MIN, INT32_MAX,
+                                             Attributes::SessionEnergyDischarged::Id, WriteCommandType::kForceWrite,
+                                             credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
+            Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
+            credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
+            Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::EventId>>>(
+            Id, "event-list", Attributes::EventList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::AttributeId>>>(
+            Id, "attribute-list", Attributes::AttributeList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint32_t>>(Id, "feature-map", 0, UINT32_MAX, Attributes::FeatureMap::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
+        make_unique<WriteAttribute<uint16_t>>(Id, "cluster-revision", 0, UINT16_MAX, Attributes::ClusterRevision::Id,
+                                              WriteCommandType::kForceWrite, credsIssuerConfig),                                //
+        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                                 //
+        make_unique<SubscribeAttribute>(Id, "state", Attributes::State::Id, credsIssuerConfig),                                 //
+        make_unique<SubscribeAttribute>(Id, "supply-state", Attributes::SupplyState::Id, credsIssuerConfig),                    //
+        make_unique<SubscribeAttribute>(Id, "fault-state", Attributes::FaultState::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeAttribute>(Id, "enable-charge-time", Attributes::EnableChargeTime::Id, credsIssuerConfig),         //
+        make_unique<SubscribeAttribute>(Id, "enable-discharge-time", Attributes::EnableDischargeTime::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "circuit-capacity", Attributes::CircuitCapacity::Id, credsIssuerConfig),            //
+        make_unique<SubscribeAttribute>(Id, "minimum-charge-current", Attributes::MinimumChargeCurrent::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "maximum-charge-current", Attributes::MaximumChargeCurrent::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "maximumd-discharge-current", Attributes::MaximumdDischargeCurrent::Id,
+                                        credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "user-maximum-charge-current", Attributes::UserMaximumChargeCurrent::Id,
+                                        credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "randomisation-delay-window", Attributes::RandomisationDelayWindow::Id,
+                                        credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "number-of-weekly-targets", Attributes::NumberOfWeeklyTargets::Id,
+                                        credsIssuerConfig),                                                                      //
+        make_unique<SubscribeAttribute>(Id, "number-of-daily-targets", Attributes::NumberOfDailyTargets::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "next-charge-start-time", Attributes::NextChargeStartTime::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "next-charge-target-time", Attributes::NextChargeTargetTime::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "next-charge-required-energy", Attributes::NextChargeRequiredEnergy::Id,
+                                        credsIssuerConfig),                                                                     //
+        make_unique<SubscribeAttribute>(Id, "next-charge-target-soc", Attributes::NextChargeTargetSoc::Id, credsIssuerConfig),  //
+        make_unique<SubscribeAttribute>(Id, "approx-ev-efficiency", Attributes::ApproxEvEfficiency::Id, credsIssuerConfig),     //
+        make_unique<SubscribeAttribute>(Id, "state-of-charge", Attributes::StateOfCharge::Id, credsIssuerConfig),               //
+        make_unique<SubscribeAttribute>(Id, "battery-capacity", Attributes::BatteryCapacity::Id, credsIssuerConfig),            //
+        make_unique<SubscribeAttribute>(Id, "vehicle-id", Attributes::VehicleId::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "session-id", Attributes::SessionId::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "event-sequence-number", Attributes::EventSequenceNumber::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "session-duration", Attributes::SessionDuration::Id, credsIssuerConfig),            //
+        make_unique<SubscribeAttribute>(Id, "session-energy-charged", Attributes::SessionEnergyCharged::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "session-energy-discharged", Attributes::SessionEnergyDischarged::Id,
+                                        credsIssuerConfig),                                                                     //
+        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
+        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
+        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
+        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
+        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
+        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
+        //
+        // Events
+        //
+        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                                    //
+        make_unique<ReadEvent>(Id, "evconnected", Events::EVConnected::Id, credsIssuerConfig),                            //
+        make_unique<ReadEvent>(Id, "evnot-detected", Events::EVNotDetected::Id, credsIssuerConfig),                       //
+        make_unique<ReadEvent>(Id, "energy-transfer-started", Events::EnergyTransferStarted::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "energy-transfer-stopped", Events::EnergyTransferStopped::Id, credsIssuerConfig),      //
+        make_unique<ReadEvent>(Id, "fault", Events::Fault::Id, credsIssuerConfig),                                        //
+        make_unique<ReadEvent>(Id, "rfid", Events::Rfid::Id, credsIssuerConfig),                                          //
+        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                               //
+        make_unique<SubscribeEvent>(Id, "evconnected", Events::EVConnected::Id, credsIssuerConfig),                       //
+        make_unique<SubscribeEvent>(Id, "evnot-detected", Events::EVNotDetected::Id, credsIssuerConfig),                  //
+        make_unique<SubscribeEvent>(Id, "energy-transfer-started", Events::EnergyTransferStarted::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "energy-transfer-stopped", Events::EnergyTransferStopped::Id, credsIssuerConfig), //
+        make_unique<SubscribeEvent>(Id, "fault", Events::Fault::Id, credsIssuerConfig),                                   //
+        make_unique<SubscribeEvent>(Id, "rfid", Events::Rfid::Id, credsIssuerConfig),                                     //
+    };
+
+    commands.RegisterCluster(clusterName, clusterCommands);
+}
 void registerClusterDoorLock(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
 {
     using namespace chip::app::Clusters::DoorLock;
@@ -20967,315 +21264,6 @@ void registerClusterAccountLogin(Commands & commands, CredentialIssuerCommands *
 
     commands.RegisterCluster(clusterName, clusterCommands);
 }
-void registerClusterEnergyManagement(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
-{
-    using namespace chip::app::Clusters::EnergyManagement;
-
-    const char * clusterName = "EnergyManagement";
-
-    commands_list clusterCommands = {
-        //
-        // Commands
-        //
-        make_unique<ClusterCommand>(Id, credsIssuerConfig),                             //
-        make_unique<EnergyManagementPowerAdjustRequest>(credsIssuerConfig),             //
-        make_unique<EnergyManagementCancelPowerAdjustRequest>(credsIssuerConfig),       //
-        make_unique<EnergyManagementStartTimeAdjustRequest>(credsIssuerConfig),         //
-        make_unique<EnergyManagementPauseRequest>(credsIssuerConfig),                   //
-        make_unique<EnergyManagementResumeRequest>(credsIssuerConfig),                  //
-        make_unique<EnergyManagementModifyPowerForecastRequest>(credsIssuerConfig),     //
-        make_unique<EnergyManagementRequestLimitBasedPowerForecast>(credsIssuerConfig), //
-        //
-        // Attributes
-        //
-        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                     //
-        make_unique<ReadAttribute>(Id, "esa-type", Attributes::EsaType::Id, credsIssuerConfig),                //
-        make_unique<ReadAttribute>(Id, "esa-is-generator", Attributes::EsaIsGenerator::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "esa-state", Attributes::EsaState::Id, credsIssuerConfig),              //
-        make_unique<ReadAttribute>(Id, "abs-min-power", Attributes::AbsMinPower::Id, credsIssuerConfig),       //
-        make_unique<ReadAttribute>(Id, "abs-max-power", Attributes::AbsMaxPower::Id, credsIssuerConfig),       //
-        make_unique<ReadAttribute>(Id, "power-adjustment-capability", Attributes::PowerAdjustmentCapability::Id,
-                                   credsIssuerConfig),                                                                     //
-        make_unique<ReadAttribute>(Id, "power-forecast", Attributes::PowerForecast::Id, credsIssuerConfig),                //
-        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
-        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
-        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
-        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
-        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
-        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                              //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum>>>(
-            Id, "esa-type", 0, UINT8_MAX, Attributes::EsaType::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<bool>>(Id, "esa-is-generator", 0, 1, Attributes::EsaIsGenerator::Id,
-                                          WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum>>>(
-            Id, "esa-state", 0, UINT8_MAX, Attributes::EsaState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<int16_t>>(Id, "abs-min-power", INT16_MIN, INT16_MAX, Attributes::AbsMinPower::Id,
-                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<int16_t>>(Id, "abs-max-power", INT16_MIN, INT16_MAX, Attributes::AbsMaxPower::Id,
-                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::Nullable<
-            chip::app::DataModel::List<const chip::app::Clusters::EnergyManagement::Structs::PowerAdjustStruct::Type>>>>(
-            Id, "power-adjustment-capability", Attributes::PowerAdjustmentCapability::Id, WriteCommandType::kForceWrite,
-            credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<
-            chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::Structs::PowerForecastStruct::Type>>>(
-            Id, "power-forecast", Attributes::PowerForecast::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
-            Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
-            credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
-            Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::EventId>>>(
-            Id, "event-list", Attributes::EventList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::AttributeId>>>(
-            Id, "attribute-list", Attributes::AttributeList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint32_t>>(Id, "feature-map", 0, UINT32_MAX, Attributes::FeatureMap::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "cluster-revision", 0, UINT16_MAX, Attributes::ClusterRevision::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig),                    //
-        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                     //
-        make_unique<SubscribeAttribute>(Id, "esa-type", Attributes::EsaType::Id, credsIssuerConfig),                //
-        make_unique<SubscribeAttribute>(Id, "esa-is-generator", Attributes::EsaIsGenerator::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "esa-state", Attributes::EsaState::Id, credsIssuerConfig),              //
-        make_unique<SubscribeAttribute>(Id, "abs-min-power", Attributes::AbsMinPower::Id, credsIssuerConfig),       //
-        make_unique<SubscribeAttribute>(Id, "abs-max-power", Attributes::AbsMaxPower::Id, credsIssuerConfig),       //
-        make_unique<SubscribeAttribute>(Id, "power-adjustment-capability", Attributes::PowerAdjustmentCapability::Id,
-                                        credsIssuerConfig),                                                                     //
-        make_unique<SubscribeAttribute>(Id, "power-forecast", Attributes::PowerForecast::Id, credsIssuerConfig),                //
-        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
-        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
-        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
-        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
-        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
-        //
-        // Events
-        //
-        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                          //
-        make_unique<ReadEvent>(Id, "power-adjust-start", Events::PowerAdjustStart::Id, credsIssuerConfig),      //
-        make_unique<ReadEvent>(Id, "power-adjust-end", Events::PowerAdjustEnd::Id, credsIssuerConfig),          //
-        make_unique<ReadEvent>(Id, "paused", Events::Paused::Id, credsIssuerConfig),                            //
-        make_unique<ReadEvent>(Id, "resumed", Events::Resumed::Id, credsIssuerConfig),                          //
-        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                     //
-        make_unique<SubscribeEvent>(Id, "power-adjust-start", Events::PowerAdjustStart::Id, credsIssuerConfig), //
-        make_unique<SubscribeEvent>(Id, "power-adjust-end", Events::PowerAdjustEnd::Id, credsIssuerConfig),     //
-        make_unique<SubscribeEvent>(Id, "paused", Events::Paused::Id, credsIssuerConfig),                       //
-        make_unique<SubscribeEvent>(Id, "resumed", Events::Resumed::Id, credsIssuerConfig),                     //
-    };
-
-    commands.RegisterCluster(clusterName, clusterCommands);
-}
-void registerClusterEvseManagement(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
-{
-    using namespace chip::app::Clusters::EvseManagement;
-
-    const char * clusterName = "EvseManagement";
-
-    commands_list clusterCommands = {
-        //
-        // Commands
-        //
-        make_unique<ClusterCommand>(Id, credsIssuerConfig),                  //
-        make_unique<EvseManagementDisableEvse>(credsIssuerConfig),           //
-        make_unique<EvseManagementEnableEvseCharging>(credsIssuerConfig),    //
-        make_unique<EvseManagementEnableEvseDischarging>(credsIssuerConfig), //
-        make_unique<EvseManagementStartDiagnostics>(credsIssuerConfig),      //
-        make_unique<EvseManagementSetTargets>(credsIssuerConfig),            //
-        make_unique<EvseManagementGetTargets>(credsIssuerConfig),            //
-        make_unique<EvseManagementClearTargets>(credsIssuerConfig),          //
-        //
-        // Attributes
-        //
-        make_unique<ReadAttribute>(Id, credsIssuerConfig),                                                                 //
-        make_unique<ReadAttribute>(Id, "evse-state", Attributes::EvseState::Id, credsIssuerConfig),                        //
-        make_unique<ReadAttribute>(Id, "supply-state", Attributes::SupplyState::Id, credsIssuerConfig),                    //
-        make_unique<ReadAttribute>(Id, "evse-fault", Attributes::EvseFault::Id, credsIssuerConfig),                        //
-        make_unique<ReadAttribute>(Id, "enable-charge-time", Attributes::EnableChargeTime::Id, credsIssuerConfig),         //
-        make_unique<ReadAttribute>(Id, "enable-discharge-time", Attributes::EnableDischargeTime::Id, credsIssuerConfig),   //
-        make_unique<ReadAttribute>(Id, "circuit-capacity", Attributes::CircuitCapacity::Id, credsIssuerConfig),            //
-        make_unique<ReadAttribute>(Id, "minimum-charge-current", Attributes::MinimumChargeCurrent::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "maximum-charge-current", Attributes::MaximumChargeCurrent::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "maximumd-discharge-current", Attributes::MaximumdDischargeCurrent::Id,
-                                   credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "user-maximum-charge-current", Attributes::UserMaximumChargeCurrent::Id,
-                                   credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "randomisation-delay-window", Attributes::RandomisationDelayWindow::Id,
-                                   credsIssuerConfig),                                                                        //
-        make_unique<ReadAttribute>(Id, "start-of-week", Attributes::StartOfWeek::Id, credsIssuerConfig),                      //
-        make_unique<ReadAttribute>(Id, "number-of-weekly-targets", Attributes::NumberOfWeeklyTargets::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "number-of-daily-targets", Attributes::NumberOfDailyTargets::Id, credsIssuerConfig),   //
-        make_unique<ReadAttribute>(Id, "next-charge-start-time", Attributes::NextChargeStartTime::Id, credsIssuerConfig),     //
-        make_unique<ReadAttribute>(Id, "next-charge-target-time", Attributes::NextChargeTargetTime::Id, credsIssuerConfig),   //
-        make_unique<ReadAttribute>(Id, "next-charge-required-energy", Attributes::NextChargeRequiredEnergy::Id,
-                                   credsIssuerConfig),                                                                    //
-        make_unique<ReadAttribute>(Id, "next-charge-target-soc", Attributes::NextChargeTargetSoc::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "approx-ev-efficiency", Attributes::ApproxEvEfficiency::Id, credsIssuerConfig),    //
-        make_unique<ReadAttribute>(Id, "state-of-charge", Attributes::StateOfCharge::Id, credsIssuerConfig),              //
-        make_unique<ReadAttribute>(Id, "battery-capacity", Attributes::BatteryCapacity::Id, credsIssuerConfig),           //
-        make_unique<ReadAttribute>(Id, "vehicle-id", Attributes::VehicleId::Id, credsIssuerConfig),                       //
-        make_unique<ReadAttribute>(Id, "evse-session-id", Attributes::EvseSessionId::Id, credsIssuerConfig),              //
-        make_unique<ReadAttribute>(Id, "event-sequence-number", Attributes::EventSequenceNumber::Id, credsIssuerConfig),  //
-        make_unique<ReadAttribute>(Id, "evse-session-duration", Attributes::EvseSessionDuration::Id, credsIssuerConfig),  //
-        make_unique<ReadAttribute>(Id, "evse-session-energy-charged", Attributes::EvseSessionEnergyCharged::Id,
-                                   credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "evse-session-energy-discharged", Attributes::EvseSessionEnergyDischarged::Id,
-                                   credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "evse-session-maximum-current", Attributes::EvseSessionMaximumCurrent::Id,
-                                   credsIssuerConfig),                                                                     //
-        make_unique<ReadAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
-        make_unique<ReadAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
-        make_unique<ReadAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
-        make_unique<ReadAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
-        make_unique<ReadAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
-        make_unique<ReadAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
-        make_unique<WriteAttribute<>>(Id, credsIssuerConfig),                                                              //
-        make_unique<WriteAttribute<chip::app::Clusters::EvseManagement::EvseStateEnum>>(
-            Id, "evse-state", 0, UINT8_MAX, Attributes::EvseState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::Clusters::EvseManagement::SupplyStateEnum>>(
-            Id, "supply-state", 0, UINT8_MAX, Attributes::SupplyState::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::Clusters::EvseManagement::EvseFaultEnum>>(
-            Id, "evse-fault", 0, UINT8_MAX, Attributes::EvseFault::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "enable-charge-time", 0, UINT16_MAX, Attributes::EnableChargeTime::Id,
-                                              WriteCommandType::kWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "enable-discharge-time", 0, UINT16_MAX, Attributes::EnableDischargeTime::Id,
-                                              WriteCommandType::kWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "circuit-capacity", 0, UINT16_MAX, Attributes::CircuitCapacity::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "minimum-charge-current", 0, UINT16_MAX, Attributes::MinimumChargeCurrent::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "maximum-charge-current", 0, UINT16_MAX, Attributes::MaximumChargeCurrent::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "maximumd-discharge-current", 0, UINT16_MAX,
-                                              Attributes::MaximumdDischargeCurrent::Id, WriteCommandType::kForceWrite,
-                                              credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "user-maximum-charge-current", 0, UINT16_MAX,
-                                              Attributes::UserMaximumChargeCurrent::Id, WriteCommandType::kWrite,
-                                              credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "randomisation-delay-window", 0, UINT16_MAX,
-                                              Attributes::RandomisationDelayWindow::Id, WriteCommandType::kWrite,
-                                              credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::Clusters::EvseManagement::StartOfWeekEnum>>(
-            Id, "start-of-week", 0, UINT8_MAX, Attributes::StartOfWeek::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint8_t>>(Id, "number-of-weekly-targets", 0, UINT8_MAX, Attributes::NumberOfWeeklyTargets::Id,
-                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint8_t>>(Id, "number-of-daily-targets", 0, UINT8_MAX, Attributes::NumberOfDailyTargets::Id,
-                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(Id, "next-charge-start-time", 0, UINT16_MAX,
-                                                                              Attributes::NextChargeStartTime::Id,
-                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(Id, "next-charge-target-time", 0, UINT16_MAX,
-                                                                              Attributes::NextChargeTargetTime::Id,
-                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint8_t>>>(Id, "next-charge-required-energy", 0, UINT8_MAX,
-                                                                             Attributes::NextChargeRequiredEnergy::Id,
-                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint8_t>>>(Id, "next-charge-target-soc", 0, UINT8_MAX,
-                                                                             Attributes::NextChargeTargetSoc::Id,
-                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(Id, "approx-ev-efficiency", 0, UINT16_MAX,
-                                                                              Attributes::ApproxEvEfficiency::Id,
-                                                                              WriteCommandType::kWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint8_t>>>(Id, "state-of-charge", 0, UINT8_MAX,
-                                                                             Attributes::StateOfCharge::Id,
-                                                                             WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<uint16_t>>>(Id, "battery-capacity", 0, UINT16_MAX,
-                                                                              Attributes::BatteryCapacity::Id,
-                                                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<chip::app::DataModel::Nullable<chip::CharSpan>>>(
-            Id, "vehicle-id", Attributes::VehicleId::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint32_t>>(Id, "evse-session-id", 0, UINT32_MAX, Attributes::EvseSessionId::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "event-sequence-number", 0, UINT16_MAX, Attributes::EventSequenceNumber::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint32_t>>(Id, "evse-session-duration", 0, UINT32_MAX, Attributes::EvseSessionDuration::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint32_t>>(Id, "evse-session-energy-charged", 0, UINT32_MAX,
-                                              Attributes::EvseSessionEnergyCharged::Id, WriteCommandType::kForceWrite,
-                                              credsIssuerConfig), //
-        make_unique<WriteAttribute<uint32_t>>(Id, "evse-session-energy-discharged", 0, UINT32_MAX,
-                                              Attributes::EvseSessionEnergyDischarged::Id, WriteCommandType::kForceWrite,
-                                              credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "evse-session-maximum-current", 0, UINT16_MAX,
-                                              Attributes::EvseSessionMaximumCurrent::Id, WriteCommandType::kForceWrite,
-                                              credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
-            Id, "generated-command-list", Attributes::GeneratedCommandList::Id, WriteCommandType::kForceWrite,
-            credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::CommandId>>>(
-            Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::EventId>>>(
-            Id, "event-list", Attributes::EventList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttributeAsComplex<chip::app::DataModel::List<const chip::AttributeId>>>(
-            Id, "attribute-list", Attributes::AttributeList::Id, WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint32_t>>(Id, "feature-map", 0, UINT32_MAX, Attributes::FeatureMap::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig), //
-        make_unique<WriteAttribute<uint16_t>>(Id, "cluster-revision", 0, UINT16_MAX, Attributes::ClusterRevision::Id,
-                                              WriteCommandType::kForceWrite, credsIssuerConfig),                                //
-        make_unique<SubscribeAttribute>(Id, credsIssuerConfig),                                                                 //
-        make_unique<SubscribeAttribute>(Id, "evse-state", Attributes::EvseState::Id, credsIssuerConfig),                        //
-        make_unique<SubscribeAttribute>(Id, "supply-state", Attributes::SupplyState::Id, credsIssuerConfig),                    //
-        make_unique<SubscribeAttribute>(Id, "evse-fault", Attributes::EvseFault::Id, credsIssuerConfig),                        //
-        make_unique<SubscribeAttribute>(Id, "enable-charge-time", Attributes::EnableChargeTime::Id, credsIssuerConfig),         //
-        make_unique<SubscribeAttribute>(Id, "enable-discharge-time", Attributes::EnableDischargeTime::Id, credsIssuerConfig),   //
-        make_unique<SubscribeAttribute>(Id, "circuit-capacity", Attributes::CircuitCapacity::Id, credsIssuerConfig),            //
-        make_unique<SubscribeAttribute>(Id, "minimum-charge-current", Attributes::MinimumChargeCurrent::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "maximum-charge-current", Attributes::MaximumChargeCurrent::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "maximumd-discharge-current", Attributes::MaximumdDischargeCurrent::Id,
-                                        credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "user-maximum-charge-current", Attributes::UserMaximumChargeCurrent::Id,
-                                        credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "randomisation-delay-window", Attributes::RandomisationDelayWindow::Id,
-                                        credsIssuerConfig),                                                   //
-        make_unique<SubscribeAttribute>(Id, "start-of-week", Attributes::StartOfWeek::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "number-of-weekly-targets", Attributes::NumberOfWeeklyTargets::Id,
-                                        credsIssuerConfig),                                                                      //
-        make_unique<SubscribeAttribute>(Id, "number-of-daily-targets", Attributes::NumberOfDailyTargets::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "next-charge-start-time", Attributes::NextChargeStartTime::Id, credsIssuerConfig),   //
-        make_unique<SubscribeAttribute>(Id, "next-charge-target-time", Attributes::NextChargeTargetTime::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "next-charge-required-energy", Attributes::NextChargeRequiredEnergy::Id,
-                                        credsIssuerConfig),                                                                    //
-        make_unique<SubscribeAttribute>(Id, "next-charge-target-soc", Attributes::NextChargeTargetSoc::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "approx-ev-efficiency", Attributes::ApproxEvEfficiency::Id, credsIssuerConfig),    //
-        make_unique<SubscribeAttribute>(Id, "state-of-charge", Attributes::StateOfCharge::Id, credsIssuerConfig),              //
-        make_unique<SubscribeAttribute>(Id, "battery-capacity", Attributes::BatteryCapacity::Id, credsIssuerConfig),           //
-        make_unique<SubscribeAttribute>(Id, "vehicle-id", Attributes::VehicleId::Id, credsIssuerConfig),                       //
-        make_unique<SubscribeAttribute>(Id, "evse-session-id", Attributes::EvseSessionId::Id, credsIssuerConfig),              //
-        make_unique<SubscribeAttribute>(Id, "event-sequence-number", Attributes::EventSequenceNumber::Id, credsIssuerConfig),  //
-        make_unique<SubscribeAttribute>(Id, "evse-session-duration", Attributes::EvseSessionDuration::Id, credsIssuerConfig),  //
-        make_unique<SubscribeAttribute>(Id, "evse-session-energy-charged", Attributes::EvseSessionEnergyCharged::Id,
-                                        credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "evse-session-energy-discharged", Attributes::EvseSessionEnergyDischarged::Id,
-                                        credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "evse-session-maximum-current", Attributes::EvseSessionMaximumCurrent::Id,
-                                        credsIssuerConfig),                                                                     //
-        make_unique<SubscribeAttribute>(Id, "generated-command-list", Attributes::GeneratedCommandList::Id, credsIssuerConfig), //
-        make_unique<SubscribeAttribute>(Id, "accepted-command-list", Attributes::AcceptedCommandList::Id, credsIssuerConfig),   //
-        make_unique<SubscribeAttribute>(Id, "event-list", Attributes::EventList::Id, credsIssuerConfig),                        //
-        make_unique<SubscribeAttribute>(Id, "attribute-list", Attributes::AttributeList::Id, credsIssuerConfig),                //
-        make_unique<SubscribeAttribute>(Id, "feature-map", Attributes::FeatureMap::Id, credsIssuerConfig),                      //
-        make_unique<SubscribeAttribute>(Id, "cluster-revision", Attributes::ClusterRevision::Id, credsIssuerConfig),            //
-        //
-        // Events
-        //
-        make_unique<ReadEvent>(Id, credsIssuerConfig),                                                                    //
-        make_unique<ReadEvent>(Id, "ev-connected", Events::EvConnected::Id, credsIssuerConfig),                           //
-        make_unique<ReadEvent>(Id, "ev-not-detected", Events::EvNotDetected::Id, credsIssuerConfig),                      //
-        make_unique<ReadEvent>(Id, "energy-transfer-started", Events::EnergyTransferStarted::Id, credsIssuerConfig),      //
-        make_unique<ReadEvent>(Id, "energy-transfer-stopped", Events::EnergyTransferStopped::Id, credsIssuerConfig),      //
-        make_unique<ReadEvent>(Id, "fault", Events::Fault::Id, credsIssuerConfig),                                        //
-        make_unique<ReadEvent>(Id, "rfid", Events::Rfid::Id, credsIssuerConfig),                                          //
-        make_unique<SubscribeEvent>(Id, credsIssuerConfig),                                                               //
-        make_unique<SubscribeEvent>(Id, "ev-connected", Events::EvConnected::Id, credsIssuerConfig),                      //
-        make_unique<SubscribeEvent>(Id, "ev-not-detected", Events::EvNotDetected::Id, credsIssuerConfig),                 //
-        make_unique<SubscribeEvent>(Id, "energy-transfer-started", Events::EnergyTransferStarted::Id, credsIssuerConfig), //
-        make_unique<SubscribeEvent>(Id, "energy-transfer-stopped", Events::EnergyTransferStopped::Id, credsIssuerConfig), //
-        make_unique<SubscribeEvent>(Id, "fault", Events::Fault::Id, credsIssuerConfig),                                   //
-        make_unique<SubscribeEvent>(Id, "rfid", Events::Rfid::Id, credsIssuerConfig),                                     //
-    };
-
-    commands.RegisterCluster(clusterName, clusterCommands);
-}
 void registerClusterElectricalMeasurement(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
 {
     using namespace chip::app::Clusters::ElectricalMeasurement;
@@ -22902,6 +22890,8 @@ void registerClusters(Commands & commands, CredentialIssuerCommands * credsIssue
     registerClusterRvcOperationalState(commands, credsIssuerConfig);
     registerClusterHepaFilterMonitoring(commands, credsIssuerConfig);
     registerClusterActivatedCarbonFilterMonitoring(commands, credsIssuerConfig);
+    registerClusterDeviceEnergyManagement(commands, credsIssuerConfig);
+    registerClusterEnergyEvse(commands, credsIssuerConfig);
     registerClusterDoorLock(commands, credsIssuerConfig);
     registerClusterWindowCovering(commands, credsIssuerConfig);
     registerClusterBarrierControl(commands, credsIssuerConfig);
@@ -22939,8 +22929,6 @@ void registerClusters(Commands & commands, CredentialIssuerCommands * credsIssue
     registerClusterApplicationLauncher(commands, credsIssuerConfig);
     registerClusterApplicationBasic(commands, credsIssuerConfig);
     registerClusterAccountLogin(commands, credsIssuerConfig);
-    registerClusterEnergyManagement(commands, credsIssuerConfig);
-    registerClusterEvseManagement(commands, credsIssuerConfig);
     registerClusterElectricalMeasurement(commands, credsIssuerConfig);
     registerClusterWaterHeater(commands, credsIssuerConfig);
     registerClusterElectricalPowerMeasurement(commands, credsIssuerConfig);

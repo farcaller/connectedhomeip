@@ -365,6 +365,58 @@ static constexpr EventId Id = 0x00000001;
 } // namespace Events
 } // namespace RvcOperationalState
 
+namespace DeviceEnergyManagement {
+namespace Events {
+
+namespace PowerAdjustStart {
+static constexpr EventId Id = 0x00000000;
+} // namespace PowerAdjustStart
+
+namespace PowerAdjustEnd {
+static constexpr EventId Id = 0x00000001;
+} // namespace PowerAdjustEnd
+
+namespace Paused {
+static constexpr EventId Id = 0x00000002;
+} // namespace Paused
+
+namespace Resumed {
+static constexpr EventId Id = 0x00000003;
+} // namespace Resumed
+
+} // namespace Events
+} // namespace DeviceEnergyManagement
+
+namespace EnergyEvse {
+namespace Events {
+
+namespace EVConnected {
+static constexpr EventId Id = 0x00000000;
+} // namespace EVConnected
+
+namespace EVNotDetected {
+static constexpr EventId Id = 0x00000001;
+} // namespace EVNotDetected
+
+namespace EnergyTransferStarted {
+static constexpr EventId Id = 0x00000002;
+} // namespace EnergyTransferStarted
+
+namespace EnergyTransferStopped {
+static constexpr EventId Id = 0x00000003;
+} // namespace EnergyTransferStopped
+
+namespace Fault {
+static constexpr EventId Id = 0x00000004;
+} // namespace Fault
+
+namespace Rfid {
+static constexpr EventId Id = 0x00000005;
+} // namespace Rfid
+
+} // namespace Events
+} // namespace EnergyEvse
+
 namespace DoorLock {
 namespace Events {
 
@@ -464,58 +516,6 @@ static constexpr EventId Id = 0x00000010;
 
 } // namespace Events
 } // namespace PumpConfigurationAndControl
-
-namespace EnergyManagement {
-namespace Events {
-
-namespace PowerAdjustStart {
-static constexpr EventId Id = 0x00000000;
-} // namespace PowerAdjustStart
-
-namespace PowerAdjustEnd {
-static constexpr EventId Id = 0x00000001;
-} // namespace PowerAdjustEnd
-
-namespace Paused {
-static constexpr EventId Id = 0x00000002;
-} // namespace Paused
-
-namespace Resumed {
-static constexpr EventId Id = 0x00000003;
-} // namespace Resumed
-
-} // namespace Events
-} // namespace EnergyManagement
-
-namespace EvseManagement {
-namespace Events {
-
-namespace EvConnected {
-static constexpr EventId Id = 0x00000000;
-} // namespace EvConnected
-
-namespace EvNotDetected {
-static constexpr EventId Id = 0x00000001;
-} // namespace EvNotDetected
-
-namespace EnergyTransferStarted {
-static constexpr EventId Id = 0x00000002;
-} // namespace EnergyTransferStarted
-
-namespace EnergyTransferStopped {
-static constexpr EventId Id = 0x00000003;
-} // namespace EnergyTransferStopped
-
-namespace Fault {
-static constexpr EventId Id = 0x00000004;
-} // namespace Fault
-
-namespace Rfid {
-static constexpr EventId Id = 0x00000005;
-} // namespace Rfid
-
-} // namespace Events
-} // namespace EvseManagement
 
 namespace ElectricalPowerMeasurement {
 namespace Events {

@@ -1721,6 +1721,217 @@ EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
 } // namespace Attributes
 } // namespace ActivatedCarbonFilterMonitoring
 
+namespace DeviceEnergyManagement {
+namespace Attributes {
+
+namespace EsaType {
+EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::DeviceEnergyManagement::EsaTypeEnum * value); // EsaTypeEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::DeviceEnergyManagement::EsaTypeEnum value);
+} // namespace EsaType
+
+namespace EsaIsGenerator {
+EmberAfStatus Get(chip::EndpointId endpoint, bool * value); // boolean
+EmberAfStatus Set(chip::EndpointId endpoint, bool value);
+} // namespace EsaIsGenerator
+
+namespace EsaState {
+EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::DeviceEnergyManagement::EsaStateEnum * value); // EsaStateEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::DeviceEnergyManagement::EsaStateEnum value);
+} // namespace EsaState
+
+namespace AbsMinPower {
+EmberAfStatus Get(chip::EndpointId endpoint, int32_t * value); // int32s
+EmberAfStatus Set(chip::EndpointId endpoint, int32_t value);
+} // namespace AbsMinPower
+
+namespace AbsMaxPower {
+EmberAfStatus Get(chip::EndpointId endpoint, int32_t * value); // int32s
+EmberAfStatus Set(chip::EndpointId endpoint, int32_t value);
+} // namespace AbsMaxPower
+
+namespace FeatureMap {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // bitmap32
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace FeatureMap
+
+namespace ClusterRevision {
+EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
+EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
+} // namespace ClusterRevision
+
+} // namespace Attributes
+} // namespace DeviceEnergyManagement
+
+namespace EnergyEvse {
+namespace Attributes {
+
+namespace State {
+EmberAfStatus Get(chip::EndpointId endpoint,
+                  DataModel::Nullable<chip::app::Clusters::EnergyEvse::EvseStateEnum> & value); // EvseStateEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::EvseStateEnum value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint,
+                  const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyEvse::EvseStateEnum> & value);
+} // namespace State
+
+namespace SupplyState {
+EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::SupplyStateEnum * value); // SupplyStateEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::SupplyStateEnum value);
+} // namespace SupplyState
+
+namespace FaultState {
+EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::FaultStateEnum * value); // FaultStateEnum
+EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyEvse::FaultStateEnum value);
+} // namespace FaultState
+
+namespace EnableChargeTime {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // elapsed_s
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
+} // namespace EnableChargeTime
+
+namespace EnableDischargeTime {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // elapsed_s
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
+} // namespace EnableDischargeTime
+
+namespace CircuitCapacity {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace CircuitCapacity
+
+namespace MinimumChargeCurrent {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace MinimumChargeCurrent
+
+namespace MaximumChargeCurrent {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace MaximumChargeCurrent
+
+namespace MaximumdDischargeCurrent {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace MaximumdDischargeCurrent
+
+namespace UserMaximumChargeCurrent {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace UserMaximumChargeCurrent
+
+namespace RandomisationDelayWindow {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // elapsed_s
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace RandomisationDelayWindow
+
+namespace NumberOfWeeklyTargets {
+EmberAfStatus Get(chip::EndpointId endpoint, uint8_t * value); // int8u
+EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
+} // namespace NumberOfWeeklyTargets
+
+namespace NumberOfDailyTargets {
+EmberAfStatus Get(chip::EndpointId endpoint, uint8_t * value); // int8u
+EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
+} // namespace NumberOfDailyTargets
+
+namespace NextChargeStartTime {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
+} // namespace NextChargeStartTime
+
+namespace NextChargeTargetTime {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint32_t> & value); // epoch_s
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint32_t> & value);
+} // namespace NextChargeTargetTime
+
+namespace NextChargeRequiredEnergy {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<int32_t> & value); // int32s
+EmberAfStatus Set(chip::EndpointId endpoint, int32_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<int32_t> & value);
+} // namespace NextChargeRequiredEnergy
+
+namespace NextChargeTargetSoc {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint8_t> & value); // int8u
+EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint8_t> & value);
+} // namespace NextChargeTargetSoc
+
+namespace ApproxEvEfficiency {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint16_t> & value); // int16u
+EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint16_t> & value);
+} // namespace ApproxEvEfficiency
+
+namespace StateOfCharge {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<chip::Percent> & value); // Percent
+EmberAfStatus Set(chip::EndpointId endpoint, chip::Percent value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<chip::Percent> & value);
+} // namespace StateOfCharge
+
+namespace BatteryCapacity {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<int32_t> & value); // int32s
+EmberAfStatus Set(chip::EndpointId endpoint, int32_t value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<int32_t> & value);
+} // namespace BatteryCapacity
+
+namespace VehicleId {
+EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<chip::MutableCharSpan> & value); // char_string
+EmberAfStatus Set(chip::EndpointId endpoint, chip::CharSpan value);
+EmberAfStatus SetNull(chip::EndpointId endpoint);
+EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<chip::CharSpan> & value);
+} // namespace VehicleId
+
+namespace SessionId {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace SessionId
+
+namespace EventSequenceNumber {
+EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
+EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
+} // namespace EventSequenceNumber
+
+namespace SessionDuration {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // elapsed_s
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace SessionDuration
+
+namespace SessionEnergyCharged {
+EmberAfStatus Get(chip::EndpointId endpoint, int32_t * value); // int32s
+EmberAfStatus Set(chip::EndpointId endpoint, int32_t value);
+} // namespace SessionEnergyCharged
+
+namespace SessionEnergyDischarged {
+EmberAfStatus Get(chip::EndpointId endpoint, int32_t * value); // int32s
+EmberAfStatus Set(chip::EndpointId endpoint, int32_t value);
+} // namespace SessionEnergyDischarged
+
+namespace FeatureMap {
+EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // bitmap32
+EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
+} // namespace FeatureMap
+
+namespace ClusterRevision {
+EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
+EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
+} // namespace ClusterRevision
+
+} // namespace Attributes
+} // namespace EnergyEvse
+
 namespace DoorLock {
 namespace Attributes {
 
@@ -3879,227 +4090,6 @@ EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
 
 } // namespace Attributes
 } // namespace AccountLogin
-
-namespace EnergyManagement {
-namespace Attributes {
-
-namespace EsaType {
-EmberAfStatus Get(chip::EndpointId endpoint,
-                  DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> & value); // EsaTypeEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyManagement::EsaTypeEnum value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint,
-                  const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaTypeEnum> & value);
-} // namespace EsaType
-
-namespace EsaIsGenerator {
-EmberAfStatus Get(chip::EndpointId endpoint, bool * value); // boolean
-EmberAfStatus Set(chip::EndpointId endpoint, bool value);
-} // namespace EsaIsGenerator
-
-namespace EsaState {
-EmberAfStatus Get(chip::EndpointId endpoint,
-                  DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> & value); // EsaStateEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EnergyManagement::EsaStateEnum value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint,
-                  const chip::app::DataModel::Nullable<chip::app::Clusters::EnergyManagement::EsaStateEnum> & value);
-} // namespace EsaState
-
-namespace AbsMinPower {
-EmberAfStatus Get(chip::EndpointId endpoint, int16_t * value); // int16s
-EmberAfStatus Set(chip::EndpointId endpoint, int16_t value);
-} // namespace AbsMinPower
-
-namespace AbsMaxPower {
-EmberAfStatus Get(chip::EndpointId endpoint, int16_t * value); // int16s
-EmberAfStatus Set(chip::EndpointId endpoint, int16_t value);
-} // namespace AbsMaxPower
-
-namespace FeatureMap {
-EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // bitmap32
-EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
-} // namespace FeatureMap
-
-namespace ClusterRevision {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace ClusterRevision
-
-} // namespace Attributes
-} // namespace EnergyManagement
-
-namespace EvseManagement {
-namespace Attributes {
-
-namespace EvseState {
-EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::EvseStateEnum * value); // EvseStateEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::EvseStateEnum value);
-} // namespace EvseState
-
-namespace SupplyState {
-EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::SupplyStateEnum * value); // SupplyStateEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::SupplyStateEnum value);
-} // namespace SupplyState
-
-namespace EvseFault {
-EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::EvseFaultEnum * value); // EvseFaultEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::EvseFaultEnum value);
-} // namespace EvseFault
-
-namespace EnableChargeTime {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace EnableChargeTime
-
-namespace EnableDischargeTime {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace EnableDischargeTime
-
-namespace CircuitCapacity {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace CircuitCapacity
-
-namespace MinimumChargeCurrent {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace MinimumChargeCurrent
-
-namespace MaximumChargeCurrent {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace MaximumChargeCurrent
-
-namespace MaximumdDischargeCurrent {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace MaximumdDischargeCurrent
-
-namespace UserMaximumChargeCurrent {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace UserMaximumChargeCurrent
-
-namespace RandomisationDelayWindow {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace RandomisationDelayWindow
-
-namespace StartOfWeek {
-EmberAfStatus Get(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::StartOfWeekEnum * value); // StartOfWeekEnum
-EmberAfStatus Set(chip::EndpointId endpoint, chip::app::Clusters::EvseManagement::StartOfWeekEnum value);
-} // namespace StartOfWeek
-
-namespace NumberOfWeeklyTargets {
-EmberAfStatus Get(chip::EndpointId endpoint, uint8_t * value); // int8u
-EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
-} // namespace NumberOfWeeklyTargets
-
-namespace NumberOfDailyTargets {
-EmberAfStatus Get(chip::EndpointId endpoint, uint8_t * value); // int8u
-EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
-} // namespace NumberOfDailyTargets
-
-namespace NextChargeStartTime {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint16_t> & value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint16_t> & value);
-} // namespace NextChargeStartTime
-
-namespace NextChargeTargetTime {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint16_t> & value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint16_t> & value);
-} // namespace NextChargeTargetTime
-
-namespace NextChargeRequiredEnergy {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint8_t> & value); // int8u
-EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint8_t> & value);
-} // namespace NextChargeRequiredEnergy
-
-namespace NextChargeTargetSoc {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint8_t> & value); // int8u
-EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint8_t> & value);
-} // namespace NextChargeTargetSoc
-
-namespace ApproxEvEfficiency {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint16_t> & value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint16_t> & value);
-} // namespace ApproxEvEfficiency
-
-namespace StateOfCharge {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint8_t> & value); // int8u
-EmberAfStatus Set(chip::EndpointId endpoint, uint8_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint8_t> & value);
-} // namespace StateOfCharge
-
-namespace BatteryCapacity {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<uint16_t> & value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<uint16_t> & value);
-} // namespace BatteryCapacity
-
-namespace VehicleId {
-EmberAfStatus Get(chip::EndpointId endpoint, DataModel::Nullable<chip::MutableCharSpan> & value); // char_string
-EmberAfStatus Set(chip::EndpointId endpoint, chip::CharSpan value);
-EmberAfStatus SetNull(chip::EndpointId endpoint);
-EmberAfStatus Set(chip::EndpointId endpoint, const chip::app::DataModel::Nullable<chip::CharSpan> & value);
-} // namespace VehicleId
-
-namespace EvseSessionId {
-EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
-EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
-} // namespace EvseSessionId
-
-namespace EventSequenceNumber {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace EventSequenceNumber
-
-namespace EvseSessionDuration {
-EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
-EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
-} // namespace EvseSessionDuration
-
-namespace EvseSessionEnergyCharged {
-EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
-EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
-} // namespace EvseSessionEnergyCharged
-
-namespace EvseSessionEnergyDischarged {
-EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // int32u
-EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
-} // namespace EvseSessionEnergyDischarged
-
-namespace EvseSessionMaximumCurrent {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace EvseSessionMaximumCurrent
-
-namespace FeatureMap {
-EmberAfStatus Get(chip::EndpointId endpoint, uint32_t * value); // bitmap32
-EmberAfStatus Set(chip::EndpointId endpoint, uint32_t value);
-} // namespace FeatureMap
-
-namespace ClusterRevision {
-EmberAfStatus Get(chip::EndpointId endpoint, uint16_t * value); // int16u
-EmberAfStatus Set(chip::EndpointId endpoint, uint16_t value);
-} // namespace ClusterRevision
-
-} // namespace Attributes
-} // namespace EvseManagement
 
 namespace ElectricalMeasurement {
 namespace Attributes {

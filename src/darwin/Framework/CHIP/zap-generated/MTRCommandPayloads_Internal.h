@@ -285,6 +285,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface MTREnergyEVSEClusterGetTargetsResponseParams (InternalMethods)
+
+- (CHIP_ERROR)_setFieldsFromDecodableStruct:
+    (const chip::app::Clusters::EnergyEvse::Commands::GetTargetsResponse::DecodableType &)decodableStruct;
+
+@end
+
 @interface MTRDoorLockClusterGetWeekDayScheduleResponseParams (InternalMethods)
 
 - (CHIP_ERROR)_setFieldsFromDecodableStruct:
@@ -380,13 +387,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CHIP_ERROR)_setFieldsFromDecodableStruct:
     (const chip::app::Clusters::AccountLogin::Commands::GetSetupPINResponse::DecodableType &)decodableStruct;
-
-@end
-
-@interface MTREVSEManagementClusterGetTargetsResponseParams (InternalMethods)
-
-- (CHIP_ERROR)_setFieldsFromDecodableStruct:
-    (const chip::app::Clusters::EvseManagement::Commands::GetTargetsResponse::DecodableType &)decodableStruct;
 
 @end
 

@@ -311,10 +311,10 @@ template("chip_data_model") {
           "${_app_root}/clusters/${cluster}/${cluster}.cpp",
           "${_app_root}/clusters/${cluster}/${cluster}.h",
         ]
-      } else if (cluster == "evse-management-server") {
+      } else if (cluster == "energy-evse-server") {
         sources += [
           "${_app_root}/clusters/${cluster}/${cluster}.cpp",
-          "${_app_root}/clusters/${cluster}/DefaultEvseManagementDelegate.cpp",
+          "${_app_root}/clusters/${cluster}/DefaultEnergyEvseDelegate.cpp",
         ]
         cflags +=
             [ "-DTIME_SYNC_ENABLE_TSC_FEATURE=${time_sync_enable_tsc_feature}" ]

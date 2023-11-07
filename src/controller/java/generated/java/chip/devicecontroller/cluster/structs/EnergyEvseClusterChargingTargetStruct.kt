@@ -23,13 +23,13 @@ import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 import java.util.Optional
 
-class EvseManagementClusterChargingTargetStruct(
+class EnergyEvseClusterChargingTargetStruct(
   val targetTime: Int,
   val targetSoC: Optional<Int>,
   val addedEnergy: Optional<Long>
 ) {
   override fun toString(): String = buildString {
-    append("EvseManagementClusterChargingTargetStruct {\n")
+    append("EnergyEvseClusterChargingTargetStruct {\n")
     append("\ttargetTime : $targetTime\n")
     append("\ttargetSoC : $targetSoC\n")
     append("\taddedEnergy : $addedEnergy\n")
@@ -57,7 +57,7 @@ class EvseManagementClusterChargingTargetStruct(
     private const val TAG_TARGET_SO_C = 1
     private const val TAG_ADDED_ENERGY = 2
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterChargingTargetStruct {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyEvseClusterChargingTargetStruct {
       tlvReader.enterStructure(tag)
       val targetTime = tlvReader.getInt(ContextSpecificTag(TAG_TARGET_TIME))
       val targetSoC =
@@ -75,7 +75,7 @@ class EvseManagementClusterChargingTargetStruct(
 
       tlvReader.exitContainer()
 
-      return EvseManagementClusterChargingTargetStruct(targetTime, targetSoC, addedEnergy)
+      return EnergyEvseClusterChargingTargetStruct(targetTime, targetSoC, addedEnergy)
     }
   }
 }

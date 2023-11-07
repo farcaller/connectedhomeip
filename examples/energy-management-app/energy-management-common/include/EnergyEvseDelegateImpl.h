@@ -18,8 +18,7 @@
 
 #pragma once
 
-#include "app/clusters/evse-management-server/evse-management-delegate.h"
-//  #include <app/clusters/evse-management-server/evse-management-server.h>
+#include "app/clusters/energy-evse-server/energy-evse-delegate.h"
 
 #include <app/util/af.h>
 #include <app/util/config.h>
@@ -28,29 +27,29 @@
 namespace chip {
 namespace app {
 namespace Clusters {
-namespace EvseManagement {
+namespace EnergyEvse {
 
 /**
  * The application delegate.
  */
 
-class EvseManagementDelegate : public Delegate
+class EnergyEvseDelegate : public Delegate
 {
 public:
-    EvseManagementDelegate() : Delegate(){};
+    EnergyEvseDelegate() : Delegate(){};
 
-    virtual CHIP_ERROR DisableEvse() override;
-    virtual CHIP_ERROR EnableEvseCharging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
-                                          const uint16_t & minimumChargeCurrent, const uint16_t & maximumChargeCurrent) override;
-    virtual CHIP_ERROR EnableEvseDischarging(const chip::app::DataModel::Nullable<uint16_t> & evseEnableTime,
-                                             const uint16_t & maximumDischargeCurrent) override;
+    virtual CHIP_ERROR Disable() override;
+    virtual CHIP_ERROR EnableCharging(const chip::app::DataModel::Nullable<uint32_t> & enableChargeTime,
+                                      const uint32_t & minimumChargeCurrent, const uint32_t & maximumChargeCurrent) override;
+    virtual CHIP_ERROR EnableDischarging(const chip::app::DataModel::Nullable<uint32_t> & enableDischargeTime,
+                                         const uint32_t & maximumDischargeCurrent) override;
     virtual CHIP_ERROR StartDiagnostics() override;
 
 private:
-    static EvseManagementDelegate sInstance;
+    static EnergyEvseDelegate sInstance;
 };
 
-} // namespace LaundryWasherControls
+} // namespace EnergyEvse
 } // namespace Clusters
 } // namespace app
 } // namespace chip

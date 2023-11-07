@@ -42,7 +42,7 @@ public:
 
         uint16_t currentLimit = request.current;
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::MaximumChargeCurrent::Set(kEndpoint, currentLimit));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::MaximumChargeCurrent::Set(kEndpoint, currentLimit));
 
         return pw::OkStatus();
     }
@@ -53,7 +53,7 @@ public:
 
         uint16_t currentLimit = request.current;
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::CircuitCapacity::Set(kEndpoint, currentLimit));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::CircuitCapacity::Set(kEndpoint, currentLimit));
 
         return pw::OkStatus();
     }
@@ -64,7 +64,7 @@ public:
 
         uint16_t currentLimit = request.current;
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::MaximumChargeCurrent::Set(kEndpoint, currentLimit));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::MaximumChargeCurrent::Set(kEndpoint, currentLimit));
 
         return pw::OkStatus();
     }
@@ -75,21 +75,21 @@ public:
 
         uint16_t currentLimit = request.current;
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::MaximumChargeCurrent::Set(kEndpoint, currentLimit));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::MaximumChargeCurrent::Set(kEndpoint, currentLimit));
 
         return pw::OkStatus();
     }
 
-    virtual pw::Status SetEvseState(const chip_rpc_EvseStateMsg & request, pw_protobuf_Empty & response)
+    virtual pw::Status SetState(const chip_rpc_EvseStateMsg & request, pw_protobuf_Empty & response)
     {
         DeviceLayer::StackLock lock;
 
-        EvseManagement::EvseStateEnum state;
+        EnergyEvse::EvseStateEnum state;
         uint32_t value = request.state;
-        state          = (EvseManagement::EvseStateEnum) value;
+        state          = (EnergyEvse::EvseStateEnum) value;
 
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::EvseState::Set(kEndpoint, state));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::State::Set(kEndpoint, state));
 
         return pw::OkStatus();
     }
@@ -98,12 +98,12 @@ public:
     {
         DeviceLayer::StackLock lock;
 
-        EvseManagement::SupplyStateEnum state;
+        EnergyEvse::SupplyStateEnum state;
         uint32_t value = request.state;
-        state          = (EvseManagement::SupplyStateEnum) value;
+        state          = (EnergyEvse::SupplyStateEnum) value;
 
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::SupplyState::Set(kEndpoint, state));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::SupplyState::Set(kEndpoint, state));
 
         return pw::OkStatus();
     }
@@ -112,11 +112,11 @@ public:
     {
         DeviceLayer::StackLock lock;
 
-        EvseManagement::EvseFaultEnum fault;
+        EnergyEvse::FaultStateEnum fault;
         uint32_t value = request.state;
-        fault          = (EvseManagement::EvseFaultEnum) value;
+        fault          = (EnergyEvse::FaultStateEnum) value;
         // TODO add call into EvseMgr
-        RETURN_STATUS_IF_NOT_OK(app::Clusters::EvseManagement::Attributes::EvseFault::Set(kEndpoint, fault));
+        RETURN_STATUS_IF_NOT_OK(app::Clusters::EnergyEvse::Attributes::FaultState::Set(kEndpoint, fault));
 
         return pw::OkStatus();
     }

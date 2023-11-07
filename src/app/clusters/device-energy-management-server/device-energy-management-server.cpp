@@ -32,22 +32,22 @@
 using namespace chip;
 using namespace chip::app;
 using namespace chip::app::Clusters;
-using namespace chip::app::Clusters::EnergyManagement;
-using namespace chip::app::Clusters::EnergyManagement::Attributes;
+using namespace chip::app::Clusters::DeviceEnergyManagement;
+using namespace chip::app::Clusters::DeviceEnergyManagement::Attributes;
 
-void MatterEnergyManagementPluginServerInitCallback() {}
+void MatterDeviceEnergyManagementPluginServerInitCallback() {}
 
-void emberAfEnergyManagementClusterServerInitCallback(chip::EndpointId endpoint) {}
+void emberAfDeviceEnergyManagementClusterServerInitCallback(chip::EndpointId endpoint) {}
 
-bool emberAfEnergyManagementClusterPowerAdjustRequestCallback(app::CommandHandler * commandObj,
-                                                              const app::ConcreteCommandPath & commandPath,
-                                                              const Commands::PowerAdjustRequest::DecodableType & commandData)
+bool emberAfDeviceEnergyManagementClusterPowerAdjustRequestCallback(app::CommandHandler * commandObj,
+                                                                    const app::ConcreteCommandPath & commandPath,
+                                                                    const Commands::PowerAdjustRequest::DecodableType & commandData)
 {
     // TODO
     return false;
 }
 
-bool emberAfEnergyManagementClusterCancelPowerAdjustRequestCallback(
+bool emberAfDeviceEnergyManagementClusterCancelPowerAdjustRequestCallback(
     app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
     const Commands::CancelPowerAdjustRequest::DecodableType & commandData)
 {
@@ -55,37 +55,37 @@ bool emberAfEnergyManagementClusterCancelPowerAdjustRequestCallback(
     return false;
 }
 
-bool emberAfEnergyManagementClusterStartTimeAdjustRequestCallback(
+bool emberAfDeviceEnergyManagementClusterStartTimeAdjustRequestCallback(
     app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
     const Commands::StartTimeAdjustRequest::DecodableType & commandData)
 {
     // TODO
     return false;
 }
-bool emberAfEnergyManagementClusterPauseRequestCallback(app::CommandHandler * commandObj,
-                                                        const app::ConcreteCommandPath & commandPath,
-                                                        const Commands::PauseRequest::DecodableType & commandData)
+bool emberAfDeviceEnergyManagementClusterPauseRequestCallback(app::CommandHandler * commandObj,
+                                                              const app::ConcreteCommandPath & commandPath,
+                                                              const Commands::PauseRequest::DecodableType & commandData)
 {
     // TODO
     return false;
 }
-bool emberAfEnergyManagementClusterResumeRequestCallback(app::CommandHandler * commandObj,
-                                                         const app::ConcreteCommandPath & commandPath,
-                                                         const Commands::ResumeRequest::DecodableType & commandData)
+bool emberAfDeviceEnergyManagementClusterResumeRequestCallback(app::CommandHandler * commandObj,
+                                                               const app::ConcreteCommandPath & commandPath,
+                                                               const Commands::ResumeRequest::DecodableType & commandData)
 {
     // TODO
     return false;
 }
-bool emberAfEnergyManagementClusterModifyPowerForecastRequestCallback(
+bool emberAfDeviceEnergyManagementClusterModifyForecastRequestCallback(
     app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
-    const Commands::ModifyPowerForecastRequest::DecodableType & commandData)
+    const Commands::ModifyForecastRequest::DecodableType & commandData)
 {
     // TODO
     return false;
 }
-bool emberAfEnergyManagementClusterRequestLimitBasedPowerForecastCallback(
+bool emberAfDeviceEnergyManagementClusterRequestConstraintBasedForecastCallback(
     app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
-    const Commands::RequestLimitBasedPowerForecast::DecodableType & commandData)
+    const Commands::RequestConstraintBasedForecast::DecodableType & commandData)
 {
     // TODO
     return false;

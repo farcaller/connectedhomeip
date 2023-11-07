@@ -22,35 +22,43 @@ import chip.tlv.Tag
 import chip.tlv.TlvReader
 import chip.tlv.TlvWriter
 
-class EvseManagementClusterEvConnectedEvent(val evseSessionId: Long, val evseState: Int) {
+class EnergyEvseClusterEnergyTransferStartedEvent(
+  val sessionId: Long,
+  val state: Int,
+  val maximumCurrent: Long
+) {
   override fun toString(): String = buildString {
-    append("EvseManagementClusterEvConnectedEvent {\n")
-    append("\tevseSessionId : $evseSessionId\n")
-    append("\tevseState : $evseState\n")
+    append("EnergyEvseClusterEnergyTransferStartedEvent {\n")
+    append("\tsessionId : $sessionId\n")
+    append("\tstate : $state\n")
+    append("\tmaximumCurrent : $maximumCurrent\n")
     append("}\n")
   }
 
   fun toTlv(tag: Tag, tlvWriter: TlvWriter) {
     tlvWriter.apply {
       startStructure(tag)
-      put(ContextSpecificTag(TAG_EVSE_SESSION_ID), evseSessionId)
-      put(ContextSpecificTag(TAG_EVSE_STATE), evseState)
+      put(ContextSpecificTag(TAG_SESSION_ID), sessionId)
+      put(ContextSpecificTag(TAG_STATE), state)
+      put(ContextSpecificTag(TAG_MAXIMUM_CURRENT), maximumCurrent)
       endStructure()
     }
   }
 
   companion object {
-    private const val TAG_EVSE_SESSION_ID = 0
-    private const val TAG_EVSE_STATE = 1
+    private const val TAG_SESSION_ID = 0
+    private const val TAG_STATE = 1
+    private const val TAG_MAXIMUM_CURRENT = 2
 
-    fun fromTlv(tag: Tag, tlvReader: TlvReader): EvseManagementClusterEvConnectedEvent {
+    fun fromTlv(tag: Tag, tlvReader: TlvReader): EnergyEvseClusterEnergyTransferStartedEvent {
       tlvReader.enterStructure(tag)
-      val evseSessionId = tlvReader.getLong(ContextSpecificTag(TAG_EVSE_SESSION_ID))
-      val evseState = tlvReader.getInt(ContextSpecificTag(TAG_EVSE_STATE))
+      val sessionId = tlvReader.getLong(ContextSpecificTag(TAG_SESSION_ID))
+      val state = tlvReader.getInt(ContextSpecificTag(TAG_STATE))
+      val maximumCurrent = tlvReader.getLong(ContextSpecificTag(TAG_MAXIMUM_CURRENT))
 
       tlvReader.exitContainer()
 
-      return EvseManagementClusterEvConnectedEvent(evseSessionId, evseState)
+      return EnergyEvseClusterEnergyTransferStartedEvent(sessionId, state, maximumCurrent)
     }
   }
 }

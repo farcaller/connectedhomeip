@@ -14166,6 +14166,1586 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
 namespace Events {} // namespace Events
 
 } // namespace ActivatedCarbonFilterMonitoring
+namespace DeviceEnergyManagement {
+namespace Structs {
+namespace CostStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCostType), costType));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kValue), value));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDecimalPoints), decimalPoints));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCurrency), currency));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kCostType):
+            ReturnErrorOnFailure(DataModel::Decode(reader, costType));
+            break;
+        case to_underlying(Fields::kValue):
+            ReturnErrorOnFailure(DataModel::Decode(reader, value));
+            break;
+        case to_underlying(Fields::kDecimalPoints):
+            ReturnErrorOnFailure(DataModel::Decode(reader, decimalPoints));
+            break;
+        case to_underlying(Fields::kCurrency):
+            ReturnErrorOnFailure(DataModel::Decode(reader, currency));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace CostStruct
+namespace SlotStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinDuration), minDuration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxDuration), maxDuration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDefaultDuration), defaultDuration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kElapsedSlotTime), elapsedSlotTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kRemainingSlotTime), remainingSlotTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlotIsPauseable), slotIsPauseable));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kManufacturerESAState), manufacturerESAState));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalPower), nominalPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinPower), minPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxPower), maxPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalEnergy), nominalEnergy));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCosts), costs));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinPowerAdjustment), minPowerAdjustment));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxPowerAdjustment), maxPowerAdjustment));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinDurationAdjustment), minDurationAdjustment));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxDurationAdjustment), maxDurationAdjustment));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kMinDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minDuration));
+            break;
+        case to_underlying(Fields::kMaxDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxDuration));
+            break;
+        case to_underlying(Fields::kDefaultDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, defaultDuration));
+            break;
+        case to_underlying(Fields::kElapsedSlotTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, elapsedSlotTime));
+            break;
+        case to_underlying(Fields::kRemainingSlotTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, remainingSlotTime));
+            break;
+        case to_underlying(Fields::kSlotIsPauseable):
+            ReturnErrorOnFailure(DataModel::Decode(reader, slotIsPauseable));
+            break;
+        case to_underlying(Fields::kManufacturerESAState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, manufacturerESAState));
+            break;
+        case to_underlying(Fields::kNominalPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, nominalPower));
+            break;
+        case to_underlying(Fields::kMinPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minPower));
+            break;
+        case to_underlying(Fields::kMaxPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxPower));
+            break;
+        case to_underlying(Fields::kNominalEnergy):
+            ReturnErrorOnFailure(DataModel::Decode(reader, nominalEnergy));
+            break;
+        case to_underlying(Fields::kCosts):
+            ReturnErrorOnFailure(DataModel::Decode(reader, costs));
+            break;
+        case to_underlying(Fields::kMinPowerAdjustment):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minPowerAdjustment));
+            break;
+        case to_underlying(Fields::kMaxPowerAdjustment):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxPowerAdjustment));
+            break;
+        case to_underlying(Fields::kMinDurationAdjustment):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minDurationAdjustment));
+            break;
+        case to_underlying(Fields::kMaxDurationAdjustment):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxDurationAdjustment));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace SlotStruct
+namespace ForecastStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kForecastId), forecastId));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kActiveSlotNumber), activeSlotNumber));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kStartTime), startTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEndTime), endTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEarliestStartTime), earliestStartTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kLatestEndTime), latestEndTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kIsPauseable), isPauseable));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlots), slots));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kForecastId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, forecastId));
+            break;
+        case to_underlying(Fields::kActiveSlotNumber):
+            ReturnErrorOnFailure(DataModel::Decode(reader, activeSlotNumber));
+            break;
+        case to_underlying(Fields::kStartTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, startTime));
+            break;
+        case to_underlying(Fields::kEndTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, endTime));
+            break;
+        case to_underlying(Fields::kEarliestStartTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, earliestStartTime));
+            break;
+        case to_underlying(Fields::kLatestEndTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, latestEndTime));
+            break;
+        case to_underlying(Fields::kIsPauseable):
+            ReturnErrorOnFailure(DataModel::Decode(reader, isPauseable));
+            break;
+        case to_underlying(Fields::kSlots):
+            ReturnErrorOnFailure(DataModel::Decode(reader, slots));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace ForecastStruct
+namespace ConstraintsStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kStartTime), startTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalPower), nominalPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumEnergy), maximumEnergy));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kLoadControl), loadControl));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kStartTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, startTime));
+            break;
+        case to_underlying(Fields::kDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
+            break;
+        case to_underlying(Fields::kNominalPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, nominalPower));
+            break;
+        case to_underlying(Fields::kMaximumEnergy):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maximumEnergy));
+            break;
+        case to_underlying(Fields::kLoadControl):
+            ReturnErrorOnFailure(DataModel::Decode(reader, loadControl));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace ConstraintsStruct
+namespace PowerAdjustStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinPower), minPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxPower), maxPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinDuration), minDuration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxDuration), maxDuration));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kMinPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minPower));
+            break;
+        case to_underlying(Fields::kMaxPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxPower));
+            break;
+        case to_underlying(Fields::kMinDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minDuration));
+            break;
+        case to_underlying(Fields::kMaxDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maxDuration));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace PowerAdjustStruct
+namespace SlotAdjustmentStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlotIndex), slotIndex));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalPower), nominalPower));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kSlotIndex):
+            ReturnErrorOnFailure(DataModel::Decode(reader, slotIndex));
+            break;
+        case to_underlying(Fields::kNominalPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, nominalPower));
+            break;
+        case to_underlying(Fields::kDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace SlotAdjustmentStruct
+} // namespace Structs
+
+namespace Commands {
+namespace PowerAdjustRequest {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPower), power));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kPower):
+            ReturnErrorOnFailure(DataModel::Decode(reader, power));
+            break;
+        case to_underlying(Fields::kDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace PowerAdjustRequest.
+namespace CancelPowerAdjustRequest {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace CancelPowerAdjustRequest.
+namespace StartTimeAdjustRequest {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kRequestedStartTime), requestedStartTime));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kRequestedStartTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, requestedStartTime));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace StartTimeAdjustRequest.
+namespace PauseRequest {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace PauseRequest.
+namespace ResumeRequest {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace ResumeRequest.
+namespace ModifyForecastRequest {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kForecastId), forecastId));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlotAdjustments), slotAdjustments));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kForecastId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, forecastId));
+            break;
+        case to_underlying(Fields::kSlotAdjustments):
+            ReturnErrorOnFailure(DataModel::Decode(reader, slotAdjustments));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace ModifyForecastRequest.
+namespace RequestConstraintBasedForecast {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kConstraints), constraints));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kConstraints):
+            ReturnErrorOnFailure(DataModel::Decode(reader, constraints));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace RequestConstraintBasedForecast.
+} // namespace Commands
+
+namespace Attributes {
+CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path)
+{
+    switch (path.mAttributeId)
+    {
+    case Attributes::EsaType::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, esaType));
+        break;
+    case Attributes::EsaIsGenerator::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, esaIsGenerator));
+        break;
+    case Attributes::EsaState::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, esaState));
+        break;
+    case Attributes::AbsMinPower::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, absMinPower));
+        break;
+    case Attributes::AbsMaxPower::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, absMaxPower));
+        break;
+    case Attributes::PowerAdjustmentCapability::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, powerAdjustmentCapability));
+        break;
+    case Attributes::Forecast::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, forecast));
+        break;
+    case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));
+        break;
+    case Attributes::AcceptedCommandList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, acceptedCommandList));
+        break;
+    case Attributes::EventList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, eventList));
+        break;
+    case Attributes::AttributeList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, attributeList));
+        break;
+    case Attributes::FeatureMap::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, featureMap));
+        break;
+    case Attributes::ClusterRevision::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, clusterRevision));
+        break;
+    default:
+        break;
+    }
+
+    return CHIP_NO_ERROR;
+}
+} // namespace Attributes
+
+namespace Events {
+namespace PowerAdjustStart {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace PowerAdjustStart.
+namespace PowerAdjustEnd {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCause), cause));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyUse), energyUse));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kCause):
+            ReturnErrorOnFailure(DataModel::Decode(reader, cause));
+            break;
+        case to_underlying(Fields::kDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
+            break;
+        case to_underlying(Fields::kEnergyUse):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyUse));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace PowerAdjustEnd.
+namespace Paused {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace Paused.
+namespace Resumed {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace Resumed.
+} // namespace Events
+
+} // namespace DeviceEnergyManagement
+namespace EnergyEvse {
+namespace Structs {
+namespace ChargingTargetStruct {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTargetTime), targetTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTargetSoC), targetSoC));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kAddedEnergy), addedEnergy));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    err = reader.EnterContainer(outer);
+    ReturnErrorOnFailure(err);
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kTargetTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, targetTime));
+            break;
+        case to_underlying(Fields::kTargetSoC):
+            ReturnErrorOnFailure(DataModel::Decode(reader, targetSoC));
+            break;
+        case to_underlying(Fields::kAddedEnergy):
+            ReturnErrorOnFailure(DataModel::Decode(reader, addedEnergy));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+
+    return CHIP_NO_ERROR;
+}
+
+} // namespace ChargingTargetStruct
+} // namespace Structs
+
+namespace Commands {
+namespace GetTargetsResponse {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDayOfWeekForSequence), dayOfWeekForSequence));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kChargingTargets), chargingTargets));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kDayOfWeekForSequence):
+            ReturnErrorOnFailure(DataModel::Decode(reader, dayOfWeekForSequence));
+            break;
+        case to_underlying(Fields::kChargingTargets):
+            ReturnErrorOnFailure(DataModel::Decode(reader, chargingTargets));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace GetTargetsResponse.
+namespace Disable {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace Disable.
+namespace EnableCharging {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnableChargeTime), enableChargeTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinimumChargeCurrent), minimumChargeCurrent));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumChargeCurrent), maximumChargeCurrent));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kEnableChargeTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, enableChargeTime));
+            break;
+        case to_underlying(Fields::kMinimumChargeCurrent):
+            ReturnErrorOnFailure(DataModel::Decode(reader, minimumChargeCurrent));
+            break;
+        case to_underlying(Fields::kMaximumChargeCurrent):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maximumChargeCurrent));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EnableCharging.
+namespace EnableDischarging {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnableDischargeTime), enableDischargeTime));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumDischargeCurrent), maximumDischargeCurrent));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kEnableDischargeTime):
+            ReturnErrorOnFailure(DataModel::Decode(reader, enableDischargeTime));
+            break;
+        case to_underlying(Fields::kMaximumDischargeCurrent):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maximumDischargeCurrent));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EnableDischarging.
+namespace StartDiagnostics {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace StartDiagnostics.
+namespace SetTargets {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDayOfWeekForSequence), dayOfWeekForSequence));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kChargingTargets), chargingTargets));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kDayOfWeekForSequence):
+            ReturnErrorOnFailure(DataModel::Decode(reader, dayOfWeekForSequence));
+            break;
+        case to_underlying(Fields::kChargingTargets):
+            ReturnErrorOnFailure(DataModel::Decode(reader, chargingTargets));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace SetTargets.
+namespace GetTargets {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDaysToReturn), daysToReturn));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kDaysToReturn):
+            ReturnErrorOnFailure(DataModel::Decode(reader, daysToReturn));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace GetTargets.
+namespace ClearTargets {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace ClearTargets.
+} // namespace Commands
+
+namespace Attributes {
+CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path)
+{
+    switch (path.mAttributeId)
+    {
+    case Attributes::State::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, state));
+        break;
+    case Attributes::SupplyState::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, supplyState));
+        break;
+    case Attributes::FaultState::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, faultState));
+        break;
+    case Attributes::EnableChargeTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, enableChargeTime));
+        break;
+    case Attributes::EnableDischargeTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, enableDischargeTime));
+        break;
+    case Attributes::CircuitCapacity::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, circuitCapacity));
+        break;
+    case Attributes::MinimumChargeCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, minimumChargeCurrent));
+        break;
+    case Attributes::MaximumChargeCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, maximumChargeCurrent));
+        break;
+    case Attributes::MaximumdDischargeCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, maximumdDischargeCurrent));
+        break;
+    case Attributes::UserMaximumChargeCurrent::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, userMaximumChargeCurrent));
+        break;
+    case Attributes::RandomisationDelayWindow::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, randomisationDelayWindow));
+        break;
+    case Attributes::NumberOfWeeklyTargets::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, numberOfWeeklyTargets));
+        break;
+    case Attributes::NumberOfDailyTargets::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, numberOfDailyTargets));
+        break;
+    case Attributes::NextChargeStartTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeStartTime));
+        break;
+    case Attributes::NextChargeTargetTime::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeTargetTime));
+        break;
+    case Attributes::NextChargeRequiredEnergy::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeRequiredEnergy));
+        break;
+    case Attributes::NextChargeTargetSoc::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeTargetSoc));
+        break;
+    case Attributes::ApproxEvEfficiency::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, approxEvEfficiency));
+        break;
+    case Attributes::StateOfCharge::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, stateOfCharge));
+        break;
+    case Attributes::BatteryCapacity::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, batteryCapacity));
+        break;
+    case Attributes::VehicleId::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, vehicleId));
+        break;
+    case Attributes::SessionId::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, sessionId));
+        break;
+    case Attributes::EventSequenceNumber::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, eventSequenceNumber));
+        break;
+    case Attributes::SessionDuration::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, sessionDuration));
+        break;
+    case Attributes::SessionEnergyCharged::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, sessionEnergyCharged));
+        break;
+    case Attributes::SessionEnergyDischarged::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, sessionEnergyDischarged));
+        break;
+    case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));
+        break;
+    case Attributes::AcceptedCommandList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, acceptedCommandList));
+        break;
+    case Attributes::EventList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, eventList));
+        break;
+    case Attributes::AttributeList::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, attributeList));
+        break;
+    case Attributes::FeatureMap::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, featureMap));
+        break;
+    case Attributes::ClusterRevision::TypeInfo::GetAttributeId():
+        ReturnErrorOnFailure(DataModel::Decode(reader, clusterRevision));
+        break;
+    default:
+        break;
+    }
+
+    return CHIP_NO_ERROR;
+}
+} // namespace Attributes
+
+namespace Events {
+namespace EVConnected {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionId), sessionId));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kSessionId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionId));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EVConnected.
+namespace EVNotDetected {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionId), sessionId));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kState), state));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionDuration), sessionDuration));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionEnergyCharged), sessionEnergyCharged));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionEnergyDischarged), sessionEnergyDischarged));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kSessionId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionId));
+            break;
+        case to_underlying(Fields::kState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, state));
+            break;
+        case to_underlying(Fields::kSessionDuration):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionDuration));
+            break;
+        case to_underlying(Fields::kSessionEnergyCharged):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionEnergyCharged));
+            break;
+        case to_underlying(Fields::kSessionEnergyDischarged):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionEnergyDischarged));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EVNotDetected.
+namespace EnergyTransferStarted {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionId), sessionId));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kState), state));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumCurrent), maximumCurrent));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kSessionId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionId));
+            break;
+        case to_underlying(Fields::kState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, state));
+            break;
+        case to_underlying(Fields::kMaximumCurrent):
+            ReturnErrorOnFailure(DataModel::Decode(reader, maximumCurrent));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EnergyTransferStarted.
+namespace EnergyTransferStopped {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionId), sessionId));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kState), state));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kReason), reason));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyTransferred), energyTransferred));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kSessionId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionId));
+            break;
+        case to_underlying(Fields::kState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, state));
+            break;
+        case to_underlying(Fields::kReason):
+            ReturnErrorOnFailure(DataModel::Decode(reader, reason));
+            break;
+        case to_underlying(Fields::kEnergyTransferred):
+            ReturnErrorOnFailure(DataModel::Decode(reader, energyTransferred));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace EnergyTransferStopped.
+namespace Fault {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSessionId), sessionId));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kState), state));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kFaultStatePreviousState), faultStatePreviousState));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kFaultStateCurrentState), faultStateCurrentState));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kSessionId):
+            ReturnErrorOnFailure(DataModel::Decode(reader, sessionId));
+            break;
+        case to_underlying(Fields::kState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, state));
+            break;
+        case to_underlying(Fields::kFaultStatePreviousState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, faultStatePreviousState));
+            break;
+        case to_underlying(Fields::kFaultStateCurrentState):
+            ReturnErrorOnFailure(DataModel::Decode(reader, faultStateCurrentState));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace Fault.
+namespace Rfid {
+CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
+{
+    TLV::TLVType outer;
+    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
+    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kUid), uid));
+    ReturnErrorOnFailure(aWriter.EndContainer(outer));
+    return CHIP_NO_ERROR;
+}
+
+CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
+{
+    CHIP_ERROR err = CHIP_NO_ERROR;
+    TLV::TLVType outer;
+    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
+    ReturnErrorOnFailure(reader.EnterContainer(outer));
+    while ((err = reader.Next()) == CHIP_NO_ERROR)
+    {
+        if (!TLV::IsContextTag(reader.GetTag()))
+        {
+            continue;
+        }
+        switch (TLV::TagNumFromTag(reader.GetTag()))
+        {
+        case to_underlying(Fields::kUid):
+            ReturnErrorOnFailure(DataModel::Decode(reader, uid));
+            break;
+        default:
+            break;
+        }
+    }
+
+    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
+    ReturnErrorOnFailure(reader.ExitContainer(outer));
+    return CHIP_NO_ERROR;
+}
+} // namespace Rfid.
+} // namespace Events
+
+} // namespace EnergyEvse
 namespace DoorLock {
 namespace Structs {
 namespace CredentialStruct {
@@ -22486,1588 +24066,6 @@ CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const Concre
 namespace Events {} // namespace Events
 
 } // namespace AccountLogin
-namespace EnergyManagement {
-namespace Structs {
-namespace CostStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCostType), costType));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kValue), value));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDecimalPoints), decimalPoints));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCurrency), currency));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kCostType):
-            ReturnErrorOnFailure(DataModel::Decode(reader, costType));
-            break;
-        case to_underlying(Fields::kValue):
-            ReturnErrorOnFailure(DataModel::Decode(reader, value));
-            break;
-        case to_underlying(Fields::kDecimalPoints):
-            ReturnErrorOnFailure(DataModel::Decode(reader, decimalPoints));
-            break;
-        case to_underlying(Fields::kCurrency):
-            ReturnErrorOnFailure(DataModel::Decode(reader, currency));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace CostStruct
-namespace SlotStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinDuration), minDuration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxDuration), maxDuration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDefaultDuration), defaultDuration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kElapsedSlotTime), elapsedSlotTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kRemainingSlotTime), remainingSlotTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlotIsPauseable), slotIsPauseable));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalPower), nominalPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinPower), minPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxPower), maxPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalEnergy), nominalEnergy));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCosts), costs));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinPowerAdjustment), minPowerAdjustment));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxPowerAdjustment), maxPowerAdjustment));
-    ReturnErrorOnFailure(
-        DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinimumDurationAdjustment), minimumDurationAdjustment));
-    ReturnErrorOnFailure(
-        DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumDurationAdjustment), maximumDurationAdjustment));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kMinDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minDuration));
-            break;
-        case to_underlying(Fields::kMaxDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maxDuration));
-            break;
-        case to_underlying(Fields::kDefaultDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, defaultDuration));
-            break;
-        case to_underlying(Fields::kElapsedSlotTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, elapsedSlotTime));
-            break;
-        case to_underlying(Fields::kRemainingSlotTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, remainingSlotTime));
-            break;
-        case to_underlying(Fields::kSlotIsPauseable):
-            ReturnErrorOnFailure(DataModel::Decode(reader, slotIsPauseable));
-            break;
-        case to_underlying(Fields::kNominalPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, nominalPower));
-            break;
-        case to_underlying(Fields::kMinPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minPower));
-            break;
-        case to_underlying(Fields::kMaxPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maxPower));
-            break;
-        case to_underlying(Fields::kNominalEnergy):
-            ReturnErrorOnFailure(DataModel::Decode(reader, nominalEnergy));
-            break;
-        case to_underlying(Fields::kCosts):
-            ReturnErrorOnFailure(DataModel::Decode(reader, costs));
-            break;
-        case to_underlying(Fields::kMinPowerAdjustment):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minPowerAdjustment));
-            break;
-        case to_underlying(Fields::kMaxPowerAdjustment):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maxPowerAdjustment));
-            break;
-        case to_underlying(Fields::kMinimumDurationAdjustment):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minimumDurationAdjustment));
-            break;
-        case to_underlying(Fields::kMaximumDurationAdjustment):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maximumDurationAdjustment));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace SlotStruct
-namespace PowerForecastStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kForecastId), forecastId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kActiveSlotNumber), activeSlotNumber));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kStartTime), startTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEndTime), endTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEarliestStartTime), earliestStartTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kLatestEndTime), latestEndTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kIsPauseable), isPauseable));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlots), slots));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kForecastId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, forecastId));
-            break;
-        case to_underlying(Fields::kActiveSlotNumber):
-            ReturnErrorOnFailure(DataModel::Decode(reader, activeSlotNumber));
-            break;
-        case to_underlying(Fields::kStartTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, startTime));
-            break;
-        case to_underlying(Fields::kEndTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, endTime));
-            break;
-        case to_underlying(Fields::kEarliestStartTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, earliestStartTime));
-            break;
-        case to_underlying(Fields::kLatestEndTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, latestEndTime));
-            break;
-        case to_underlying(Fields::kIsPauseable):
-            ReturnErrorOnFailure(DataModel::Decode(reader, isPauseable));
-            break;
-        case to_underlying(Fields::kSlots):
-            ReturnErrorOnFailure(DataModel::Decode(reader, slots));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace PowerForecastStruct
-namespace PowerAdjustStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinPower), minPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxPower), maxPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinDuration), minDuration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaxDuration), maxDuration));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kMinPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minPower));
-            break;
-        case to_underlying(Fields::kMaxPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maxPower));
-            break;
-        case to_underlying(Fields::kMinDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minDuration));
-            break;
-        case to_underlying(Fields::kMaxDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maxDuration));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace PowerAdjustStruct
-namespace PowerLimitsStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kStartTime), startTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalPower), nominalPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumEnergy), maximumEnergy));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kStartTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, startTime));
-            break;
-        case to_underlying(Fields::kDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
-            break;
-        case to_underlying(Fields::kNominalPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, nominalPower));
-            break;
-        case to_underlying(Fields::kMaximumEnergy):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maximumEnergy));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace PowerLimitsStruct
-namespace SlotAdjustmentStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlotIndex), slotIndex));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNominalPower), nominalPower));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kSlotIndex):
-            ReturnErrorOnFailure(DataModel::Decode(reader, slotIndex));
-            break;
-        case to_underlying(Fields::kNominalPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, nominalPower));
-            break;
-        case to_underlying(Fields::kDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace SlotAdjustmentStruct
-} // namespace Structs
-
-namespace Commands {
-namespace PowerAdjustRequest {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPower), power));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kPower):
-            ReturnErrorOnFailure(DataModel::Decode(reader, power));
-            break;
-        case to_underlying(Fields::kDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace PowerAdjustRequest.
-namespace CancelPowerAdjustRequest {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace CancelPowerAdjustRequest.
-namespace StartTimeAdjustRequest {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kRequestedStartTime), requestedStartTime));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kRequestedStartTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, requestedStartTime));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace StartTimeAdjustRequest.
-namespace PauseRequest {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace PauseRequest.
-namespace ResumeRequest {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace ResumeRequest.
-namespace ModifyPowerForecastRequest {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kForecastId), forecastId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kSlotAdjustments), slotAdjustments));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kForecastId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, forecastId));
-            break;
-        case to_underlying(Fields::kSlotAdjustments):
-            ReturnErrorOnFailure(DataModel::Decode(reader, slotAdjustments));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace ModifyPowerForecastRequest.
-namespace RequestLimitBasedPowerForecast {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kPowerLimits), powerLimits));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kPowerLimits):
-            ReturnErrorOnFailure(DataModel::Decode(reader, powerLimits));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace RequestLimitBasedPowerForecast.
-} // namespace Commands
-
-namespace Attributes {
-CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path)
-{
-    switch (path.mAttributeId)
-    {
-    case Attributes::EsaType::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, esaType));
-        break;
-    case Attributes::EsaIsGenerator::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, esaIsGenerator));
-        break;
-    case Attributes::EsaState::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, esaState));
-        break;
-    case Attributes::AbsMinPower::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, absMinPower));
-        break;
-    case Attributes::AbsMaxPower::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, absMaxPower));
-        break;
-    case Attributes::PowerAdjustmentCapability::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, powerAdjustmentCapability));
-        break;
-    case Attributes::PowerForecast::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, powerForecast));
-        break;
-    case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));
-        break;
-    case Attributes::AcceptedCommandList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, acceptedCommandList));
-        break;
-    case Attributes::EventList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, eventList));
-        break;
-    case Attributes::AttributeList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, attributeList));
-        break;
-    case Attributes::FeatureMap::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, featureMap));
-        break;
-    case Attributes::ClusterRevision::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, clusterRevision));
-        break;
-    default:
-        break;
-    }
-
-    return CHIP_NO_ERROR;
-}
-} // namespace Attributes
-
-namespace Events {
-namespace PowerAdjustStart {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace PowerAdjustStart.
-namespace PowerAdjustEnd {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kCause), cause));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDuration), duration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyUse), energyUse));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kCause):
-            ReturnErrorOnFailure(DataModel::Decode(reader, cause));
-            break;
-        case to_underlying(Fields::kDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, duration));
-            break;
-        case to_underlying(Fields::kEnergyUse):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyUse));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace PowerAdjustEnd.
-namespace Paused {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace Paused.
-namespace Resumed {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace Resumed.
-} // namespace Events
-
-} // namespace EnergyManagement
-namespace EvseManagement {
-namespace Structs {
-namespace ChargingTargetStruct {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTargetTime), targetTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kTargetSoC), targetSoC));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kAddedEnergy), addedEnergy));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    err = reader.EnterContainer(outer);
-    ReturnErrorOnFailure(err);
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kTargetTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, targetTime));
-            break;
-        case to_underlying(Fields::kTargetSoC):
-            ReturnErrorOnFailure(DataModel::Decode(reader, targetSoC));
-            break;
-        case to_underlying(Fields::kAddedEnergy):
-            ReturnErrorOnFailure(DataModel::Decode(reader, addedEnergy));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-
-    return CHIP_NO_ERROR;
-}
-
-} // namespace ChargingTargetStruct
-} // namespace Structs
-
-namespace Commands {
-namespace GetTargetsResponse {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace GetTargetsResponse.
-namespace DisableEvse {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace DisableEvse.
-namespace EnableEvseCharging {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseEnableTime), evseEnableTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMinimumChargeCurrent), minimumChargeCurrent));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumChargeCurrent), maximumChargeCurrent));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseEnableTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseEnableTime));
-            break;
-        case to_underlying(Fields::kMinimumChargeCurrent):
-            ReturnErrorOnFailure(DataModel::Decode(reader, minimumChargeCurrent));
-            break;
-        case to_underlying(Fields::kMaximumChargeCurrent):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maximumChargeCurrent));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace EnableEvseCharging.
-namespace EnableEvseDischarging {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseEnableTime), evseEnableTime));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kMaximumDischargeCurrent), maximumDischargeCurrent));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseEnableTime):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseEnableTime));
-            break;
-        case to_underlying(Fields::kMaximumDischargeCurrent):
-            ReturnErrorOnFailure(DataModel::Decode(reader, maximumDischargeCurrent));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace EnableEvseDischarging.
-namespace StartDiagnostics {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace StartDiagnostics.
-namespace SetTargets {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(
-        DataModel::Encode(aWriter, TLV::ContextTag(Fields::kNumberOfTargetsForSequence), numberOfTargetsForSequence));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDayOfWeekForSequence), dayOfWeekForSequence));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kChargingTargets), chargingTargets));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kNumberOfTargetsForSequence):
-            ReturnErrorOnFailure(DataModel::Decode(reader, numberOfTargetsForSequence));
-            break;
-        case to_underlying(Fields::kDayOfWeekForSequence):
-            ReturnErrorOnFailure(DataModel::Decode(reader, dayOfWeekForSequence));
-            break;
-        case to_underlying(Fields::kChargingTargets):
-            ReturnErrorOnFailure(DataModel::Decode(reader, chargingTargets));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace SetTargets.
-namespace GetTargets {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kDaysToReturn), daysToReturn));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kDaysToReturn):
-            ReturnErrorOnFailure(DataModel::Decode(reader, daysToReturn));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace GetTargets.
-namespace ClearTargets {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace ClearTargets.
-} // namespace Commands
-
-namespace Attributes {
-CHIP_ERROR TypeInfo::DecodableType::Decode(TLV::TLVReader & reader, const ConcreteAttributePath & path)
-{
-    switch (path.mAttributeId)
-    {
-    case Attributes::EvseState::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseState));
-        break;
-    case Attributes::SupplyState::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, supplyState));
-        break;
-    case Attributes::EvseFault::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseFault));
-        break;
-    case Attributes::EnableChargeTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, enableChargeTime));
-        break;
-    case Attributes::EnableDischargeTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, enableDischargeTime));
-        break;
-    case Attributes::CircuitCapacity::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, circuitCapacity));
-        break;
-    case Attributes::MinimumChargeCurrent::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, minimumChargeCurrent));
-        break;
-    case Attributes::MaximumChargeCurrent::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, maximumChargeCurrent));
-        break;
-    case Attributes::MaximumdDischargeCurrent::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, maximumdDischargeCurrent));
-        break;
-    case Attributes::UserMaximumChargeCurrent::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, userMaximumChargeCurrent));
-        break;
-    case Attributes::RandomisationDelayWindow::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, randomisationDelayWindow));
-        break;
-    case Attributes::StartOfWeek::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, startOfWeek));
-        break;
-    case Attributes::NumberOfWeeklyTargets::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, numberOfWeeklyTargets));
-        break;
-    case Attributes::NumberOfDailyTargets::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, numberOfDailyTargets));
-        break;
-    case Attributes::NextChargeStartTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeStartTime));
-        break;
-    case Attributes::NextChargeTargetTime::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeTargetTime));
-        break;
-    case Attributes::NextChargeRequiredEnergy::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeRequiredEnergy));
-        break;
-    case Attributes::NextChargeTargetSoc::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, nextChargeTargetSoc));
-        break;
-    case Attributes::ApproxEvEfficiency::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, approxEvEfficiency));
-        break;
-    case Attributes::StateOfCharge::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, stateOfCharge));
-        break;
-    case Attributes::BatteryCapacity::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, batteryCapacity));
-        break;
-    case Attributes::VehicleId::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, vehicleId));
-        break;
-    case Attributes::EvseSessionId::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionId));
-        break;
-    case Attributes::EventSequenceNumber::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, eventSequenceNumber));
-        break;
-    case Attributes::EvseSessionDuration::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionDuration));
-        break;
-    case Attributes::EvseSessionEnergyCharged::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionEnergyCharged));
-        break;
-    case Attributes::EvseSessionEnergyDischarged::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionEnergyDischarged));
-        break;
-    case Attributes::EvseSessionMaximumCurrent::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionMaximumCurrent));
-        break;
-    case Attributes::GeneratedCommandList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, generatedCommandList));
-        break;
-    case Attributes::AcceptedCommandList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, acceptedCommandList));
-        break;
-    case Attributes::EventList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, eventList));
-        break;
-    case Attributes::AttributeList::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, attributeList));
-        break;
-    case Attributes::FeatureMap::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, featureMap));
-        break;
-    case Attributes::ClusterRevision::TypeInfo::GetAttributeId():
-        ReturnErrorOnFailure(DataModel::Decode(reader, clusterRevision));
-        break;
-    default:
-        break;
-    }
-
-    return CHIP_NO_ERROR;
-}
-} // namespace Attributes
-
-namespace Events {
-namespace EvConnected {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionId), evseSessionId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseState), evseState));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseSessionId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionId));
-            break;
-        case to_underlying(Fields::kEvseState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseState));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace EvConnected.
-namespace EvNotDetected {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionId), evseSessionId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseState), evseState));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionDuration), evseSessionDuration));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionEnergyCharged), evseSessionEnergyCharged));
-    ReturnErrorOnFailure(
-        DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionEnergyDischarged), evseSessionEnergyDischarged));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseSessionId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionId));
-            break;
-        case to_underlying(Fields::kEvseState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseState));
-            break;
-        case to_underlying(Fields::kEvseSessionDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionDuration));
-            break;
-        case to_underlying(Fields::kEvseSessionEnergyCharged):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionEnergyCharged));
-            break;
-        case to_underlying(Fields::kEvseSessionEnergyDischarged):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionEnergyDischarged));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace EvNotDetected.
-namespace EnergyTransferStarted {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionId), evseSessionId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseState), evseState));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionDuration), evseSessionDuration));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseSessionId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionId));
-            break;
-        case to_underlying(Fields::kEvseState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseState));
-            break;
-        case to_underlying(Fields::kEvseSessionDuration):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionDuration));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace EnergyTransferStarted.
-namespace EnergyTransferStopped {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionId), evseSessionId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseState), evseState));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kReason), reason));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEnergyTransferred), energyTransferred));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseSessionId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionId));
-            break;
-        case to_underlying(Fields::kEvseState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseState));
-            break;
-        case to_underlying(Fields::kReason):
-            ReturnErrorOnFailure(DataModel::Decode(reader, reason));
-            break;
-        case to_underlying(Fields::kEnergyTransferred):
-            ReturnErrorOnFailure(DataModel::Decode(reader, energyTransferred));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace EnergyTransferStopped.
-namespace Fault {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseSessionId), evseSessionId));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseState), evseState));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseFaultPreviousState), evseFaultPreviousState));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kEvseFaultCurrentState), evseFaultCurrentState));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kEvseSessionId):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseSessionId));
-            break;
-        case to_underlying(Fields::kEvseState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseState));
-            break;
-        case to_underlying(Fields::kEvseFaultPreviousState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseFaultPreviousState));
-            break;
-        case to_underlying(Fields::kEvseFaultCurrentState):
-            ReturnErrorOnFailure(DataModel::Decode(reader, evseFaultCurrentState));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace Fault.
-namespace Rfid {
-CHIP_ERROR Type::Encode(TLV::TLVWriter & aWriter, TLV::Tag aTag) const
-{
-    TLV::TLVType outer;
-    ReturnErrorOnFailure(aWriter.StartContainer(aTag, TLV::kTLVType_Structure, outer));
-    ReturnErrorOnFailure(DataModel::Encode(aWriter, TLV::ContextTag(Fields::kUid), uid));
-    ReturnErrorOnFailure(aWriter.EndContainer(outer));
-    return CHIP_NO_ERROR;
-}
-
-CHIP_ERROR DecodableType::Decode(TLV::TLVReader & reader)
-{
-    CHIP_ERROR err = CHIP_NO_ERROR;
-    TLV::TLVType outer;
-    VerifyOrReturnError(TLV::kTLVType_Structure == reader.GetType(), CHIP_ERROR_WRONG_TLV_TYPE);
-    ReturnErrorOnFailure(reader.EnterContainer(outer));
-    while ((err = reader.Next()) == CHIP_NO_ERROR)
-    {
-        if (!TLV::IsContextTag(reader.GetTag()))
-        {
-            continue;
-        }
-        switch (TLV::TagNumFromTag(reader.GetTag()))
-        {
-        case to_underlying(Fields::kUid):
-            ReturnErrorOnFailure(DataModel::Decode(reader, uid));
-            break;
-        default:
-            break;
-        }
-    }
-
-    VerifyOrReturnError(err == CHIP_END_OF_TLV, err);
-    ReturnErrorOnFailure(reader.ExitContainer(outer));
-    return CHIP_NO_ERROR;
-}
-} // namespace Rfid.
-} // namespace Events
-
-} // namespace EvseManagement
 namespace ElectricalMeasurement {
 
 namespace Commands {
@@ -28284,6 +28282,20 @@ bool CommandIsFabricScoped(ClusterId aCluster, CommandId aCommand)
             return false;
         }
     }
+    case Clusters::DeviceEnergyManagement::Id: {
+        switch (aCommand)
+        {
+        default:
+            return false;
+        }
+    }
+    case Clusters::EnergyEvse::Id: {
+        switch (aCommand)
+        {
+        default:
+            return false;
+        }
+    }
     case Clusters::DoorLock::Id: {
         switch (aCommand)
         {
@@ -28390,20 +28402,6 @@ bool CommandIsFabricScoped(ClusterId aCluster, CommandId aCommand)
         }
     }
     case Clusters::AccountLogin::Id: {
-        switch (aCommand)
-        {
-        default:
-            return false;
-        }
-    }
-    case Clusters::EnergyManagement::Id: {
-        switch (aCommand)
-        {
-        default:
-            return false;
-        }
-    }
-    case Clusters::EvseManagement::Id: {
         switch (aCommand)
         {
         default:

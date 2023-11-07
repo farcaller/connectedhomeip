@@ -236,6 +236,14 @@
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end
 
+@interface MTRBaseClusterDeviceEnergyManagement ()
+@property (nonatomic, strong, readonly) MTRBaseDevice * device;
+@end
+
+@interface MTRBaseClusterEnergyEVSE ()
+@property (nonatomic, strong, readonly) MTRBaseDevice * device;
+@end
+
 @interface MTRBaseClusterDoorLock ()
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end
@@ -381,14 +389,6 @@
 @end
 
 @interface MTRBaseClusterAccountLogin ()
-@property (nonatomic, strong, readonly) MTRBaseDevice * device;
-@end
-
-@interface MTRBaseClusterEnergyManagement ()
-@property (nonatomic, strong, readonly) MTRBaseDevice * device;
-@end
-
-@interface MTRBaseClusterEVSEManagement ()
 @property (nonatomic, strong, readonly) MTRBaseDevice * device;
 @end
 
